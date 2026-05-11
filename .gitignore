@@ -1,0 +1,17 @@
+# ignore IDE files
+.idea/
+.vscode/
+
+# ignore OS files
+.DS_Store
+Thumbs.db
+
+# ignore Python files
+__pycache__/
+*.pyc
+
+# ignore Python virtual environment
+.venv/
+
+# ignore data
+data/
