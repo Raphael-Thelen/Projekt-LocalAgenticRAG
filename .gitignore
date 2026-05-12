@@ -15,3 +15,6 @@ __pycache__/
 
 # ignore data
 data/
+
+# ignore node modules
+node_modules/
