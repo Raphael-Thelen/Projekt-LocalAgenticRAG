@@ -6,7 +6,7 @@ from mcp.client.stdio import stdio_client
 
 # 1. Konfiguration für unser Plug & Play System
 OLLAMA_BASE_URL = "http://localhost:11434/v1" # Ollama's OpenAI-kompatible API
-MODEL_NAME = "mistral" # Das Modell, das wir in Ollama geladen haben
+MODEL_NAME = "llama3.1" # Das Modell, das wir in Ollama geladen haben
 
 # Pfad zu unserem LARA TypeScript MCP Server
 MCP_SERVER_SCRIPT = "../mcp-server/index.ts"
@@ -67,7 +67,7 @@ async def run_agentic_loop(user_query: str):
             ]
 
             # 6. SCHLEIFE 1: KI entscheidet, ob sie ein Tool nutzen muss
-            print("Lasse KI nachdenken (Mistral via Ollama)...")
+            print(f"Lasse KI nachdenken ({MODEL_NAME} via Ollama)...")
             response = await llm_client.chat.completions.create(
                 model=MODEL_NAME,
                 messages=messages,
@@ -92,8 +92,11 @@ async def run_agentic_loop(user_query: str):
                     
                     # Ergebnis extrahieren (Der MCP Server liefert in der Regel Text zurück)
                     result_text = "\n".join([content.text for content in tool_result.content if content.type == "text"])
-                    print(f"📥 Tool hat {len(result_text)} Zeichen zurückgeliefert.")
-
+                    print(f"📥 Tool hat {len(result_text)} Zeichen zurückgeliefert. Hier ist der Anfang:")
+                    print("-" * 40)
+                    print(result_text[:500]) # Wir drucken die ersten 500 Zeichen des Suchergebnisses aus
+                    print("-" * 40)
+                    
                     # Das Ergebnis der Suche hängen wir an den Nachrichtenverlauf an
                     messages.append({
                         "role": "tool",
@@ -119,9 +122,25 @@ async def run_agentic_loop(user_query: str):
                 print("=====================================\n")
 
 if __name__ == "__main__":
-    # Test-Frage: Ersetze dies durch etwas, das wirklich in deinen Dokumenten steht!
-    # z.B. "Wie funktioniert der Talentwert (TaW) im DSA 5 Regelwerk?"
-    test_frage = "Kannst du mir die grundlegenden Kampfregeln in LARA zusammenfassen?"
+    print("======================================================")
+    print("Willkommen bei L.A.R.A.")
+    print("Dein lokaler, datensouveräner Forschungs-Assistent.")
+    print("Tippe 'exit' oder 'quit' um das Programm zu beenden.")
+    print("======================================================\n")
     
-    # Da die Tools asynchron sind, starten wir den asynchronen Loop
-    asyncio.run(run_agentic_loop(test_frage))
+    # Eine Schleife, damit du mehrere Fragen hintereinander stellen kannst
+    while True:
+        # Die input() Funktion wartet darauf, dass du im Terminal etwas eintippst
+        user_input = input("Deine Frage an L.A.R.A.: ")
+        
+        # Abbrechen, wenn der User exit tippt
+        if user_input.lower() in ['exit', 'quit']:
+            print("L.A.R.A. wird beendet. Bis bald!")
+            break
+            
+        # Ignoriere leere Eingaben
+        if not user_input.strip():
+            continue
+            
+        # Starte den Agenten mit deiner eingetippten Frage
+        asyncio.run(run_agentic_loop(user_input))

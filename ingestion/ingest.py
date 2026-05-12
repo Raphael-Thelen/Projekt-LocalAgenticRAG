@@ -5,27 +5,35 @@ from elasticsearch.helpers import bulk
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 # 1. Konfiguration
-PDF_PATH = "../data/dsa_regelwerk.pdf"
+PDF_PATH = "../data/dsa-regelwerk.pdf"
 INDEX_NAME = "lara_documents"
-ES_HOST = "http://localhost:9200"
+ES_HOST = "http://127.0.0.1:9200" 
 
 def setup_elasticsearch():
     """Verbindet sich mit ES und erstellt den Index mit deutschen Settings."""
+    
+    # 1. Zwingt Python, für lokale Verbindungen KEINE Uni-Netzwerk-Proxies (Eduroam) zu nutzen
+    os.environ["no_proxy"] = "*"
+    
     es = Elasticsearch(ES_HOST)
     
-    # Warte, bis ES verfügbar ist
-    if not es.ping():
-        raise ConnectionError("Elasticsearch ist nicht erreichbar. Läuft Docker?")
+    # 2. Wir nutzen es.info() statt es.ping(), da ping() den Fehlertraceback verschluckt
+    try:
+        info = es.info()
+        print(f"--- Erfolgreich verbunden! Elasticsearch Version: {info['version']['number']} ---")
+    except Exception as e:
+        print(f"Fehler bei der Verbindung zu Elasticsearch:\n{e}")
+        raise ConnectionError("Abbruch wegen Verbindungsfehler.")
 
     # Index Mapping: Sagt ES, wie die Daten aussehen (z.B. deutscher Text)
     mapping = {
         "mappings": {
             "properties": {
-                "source": {"type": "keyword"}, # Der Dateiname (für Filter)
-                "page": {"type": "integer"},   # Die Seitenzahl
+                "source": {"type": "keyword"}, 
+                "page": {"type": "integer"},   
                 "content": {
                     "type": "text", 
-                    "analyzer": "german"       # Wichtig für DSA (Stichwort: Umlaute & Grammatik!)
+                    "analyzer": "german"       
                 }
             }
         }
