@@ -1,0 +1,274 @@
+MANUELLE BEWERTUNG (C/P/W)
+
+Regeln:
+- C = Correct (inhaltlich korrekt)
+- P = Partly correct (teilweise korrekt)
+- W = Wrong (falsch / nicht ausreichend)
+
+Wichtig:
+- Nur die RATING-Zeilen bearbeiten.
+- Format muss exakt bleiben: RATING|Qx|tool_name|C
+
+Eval Mode: diagnostic_args
+
+========Q1=======
+Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?
+
+Expected: Das Mittelreich wird von der jungen Kaiserin Rohaja regiert und zusammengehalten. Die Hauptstadt und der Mittelpunkt des Reiches ist Gareth.
+
+--------search_exact_keyword--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Der bereitgestellte Kontext enthält keine explizite Information zur Hauptstadt des Mittelreiches.
+
+RATING|Q1|search_exact_keyword|P
+
+--------search_fuzzy--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Die Hauptstadt des Mittelreichs ist Gareth.
+
+RATING|Q1|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Der bereitgestellte Kontext enthält keine Information über den Namen der Hauptstadt des Mittelreiches.
+
+RATING|Q1|search_phrase_proximity|P
+
+
+========Q2=======
+Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?
+
+Expected: Die primaeren Widersacher der Goetter sind der Namenlose sowie die Erzdämonen, welche als groteske Zerrbilder der Zwoelfgoetter beschrieben werden.
+
+--------search_exact_keyword--------
+AI-Answer: Die größten Widersacher der Zwölfgötter sind:
+
+*   **Der Namenlose:** Er wird als Gegenspieler der Götter genannt.
+*   **Die Erzdämonen:** Sie gelten als Widersacher aller Götter und Schrecken aus der siebten Sphäre (dem Chaos). Es wird angenommen, dass sich für jeden Zwölfgott ein eigener Erzdämon als Widersacher manifestiert hat.
+
+RATING|Q2|search_exact_keyword|C
+
+--------search_fuzzy--------
+AI-Answer: Die größten Widersacher der Zwölfgötter sind:
+
+*   **Der Namenlose:** Er gilt als bedeutender Gegenspieler der Götter, ist jedoch kein Erzdämon.
+*   **Die Erzdämonen:** Diese Wesen aus der Siebten Sphäre (dem Chaos) manifestieren sich als direkte Widersacher der einzelnen Zwölfgötter, um deren Wirken zu vernichten oder zu pervertieren.
+
+RATING|Q2|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Als größte Widersacher der Zwölfgötter gelten:
+
+*   **Der Namenlose:** Er wird in vielen Ländern als der größte Widersacher der Zwölfgötter betrachtet.
+*   **Die Erzdämonen:** Diese Entitäten aus der siebten Sphäre (dem Chaos) gelten als Widersacher aller Götter. Es heißt, dass sich zu jedem Zwölfgott ein eigener Erzdämon als Gegenspieler manifestiert hat, um das Wirken der Götter zu vernichten oder zu pervertieren.
+
+RATING|Q2|search_phrase_proximity|C
+
+
+========Q3=======
+Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?
+
+Expected: Eine Fertigkeitsprobe wird mit 3W20 abgelegt. Jeder Wurf wird mit einem Eigenschaftswert verglichen. Zu hohe Wuerfe koennen mit FW ausgeglichen werden. Uebrig gebliebene Punkte ergeben FP und bestimmen die QS.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q3|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Eine Fertigkeitsprobe besteht aus folgenden Schritten:
+
+1.  **Zuordnung:** Vor dem Wurf muss festgelegt werden, welcher Würfel welcher der drei für das Talent, den Zauber oder die Liturgie angegebenen Eigenschaften zugeordnet ist.
+2.  **Wurf:** Es werden 3W20 geworfen.
+3.  **Vergleich:** Jeder der drei Würfel wird einzeln mit dem jeweiligen Eigenschaftswert verglichen. Die Ergebnisse werden nicht addiert.
+
+**Funktion des Fertigkeitswerts (FW):**
+Der bereitgestellte Kontext enthält keine explizite Definition der Funktion des Fertigkeitswerts (FW) innerhalb des Probenmechanismus. Er erwähnt lediglich, dass Fertigkeitspunkte (FP) eingesetzt werden können, um eine Probe auszugleichen (siehe Quelle [3]).
+
+RATING|Q3|search_fuzzy|P
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über die Schritte, die Würfe oder die Funktion des Fertigkeitswerts (FW) bei einer Fertigkeitsprobe. Er beschreibt lediglich, dass Fertigkeitsproben mit 3W20 durchgeführt werden und keine Bestätigungswürfe für kritische Erfolge oder Patzer erfordern.
+
+RATING|Q3|search_phrase_proximity|W
+
+
+========Q4=======
+Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?
+
+Expected: Wenn bei Attacke 20 und Bestaetigungswurf misslungen, ist der Patzer bestaetigt und der Angreifer erleidet 1W6+2 SP.
+
+--------search_exact_keyword--------
+AI-Answer: Wenn der Bestätigungswurf bei einer 20 misslingt, erleidet der Held 1W6+2 SP. Alternativ kann die optionale Nahkampf-Patzertabelle verwendet werden.
+
+RATING|Q4|search_exact_keyword|C
+
+--------search_fuzzy--------
+AI-Answer: Wenn der Bestätigungswurf bei einem Patzer (20) misslingt, erleidet der Held 1W6+2 SP. Alternativ kann als optionale Regel die Nahkampf-Patzertabelle verwendet werden.
+
+RATING|Q4|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu den allgemeinen mechanischen Konsequenzen eines nicht bestätigten Patzers bei einer Nahkampf-Attacke. Die vorliegenden Informationen beziehen sich ausschließlich auf spezifische Waffennachteile (Ladehemmungen bei Fernkampfwaffen) oder die Konsequenzen eines *bestätigten* Patzers (Stufe Betäubung).
+
+RATING|Q4|search_phrase_proximity|W
+
+
+========Q5=======
+Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?
+
+Expected: Erfahren: Eigenschaften max 14 und Summe max 100, Fertigkeiten max 10, Kampftechniken max 12.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q5|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Für den Erfahrungsgrad „Erfahren“ gelten bei der Heldenerschaffung folgende Obergrenzen:
+
+*   **Eigenschaften:** 14
+*   **Fertigkeiten:** 10
+*   **Kampftechniken:** 12
+
+RATING|Q5|search_fuzzy|P
+
+--------search_phrase_proximity--------
+AI-Answer: Für den Erfahrungsgrad **Erfahren** gelten bei der Heldenerschaffung folgende Maximalwerte:
+
+*   **Eigenschaften:** 14
+*   **Fertigkeiten:** 10
+*   **Kampftechniken:** 12
+
+RATING|Q5|search_phrase_proximity|P
+
+
+========Q6=======
+Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?
+
+Expected: Schmerz Stufe 1 bei 75% LE. Sie verschwindet bei Heilung ueber die Grenze oder nach jeweils 4 Stunden Ruhe um eine Stufe.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q6|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Die erste Stufe Schmerz erhält ein Held, sobald seine Lebenspunkte auf **Dreiviertel** der Gesamt-Lebensenergie gesunken sind.
+
+Die Stufe verschwindet wieder, sobald die Lebenspunkte durch Heilung über diese Begrenzung (Dreiviertel der Gesamt-Lebensenergie) steigen. Alternativ verliert der Held, sofern nichts anderes genannt ist, nach jeweils 4 Stunden eine Stufe des Zustands.
+
+RATING|Q6|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ab welchem Lebenspunkte-Verlust ein Held die erste Stufe Schmerz erhält oder wann diese wieder verschwindet. Die Dokumente behandeln lediglich die Erzeugung von Schmerz durch Zauber.
+
+RATING|Q6|search_phrase_proximity|W
+
+
+========Q7=======
+In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?
+
+Expected: Weisse Gilde: goettertreu/gesetzestreu, gegen Daemonenbeschwoerung und Nekromantie. Graue Gilde: wissenschaftlich und tolerant. Schwarze Gilde: liberaler Umgang, auch verpoente Kuenste.
+
+--------search_exact_keyword--------
+AI-Answer: Die drei großen Gilden sind die **Weiße Gilde**, die **Graue Gilde** und die **Schwarze Gilde**.
+
+Der bereitgestellte Kontext enthält keine Informationen über die spezifischen Unterschiede in ihrer Haltung zur Magie.
+
+RATING|Q7|search_exact_keyword|P
+
+--------search_fuzzy--------
+AI-Answer: Die drei großen Gilden sind:
+
+1.  **Der Bund des Weißen Pentagramms (Weiße Gilde)**
+2.  **Die Große Graue Gilde des Geistes (Graue Gilde)**
+3.  **Die Schwarze Gilde**
+
+Der bereitgestellte Kontext enthält keine Informationen über die spezifischen Unterschiede in ihrer Haltung zur Magie.
+
+RATING|Q7|search_fuzzy|P
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext nennt lediglich die **Große Graue Gilde des Geistes** (Graue Gilde). Diese steht für Forschung, Wissenschaft und einen freigeistigen, toleranten Umgang mit Magie.
+
+Der Kontext enthält keine Informationen zu den anderen beiden Gilden oder deren Haltung zur Magie.
+
+RATING|Q7|search_phrase_proximity|P
+
+
+========Q8=======
+Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.
+
+Expected: Mindestens vier korrekte Optionen aus: Erster handeln, Wuerfel neu werfen, QS um 1 verbessern, W6 Schaden neu werfen, +4 Verteidigung, Zustaende eine Kampfrunde ignorieren.
+
+Answer Rule: Mindestens 4 korrekte Optionen nennen.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q8|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Ein Spieler kann Schicksalspunkte (Schips) für folgende vier Optionen einsetzen:
+
+1. **Neuer Wurf:** Alle Würfel einer Probe werden erneut geworfen.
+2. **Qualität verbessern:** Die Qualitätsstufen (QS) einer Probe werden erhöht.
+3. **Verteidigung stärken:** Der Charakter erhält bis zum Ende der aktuellen Kampfrunde einen Bonus von 4 auf alle Verteidigungen.
+4. **Zustand ignorieren:** Alle Zustände, von denen der Charakter betroffen ist, werden für eine Kampfrunde ignoriert.
+
+RATING|Q8|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine vollständige Liste der Einsatzmöglichkeiten für Schicksalspunkte. Er nennt lediglich eine spezifische Option:
+
+1. **Initiative:** Ein Schicksalspunkt kann eingesetzt werden, um zu Beginn eines Kampfes sofort als Erster zu handeln.
+
+Die weiteren bereitgestellten Dokumente erwähnen lediglich, dass Schicksalsrunen wie Schicksalspunkte eingesetzt werden können und dass der Einsatz von Schicksalspunkten in der Nähe bestimmter Dämonen (z. B. Shihayazad) unterbunden werden kann. Weitere Einsatzmöglichkeiten gehen aus dem Kontext nicht hervor.
+
+RATING|Q8|search_phrase_proximity|W
+
+
+========Q9=======
+Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?
+
+Expected: Zwerg: LE 8, SK -4, ZK -4, GS 6.
+
+--------search_exact_keyword--------
+AI-Answer: Ein Spielercharakter der Spezies Zwerg erhält folgende Grundwerte:
+
+*   **LE:** 8
+*   **SK:** –4
+*   **ZK:** –4
+*   **GS:** 6
+
+RATING|Q9|search_exact_keyword|C
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine spezifischen Zahlenwerte für die Grundwerte (LE, SK, ZK, GS) der Spezies Zwerg. Er verweist lediglich darauf, dass diese Werte im Kapitel „Spezies“ (ab Seite 87 des Regelwerks) in einem Wertekasten aufgeführt sind.
+
+RATING|Q9|search_fuzzy|W
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu den Grundwerten (LE, SK, ZK, GS) für die Spezies Zwerg.
+
+RATING|Q9|search_phrase_proximity|W
+
+
+========Q10=======
+Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?
+
+Expected: Benoetigt wird ARCANOVI, dazu permanente AsP ins Objekt binden.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q10|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen, ist das Ritual **ARCANOVI** erforderlich. Alternativ kann für Zauberspeicher auch der **APPLICATUS** verwendet werden.
+
+RATING|Q10|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q10|search_phrase_proximity|W
+

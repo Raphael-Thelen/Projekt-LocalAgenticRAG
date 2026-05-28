@@ -1,0 +1,49 @@
+Testbench Score Summary
+
+Run ID: 20260602-161506-diagnostic_args
+Eval Mode: diagnostic_args
+Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json
+Run File: experiments/eval/runs/20260602-161506-diagnostic_args/run-diagnostic_args.json
+Review File: experiments/eval/runs/20260602-161506-diagnostic_args/manual-review-diagnostic_args.txt
+
+Overall Retrieval
+- Evaluated Rows: 30
+- Macro Precision: 0.282
+- Macro Recall: 0.428
+- Hit Rate: 0.567
+
+Overall Answer
+- Rated Rows: 30
+- C/P/W: 10/8/12
+- Strict Precision (C only): 0.333
+- Lenient Recall (C+P): 0.600
+- Weighted Score (C=1,P=0.5,W=0): 0.467
+
+By Tool
+
+[search_exact_keyword]
+- Retrieval Macro Precision: 0.247
+- Retrieval Macro Recall: 0.283
+- Retrieval Hit Rate: 0.400
+- Answer C/P/W: 3/2/5
+- Answer Strict Precision: 0.300
+- Answer Lenient Recall: 0.500
+- Answer Weighted Score: 0.400
+
+[search_fuzzy]
+- Retrieval Macro Precision: 0.440
+- Retrieval Macro Recall: 0.800
+- Retrieval Hit Rate: 0.900
+- Answer C/P/W: 6/3/1
+- Answer Strict Precision: 0.600
+- Answer Lenient Recall: 0.900
+- Answer Weighted Score: 0.750
+
+[search_phrase_proximity]
+- Retrieval Macro Precision: 0.160
+- Retrieval Macro Recall: 0.200
+- Retrieval Hit Rate: 0.400
+- Answer C/P/W: 1/3/6
+- Answer Strict Precision: 0.100
+- Answer Lenient Recall: 0.400
+- Answer Weighted Score: 0.250

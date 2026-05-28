@@ -1,5 +1,8 @@
+import asyncio
 import json
 import os
+import random
+import re
 from pathlib import Path
 from typing import Any
 
@@ -37,6 +40,136 @@ def load_env_file() -> None:
 load_env_file()
 
 
+def _is_retryable_quota_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    markers = [
+        "quota",
+        "rate limit",
+        "rate_limit",
+        "too many requests",
+        "resource has been exhausted",
+        "429",
+    ]
+    return any(marker in text for marker in markers)
+
+
+def _parse_retry_after_from_error(exc: Exception) -> float | None:
+    response = getattr(exc, "response", None)
+    if response is not None:
+        headers = getattr(response, "headers", None)
+        if headers:
+            retry_after = headers.get("retry-after") or headers.get("Retry-After")
+            if retry_after:
+                try:
+                    return max(0.0, float(retry_after))
+                except ValueError:
+                    pass
+
+    text = str(exc)
+    patterns = [
+        r"retry\s+(?:in|after)\s+(\d+(?:\.\d+)?)\s*s",
+        r"retry_delay.*?seconds\D+(\d+)",
+        r'"seconds"\s*:\s*(\d+)',
+    ]
+    lowered = text.lower()
+    for pattern in patterns:
+        match = re.search(pattern, lowered)
+        if match:
+            try:
+                return max(0.0, float(match.group(1)))
+            except ValueError:
+                continue
+    return None
+
+
+async def _chat_with_retry(
+    llm_client: AsyncOpenAI,
+    *,
+    model: str,
+    messages: list[Any],
+    tools: list[dict[str, Any]] | None = None,
+    temperature: float | None = None,
+    max_retries: int = 12,
+    retry_base_seconds: float = 20.0,
+    retry_max_seconds: float = 300.0,
+    retry_jitter_seconds: float = 3.0,
+    verbose: bool = False,
+    operation_label: str = "llm_chat",
+) -> Any:
+    attempt = 0
+    while True:
+        try:
+            kwargs: dict[str, Any] = {
+                "model": model,
+                "messages": messages,
+            }
+            if tools is not None:
+                kwargs["tools"] = tools
+            if temperature is not None:
+                kwargs["temperature"] = temperature
+            if verbose and attempt == 0:
+                print(
+                    f"[LARA][{operation_label}] Sende Anfrage an Modell {model}..."
+                )
+            return await llm_client.chat.completions.create(**kwargs)
+        except Exception as exc:
+            retryable = _is_retryable_quota_error(exc)
+            err_class = type(exc).__name__
+            err_text = " ".join(str(exc).split())
+            err_preview = err_text[:500] + ("..." if len(err_text) > 500 else "")
+
+            if verbose:
+                print(
+                    f"[LARA][{operation_label}] Fehler: {err_class}: {err_preview}"
+                )
+
+            if not retryable or attempt >= max_retries:
+                if verbose:
+                    if not retryable:
+                        print(
+                            f"[LARA][{operation_label}] Fehler ist nicht retry-faehig. Breche ab."
+                        )
+                    else:
+                        print(
+                            f"[LARA][{operation_label}] Max Retries erreicht "
+                            f"({max_retries}). Breche ab."
+                        )
+                raise
+
+            server_wait = _parse_retry_after_from_error(exc)
+            exp_wait = min(retry_max_seconds, retry_base_seconds * (2**attempt))
+            jitter = random.uniform(0.0, max(0.0, retry_jitter_seconds))
+            wait_seconds = max(server_wait or 0.0, exp_wait) + jitter
+
+            if verbose:
+                print(
+                    f"[LARA][{operation_label}] Quota/Rate-Limit erkannt. "
+                    f"Retry {attempt + 1}/{max_retries} in {wait_seconds:.1f}s "
+                    f"(retry_after={server_wait}, exp_backoff={exp_wait:.1f}, jitter={jitter:.1f})"
+                )
+
+            await asyncio.sleep(wait_seconds)
+            attempt += 1
+
+
+def _build_context_from_results(results: list[dict], limit: int = 5) -> str:
+    lines = [
+        "Kontext aus lokalen Dokumenten (MCP Retrieval):",
+        "",
+    ]
+
+    for idx, row in enumerate(results[:limit], start=1):
+        title = str(row.get("title", "unknown"))
+        page = row.get("page", None)
+        chunk_id = str(row.get("chunk_id", "unknown"))
+        excerpt = " ".join(str(row.get("excerpt", "")).split())
+        lines.append(f"[{idx}] title={title} | page={page} | chunk_id={chunk_id}")
+        lines.append(f"excerpt: {excerpt}")
+        lines.append("")
+
+    return "\n".join(lines).strip()
+
+
 def resolve_provider(provider_override: str | None = None) -> str:
     provider = provider_override or os.getenv("LARA_LLM_PROVIDER", "gemini")
     return provider.strip().lower()
@@ -64,7 +197,7 @@ def build_llm_client(
                 ),
                 api_key=gemini_api_key,
             ),
-            model_override or os.getenv("GEMINI_MODEL_NAME", "gemini-2.5-flash"),
+            model_override or os.getenv("GEMINI_MODEL_NAME", "gemini-3.1-flash-lite"),
             "Gemini API",
             provider,
         )
@@ -91,6 +224,11 @@ async def run_query_once(
     model_override: str | None = None,
     system_prompt: str = DEFAULT_SYSTEM_PROMPT,
     temperature: float = 0.1,
+    max_retries: int = 12,
+    retry_base_seconds: float = 20.0,
+    retry_max_seconds: float = 300.0,
+    retry_jitter_seconds: float = 3.0,
+    verbose_retry: bool = False,
 ) -> dict[str, Any]:
     llm_client, model_name, provider_label, provider_key = build_llm_client(
         provider_override=provider_override,
@@ -128,11 +266,18 @@ async def run_query_once(
                 {"role": "user", "content": user_query},
             ]
 
-            response = await llm_client.chat.completions.create(
+            response = await _chat_with_retry(
+                llm_client,
                 model=model_name,
                 messages=messages,
                 tools=agent_tools,
                 temperature=temperature,
+                max_retries=max_retries,
+                retry_base_seconds=retry_base_seconds,
+                retry_max_seconds=retry_max_seconds,
+                retry_jitter_seconds=retry_jitter_seconds,
+                verbose=verbose_retry,
+                operation_label="agent_first_call",
             )
 
             response_message = response.choices[0].message
@@ -172,9 +317,16 @@ async def run_query_once(
                         }
                     )
 
-                final_response = await llm_client.chat.completions.create(
+                final_response = await _chat_with_retry(
+                    llm_client,
                     model=model_name,
                     messages=messages,
+                    max_retries=max_retries,
+                    retry_base_seconds=retry_base_seconds,
+                    retry_max_seconds=retry_max_seconds,
+                    retry_jitter_seconds=retry_jitter_seconds,
+                    verbose=verbose_retry,
+                    operation_label="agent_final_call",
                 )
                 final_answer = final_response.choices[0].message.content or ""
 
@@ -185,4 +337,102 @@ async def run_query_once(
                 "available_tools": tool_names,
                 "tool_calls": tool_calls_trace,
                 "final_answer": final_answer,
+            }
+
+
+async def run_query_with_forced_tool(
+    user_query: str,
+    tool_name: str,
+    tool_args: dict[str, Any],
+    provider_override: str | None = None,
+    model_override: str | None = None,
+    temperature: float = 0.1,
+    top_k_context: int = 5,
+    skip_llm_on_zero_hits: bool = True,
+    max_retries: int = 12,
+    retry_base_seconds: float = 20.0,
+    retry_max_seconds: float = 300.0,
+    retry_jitter_seconds: float = 3.0,
+    verbose_retry: bool = False,
+) -> dict[str, Any]:
+    llm_client, model_name, provider_label, provider_key = build_llm_client(
+        provider_override=provider_override,
+        model_override=model_override,
+    )
+
+    server_params = StdioServerParameters(
+        command="npx",
+        args=["tsx", str(MCP_SERVER_SCRIPT)],
+        cwd=str(ROOT / "mcp-server"),
+    )
+
+    async with stdio_client(server_params) as (read_stream, write_stream):
+        async with ClientSession(read_stream, write_stream) as session:
+            await session.initialize()
+
+            tool_result = await session.call_tool(tool_name, tool_args)
+            text_blocks = [item.text for item in tool_result.content if item.type == "text"]
+            payload = {"count": 0, "results": []}
+            if text_blocks:
+                payload = json.loads(text_blocks[0])
+
+            results = payload.get("results", [])
+            retrieved_count = int(payload.get("count", len(results)))
+            context_text = _build_context_from_results(results, limit=top_k_context)
+
+            if skip_llm_on_zero_hits and retrieved_count == 0:
+                answer = (
+                    "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, "
+                    "um Quota zu schonen."
+                )
+                llm_skipped = True
+            else:
+                llm_messages: list[dict[str, str]] = [
+                    {
+                        "role": "system",
+                        "content": (
+                            "Du bist ein praeziser Assistent fuer DSA-Regelfragen. "
+                            "Antworte kurz, faktisch und auf Deutsch. "
+                            "Nutze nur den bereitgestellten Kontext. "
+                            "Wenn der Kontext nicht ausreicht, sage das klar."
+                        ),
+                    },
+                    {
+                        "role": "user",
+                        "content": (
+                            f"Frage: {user_query}\n\n"
+                            f"{context_text}\n\n"
+                            "Bitte beantworte die Frage praezise."
+                        ),
+                    },
+                ]
+
+                llm_response = await _chat_with_retry(
+                    llm_client,
+                    model=model_name,
+                    messages=llm_messages,
+                    temperature=temperature,
+                    max_retries=max_retries,
+                    retry_base_seconds=retry_base_seconds,
+                    retry_max_seconds=retry_max_seconds,
+                    retry_jitter_seconds=retry_jitter_seconds,
+                    verbose=verbose_retry,
+                    operation_label=f"forced_tool:{tool_name}",
+                )
+                answer = llm_response.choices[0].message.content or ""
+                llm_skipped = False
+
+            return {
+                "provider": provider_key,
+                "provider_label": provider_label,
+                "model": model_name,
+                "tool": tool_name,
+                "tool_args": tool_args,
+                "retrieval_payload": payload,
+                "retrieved_count": retrieved_count,
+                "retrieved_chunk_ids": [
+                    str(row.get("chunk_id", "")) for row in results if row.get("chunk_id")
+                ],
+                "answer": (answer or "").strip(),
+                "llm_skipped": llm_skipped,
             }

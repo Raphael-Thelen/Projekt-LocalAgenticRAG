@@ -11,13 +11,16 @@ async def run_agentic_loop(
 ) -> None:
     print(f"\n--- Starte L.A.R.A. Agent fuer Frage: '{user_query}' ---\n")
 
+    print("Starte MCP Server Instanz und initialisiere Tools...")
+    print("Lasse KI nachdenken (inkl. automatischem Retry bei Rate-Limit)...")
+
     result = await run_query_once(
         user_query,
         provider_override=provider_override,
         model_override=model_override,
+        verbose_retry=True,
     )
 
-    print("Starte MCP Server Instanz...")
     print(
         "Server meldet "
         f"{len(result['available_tools'])} verfuegbare Tools: {result['available_tools']}"

@@ -48,7 +48,7 @@ Dann in .env mindestens den API Key eintragen:
 ```env
 LARA_LLM_PROVIDER=gemini
 GEMINI_API_KEY=dein_key
-GEMINI_MODEL_NAME=gemini-2.5-flash
+GEMINI_MODEL_NAME=gemini-3.1-flash-lite
 ```
 
 Optional fuer lokale Tests spaeter:
@@ -138,6 +138,9 @@ Aktuelle Kernartefakte fuer Retrieval-Evaluation und Modellvergleich:
 - Retrieval-Runner: `experiments/eval/run_eval.py`
 - Gold-Truth (aktuell): `experiments/eval/gold-truth-v4.csv`
 - Eval-Report (aktuell): `experiments/eval/eval-report-v4.md`
+- Testbench-Spezifikation (10 Fragen): `experiments/eval/testbench-v1.json`
+- Testbench-Runner: `experiments/eval/run_testbench.py`
+- Testbench-Scorer: `experiments/eval/score_testbench.py`
 - Modellvergleich-Runner: `experiments/model_compare/run_model_compare.py`
 - Modellvergleich-Konfiguration: `experiments/model_compare/query-set.json`
 - Modellvergleich-Report: `experiments/model_compare/model-compare-report.md`
@@ -156,5 +159,74 @@ Beispiel: Modellvergleich laufen lassen
 
 ```bash
 source .venv/bin/activate
-python experiments/model_compare/run_model_compare.py
+python3 experiments/model_compare/run_model_compare.py
 ```
+
+### Neuer Testbench-Workflow (Chunk + Antwortbewertung)
+
+Der Testbench trennt Retrieval und Antwortbewertung bewusst:
+
+1. Der Runner erzeugt pro Lauf einen Run-Ordner mit Rohdaten und einer manuellen Bewertungsdatei.
+2. Du bewertest die KI-Antworten in `manual-review-<mode>.txt` mit `C/P/W`.
+3. Nach dem Schliessen der Datei berechnet der Scorer die Kennzahlen.
+
+Verfuegbare Modi:
+
+- `user`: nutzt direkt das Feld `question` aus der JSON als Tool-Eingabe.
+- `realistic_args`: nutzt `realistic_tool_args` aus der JSON.
+- `diagnostic_args`: nutzt `diagnostic_tool_args` aus der JSON (technische Diagnose, nicht Hauptbenchmark).
+
+Wichtige CLI-Argumente:
+
+- `--provider gemini|ollama`
+- `--model <modellname>` (optional)
+- `--tools all|search_exact_keyword,search_fuzzy,search_phrase_proximity`
+- `--mode user|realistic_args|diagnostic_args`
+- `--max-retries`, `--retry-base-seconds`, `--retry-max-seconds`, `--retry-jitter-seconds` fuer adaptives Warten bei Quota/Rate-Limit
+- `--score-after-review` (Editor wird mit `--wait` geoeffnet, danach Scoring)
+
+Beispiel: realistischer Lauf ueber alle drei Tools
+
+```bash
+source .venv/bin/activate
+python3 experiments/eval/run_testbench.py \
+	--provider gemini \
+	--mode realistic_args \
+	--tools all \
+	--max-retries 20 \
+	--retry-base-seconds 30 \
+	--retry-max-seconds 600 \
+	--retry-jitter-seconds 3 \
+	--score-after-review
+```
+
+Beispiel: User-Modus (echte Nutzerfrage direkt als Query)
+
+```bash
+source .venv/bin/activate
+python3 experiments/eval/run_testbench.py \
+	--provider gemini \
+	--mode user \
+	--tools all \
+	--max-retries 20 \
+	--retry-base-seconds 30 \
+	--retry-max-seconds 600 \
+	--retry-jitter-seconds 3 \
+	--score-after-review
+```
+
+Beispiel: Nur Scoring fuer einen vorhandenen Lauf
+
+```bash
+python3 experiments/eval/score_testbench.py \
+	--run-json experiments/eval/runs/<RUN_ID>/run-<MODE>.json \
+	--review-txt experiments/eval/runs/<RUN_ID>/manual-review-<MODE>.txt
+```
+
+Erzeugte Dateien pro Lauf (im jeweiligen `experiments/eval/runs/<RUN_ID>-<MODE>/`):
+
+- `run-<mode>.json`: Vollstaendige maschinenlesbare Rohdaten (Retrieval + Antworten + Metadaten).
+- `manual-review-<mode>.txt`: Manuelle C/P/W-Bewertung pro Frage und Tool.
+- `score-<mode>.json`: Kennzahlen als JSON.
+- `score-summary-<mode>.txt`: Menschlich lesbare Zusammenfassung.
+- `spec.snapshot.json`: Eingefrorene Spezifikation des Laufs fuer Reproduzierbarkeit.

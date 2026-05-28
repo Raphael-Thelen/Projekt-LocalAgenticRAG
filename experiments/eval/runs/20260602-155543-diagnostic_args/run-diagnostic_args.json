@@ -1,0 +1,1868 @@
+{
+  "run_id": "20260602-155543-diagnostic_args",
+  "run_id_base": "20260602-155543",
+  "created_at": "2026-06-02T15:55:43.787699",
+  "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json",
+  "eval_mode": "diagnostic_args",
+  "provider": "gemini",
+  "provider_label": "Gemini API",
+  "model": "gemini-3.1-flash-lite",
+  "selected_tools": [
+    "search_exact_keyword",
+    "search_fuzzy",
+    "search_phrase_proximity"
+  ],
+  "retry_policy": {
+    "max_retries": 20,
+    "retry_base_seconds": 30.0,
+    "retry_max_seconds": 600.0,
+    "retry_jitter_seconds": 3.0
+  },
+  "skip_llm_on_zero_hits": true,
+  "questions": [
+    {
+      "id": "Q1",
+      "category": "Lore / Hintergrundwissen",
+      "difficulty": "easy",
+      "question": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+      "expected_answer": "Das Mittelreich wird von der jungen Kaiserin Rohaja regiert und zusammengehalten. Die Hauptstadt und der Mittelpunkt des Reiches ist Gareth.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Mittelreich Kaiserin Rohaja Gareth",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "aventurischer_almanach_p206_c000",
+            "aventurischer_almanach_p263_c004",
+            "aventurischer_almanach_p33_c005",
+            "aventurische_namen_p32_c002",
+            "aventurischer_almanach_p12_c006"
+          ],
+          "expected_chunk_ids": [
+            "dsa_regelwerk_p10_c002"
+          ],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Mittelreich Kaiserin Rohaja Gareth",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 206,
+                "score": 29.741117,
+                "chunk_id": "aventurischer_almanach_p206_c000",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "**Rohaja von Gareth Kaiserin des Mittelreiches** \n\n_\u00bbEndlich haben Wir den Heptarchen Einhalt geboten, nun m\u00fcssen Wir das Reich wieder aufbauen. Selbst Wir als Kaiserin sind Uns daf\u00fcr nicht zu schade. Wir nehmen unsere g\u00f6ttergegebene Aufgabe nicht nur ernst, sondern Wir f\u00fcllen sie aus. Wie wollt Ihr es denn nun halten, Herr Baron?\u00ab_"
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 263,
+                "score": 27.237085,
+                "chunk_id": "aventurischer_almanach_p263_c004",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "## **Lang lebe der Kaiser!** \n\nRohaja von Gareth ist im ofiziellen Aventurien Kaiserin des Mittelreiches. Es spricht aber nichts dagegen, in eurem Aventurien einen anderen Kaiser zu kr\u00f6nen: Kaiser Hal oder Answin von Rabenmund k\u00f6nnten etwa noch immer auf dem Thron sitzen, ihr Bruder Selindian Hal k\u00f6nnte sich als Hal II. durchgesetzt haben oder vielleicht hat sogar einer eurer Spielerhelden die junge Kaiserin geehelicht und regiert nun an ihrer Seite."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 33,
+                "score": 26.83697,
+                "chunk_id": "aventurischer_almanach_p33_c005",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "**Politische Zugeh\u00f6rigkeit:** Provinzen des Mittelreichs: K\u00f6nigreich Garetien (K\u00f6nigin Rohaja von Gareth), Markgrafschaft Rommilyser Mark (Markgr\u00e4in Swantje von Rabenmund) \n\n**Regierungsform:** Feudalherrschaft mit starrem Lehnssystem; die Kaiserin ist immer auch K\u00f6nigin Garetiens, die Markgr\u00e4in der Rommilyser Mark versucht, ihr Herrschaftsgebiet wieder zu einem Erbf\u00fcrstentum zu machen"
+              },
+              {
+                "source": "aventurische_namen",
+                "title": "Aventurische Namen",
+                "page": 32,
+                "score": 26.15245,
+                "chunk_id": "aventurische_namen_p32_c002",
+                "doc_id": "aventurische_namen",
+                "excerpt": "Brin(ya), Emer, Rohaja, Selindian oder Yppolita h\u00e4ufiger vor. \n\n**Helden & Heilige:** Brin von Gareth (Reichsbeh\u00fcter, k\u00e4mpfte gegen Orks, den Usurpator Answin von Rabenmund und Borbarad, Vater Rohajas), Danos von Luring (Graf von Reichsforst, genannt ,K\u00f6nig der Ritter\u2018, Inbegriff ritterlicher Tugenden, fiel im Kriegszug gegen die Schattenlande), Hal von Gareth (Kaiser des Mittelreiches), Emmeran Stoerrebrandt (Handelsmagnat, gilt als reichster Mann Aventuriens), Geron der Einh\u00e4ndige (Heiliger der Rondra, erster Tr\u00e4ger Siebenstreichs, Bezwinger zahlloser Ungeheuer), Hl\u00fbthar von den Nordmarken (Schutzheiliger der Rondra wider d\u00e4monische M\u00e4chte, Tr\u00e4ger des Heldenschwerts Siebenstreich, Held der Ersten D\u00e4monenschlacht), Raul der Gro\u00dfe (Bezwinger Bosparans, erster Garether Kaiser und Begr\u00fcnder des Raulschen Reiches), Reto von Gareth (Kaiser des Mittelreiches, vertrieb die Kaiserzwillinge Bardo und Cella), Rohaja von Gareth (K\u00f6nigin Garetiens, Kaiserin des Mittelreiches), Thorn Eisinger (auch: Schmied der 1.000 Helden, Garether Meisterschmied) \n\n## **Namen f\u00fcr Gemeine**"
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 12,
+                "score": 23.891088,
+                "chunk_id": "aventurischer_almanach_p12_c006",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "## **Das Mittelreich** \n\nUnter allen Reichen Aventuriens nimmt das Raulsche Reich, auch Mittelreich oder Neues Reich genannt, die gr\u00f6\u00dfte Fl\u00e4che ein. Von der sturmgepeitschten K\u00fcste des Meeres der Sieben Winde im Westen bis zur Tobrischen See und dem Golf von Perricum im Osten, vom Raschtulswall und dem Strom Yaquir im S\u00fcden bis zum Rathil und zu den Gebirgen von Finsterkamm und Drachensteinen im Norden erstreckt sich das Reich der Kaiserin Rohaja von Gareth. \n\nGanz im Westen liegt das F\u00fcrstentum **Albernia** mit seiner Hauptstadt Havena, dem gr\u00f6\u00dften und wichtigsten Handelshafen des Mittelreiches am Meer der Sieben Winde. Weite Bruchlandschaften, Seen und t\u00fcckische Moore bedecken das albernische Land. Vermutlich gibt \n\n11"
+              }
+            ]
+          },
+          "answer": "Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Der bereitgestellte Kontext enth\u00e4lt keine explizite Information zur Hauptstadt des gesamten Mittelreiches.",
+          "llm_skipped": false
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Mittelreich Rohaja Hauptstadt Gareth",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p108_c000",
+            "kodex_der_helden_p58_c000",
+            "aventurischer_almanach_p12_c006",
+            "aventurischer_almanach_p206_c001",
+            "aventurischer_almanach_p230_c005"
+          ],
+          "expected_chunk_ids": [
+            "dsa_regelwerk_p10_c002"
+          ],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Mittelreich Rohaja Hauptstadt Gareth",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 108,
+                "score": 48.614166,
+                "chunk_id": "regelwerk_p108_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "Hauptstadt Elenvina. Traditionell sind die unverbr\u00fcchlich treuen Nordm\u00e4rker und die freiheitsliebenden Albernier sich spinnefeind. \n\nOrks Menschenblut opfern, um ihren G\u00f6tzen zu huldigen. \u00d6stlich des Kosch kommt nun das **K\u00f6nigreich Garetien** , die zentrale Provinz des Mittelreichs, auf der sich auch die Hausmacht der Kaiser des Mittelreiches gr\u00fcndet, denn Kaiserin Rohaja ist zugleich K\u00f6nigin Garetiens. Das Land ist fruchtbar und Handel und Handwerk florieren. Und doch scheint das ganze K\u00f6nigreich damit besch\u00e4ftigt, die vielen hungrigen M\u00e4uler der Metropole Gareth zu stopfen. Denn die Hauptstadt Garetiens und des Mittelreichs ist die gr\u00f6\u00dfte Stadt des Kontinents, zu der fast alle gro\u00dfen Stra\u00dfen f\u00fchren. Es ist eine Stadt der B\u00fcrger und Z\u00fcnfte, der Geweihten und Krieger, der Diebe und Streuner, regiert von einem Rat der Helden. Unheimlichster Ort Garetiens ist der verfluchte Wald s\u00fcdwestlich der Hauptstadt, die sogenannte D\u00e4monenbrache, wo einst die Erste D\u00e4monenschlacht stattfand."
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 58,
+                "score": 45.153725,
+                "chunk_id": "kodex_der_helden_p58_c000",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "und gut versteckte Kultpl\u00e4tze gibt, an denen Orks Menschenblut opfern, um ihren G\u00f6tzen zu huldigen. \u00d6stlich des Kosch kommt nun das K\u00f6nigreich Garetien, die zentrale Provinz des Mittelreiches, auf der sich auch die Hausmacht der Kaiser des Mittelreiches gr\u00fcndet, denn Kaiserin Rohaja ist zugleich K\u00f6nigin Garetiens. Das Land ist fruchtbar, Handel und Handwerk florieren. Und doch scheint das ganze K\u00f6nigreich damit besch\u00e4ftigt, die vielen hungrigen M\u00e4uler der Metropole Gareth zu stopfen. Denn die Hauptstadt Garetiens und des Mittelreiches ist die gr\u00f6\u00dfte Stadt des Kontinents, zu der fast alle gro\u00dfen Stra\u00dfen f\u00fchren. Es ist eine Stadt der B\u00fcrger und Z\u00fcnfte, der Geweihten und Krieger, der Diebe und Streuner, regiert von einem Rat der Helden. Unheimlichster Ort Garetiens ist der verfluchte Wald s\u00fcdwestlich der Hauptstadt, die sogenannte D\u00e4monenbrache, wo einst die Erste D\u00e4monenschlacht stattfand. \u00dcberall in Garetien finden sich riesige Mauern, die unm\u00f6glich von Menschenhand geschaffen worden sein k\u00f6nnen \u2013 und bis heute sind ihre Geheimnisse kaum entr\u00e4tselt."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 12,
+                "score": 36.46881,
+                "chunk_id": "aventurischer_almanach_p12_c006",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "## **Das Mittelreich** \n\nUnter allen Reichen Aventuriens nimmt das Raulsche Reich, auch Mittelreich oder Neues Reich genannt, die gr\u00f6\u00dfte Fl\u00e4che ein. Von der sturmgepeitschten K\u00fcste des Meeres der Sieben Winde im Westen bis zur Tobrischen See und dem Golf von Perricum im Osten, vom Raschtulswall und dem Strom Yaquir im S\u00fcden bis zum Rathil und zu den Gebirgen von Finsterkamm und Drachensteinen im Norden erstreckt sich das Reich der Kaiserin Rohaja von Gareth. \n\nGanz im Westen liegt das F\u00fcrstentum **Albernia** mit seiner Hauptstadt Havena, dem gr\u00f6\u00dften und wichtigsten Handelshafen des Mittelreiches am Meer der Sieben Winde. Weite Bruchlandschaften, Seen und t\u00fcckische Moore bedecken das albernische Land. Vermutlich gibt \n\n11"
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 206,
+                "score": 35.85229,
+                "chunk_id": "aventurischer_almanach_p206_c001",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "Rohaja von Gareth ist die junge Kaiserin des Mittelreiches. Sie gilt als Heldenkaiserin, die tatkr\u00e4ftig selbst mit anpackt und aufrechte Streiter um sich schart, die ihrem Willen folgen. Durch die Schlachten der Vergangenheit ist sie zu einer umsichtigen Herrscherin geworden, die mit ihrem Kaiserhof von Pfalz zu Pfalz reist, um sich ein Bild von Sorgen und N\u00f6ten ihrer Untertanen zu machen und Recht zu sprechen. Verheiratet ist sie inzwischen mit ihrer Jugendliebe, dem Kaiseringemahl Rondrigan Paligan, der ihr als Reichsgro\u00dfgeheimrat in der Hauptstadt dient und verl\u00e4sslich den R\u00fccken st\u00e4rkt. Kinder sind aus dieser Verbindung, sehr zur Sorge des Volkes, mehr aber noch des Adels, bisher keine hervorgegangen. Manche munkeln inzwischen gar, dass die Kaiserin verlucht wurde, und daher keinen Erben geb\u00e4ren kann. Inzwischen setzen viele ihre Hoffnungen in Sachen Nachwuchs auf Rohajas um wenige Minuten j\u00fcngere Zwillingsschwester Yppolita, die allerdings eine Gildemagierin ist \u2013 und daher nicht selbst den Thron besteigen d\u00fcrfte. \n\n## **Volkes Stimme**"
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 230,
+                "score": 35.28108,
+                "chunk_id": "aventurischer_almanach_p230_c005",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "Dann endlich holte Kaiserin Rohaja zum Gegenschlag aus. 1039 BF brach ein m\u00e4chtiger Schwertzug von Gallys aus auf, um Mendena zu erobern. Nach heftiger Schlacht iel Haffax\u2019 Hauptstadt schlie\u00dflich Ende des Jahres an die Kaiserlichen. Der F\u00fcrstkomtur aber hatte noch ein Ass im \u00c4rmel: In den Namenlosen Tagen desselben Jahres nahm der geniale Stratege Perricum ein und lie\u00df seine Truppen von dort aus weit ins Herz des Mittelreichs vorsto\u00dfen. Er belagerte Rommilys und Gareth, und seine Truppen, wie auch er selbst, konnten erst in letzter Sekunde in der Hauptstadt gestellt und bezwungen werden. Ein Gro\u00dfteil der Schattenlande ist mit dem Fall des Heptarchen Helme Haffax endg\u00fcltig Vergangenheit, doch der Sternenfall ( **238** ) wirft inzwischen einen neuen, sehr viel gr\u00f6\u00dferen Schatten auf Aventurien. \n\n229"
+              }
+            ]
+          },
+          "answer": "Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Die Hauptstadt des Mittelreichs ist Gareth.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Kaiserin Rohaja",
+            "slop": 4,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "arkane_schmieden_und_labore_p79_c005",
+            "aventurisches_animatorium_p38_c006",
+            "aventurischer_almanach_p199_c000",
+            "aventurischer_almanach_p204_c002",
+            "aventurischer_almanach_p205_c005"
+          ],
+          "expected_chunk_ids": [
+            "dsa_regelwerk_p10_c002"
+          ],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Kaiserin Rohaja",
+              "slop": 4,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "arkane_schmieden_und_labore",
+                "title": "Arkane Schmieden und Labore",
+                "page": 79,
+                "score": 16.829746,
+                "chunk_id": "arkane_schmieden_und_labore_p79_c005",
+                "doc_id": "arkane_schmieden_und_labore",
+                "excerpt": "**==> picture [11 x 7] intentionally omitted <==**\n\n**Art:** Zauberspeicher \n\n**Struktur:** Arcanovi + Psychostabilis + (Gardianum) + (Armatrutz) \n\n**Namhafte Exemplare:** Amuletum ultima protectio (Khadil Okharim, am Hals von Kaiserin Rohaja) \n\n75"
+              },
+              {
+                "source": "aventurisches_animatorium",
+                "title": "Aventurisches Animatorium",
+                "page": 38,
+                "score": 15.569681,
+                "chunk_id": "aventurisches_animatorium_p38_c006",
+                "doc_id": "aventurisches_animatorium",
+                "excerpt": ". Kurz bevor Kaiserin Rohaja im Rahja des Jahres 1039 BF die Stadt Mendena eroberte, soll dieser Lignolith-Schiffsgolem jedoch mit unbekanntem Ziel ausgelaufen sein. In Myranor wird Lignolith schon seit Hunderten von Jahren verwendet. Dort wird der Stoff nicht nur f\u00fcr die Golemerschaffung sondern auch f\u00fcr arkanomechanische Wunderwerke wie beispielsweise leichte, aber stabile Prothesen oder \u00e4hnliches verwendet."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 199,
+                "score": 15.007853,
+                "chunk_id": "aventurischer_almanach_p199_c000",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "## **Das Auge des Morgens** \n\n**==> picture [300 x 145] intentionally omitted <==**\n\n**Beschreibung:** Das Auge des Morgens genannte Schwarze Auge ist etwa kindskopfgro\u00df und von tiefschwarzer Farbe. Das Artefakt beindet sich seit der Zeit der Friedenskaiser im Besitz des Mittelreiches und ist eines der wenigen portablen Exemplare. Der geheime Beraterzirkel, der Orden vom Auge, nutzt es bei Hofe, um Kaiserin Rohaja mit Informationen und Ratschl\u00e4gen zu versorgen."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 204,
+                "score": 14.900319,
+                "chunk_id": "aventurischer_almanach_p204_c002",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": ". Doch wir wollen nicht mit Derartigem im Sinn auseinandergehen, also besinnt euch auf den guten Kaiser Hal, der das Reich ordnete und sicher machte, seinen Sohn Brin, der sein Leben gab, um Orks und D\u00e4monenanbetern zu widerstehen, und seine Tochter, die gute Kaiserin Rohaja, die die letzten Schattenknechte zur\u00fcck in die See des Ostens trieb, damit wir alle befreit und unter dem Segen der G\u00f6tter leben und unserem Tagwerk nachgehen k\u00f6nnen.\u00ab \u2014geh\u00f6rt in einer Garether Nandusschule, 1040 BF_"
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 205,
+                "score": 14.092508,
+                "chunk_id": "aventurischer_almanach_p205_c005",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "**K\u00f6nig** : K\u00f6nige sind essenziellf\u00fcr den Fortgang der LebendigenGeschichte. Entweder sind sie tragenderTeil \n\neiner Erz\u00e4hlung oder sie setzenEreignisse in Gang, die den aventurischenHintergrund oder eine Abenteuerhandlungvorantreiben. Diese Figuren spieleneine wichtige Rolle imofiziellen Aventurien, die weitgehendfestgeschrieben ist. Ihr Schicksal mag durch Helden beeinlussbar sein,sie schreiben jedoch ihre eigene Geschichte.Eine abweichende Darstellung, sei es der verfr\u00fchteTod eines B\u00f6sewichts durch Heldenhand oder der Austauschdurch eine andere Meisterperson, ist prinzipiellm\u00f6glich, f\u00fchrt aber unweigerlich zu Konliktenmit anderen Publikationen. Kaiserin Rohaja,die als Herrscherin ma\u00dfgeblich die Geschicke des Mittelreichespr\u00e4gt, ist in diesem System ein K\u00f6nig."
+              }
+            ]
+          },
+          "answer": "Das Mittelreich wird von Kaiserin Rohaja regiert. Der bereitgestellte Kontext enth\u00e4lt keine Information \u00fcber den Namen der Hauptstadt des Mittelreiches.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "category": "Goetter & Kosmologie",
+      "difficulty": "medium",
+      "question": "Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?",
+      "expected_answer": "Die primaeren Widersacher der Goetter sind der Namenlose sowie die Erzd\u00e4monen, welche als groteske Zerrbilder der Zwoelfgoetter beschrieben werden.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Namenlose Erzd\u00e4monen Zwoelfgoetter",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "archiv_der_da_monen_p41_c001",
+            "archiv_der_da_monen_p41_c000",
+            "regelwerk_p316_c000",
+            "kodex_des_go_tterwirkens_p16_c003",
+            "aventurischer_almanach_p185_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Namenlose Erzd\u00e4monen Zwoelfgoetter",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 41,
+                "score": 17.902073,
+                "chunk_id": "archiv_der_da_monen_p41_c001",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "**Feindbilder:** Die Zw\u00f6lfg\u00f6tter und ihre Verb\u00fcndeten, die Erzd\u00e4monen und ihre Verb\u00fcndeten **Diener:** u. a. Atesh\u2019Seruhn, Ghon\u2019chmur, Grakvaloth, Ivash, Maruk-Methai, Nab\u2019Pashakoth, Zhylwyraq \n\n## **Frevlergewand:** Die D\u00e4monenkrone (?) **Magnum Opus:** keines **Unmetall:** Rattengold \n\n**D\u00e4monenmale:** keine, aber Geweihte des Namenlosen haben stets etwas von sich geopfert, um einen Weihegrad zu erreichen."
+              },
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 41,
+                "score": 17.65438,
+                "chunk_id": "archiv_der_da_monen_p41_c000",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "## Namenloser / Der Abgrund \n\n**==> picture [298 x 518] intentionally omitted <==**\n\nObgleich der Gott ohne Namen kein Erzd\u00e4mon ist, hat er sich mit einigen D\u00e4monen verb\u00fcndet und belegt eine Dom\u00e4ne, die wie er keinen Namen tr\u00e4gt, sondern einfach nur \u201eDer Abgrund\u201c genannt wird. W\u00e4hrend die anderen Erzd\u00e4monen \u00fcber Dom\u00e4nen in den Niederh\u00f6llen herrschen, ist der Abgrund zwischen der 6. und 7. Sph\u00e4re gelegen. Nur die wenigsten Zauberer wissen ohne einen Pakt mit dem Namenlosen, dass diese Dom\u00e4ne \u00fcberhaupt existiert, aber selbst diese kennen nicht alle Geheimnisse dieses dunklen Ortes. Am ehesten ist es myranischen Optimaten und die den Namenlosen anbetenden \n\n**Herrscher:** Der Namenlose \n\n**Beinamen:** Der Dreizehnte, Der Gesichtslose, Der G\u00fcldene, Rattenkind \n\n**Aspekte:** Erfolg, Hass, Heimt\u00fccke, Herrschaft, L\u00fcge und Verrat, Macht, Rache, Selbstsucht, Selbstverst\u00fcmmelung, Versuchung, Zerst\u00f6rung **Donaria:** gesichtslose Masken, Blut, Gold, Purpur, Weihrauch, heilige Tiere der Zw\u00f6lfg\u00f6tter"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 316,
+                "score": 17.651924,
+                "chunk_id": "regelwerk_p316_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "Feindselige G\u00f6tter, Tempel des Namenlosen oder Unheiligt\u00fcmer von Erzd\u00e4monen oder gar Erzd\u00e4monen, die ein Gegenpart zum eigenen Gott darstellen, erschweren die Probe. \n\nDer Zeitpunkt kann ebenfalls die Probe modifizieren. Jeder der Zw\u00f6lfg\u00f6tter hat einen eigenen Monat im Jahr (mit 30 Tagen). In diesem Monat kann man Zeremonien leichter wirken. Manche Kirchen zelebrieren auch Feiertage der Gottheit, und an diesen Tagen wird das Wirken ebenfalls leichter. Die letzten f\u00fcnf Tage des Jahres geh\u00f6ren dem Namenlosen \u2013 an ihnen ist das Wirken von Zeremonien aller anderen G\u00f6tter erschwert. \n\n|**Modifkatoren f\u00fcr die Zeremonieprobe Ort***||\n|---|---|\n|Heiligtum der Gottheit|+2|\n|Tempel der Gottheit (geweihter Boden)|+1|\n|Heiligtum oder Tempel eines Gottes au\u00dferhalb|\u20131|\n|des Pantheons der eigenen Gottheit||\n|Heiligtum oder Tempel eines feindseligen Gottes|\u20132|\n|Unheiligtum eines Erzd\u00e4monen|\u20133|\n|Unheiligtum oder Tempel des Namenlosen|\u20134|\n|Unheiligtum des Gegenspielers der eigenen|\u20135|\n|Gottheit||\n\n\n\n* Nur einer der Modifikatoren kann gelten. \n\n## **Zeit****"
+              },
+              {
+                "source": "kodex_des_go_tterwirkens",
+                "title": "Kodex des Go\u0308tterwirkens",
+                "page": 16,
+                "score": 16.62388,
+                "chunk_id": "kodex_des_go_tterwirkens_p16_c003",
+                "doc_id": "kodex_des_go_tterwirkens",
+                "excerpt": "**==> picture [11 x 7] intentionally omitted <==**\n\n_Beispiel: Der Ackersegen wirkt auf Pflanzen. Hilbert hat sich einige Samen herausgesucht, auf die er die Zeremonie anwenden m\u00f6chte. Auch die Reichweite stellt mit Sicht kein Problem dar._ \n\n## **Modifikatoren f\u00fcr die Zeremonieprobe** \n\nOrt und Zeit k\u00f6nnen die Zeremonieprobe beeinflussen. An heiligen Orten der Gottheit oder in Tempeln ist eine Zeremonie leichter zu wirken. Auch Tempel von Gottheiten des gleichen Pantheons, wie das der Zw\u00f6lfg\u00f6tter, k\u00f6nnen Erleichterungen einbringen (Meisterentscheid). Feindselige G\u00f6tter, Tempel des Namenlosen oder Unheiligt\u00fcmer von Erzd\u00e4monen oder gar Erzd\u00e4monen, die ein Gegenpart zum eigenen Gott darstellen, erschweren die Probe."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 185,
+                "score": 13.415142,
+                "chunk_id": "aventurischer_almanach_p185_c003",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "_\u2014aus der echsischen Originalfassung des Daimonicons, im Besitz von Pardona_ \n\nNeben dem Namenlosen gibt es weitere bedrohliche Gegenspieler der G\u00f6tter, n\u00e4mlich jene, die au\u00dferhalb der Sch\u00f6pfung stehen: die Widersacher aller G\u00f6tter, die Schrecken aus der Siebten Sph\u00e4re. Die Welt jenseits des Sternenwalls und der Sechsten Sph\u00e4re, die auch als das Drau\u00dfen oder das Chaos bekannt ist, gilt als Heimstatt der D\u00e4monen. Derzeit hat es den Anschein, als ob sich im Chaos zu jedem Zw\u00f6lfgott ein eigener Widersacher in Form eines Erzd\u00e4mons manifestiert hat. Deren niederh\u00f6llische Horden streben danach, das Wirken der G\u00f6tter zunichte zu machen oder zu pervertieren, auf dass die gesamte Welt vom Chaos verschlungen werden kann. Ob sie dem D\u00e4monensultan der Legenden gehorchen m\u00fcssen oder ihm je Vasallentreue geschworen haben, ist unbekannt. Diese Vorstellung entspringt jedoch wahrscheinlich dem geordneten Denken der Welt und viel weniger dem Chaos, aus dem diese Entit\u00e4ten stammen."
+              }
+            ]
+          },
+          "answer": "Die gr\u00f6\u00dften Widersacher der Zw\u00f6lfg\u00f6tter sind:\n\n*   **Der Namenlose:** Er wird als Gegenspieler der G\u00f6tter genannt.\n*   **Die Erzd\u00e4monen:** Sie gelten als Widersacher aller G\u00f6tter und Schrecken aus der siebten Sph\u00e4re. Es wird angenommen, dass f\u00fcr jeden der Zw\u00f6lfg\u00f6tter ein eigener Erzd\u00e4mon als Widersacher existiert.",
+          "llm_skipped": false
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Widersacher Zwoelfgoetter Namenlose Erzd\u00e4monen",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "aventurischer_almanach_p185_c003",
+            "archiv_der_da_monen_p41_c001",
+            "archiv_der_da_monen_p41_c000",
+            "regelwerk_p316_c000",
+            "die_winterwacht_p91_c001"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Widersacher Zwoelfgoetter Namenlose Erzd\u00e4monen",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 185,
+                "score": 34.64039,
+                "chunk_id": "aventurischer_almanach_p185_c003",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "_\u2014aus der echsischen Originalfassung des Daimonicons, im Besitz von Pardona_ \n\nNeben dem Namenlosen gibt es weitere bedrohliche Gegenspieler der G\u00f6tter, n\u00e4mlich jene, die au\u00dferhalb der Sch\u00f6pfung stehen: die Widersacher aller G\u00f6tter, die Schrecken aus der Siebten Sph\u00e4re. Die Welt jenseits des Sternenwalls und der Sechsten Sph\u00e4re, die auch als das Drau\u00dfen oder das Chaos bekannt ist, gilt als Heimstatt der D\u00e4monen. Derzeit hat es den Anschein, als ob sich im Chaos zu jedem Zw\u00f6lfgott ein eigener Widersacher in Form eines Erzd\u00e4mons manifestiert hat. Deren niederh\u00f6llische Horden streben danach, das Wirken der G\u00f6tter zunichte zu machen oder zu pervertieren, auf dass die gesamte Welt vom Chaos verschlungen werden kann. Ob sie dem D\u00e4monensultan der Legenden gehorchen m\u00fcssen oder ihm je Vasallentreue geschworen haben, ist unbekannt. Diese Vorstellung entspringt jedoch wahrscheinlich dem geordneten Denken der Welt und viel weniger dem Chaos, aus dem diese Entit\u00e4ten stammen."
+              },
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 41,
+                "score": 12.53145,
+                "chunk_id": "archiv_der_da_monen_p41_c001",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "**Feindbilder:** Die Zw\u00f6lfg\u00f6tter und ihre Verb\u00fcndeten, die Erzd\u00e4monen und ihre Verb\u00fcndeten **Diener:** u. a. Atesh\u2019Seruhn, Ghon\u2019chmur, Grakvaloth, Ivash, Maruk-Methai, Nab\u2019Pashakoth, Zhylwyraq \n\n## **Frevlergewand:** Die D\u00e4monenkrone (?) **Magnum Opus:** keines **Unmetall:** Rattengold \n\n**D\u00e4monenmale:** keine, aber Geweihte des Namenlosen haben stets etwas von sich geopfert, um einen Weihegrad zu erreichen."
+              },
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 41,
+                "score": 12.358066,
+                "chunk_id": "archiv_der_da_monen_p41_c000",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "## Namenloser / Der Abgrund \n\n**==> picture [298 x 518] intentionally omitted <==**\n\nObgleich der Gott ohne Namen kein Erzd\u00e4mon ist, hat er sich mit einigen D\u00e4monen verb\u00fcndet und belegt eine Dom\u00e4ne, die wie er keinen Namen tr\u00e4gt, sondern einfach nur \u201eDer Abgrund\u201c genannt wird. W\u00e4hrend die anderen Erzd\u00e4monen \u00fcber Dom\u00e4nen in den Niederh\u00f6llen herrschen, ist der Abgrund zwischen der 6. und 7. Sph\u00e4re gelegen. Nur die wenigsten Zauberer wissen ohne einen Pakt mit dem Namenlosen, dass diese Dom\u00e4ne \u00fcberhaupt existiert, aber selbst diese kennen nicht alle Geheimnisse dieses dunklen Ortes. Am ehesten ist es myranischen Optimaten und die den Namenlosen anbetenden \n\n**Herrscher:** Der Namenlose \n\n**Beinamen:** Der Dreizehnte, Der Gesichtslose, Der G\u00fcldene, Rattenkind \n\n**Aspekte:** Erfolg, Hass, Heimt\u00fccke, Herrschaft, L\u00fcge und Verrat, Macht, Rache, Selbstsucht, Selbstverst\u00fcmmelung, Versuchung, Zerst\u00f6rung **Donaria:** gesichtslose Masken, Blut, Gold, Purpur, Weihrauch, heilige Tiere der Zw\u00f6lfg\u00f6tter"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 316,
+                "score": 12.356346,
+                "chunk_id": "regelwerk_p316_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "Feindselige G\u00f6tter, Tempel des Namenlosen oder Unheiligt\u00fcmer von Erzd\u00e4monen oder gar Erzd\u00e4monen, die ein Gegenpart zum eigenen Gott darstellen, erschweren die Probe. \n\nDer Zeitpunkt kann ebenfalls die Probe modifizieren. Jeder der Zw\u00f6lfg\u00f6tter hat einen eigenen Monat im Jahr (mit 30 Tagen). In diesem Monat kann man Zeremonien leichter wirken. Manche Kirchen zelebrieren auch Feiertage der Gottheit, und an diesen Tagen wird das Wirken ebenfalls leichter. Die letzten f\u00fcnf Tage des Jahres geh\u00f6ren dem Namenlosen \u2013 an ihnen ist das Wirken von Zeremonien aller anderen G\u00f6tter erschwert. \n\n|**Modifkatoren f\u00fcr die Zeremonieprobe Ort***||\n|---|---|\n|Heiligtum der Gottheit|+2|\n|Tempel der Gottheit (geweihter Boden)|+1|\n|Heiligtum oder Tempel eines Gottes au\u00dferhalb|\u20131|\n|des Pantheons der eigenen Gottheit||\n|Heiligtum oder Tempel eines feindseligen Gottes|\u20132|\n|Unheiligtum eines Erzd\u00e4monen|\u20133|\n|Unheiligtum oder Tempel des Namenlosen|\u20134|\n|Unheiligtum des Gegenspielers der eigenen|\u20135|\n|Gottheit||\n\n\n\n* Nur einer der Modifikatoren kann gelten. \n\n## **Zeit****"
+              },
+              {
+                "source": "die_winterwacht",
+                "title": "Die Winterwacht",
+                "page": 91,
+                "score": 12.027191,
+                "chunk_id": "die_winterwacht_p91_c001",
+                "doc_id": "die_winterwacht",
+                "excerpt": "Die zunehmende Anbetung von **Kor** im Bornland kann ebenso in die Klauen des Namenlosen oder des Erzd\u00e4mons **Belhalhar** f\u00fchren \u2013 verstehen es doch beide meisterlich, die Grenze zwischen gutem Kampf und sinnlosem T\u00f6ten verschwimmen zu lassen. Selbst gefestigte Bronnjaren oder Krieger sind schon im vermeintlichen Glauben an Kor vom rechten Pfad abgekommen und haben sich unwissentlich dem Widersacher Rondras verschrieben. Die Aus\u00fcbung von Gewalt der Bronnjaren gegen ihre Leibeigenen \u2013 oder umgekehrt in Form von Rache \u2013 sind oft die ersten Schritte, die nur scheinbar dem Wege Kors folgen und in Wirklichkeit in die F\u00e4nge des Namenlosen oder von Rondras und Kors Widersacher f\u00fchren. Zu einem gewissen finsteren Ruhm hat es der sogenannte _Korsmalbund_ gebracht, der unter dem Deckmantel der Verehrung des Schlachtengottes in Wahrheit dem Namenlosen huldigte und zahlreiche Bronnjaren auf seine Seite ziehen konnte, bis er 1039 BF bei Notmark durch den Gr\u00fcnen Zug milit\u00e4risch besiegt werden konnte."
+              }
+            ]
+          },
+          "answer": "Die gr\u00f6\u00dften Widersacher der Zw\u00f6lfg\u00f6tter sind:\n\n*   **Der Namenlose:** Er gilt als bedeutender Gegenspieler der G\u00f6tter, ist jedoch kein Erzd\u00e4mon.\n*   **Die Erzd\u00e4monen:** Diese Wesen aus der Siebten Sph\u00e4re (dem Chaos) manifestieren sich als direkte Widersacher zu den einzelnen Zw\u00f6lfg\u00f6ttern, um deren Wirken zu vernichten oder zu pervertieren.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Widersacher der Zwoelfgoetter",
+            "slop": 5,
+            "size": 5
+          },
+          "retrieved_count": 3,
+          "retrieved_chunk_ids": [
+            "das_wu_stenreich_p104_c007",
+            "das_dornenreich_p95_c005",
+            "aventurischer_almanach_p185_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Widersacher der Zwoelfgoetter",
+              "slop": 5,
+              "size": 5
+            },
+            "count": 3,
+            "results": [
+              {
+                "source": "das_wu_stenreich",
+                "title": "Das Wu\u0308stenreich",
+                "page": 104,
+                "score": 11.912957,
+                "chunk_id": "das_wu_stenreich_p104_c007",
+                "doc_id": "das_wu_stenreich",
+                "excerpt": "Nur sehr wenige Gl\u00e4ubige hat der **Namenlose** in dieser Region. Der traditionelle Widersacher der Zw\u00f6lfg\u00f6tter ist hier schw\u00e4cher als seine Feinde und fast scheint es, dass sein Kult diese Region meidet oder f\u00fcr Menschen hier uninteressant ist. Er gilt weder Novadis, f\u00fcr die er nur ein anderer, alter Gott ist, noch den Ferkinas als Gegenspieler. Lediglich die Beni Geraut Schie f\u00fcrchten ihn, da er ihnen als ewiger Feind gilt. ( **184** ) Die offensichtlichen Gegner im Gebiet der Kh\u00f4m sind die Echsen und ihre H\u2019Ranga, gegen welche die Tulamiden k\u00e4mpfen, seit sie vor Jahrtausenden die Berge verlie\u00dfen. \n\n100 G\u00f6tter & D\u00e4monen"
+              },
+              {
+                "source": "das_dornenreich",
+                "title": "Das Dornenreich",
+                "page": 95,
+                "score": 9.372373,
+                "chunk_id": "das_dornenreich_p95_c005",
+                "doc_id": "das_dornenreich",
+                "excerpt": "## . Die Widersacher , \n\nIn vielen L\u00e4ndern gilt der abtr\u00fcnnige Namenlose (siehe **Aventurischer Almanach** Seite **230** ) als gr\u00f6\u00dfter Widersacher der Zw\u00f6lfg\u00f6tter. Im K\u00f6nigreich Aranien treten im Verh\u00e4ltnis zu anderen Regionen die Diener des Goldenen Gottes nur vereinzelt auf. Hintergrund sind die vorherrschenden Geheimgesellschaften, zu denen die Qabalyas, dunkle oronischen Kulte und auch die ketzerischen Ilaristen z\u00e4hlen. Die verborgenen Gruppierungen beobachten ihre Umgebung und Konkurrenz wachsam, sodass die Anh\u00e4nger des Dreizehnten hier mehr M\u00fche haben und sich lieber auf andere Ziele konzentrieren. \n\nDer Sternenfall bringt alte und vergessene Kulte zum Vorschein oder verhilft ihnen zu neuer Bl\u00fcte (siehe Seite **91** ). Da in Aranien die sch\u00f6ne G\u00f6ttin Rahja eine bedeutende Rolle innehat, lauert ihre erzd\u00e4monische Widersacherin **Belkelel** auf neue Gelegenheiten, um ihre Herrschaft zu mehren. Neben dem Aspekt der Gewalt, plant die Herrin der schwarzfaulen Lust, entt\u00e4uschte Personen der Gesellschaft um sich zu scharen und auf schleichendem Wege zu verf\u00fchren."
+              },
+              {
+                "source": "aventurischer_almanach",
+                "title": "Aventurischer Almanach",
+                "page": 185,
+                "score": 2.7193546,
+                "chunk_id": "aventurischer_almanach_p185_c003",
+                "doc_id": "aventurischer_almanach",
+                "excerpt": "_\u2014aus der echsischen Originalfassung des Daimonicons, im Besitz von Pardona_ \n\nNeben dem Namenlosen gibt es weitere bedrohliche Gegenspieler der G\u00f6tter, n\u00e4mlich jene, die au\u00dferhalb der Sch\u00f6pfung stehen: die Widersacher aller G\u00f6tter, die Schrecken aus der Siebten Sph\u00e4re. Die Welt jenseits des Sternenwalls und der Sechsten Sph\u00e4re, die auch als das Drau\u00dfen oder das Chaos bekannt ist, gilt als Heimstatt der D\u00e4monen. Derzeit hat es den Anschein, als ob sich im Chaos zu jedem Zw\u00f6lfgott ein eigener Widersacher in Form eines Erzd\u00e4mons manifestiert hat. Deren niederh\u00f6llische Horden streben danach, das Wirken der G\u00f6tter zunichte zu machen oder zu pervertieren, auf dass die gesamte Welt vom Chaos verschlungen werden kann. Ob sie dem D\u00e4monensultan der Legenden gehorchen m\u00fcssen oder ihm je Vasallentreue geschworen haben, ist unbekannt. Diese Vorstellung entspringt jedoch wahrscheinlich dem geordneten Denken der Welt und viel weniger dem Chaos, aus dem diese Entit\u00e4ten stammen."
+              }
+            ]
+          },
+          "answer": "Als gr\u00f6\u00dfte Widersacher der Zw\u00f6lfg\u00f6tter gelten:\n\n*   **Der Namenlose:** Er wird in vielen L\u00e4ndern als der gr\u00f6\u00dfte Widersacher der Zw\u00f6lfg\u00f6tter betrachtet.\n*   **Die Erzd\u00e4monen:** Diese Entit\u00e4ten aus der Siebten Sph\u00e4re (dem Chaos) gelten als Widersacher aller G\u00f6tter. Es scheint, als habe sich zu jedem Zw\u00f6lfgott ein eigener Erzd\u00e4mon als Gegenspieler manifestiert, die danach streben, das Wirken der G\u00f6tter zu vernichten oder zu pervertieren.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "category": "Grundregeln / Wuerfelmechanik",
+      "difficulty": "hard",
+      "question": "Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?",
+      "expected_answer": "Eine Fertigkeitsprobe wird mit 3W20 abgelegt. Jeder Wurf wird mit einem Eigenschaftswert verglichen. Zu hohe Wuerfe koennen mit FW ausgeglichen werden. Uebrig gebliebene Punkte ergeben FP und bestimmen die QS.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Fertigkeitsprobe 3W20 Fertigkeitswert FW FP QS",
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Fertigkeitsprobe 3W20 Fertigkeitswert FW FP QS",
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Fertigkeitsprobe Wuerfel Eigenschaftswerte FW FP QS",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "kodex_des_schwertes_p16_c004",
+            "regelwerk_p24_c005",
+            "regelwerk_p314_c002",
+            "regelwerk_p267_c002",
+            "kodex_des_schwertes_p17_c002"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Fertigkeitsprobe Wuerfel Eigenschaftswerte FW FP QS",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 16,
+                "score": 20.687267,
+                "chunk_id": "kodex_des_schwertes_p16_c004",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "## **Eigenschaftsproben vs. Fertigkeitsproben** \n\nEigenschaftsproben sollten nur selten verlangt werden und Fertigkeitsproben sollten immer den Vorzug erhalten. Talente decken so gut wie alle T\u00e4tigkeiten ab, die ein Held ausf\u00fchren kann. Nur wenn kein Talent passend erscheint, sollte auf eine Eigenschaftsprobe zur\u00fcckgegriffen werden. \n\n## Fertigkeitsprobe \n\nIm Unterschied zu der Eigenschaftsprobe kommt bei einer _Fertigkeitsprobe_ nicht nur 1W20 zum Einsatz, sondern es sind gleich 3W20. Die Ergebnisse der W\u00fcrfe werden aber nicht addiert, sondern jeder einzelne Wurf mit einem Eigenschaftswert verglichen. Es gelten hier grundlegend die Regeln zu Probenw\u00fcrfen, mit folgenden Ausnahmen: \n\n- Bei jedem Talent, jedem Zauber und jeder Liturgie sind drei Eigenschaftswerte angegeben. Ein Held muss nacheinander auf diese drei Eigenschaften w\u00fcrfeln. Die Reihenfolge, in der du auf die bei der Probe beteiligten Eigenschaften w\u00fcrfelst, ist dir \u00fcberlassen. Wichtig ist nur, dass vor dem Wurf der \n\n**==> picture [12 x 7] intentionally omitted <==**"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 24,
+                "score": 18.416328,
+                "chunk_id": "regelwerk_p24_c005",
+                "doc_id": "regelwerk",
+                "excerpt": "- Bei jedem Talent, jedem Zauber und jeder Liturgie sind drei Eigenschaftswerte angegeben. Ein Held muss nacheinander auf diese drei Eigenschaften w\u00fcrfeln. Die Reihenfolge, in der du auf die bei der Probe beteiligten Eigenschaften w\u00fcrfelst, ist dir \u00fcberlassen. Wichtig ist nur, dass vor dem Wurf der W\u00fcrfel einer Eigenschaft zugeordnet ist. Einige Hilfestellung f\u00fcr das W\u00fcrfeln einer Probe findest du auf der folgenden Seite. \n\n21"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 314,
+                "score": 16.066671,
+                "chunk_id": "regelwerk_p314_c002",
+                "doc_id": "regelwerk",
+                "excerpt": "_Beispiel: Hilbert ist die Probe auf_ Selbstbeherrschung (St\u00f6rungen ignorieren) _gelungen und er hat das Eichh\u00f6rnchen ignoriert (es ist mit den N\u00fcssen entkommen). Nun ist es Zeit f\u00fcr die Fertigkeitsprobe. Hilbert muss auf drei Eigenschaften w\u00fcrfeln, die bei der Liturgie Heilsegen genannt sind (KL/IN/CH). Zun\u00e4chst muss er aber festlegen, wie viele KaP er einsetzen will, er entscheidet sich f\u00fcr 8 Punkte. Er w\u00fcrfelt auf die drei Eigenschaften, bei den ersten beiden schafft er es trotz der Erschwernis von 1 durch das Modifizieren unter seinem Eigenschaftswert zu bleiben, bei der CH-Probe muss er 5 FP einsetzen, um die Probe auszugleichen. Aber er schafft es._ \n\nIn fr\u00fcheren Zeiten waren die karmalen Str\u00f6mungen durch die Ordnung der G\u00f6tter gepr\u00e4gt. Mittlerweile ist es schwieriger Karma zu lenken und es besteht die Chance, dass durch die falsche Anwendung von Sterblichen auch chaotische Effekte entstehen. Die Kirchen und Kulte vermuten dahinter den Sternenfall, ein Ereignis von kosmologischer Gr\u00f6\u00dfe, dessen Ursachen sie noch nicht verstehen."
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 267,
+                "score": 15.724104,
+                "chunk_id": "regelwerk_p267_c002",
+                "doc_id": "regelwerk",
+                "excerpt": "_Beispiel: Mirhibans Spieler w\u00fcrfelt die modifizierte Fertigkeitsprobe auf DSCHINNENRUF. Die Probe gelingt, ohne das Mirhiban auch nur einen einzigen FP ausgeben musste. Sie beh\u00e4lt alle 12 FP und hat damit 4 QS._ \n\n## **Beschworene Wesen verbessern** \n\nJede Verbesserung kann nur einmal gew\u00e4hlt werden. Beispielhafte Werte von D\u00e4monen und Elementaren **353** . findest du im Bestiarium auf Seite"
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 17,
+                "score": 15.702135,
+                "chunk_id": "kodex_des_schwertes_p17_c002",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**==> picture [11 x 7] intentionally omitted <==**\n\n## **Schnellerer Fertigkeitsprobenwurf** _Optionale Regel_ \n\nEine Fertigkeitsprobe dauert wesentlich l\u00e4nger als eine Eigenschaftsprobe. Schlie\u00dflich w\u00fcrfelst du drei W\u00fcrfel und musst das Ergebnis mit den einzelnen Spielwerten vergleichen. Es gibt jedoch verschiedene M\u00f6glichkeiten, die Zeit zu verk\u00fcrzen: Durch verschiedenfarbige W\u00fcrfel kannst du die Reihenfolge der Teilproben festlegen. Ein roter W\u00fcrfel k\u00f6nnte beispielsweise immer f\u00fcr den ersten Eigenschaftswert, ein blauer f\u00fcr den zweiten Wert und ein gr\u00fcner f\u00fcr den dritten Wert stehen. So kannst du alle W\u00fcrfel auf einmal werfen und direkt vergleichen. Eine weitere M\u00f6glichkeit ist, den am weitesten links liegenden W\u00fcrfel nach dem Wurf dem ersten Wert und den am weitesten rechts liegenden dem letzten Wert zuzuordnen. Durch den Einsatz dieser Optionalregel bleibt das Spiel gleich komplex. \n\n## **Anwendungsgebiete**"
+              }
+            ]
+          },
+          "answer": "Eine Fertigkeitsprobe besteht aus folgenden Schritten:\n\n1.  **Zuordnung:** Vor dem Wurf muss festgelegt werden, welcher W\u00fcrfel welcher der drei f\u00fcr das Talent, den Zauber oder die Liturgie angegebenen Eigenschaften zugeordnet ist.\n2.  **Wurf:** Es werden 3W20 geworfen.\n3.  **Vergleich:** Jeder der drei W\u00fcrfel wird einzeln mit seinem zugeordneten Eigenschaftswert verglichen. Die Ergebnisse werden nicht addiert.\n\n**Funktion des Fertigkeitswerts (FW):**\nDer bereitgestellte Kontext enth\u00e4lt keine explizite Definition der Funktion des Fertigkeitswerts (FW) innerhalb einer Fertigkeitsprobe. Er erw\u00e4hnt lediglich den Einsatz von Fertigkeitspunkten (FP) zum Ausgleich von Proben.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Fertigkeitsprobe 3W20",
+            "slop": 6,
+            "size": 5
+          },
+          "retrieved_count": 2,
+          "retrieved_chunk_ids": [
+            "kodex_des_schwertes_p19_c004",
+            "regelwerk_p27_c004"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Fertigkeitsprobe 3W20",
+              "slop": 6,
+              "size": 5
+            },
+            "count": 2,
+            "results": [
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 19,
+                "score": 8.456507,
+                "chunk_id": "kodex_des_schwertes_p19_c004",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**Kein Best\u00e4tigungswurf bei Fertigkeitsproben?** Anders als bei Eigenschaftsproben gibt es bei Fertigkeitsproben keine Best\u00e4tigungsw\u00fcrfe bei Kritischen Erfolgen oder Patzern. Das liegt daran, dass die Wahrscheinlichkeiten f\u00fcr Kritische Erfolge bei den beiden Proben unterschiedlich hoch sind. Da die Fertigkeitsprobe mit 3W20 durchgef\u00fchrt wird, ist die Chance f\u00fcr eine Doppel-1 (oder gar Dreifach-1) gering und reicht als Wahrscheinlichkeit f\u00fcr einen Kritischen Erfolg oder Patzer aus. Ein nochmaliger Best\u00e4tigungswurf bei den Teilproben w\u00fcrde die Wahrscheinlichkeit nochmals senken und es noch unwahrscheinlicher machen, dass dieser Fall eintritt. Bei einer Eigenschaftsprobe w\u00e4re ohne einen Best\u00e4tigungswurf die Chance bei jedem Wurf 10 % (n\u00e4mlich bei einer 1 oder 20). Und das ist deutlich zu hoch. Deshalb unterscheidet sich bei Eigenschafts- und Fertigkeitsproben die Regelung f\u00fcr Kritische Erfolge und Patzer. \n\n## **Patzer**"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 27,
+                "score": 8.456507,
+                "chunk_id": "regelwerk_p27_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Kein Best\u00e4tigungswurf bei Fertigkeitsproben?** \n\nAnders als bei Eigenschaftsproben gibt es bei Fertigkeitsproben keine Best\u00e4tigungsw\u00fcrfe bei Kritischen Erfolgen oder Patzern. Das liegt daran, dass die Wahrscheinlichkeiten f\u00fcr Kritische Erfolge bei den beiden Proben unterschiedlich hoch sind. Da die Fertigkeitsprobe mit 3W20 durchgef\u00fchrt wird, ist die Chance f\u00fcr eine Doppel-1 (oder gar Dreifach-1) gering und reicht als Wahrscheinlichkeit f\u00fcr einen Kritischen Erfolg oder Patzer aus. Ein nochmaliger Best\u00e4tigungswurf bei den Teilproben w\u00fcrde die Wahrscheinlichkeit nochmals senken und es noch unwahrscheinlicher machen, dass dieser Fall eintritt. \n\nBei einer Eigenschaftsprobe w\u00e4re ohne einen Best\u00e4tigungswurf die Chance bei jedem Wurf 10 % (n\u00e4mlich bei einer 1 oder 20). Und das ist deutlich zu hoch. Deshalb unterscheidet sich bei Eigenschafts- und Fertigkeitsproben die Regelung f\u00fcr Kritische Erfolge und Patzer. \n\n## **Patzer**"
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die Schritte, die W\u00fcrfe oder die Funktion des Fertigkeitswerts (FW) bei einer Fertigkeitsprobe. Er beschreibt lediglich, dass Fertigkeitsproben mit 3W20 durchgef\u00fchrt werden und keine Best\u00e4tigungsw\u00fcrfe f\u00fcr kritische Erfolge oder Patzer erfordern.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "category": "Kampfregeln",
+      "difficulty": "medium",
+      "question": "Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?",
+      "expected_answer": "Wenn bei Attacke 20 und Bestaetigungswurf misslungen, ist der Patzer bestaetigt und der Angreifer erleidet 1W6+2 SP.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Patzer Nahkampf Attacke Bestaetigungswurf 1W6+2 SP",
+            "size": 5
+          },
+          "retrieved_count": 1,
+          "retrieved_chunk_ids": [
+            "regelwerk_p234_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Patzer Nahkampf Attacke Bestaetigungswurf 1W6+2 SP",
+              "size": 5
+            },
+            "count": 1,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 234,
+                "score": 37.099365,
+                "chunk_id": "regelwerk_p234_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "Wenn der Best\u00e4tigungswurf misslingt, geschieht Folgendes: \n\n- Der Held erleidet 1W6+2 SP. \n\n_Beispiel: H\u00e4tte der Spieler von Arbosch weniger Gl\u00fcck gehabt und bei seiner Attacke eine 20 gew\u00fcrfelt, h\u00e4tte dies f\u00fcr ihn schlimm enden k\u00f6nnen. Es w\u00e4re ein Best\u00e4tigungswurf n\u00f6tig gewesen, und zwar gegen die wie zuvor modifizierte Attacke, in dem Fall also gegen 11. H\u00e4tte er eine 12 oder h\u00f6her gew\u00fcrfelt, w\u00e4re ihm ein Patzer unterlaufen und Arbosch h\u00e4tte 1W6+2 SP erlitten._ \n\n## **Nahkampf-Patzertabelle** _Optionale Regel_ \n\nAnstatt 1W6+2 SP bei einem Patzer, kann auch diese Tabelle benutzt werden: Ist der K\u00e4mpfer unbewaffnet, wird auf das Wurfergebnis 5 addiert, sollte es unter 7 bleiben. \n\n**==> picture [242 x 21] intentionally omitted <==**\n\n**----- Start of picture text -----**<br>\nErgebnis (2W6) Auswirkung<br>**----- End of picture text -----**<br>"
+              }
+            ]
+          },
+          "answer": "Wenn der Best\u00e4tigungswurf bei einer 20 misslingt, erleidet der Held 1W6+2 SP. Alternativ kann die optionale Nahkampf-Patzertabelle verwendet werden.",
+          "llm_skipped": false
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Patzer Attacke Bestaetigungswurf Schaden 1W6+2",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "kodex_des_schwertes_p68_c004",
+            "regelwerk_p234_c003",
+            "ru_stkammer_der_dampfenden_dschungel_p11_c005",
+            "regelwerk_p248_c000",
+            "regelwerk_p234_c000"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Patzer Attacke Bestaetigungswurf Schaden 1W6+2",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 68,
+                "score": 19.60953,
+                "chunk_id": "kodex_des_schwertes_p68_c004",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "## **Patzer** \n\nAuf der anderen Seite gibt es im Kampf auch Patzer. Hier muss ebenfalls ein Best\u00e4tigungswurf erfolgen. \n\nWenn der Best\u00e4tigungswurf gelingt, geschieht Folgendes: gew\u00f6hnliches Misslingen \n\nWenn der Best\u00e4tigungswurf misslingt, geschieht Folgendes: Der Held erleidet 1W6+2 SP. \n\n_Beispiel: H\u00e4tte der Spieler von Arbosch weniger Gl\u00fcck gehabt und bei seiner Attacke eine 20 gew\u00fcrfelt, h\u00e4tte dies f\u00fcr ihn schlimm enden k\u00f6nnen. Es w\u00e4re ein Best\u00e4tigungswurf n\u00f6tig gewesen, und zwar gegen die wie zuvor modifizierte Attacke, in dem Fall also gegen 11. H\u00e4tte er eine 12 oder h\u00f6her gew\u00fcrfelt, w\u00e4re ihm ein Patzer unterlaufen und Arbosch h\u00e4tte 1W6+2 SP erlitten._ \n\n## **3. Verteidigung** \n\nAngreifern, besonders solchen, die mit scharfen Gegenst\u00e4nden nach einem schlagen, m\u00f6chte man nat\u00fcrlich nicht schutzlos ausgeliefert sein. Hierzu gibt es die Verteidigung. Ein K\u00e4mpfer hat hierbei die Wahl zwischen einer Parade und Ausweichen. Diese beiden Verteidigungsarten haben jeweils gewisse Vor- und Nachteile."
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 234,
+                "score": 19.388817,
+                "chunk_id": "regelwerk_p234_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "Wenn der Best\u00e4tigungswurf misslingt, geschieht Folgendes: \n\n- Der Held erleidet 1W6+2 SP. \n\n_Beispiel: H\u00e4tte der Spieler von Arbosch weniger Gl\u00fcck gehabt und bei seiner Attacke eine 20 gew\u00fcrfelt, h\u00e4tte dies f\u00fcr ihn schlimm enden k\u00f6nnen. Es w\u00e4re ein Best\u00e4tigungswurf n\u00f6tig gewesen, und zwar gegen die wie zuvor modifizierte Attacke, in dem Fall also gegen 11. H\u00e4tte er eine 12 oder h\u00f6her gew\u00fcrfelt, w\u00e4re ihm ein Patzer unterlaufen und Arbosch h\u00e4tte 1W6+2 SP erlitten._ \n\n## **Nahkampf-Patzertabelle** _Optionale Regel_ \n\nAnstatt 1W6+2 SP bei einem Patzer, kann auch diese Tabelle benutzt werden: Ist der K\u00e4mpfer unbewaffnet, wird auf das Wurfergebnis 5 addiert, sollte es unter 7 bleiben. \n\n**==> picture [242 x 21] intentionally omitted <==**\n\n**----- Start of picture text -----**<br>\nErgebnis (2W6) Auswirkung<br>**----- End of picture text -----**<br>"
+              },
+              {
+                "source": "ru_stkammer_der_dampfenden_dschungel",
+                "title": "Ru\u0308stkammer der Dampfenden Dschungel",
+                "page": 11,
+                "score": 17.241394,
+                "chunk_id": "ru_stkammer_der_dampfenden_dschungel_p11_c005",
+                "doc_id": "ru_stkammer_der_dampfenden_dschungel",
+                "excerpt": "**Waffenvorteil:** Nach einem Patzer bei der Attacke wird das W\u00fcrfelergebnis des Best\u00e4tigungswurfes um 1 gesenkt. **Waffennachteil:** Nach einem kritischen Erfolg auf Attacke oder Parade wird das W\u00fcrfelergebnis des Best\u00e4tigungswurfes um 1 erh\u00f6ht. \n\n9"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 248,
+                "score": 16.856073,
+                "chunk_id": "regelwerk_p248_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Patzer** \n\nAuf der anderen Seite gibt es bei der Verteidigung im Fernkampf auch Patzer. Hier muss ebenfalls ein Best\u00e4tigungswurf erfolgen. \n\nWenn der Best\u00e4tigungswurf gelingt, geschieht Folgendes: \n\n## \u2022 gew\u00f6hnliches Misslingen \n\nWenn der Best\u00e4tigungswurf misslingt, geschieht Folgendes: \n\n- Der Held erleidet 1W6+2 SP. \n\n## Spezielle Fernkampfregeln \n\n## **Fernkampftechniken Armbr\u00fcste** \n\nViele behaupten, die Zwerge h\u00e4tten die Armbrust erfunden, w\u00e4hrend einige vermuten, dass sie von g\u00fcldenl\u00e4ndischen Siedlern nach Aventurien gebracht wurde. \n\nDie Armbrust ist bei den Zwergen, aber auch bei den B\u00fcrgern der gro\u00dfen St\u00e4dte beliebt und wird bisweilen f\u00fcr die Jagd verwendet. Der Umgang mit ihr ist leicht zu erlernen, es ist jedoch mit Aufwand verbunden, sie nachzuladen. \n\n**Leiteigenschaft:** Fingerfertigkeit \n\n_Beispiel: Layariel versucht dem n\u00e4chsten Pfeil des Goblins auszuweichen, leider hat sie dieses Mal Pech und w\u00fcrfelt eine 20 \u2013 und best\u00e4tigt diese. Sie erleidet 1W6+2 SP._ \n\n## **4. Schaden**"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 234,
+                "score": 16.596695,
+                "chunk_id": "regelwerk_p234_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Patzer** \n\n## **Lange Waffe** \n\n_Vorteil:_ Kurze und mittlere Waffen erleiden Erschwernisse gegen lange Waffen. \n\n_Nachteil:_ Lange Waffen erleiden bei beengter Umgebung eine Erschwernis von 8 auf Attacke und Parade. \n\nAuf der anderen Seite gibt es im Kampf auch Patzer. Hier muss ebenfalls ein Best\u00e4tigungswurf erfolgen. \n\nWenn der Best\u00e4tigungswurf gelingt, geschieht Folgendes: \n\n- gew\u00f6hnliches Misslingen \n\n|**Gegen**|**Kurz**|**Mittel**|**Lang**|\n|---|---|---|---|\n|**Kurz**|keine|\u20132 AT|\u20134 AT|\n||Nachteile|f\u00fcr kurz|f\u00fcr kurz|\n|**Mittel**|-2 AT|keine|**\u2013**2 AT|\n||f\u00fcr kurz|Nachteile|f\u00fcr mittel|\n|**Lang**|\u20134 AT|**\u2013**2 AT|keine|\n||f\u00fcr kurz|f\u00fcr mittel|Nachteile|\n\n\n\n## **Kritischer Erfolg** \n\nWie schon im Kapitel **Grundregeln** erkl\u00e4rt, k\u00f6nnen auch bei Proben im Kampf Kritische Erfolge zustande kommen. Eine gew\u00fcrfelte 1 bei einer Attacke muss mit einem Best\u00e4tigungswurf \u00fcberpr\u00fcft werden. \n\nWenn der Best\u00e4tigungswurf gelingt, treten die folgenden Effekte ein: \n\n- Der Verteidigungswert des Gegners wird f\u00fcr diesen Angriff halbiert."
+              }
+            ]
+          },
+          "answer": "Wenn der Best\u00e4tigungswurf bei einem Patzer (20) misslingt, erleidet der Held 1W6+2 SP. Alternativ kann als optionale Regel die Nahkampf-Patzertabelle verwendet werden.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Patzer bestaetigt",
+            "slop": 5,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "archiv_der_ausru_stung_p146_c005",
+            "archiv_der_ausru_stung_p299_c003",
+            "archiv_der_ausru_stung_p146_c004",
+            "archiv_der_ausru_stung_p142_c005",
+            "archiv_der_ausru_stung_p149_c005"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Patzer bestaetigt",
+              "slop": 5,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "archiv_der_ausru_stung",
+                "title": "Archiv der Ausru\u0308stung",
+                "page": 146,
+                "score": 12.628064,
+                "chunk_id": "archiv_der_ausru_stung_p146_c005",
+                "doc_id": "archiv_der_ausru_stung",
+                "excerpt": "**Waffenvorteil:** Die Abz\u00fcge f\u00fcr Sch\u00fcsse auf Ziele der Gr\u00f6\u00dfenkategorie _klein_ und _winzig_ sinken um 1. **Waffennachteil:** Bei einer gew\u00fcrfelten 20, egal ob der Patzer best\u00e4tigt wird oder nicht, kommt es zu einer schweren Ladehemmung Der Sch\u00fctze ben\u00f6tigt 2 Aktionen, um die Ladehemmung zu beseitigen. Spielst du mit der Optionalregel der Patzertabellen, addieren sich diese Aktionen auf die Zeit f\u00fcr eine weitere erw\u00fcrfelte Ladehemmung. \n\n144 Waffen und Ausr\u00fcstungen"
+              },
+              {
+                "source": "archiv_der_ausru_stung",
+                "title": "Archiv der Ausru\u0308stung",
+                "page": 299,
+                "score": 11.881991,
+                "chunk_id": "archiv_der_ausru_stung_p299_c003",
+                "doc_id": "archiv_der_ausru_stung",
+                "excerpt": ".<br>Waffennachteil:  Bei einer gew\u00fcrfelten 20, egal ob der Patzer best\u00e4tigt wird oder nicht, kommt es zu einer schweren Lade-<br>hemmung. Der Sch\u00fctze ben\u00f6tigt 2 Aktionen, um die Ladehemmung zu beseitigen. Spielst du mit der Optionalregel der<br>Patzertabellen, addieren sich diese Aktionen auf die Zeit f\u00fcr eine weitere erw\u00fcrfelte Ladehemmung.<br>Balestrina Armbr\u00fcste 1W6+4 2 Aktionen 5/25/40 Kugeln 0,75 Stn 40 HF 120 S komp (4 AP)<br>Waffenvorteil:  Die Abz\u00fcge f\u00fcr Sch\u00fcsse auf Ziele der Gr\u00f6\u00dfenkategorie  klein  und  winzig  sinken um 1.<br>Waffennachteil:  Bei einer gew\u00fcrfelten 20, egal ob der Patzer best\u00e4tigt wird oder nicht, kommt es zu einer schweren Lade-<br>hemmung Der Sch\u00fctze ben\u00f6tigt 2 Aktionen, um die Ladehemmung zu beseitigen. Spielst du mit der Optionalregel der<br>Patzertabellen, addieren sich diese Aktionen auf die Zeit f\u00fcr eine weitere erw\u00fcrfelte Ladehemmung.<br>Ball\u00e4ster-Arm- Armbr\u00fcste 1W6+3 2 Aktionen 20/60/100 Kugel 3 Stn 80 HF 200 S komp (3 AP)<br>brust<br>**----- End of picture text -----**<br>"
+              },
+              {
+                "source": "archiv_der_ausru_stung",
+                "title": "Archiv der Ausru\u0308stung",
+                "page": 146,
+                "score": 9.750899,
+                "chunk_id": "archiv_der_ausru_stung_p146_c004",
+                "doc_id": "archiv_der_ausru_stung",
+                "excerpt": "**Waffenvorteil:** Die Abz\u00fcge f\u00fcr Sch\u00fcsse auf Ziele der Gr\u00f6\u00dfenkategorie _klein_ und _winzig_ sinken um 1. **Waffennachteil:** Bei einer gew\u00fcrfelten 20, egal ob der Patzer best\u00e4tigt wird oder nicht, kommt es zu einer schweren Ladehemmung. Der Sch\u00fctze ben\u00f6tigt 2 Aktionen, um die Ladehemmung zu beseitigen. Spielst du mit der Optionalregel der Patzertabellen, addieren sich diese Aktionen auf die Zeit f\u00fcr eine weitere erw\u00fcrfelte Ladehemmung. \n\n|**Balestrina**|**Komplexit\u00e4t:**komp (4 AP)|\n|---|---|\n|**Name**|**Kampftechnik**<br>**TP**<br>**LZ**<br>**RW**<br>**Munitionstyp**<br>**Gewicht**<br>**L\u00e4nge**<br>**Preis**|\n|**Balestrina**|Armbr\u00fcste<br>1W6+4<br>2 Aktionen<br>5/25/40<br>Kugeln<br>0,75 Stn<br>40 HF<br>120 S|"
+              },
+              {
+                "source": "archiv_der_ausru_stung",
+                "title": "Archiv der Ausru\u0308stung",
+                "page": 142,
+                "score": 9.129389,
+                "chunk_id": "archiv_der_ausru_stung_p142_c005",
+                "doc_id": "archiv_der_ausru_stung",
+                "excerpt": "**Waffennachteil:** Nach einem best\u00e4tigten Patzer bei einer Attacke oder Parade erh\u00e4lt der Tr\u00e4ger zus\u00e4tzlich 1 Stufe _Bet\u00e4ubung_ . \n\n140 Waffen und Ausr\u00fcstungen"
+              },
+              {
+                "source": "archiv_der_ausru_stung",
+                "title": "Archiv der Ausru\u0308stung",
+                "page": 149,
+                "score": 9.127049,
+                "chunk_id": "archiv_der_ausru_stung_p149_c005",
+                "doc_id": "archiv_der_ausru_stung",
+                "excerpt": "**----- End of picture text -----**<br>\n\n\n**Waffenvorteil:** Beim Zielen erh\u00e4lt der Sch\u00fctze einen Bonus von 3 (jedoch wie \u00fcblich nur bis zu einem Maximum von 4). **Waffennachteil:** Bei einer gew\u00fcrfelten 20, egal ob der Patzer best\u00e4tigt wird oder nicht, kommt es zu einer schweren Ladehemmung. Der Sch\u00fctze ben\u00f6tigt 3 Aktionen, um die Ladehemmung zu beseitigen. Spielst du mit der Optionalregel der Patzertabellen, addieren sich diese Aktionen auf die Zeit f\u00fcr eine weitere erw\u00fcrfelte Ladehemmung. \n\n**==> picture [472 x 67] intentionally omitted <==**\n\n**----- Start of picture text -----**<br>\n||||||||||\n|---|---|---|---|---|---|---|---|---|\n|Elfenbogen|Komplexit\u00e4t:|komp|(5 AP)|\n|Name|Kampftechnik|TP|LZ|RW|Munitionstyp|Gewicht|L\u00e4nge|Preis|\n|Elfenbogen (Yara)|B\u00f6gen|1W6+5|1 Aktion|50/100/200|Pfeile|0,5 Stn|180 HF|400 S|\n|Anmerkung|Um den Elfenbogen zu erwerben, muss der Held einer elfischen Kultur angeh\u00f6ren.|\n\n**----- End of picture text -----**<br>"
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen zu den allgemeinen mechanischen Konsequenzen eines nicht best\u00e4tigten Patzers bei einer Nahkampf-Attacke. Die vorliegenden Informationen beziehen sich ausschlie\u00dflich auf spezifische Waffennachteile (Ladehemmungen bei Fernkampfwaffen) oder die Konsequenzen eines *best\u00e4tigten* Patzers.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "category": "Charaktererschaffung",
+      "difficulty": "hard",
+      "question": "Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?",
+      "expected_answer": "Erfahren: Eigenschaften max 14 und Summe max 100, Fertigkeiten max 10, Kampftechniken max 12.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Heldenerschaffung Erfahren maximal Eigenschaften Fertigkeiten Kampftechniken",
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Heldenerschaffung Erfahren maximal Eigenschaften Fertigkeiten Kampftechniken",
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Erfahrungsgrad Erfahren AP 1100 Maximalwerte",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p42_c004",
+            "kodex_der_helden_p10_c004",
+            "kodex_der_helden_p10_c002",
+            "regelwerk_p42_c001",
+            "regelwerk_p48_c002"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Erfahrungsgrad Erfahren AP 1100 Maximalwerte",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 42,
+                "score": 40.713604,
+                "chunk_id": "regelwerk_p42_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "Die Obergrenze ver\u00e4ndert sich, wenn der Held einen h\u00f6heren Erfahrungsgrad erreicht (was mit dem Erwerb von AP einhergeht) und k\u00f6nnte auf EG Legend\u00e4r ein absolutes Maximum von 20 (18 + 2) erreichen. Durch den Einsatz dieser Optionalregel wird das Spiel etwas komplexer. \n\n## **Maximalwerte bei Heldenerschaffung** \n\n|**Erfahrungsgrad**|**AP-Konto**|**H\u00f6chstwert**<br>**Eigenschaft**|**H\u00f6chstwert**<br>**Fertigkeit**|**H\u00f6chstwert**<br>**Kampf-**<br>**technik**|**maximale**<br>**Eigen-**<br>**schafts-**<br>**punkte**|**maximale**<br>**Zahl der**<br>**Zauber/**<br>**Liturgien**|**(davon**<br>**Fremd-**<br>**zauber)**|\n|---|---|---|---|---|---|---|---|\n|**Unerfahren**|900|12|10|8|95|8|(0)|\n|**Durchschnittlich**|1.000|13|10|10|98|10|(1)|\n|**Erfahren**|1.100|14|10|12|100|12|(2)|\n|**Kompetent**|1.200|15|13|14|102|14|(3)|\n|**Meisterlich**|1.400|16|16|16|105|16|(4)|\n|**Brillant**|1.700|17|19|18|109|18|(5)|\n|**Legend\u00e4r**|2.100|18|20|20|114|20|(6)|\n\n\n\n39"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 10,
+                "score": 38.384872,
+                "chunk_id": "kodex_der_helden_p10_c004",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "Durch den Einsatz dieser Optionalregel wird das Spiel etwas komplexer. \n\n## **Maximalwerte bei Heldenerschaffung** \n\n|**Erfahrungsgrad**|**AP-Konto**|**H\u00f6chstwert**<br>**Eigenschaft**|**H\u00f6chstwert**<br>**Fertigkeit**|**H\u00f6chstwert**<br>**Kampf-**<br>**technik**|**maxima-**<br>**le Eigen-**<br>**schafts-**<br>**punkte**|**maximale**<br>**Zahl der**<br>**Zauber/**<br>**Liturgien**|**(davon**<br>**Fremd-**<br>**zauber)**|\n|---|---|---|---|---|---|---|---|\n|**Unerfahren**|900|12|10|8|95|8|(0)|\n|**Durchschnittlich**|1.000|13|10|10|98|10|(1)|\n|**Erfahren**|1.100|14|10|12|100|12|(2)|\n|**Kompetent**|1.200|15|13|14|102|14|(3)|\n|**Meisterlich**|1.400|16|16|16|105|16|(4)|\n|**Brillant**|1.700|17|19|18|109|18|(5)|\n|**Legend\u00e4r**|2.100|18|20|20|114|20|(6)|\n\n\n\n9"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 10,
+                "score": 15.939685,
+                "chunk_id": "kodex_der_helden_p10_c002",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "## **Begrenzung von Eigenschaften, Fertigkeiten und Kampftechniken** \n\nW\u00e4hrend der Heldenerschaffung z\u00e4hlt die in der Tabelle unten angegebene Grenze nach Erfahrungsgrad f\u00fcr Eigenschaften, Fertigkeiten und Kampftechniken. Eigenschaften sind nach Spielbeginn nicht mehr begrenzt und k\u00f6nnen beliebig gesteigert werden. Fertigkeiten und Kampftechniken unterliegen im Spiel einer Begrenzung durch Eigenschaften. Der H\u00f6chstwert einer Fertigkeit entspricht der h\u00f6chsten an der Probe beteiligten Eigenschaft +2; Kampftechnikwerte sind durch die dazugeh\u00f6rige Leiteigenschaft +2 begrenzt. \n\n_Beispiel: Louisa, Chris und Sarah m\u00f6chten alle auf dem Erfahrungsgrad_ Erfahren _starten. Dementsprechend erh\u00e4lt jeder 1.100 Abenteuerpunkte, um seinen Helden zusammenzustellen. Die H\u00f6chstgrenze der Eigenschaften liegt bei 14, bei Fertigkeiten bei 10 und bei Kampftechniken bei 12. Die Gesamtanzahl an Eigenschaftspunkten darf bei dem EG_ Erfahren _100 nicht \u00fcbersteigen._ \n\n**Eigenschaftsobergrenze** _Optionale Regel_"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 42,
+                "score": 15.411348,
+                "chunk_id": "regelwerk_p42_c001",
+                "doc_id": "regelwerk",
+                "excerpt": "- Unabh\u00e4ngig vom Erfahrungsgrad kann ein Held maximal  80 AP in Vorteile investieren und 80 AP durch Nachteile erlangen. \n\n_Beispiel: Louisa, Chris und Sarah m\u00f6chten alle auf dem Erfahrungsgrad Erfahren starten. Dementsprechend erh\u00e4lt jeder 1.100 Abenteuerpunkte, um seinen Helden zusammenzustellen. Die H\u00f6chstgrenze der Eigenschaften liegt bei 14, bei Fertigkeiten bei 10 und bei Kampftechniken bei 12. Die Gesamtanzahl an Eigenschaftspunkten darf bei dem EG Erfahren 100 nicht \u00fcbersteigen._ \n\n**==> picture [134 x 85] intentionally omitted <==**\n\n**----- Start of picture text -----**<br>\nDer Meister sollte es<br>den Spielern gestatten,<br>den Vorteil Gl\u00fcck auch<br>nach Spielstart zu<br>erwerben.<br>**----- End of picture text -----**<br>"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 48,
+                "score": 14.416399,
+                "chunk_id": "regelwerk_p48_c002",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Erfahrungsgrad und Profession** \n\nDie Professionspakete ab Seite **129** sind f\u00fcr Helden mit dem Erfahrungsgrad Erfahren gedacht. Wenn du Spielercharaktere mit h\u00f6herem Erfahrungsgrad spielen willst, kannst du das Professionspaket als Grundlage nehmen, aber die Werte noch weiter erh\u00f6hen, bis zum H\u00f6chstwert der Fertigkeiten und der Kampftechniken des Erfahrungsgrades. Die zus\u00e4tzlichen AP-Kosten musst du nat\u00fcrlich von deinem AP-Konto bezahlen. \n\nBei Helden mit niedrigerem Erfahrungsgrad kannst du die Professionspakete ebenfalls als Beispiel nutzen, aber du solltest einige der Fertigkeitspunkte abziehen (Einige der Professionspakete w\u00e4ren f\u00fcr unerfahrene Helden zu teuer von den AP-Kosten). \n\n## **Professionen modifizieren** \n\nAuch wenn die Professionspakete sehr viele Berufe Deres abdecken, musst du dich nicht zwangsweise f\u00fcr ein Paket entscheiden, sondern kannst dir die Fertigkeiten deines Helden frei zusammenstellen oder die Pakete modifizieren."
+              }
+            ]
+          },
+          "answer": "F\u00fcr den Erfahrungsgrad \u201eErfahren\u201c gelten bei der Heldenerschaffung folgende Obergrenzen:\n\n*   **Eigenschaften:** 14\n*   **Fertigkeiten:** 10\n*   **Kampftechniken:** 12",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Maximalwerte bei Heldenerschaffung",
+            "slop": 4,
+            "size": 5
+          },
+          "retrieved_count": 3,
+          "retrieved_chunk_ids": [
+            "kodex_der_helden_p10_c003",
+            "kodex_der_helden_p10_c004",
+            "regelwerk_p42_c004"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Maximalwerte bei Heldenerschaffung",
+              "slop": 4,
+              "size": 5
+            },
+            "count": 3,
+            "results": [
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 10,
+                "score": 14.579065,
+                "chunk_id": "kodex_der_helden_p10_c003",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "**Eigenschaftsobergrenze** _Optionale Regel_ \n\nWenn du kein offenes Maximum in den Eigenschaftswerten nach Spielbeginn zulassen m\u00f6chtest, kannst du als Obergrenze die H\u00f6chstwerte aus der Tabelle unten nach Erfahrungsgrad +2 festlegen. Ein _Kompetenter_ Held k\u00f6nnte somit beispielsweise seine Eigenschaften bis maximal auf 17 steigern (15 + 2). \n\nDie Obergrenze ver\u00e4ndert sich, wenn der Held einen h\u00f6heren Erfahrungsgrad erreicht (was mit dem Erwerb von AP einhergeht) und k\u00f6nnte auf EG Legend\u00e4r ein absolutes Maximum von 20 (18 + 2) erreichen. \n\nDurch den Einsatz dieser Optionalregel wird das Spiel etwas komplexer. \n\n## **Maximalwerte bei Heldenerschaffung**"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 10,
+                "score": 11.149794,
+                "chunk_id": "kodex_der_helden_p10_c004",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "Durch den Einsatz dieser Optionalregel wird das Spiel etwas komplexer. \n\n## **Maximalwerte bei Heldenerschaffung** \n\n|**Erfahrungsgrad**|**AP-Konto**|**H\u00f6chstwert**<br>**Eigenschaft**|**H\u00f6chstwert**<br>**Fertigkeit**|**H\u00f6chstwert**<br>**Kampf-**<br>**technik**|**maxima-**<br>**le Eigen-**<br>**schafts-**<br>**punkte**|**maximale**<br>**Zahl der**<br>**Zauber/**<br>**Liturgien**|**(davon**<br>**Fremd-**<br>**zauber)**|\n|---|---|---|---|---|---|---|---|\n|**Unerfahren**|900|12|10|8|95|8|(0)|\n|**Durchschnittlich**|1.000|13|10|10|98|10|(1)|\n|**Erfahren**|1.100|14|10|12|100|12|(2)|\n|**Kompetent**|1.200|15|13|14|102|14|(3)|\n|**Meisterlich**|1.400|16|16|16|105|16|(4)|\n|**Brillant**|1.700|17|19|18|109|18|(5)|\n|**Legend\u00e4r**|2.100|18|20|20|114|20|(6)|\n\n\n\n9"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 42,
+                "score": 10.3065605,
+                "chunk_id": "regelwerk_p42_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "Die Obergrenze ver\u00e4ndert sich, wenn der Held einen h\u00f6heren Erfahrungsgrad erreicht (was mit dem Erwerb von AP einhergeht) und k\u00f6nnte auf EG Legend\u00e4r ein absolutes Maximum von 20 (18 + 2) erreichen. Durch den Einsatz dieser Optionalregel wird das Spiel etwas komplexer. \n\n## **Maximalwerte bei Heldenerschaffung** \n\n|**Erfahrungsgrad**|**AP-Konto**|**H\u00f6chstwert**<br>**Eigenschaft**|**H\u00f6chstwert**<br>**Fertigkeit**|**H\u00f6chstwert**<br>**Kampf-**<br>**technik**|**maximale**<br>**Eigen-**<br>**schafts-**<br>**punkte**|**maximale**<br>**Zahl der**<br>**Zauber/**<br>**Liturgien**|**(davon**<br>**Fremd-**<br>**zauber)**|\n|---|---|---|---|---|---|---|---|\n|**Unerfahren**|900|12|10|8|95|8|(0)|\n|**Durchschnittlich**|1.000|13|10|10|98|10|(1)|\n|**Erfahren**|1.100|14|10|12|100|12|(2)|\n|**Kompetent**|1.200|15|13|14|102|14|(3)|\n|**Meisterlich**|1.400|16|16|16|105|16|(4)|\n|**Brillant**|1.700|17|19|18|109|18|(5)|\n|**Legend\u00e4r**|2.100|18|20|20|114|20|(6)|\n\n\n\n39"
+              }
+            ]
+          },
+          "answer": "F\u00fcr den Erfahrungsgrad **Erfahren** gelten bei der Heldenerschaffung folgende Maximalwerte:\n\n*   **Eigenschaften:** 14\n*   **Fertigkeiten:** 10\n*   **Kampftechniken:** 12",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "category": "Spielmechanik / Zustaende",
+      "difficulty": "medium",
+      "question": "Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?",
+      "expected_answer": "Schmerz Stufe 1 bei 75% LE. Sie verschwindet bei Heilung ueber die Grenze oder nach jeweils 4 Stunden Ruhe um eine Stufe.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Schmerz Stufe 1 75% Lebenspunkte 4 Stunden Ruhe",
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Schmerz Stufe 1 75% Lebenspunkte 4 Stunden Ruhe",
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Zustand Schmerz Dreiviertel Lebensenergie verschwindet Heilung Ruhe",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p37_c001",
+            "kodex_des_schwertes_p27_c003",
+            "kodex_des_schwertes_p64_c002",
+            "kodex_der_helden_p22_c002",
+            "regelwerk_p237_c004"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Zustand Schmerz Dreiviertel Lebensenergie verschwindet Heilung Ruhe",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 37,
+                "score": 23.130215,
+                "chunk_id": "regelwerk_p37_c001",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Schmerz** \n\nDurch Verletzungen, Gifte, Zauber und andere Unannehmlichkeiten kann ein Held Schmerzen erleiden, die ihn im schlimmsten Falle handlungsunf\u00e4hig machen. Um trotz immenser Schmerzen (Stufe IV) handlungsf\u00e4hig zu bleiben, ist eine Probe auf _Selbstbeherrschung (Handlungsf\u00e4higkeit bewahren)_ n\u00f6tig. Durch den Verlust von Lebenspunkten kommt es \u00f6fters vor, dass ein Held Stufen dieses Zustands erh\u00e4lt. \n\nSind die Lebenspunkte auf Dreiviertel, die H\u00e4lfte oder ein Viertel der Gesamt-Lebensenergie gesunken, erh\u00e4lt der Held jeweils eine Stufe _Schmerz_ . Steigen die Lebenspunkte wieder \u00fcber diese Begrenzungen, verschwindet damit auch die entsprechende Stufe _Schmerz_ . Sinkt sie auf 5 oder weniger, erh\u00e4lt er eine weitere Stufe _Schmerz_ . Ist nichts anderes genannt, verliert der Held nach jeweils 4 Stunden eine Stufe des Zustands. \n\n## **Schmerz**"
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 27,
+                "score": 22.427643,
+                "chunk_id": "kodex_des_schwertes_p27_c003",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "## **Schmerz** \n\nDurch Verletzungen, Gifte, Zauber und andere Unannehmlichkeiten kann ein Held Schmerzen erleiden, die ihn im schlimmsten Falle handlungsunf\u00e4hig machen. Um trotz immenser Schmerzen (Stufe IV) handlungsf\u00e4hig zu bleiben, ist eine Probe auf _Selbstbeherrschung (Handlungsf\u00e4higkeit bewahren)_ n\u00f6tig. Durch den Verlust von Lebenspunkten kommt es \u00f6fters vor, dass ein Held Stufen dieses Zustands erh\u00e4lt. \n\nSind die Lebenspunkte auf Dreiviertel, die H\u00e4lfte oder ein Viertel der Gesamt-Lebensenergie gesunken, erh\u00e4lt der Held jeweils eine Stufe _Schmerz_ . Steigen die Lebenspunkte wieder \u00fcber diese Begrenzungen, verschwindet damit auch die entsprechende Stufe _Schmerz_ . Sinkt sie auf 5 oder weniger, erh\u00e4lt er eine weitere Stufe _Schmerz_ . Ist nichts anderes genannt, verliert der Held nach jeweils 4 Stunden eine Stufe des Zustands. \n\nKapitel 1: Grundregeln \n\n26"
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 64,
+                "score": 20.62948,
+                "chunk_id": "kodex_des_schwertes_p64_c002",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "- _Kampftechnikwert (KTW):_ Der Kampftechnikwert stellt die Kompetenz eines K\u00e4mpfers im Umgang mit einer Art von Waffen dar. Jeder Waffe ist einer Kampftechnik zugeordnet. \n\n- _Lebensenergie (LE)_ : Die Lebensenergie stellt die Gesundheit eines Helden dar. Immer wenn er Schaden nimmt, vergiftet wird oder an einer Krankheit leidet, verliert er Lebenspunkte. Hat ein Held ein Viertel der Lebenspunkte verloren, erh\u00e4lt er eine Stufe des Zustandes _Schmerz_ . Das Gleiche geschieht erneut, wenn er die H\u00e4lfte und Dreiviertel der Lebenspunkte verloren hat und wenn die Lebenspunkte auf 5 oder weniger sinken. Ab 0 Lebenspunkten liegt ein Held im Sterben. Steigen die Lebenspunkte wieder \u00fcber diese Begrenzungen, verschwindet damit auch die entsprechende Stufe _Schmerz_ . \n\nausgew\u00fcrfelt. Nur besondere Situationen wie der Zustand _Belastung_ kann die Initiative noch ver\u00e4ndern. Der Beteiligte mit der h\u00f6chsten Initiative beginnt mit seinen Handlungen. Dann folgt der Kampfbeteiligte mit der zweith\u00f6chsten Initiative und so weiter. Statt seine \n\nBerechnung: Grundwert der Spezies"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 22,
+                "score": 19.781626,
+                "chunk_id": "kodex_der_helden_p22_c002",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "## **Leiteigenschaft** \n\n**Kampftechnik und Einsatz Leiteigenschaft Attacke f\u00fcr alle Kampf\u00ad** MU **techniken (au\u00dfer Peitschen) Attacke f\u00fcr Peitschen** FF **Parade f\u00fcr Raufen, Schwerter,** GE oder KK **Stangenwaffen Parade f\u00fcr Dolche, F\u00e4cher,** GE **Fechtwaffen Parade f\u00fcr Hiebwaffen, Ketten\u00ad** KK **waffen, Lanzen, Schilde, Spie\u00df\u00ad waffen, Zweihandschwerter, Zweihandhiebwaffen Fernkampf** FF \n\n## **LeP-Verlust und Schmerz** \n\nWerden Helden schwer verletzt, verlieren sie einen Teil ihrer Lebensenergie. Verletzungen sind au\u00dferdem mit Schmerzen verbunden und haben weitere Auswirkungen. \n\nSind die Lebenspunkte auf Dreiviertel, die H\u00e4lfte oder ein Viertel der Gesamt-Lebensenergie gesunken, erh\u00e4lt der Held jeweils eine Stufe _Schmerz_ . Steigen die Lebenspunkte wieder \u00fcber diese Begrenzungen, verschwindet damit auch die entsprechende Stufe _Schmerz_ . Sinkt die LE auf 5 oder weniger, erh\u00e4lt er eine weitere Stufe _Schmerz_ . \n\n21"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 237,
+                "score": 18.58192,
+                "chunk_id": "regelwerk_p237_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "_Beispiel: Der Ork hat Arbosch mit seiner Axt getroffen. Der Spielleiter w\u00fcrfelt die Trefferpunkte der orkischen Axt aus. Die Axt verursacht 1W6+5 Trefferpunkte. Da der Spielleiter hier eine 5 w\u00fcrfelt, erzielt er so 10 (5 + 5) Trefferpunkte. Hiervon wird nun der R\u00fcstungsschutz von 4 abgezogen, den Arboschs Kettenr\u00fcstung bereitstellt. Arbosch erleidet also 6 Schadenspunkte (10 \u2013 4) und muss damit 6 Lebenspunkte von seiner Lebensenergie streichen. Ohne die Kettenr\u00fcstung w\u00e4re es deutlich schmerzhafter ausgegangen._ \n\n## **Geringe Lebensenergie** \n\nHat man ein Viertel der Lebenspunkte verloren, erh\u00e4lt man eine Stufe des Zustandes _Schmerz_ . Das Gleiche geschieht, wenn man die H\u00e4lfte und Dreiviertel der Lebenspunkte verloren hat und wenn die Lebenspunkte auf 5 oder weniger sinken. Steigen die Lebenspunkte wieder \u00fcber diese Begrenzungen, verschwindet damit auch die entsprechende Stufe _Schmerz_ . \n\nAb 0 Lebenspunkten liegt ein Held im Sterben. Zu den Zust\u00e4nden siehe Seite **31** . \n\n## Spezielle Nahkampfregeln \n\n## **Kampftechniken**"
+              }
+            ]
+          },
+          "answer": "Die erste Stufe Schmerz erh\u00e4lt ein Held, sobald seine Lebenspunkte auf drei Viertel der Gesamt-Lebensenergie gesunken sind.\n\nDie Stufe verschwindet, sobald die Lebenspunkte wieder \u00fcber diese Begrenzung steigen. Alternativ verliert der Held, sofern nichts anderes genannt ist, nach jeweils 4 Stunden eine Stufe des Zustands.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Stufe Schmerz",
+            "slop": 6,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "grimorum_cantiones_p95_c000",
+            "grimorum_cantiones_p275_c001",
+            "grimorum_cantiones_p179_c000",
+            "grimorum_cantiones_p322_c001",
+            "grimorum_cantiones_p413_c000"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Stufe Schmerz",
+              "slop": 6,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "grimorum_cantiones",
+                "title": "Grimorum Cantiones",
+                "page": 95,
+                "score": 10.937296,
+                "chunk_id": "grimorum_cantiones_p95_c000",
+                "doc_id": "grimorum_cantiones",
+                "excerpt": "## **orpofesso C** \n\nDurch den CORPOFESSO kann der Zauberer Schmerzen verursachen. Der Zauberspruch ist als Kampfzauber entwickelt worden, der einen Gegner ausschalten soll, ohne ihn zu t\u00f6ten. _Probe:_ KL/IN/KO (modifiziert um ZK) \n\n_Wirkung:_ Der Verzauberte erleidet schmerzhafte Muskelschw\u00e4che. W\u00e4hrend der Wirkungsdauer erleidet er den Zustand Schmerz. \n\n_QS 1:_ 1 Stufe Schmerz \n\n_QS 2:_ 1 Stufe Schmerz _QS 3:_ 2 Stufen Schmerz _QS 4:_ 3 Stufen Schmerz _QS 5:_ 4 Stufen Schmerz \n\n_QS 6:_ 4 Stufen Schmerz, aber f\u00fcr die doppelte Wirkungsdauer \n\n_Zauberdauer:_ 2 Aktionen _AsP-Kosten:_ 8 AsP _Reichweite:_ 8 Schritt _Wirkungsdauer:_ QS x 3 KR _Zielkategorie:_ Lebewesen _Merkmal:_ Verwandlung _Verbreitung:_ Gildenmagier _Steigerungsfaktor:_ C \n\n## _Zaubererweiterungen:_"
+              },
+              {
+                "source": "grimorum_cantiones",
+                "title": "Grimorum Cantiones",
+                "page": 275,
+                "score": 10.446413,
+                "chunk_id": "grimorum_cantiones_p275_c001",
+                "doc_id": "grimorum_cantiones",
+                "excerpt": "_QS 1:_ 1 Stufe Schmerz \n\n_QS 2:_ 1 Stufe Schmerz, +1 KO f\u00fcr 1 Minute _QS 3:_ 2 Stufen Schmerz, +1 KO f\u00fcr 1 Minute _QS 4:_ 3 Stufen Schmerz, +1 KO f\u00fcr 1 Minute _QS 5:_ 4 Stufen Schmerz, +1 KO f\u00fcr 1 Minute _QS 6:_ 4 Stufen Schmerz, +2 KO f\u00fcr 1 Minute _Zauberdauer:_ 4 Aktionen _AsP-Kosten:_ 8 AsP _Reichweite:_ Ber\u00fchrung _Wirkungsdauer:_ sofort _Zielkategorie:_ Kulturschaffende _Merkmal:_ Heilung _Verbreitung:_ Elfen, Gildenmagier _Steigerungsfaktor:_ B \n\n# Zwei Ziele (FW 16, 6 AP): Der Zauber kann auf bis zu 2 Ziele gleichzeitig gesprochen werden. Das zweite Ziel kostet 4 AsP extra. \n\n## _Geste und Formel:_ \n\n- # Elfen: Der Elf legt dem Ziel die flache Hand auf und singt die Melodie des sha\u2019manda ai\u2019dao. \n\n# Gildenmagier: Der Magier legt dem Ziel die flache Hand auf, f\u00fchrt eine nehmende Bewegung aus und spricht die Formel: \u201eSindolor! (bosp.) / La\u2019alam! (tul.) / Deragaur Saussaka! (thorw.)\u201c \n\n_Reversalis:_ Die reversalisierte Version des Zauberspruchs verursacht 1 Stufe Schmerz. (Merkmal: Heilung) \n\n**==> picture [232 x 205] intentionally omitted <==**\n\n274"
+              },
+              {
+                "source": "grimorum_cantiones",
+                "title": "Grimorum Cantiones",
+                "page": 179,
+                "score": 10.054377,
+                "chunk_id": "grimorum_cantiones_p179_c000",
+                "doc_id": "grimorum_cantiones",
+                "excerpt": "## **\u00f6llenpein H** \n\nDurch diesen Zauberspruch wird der Geist des Ziels mit Schmerz durchflutet. Er gilt in manchen Kreisen als formidabler Ersatz f\u00fcr k\u00f6rperliche Folter. \n\n_Probe:_ MU/IN/CH (modifiziert um SK) \n\n_Wirkung:_ Der Verzauberte erleidet Schmerzen, die sich oft in Kr\u00e4mpfen manifestieren. Der H\u00f6llenpein ersetzt bei Folterungen das Talent Einsch\u00fcchtern (Folter). Das Opfer muss eine Vergleichsprobe mit Selbstbeherrschung (Folter widerstehen) gegen den Zauber bestehen, die um die Schmerzstufe des Spruchs erschwert ist (zus\u00e4tzlich zu allen sonstigen Modifikatoren). \n\nDer Zaubernde hat nach dem Wirken des Zaubers QS KR Zeit, um sein Ziel zu ber\u00fchren, damit der Spruch seine Wirkung entfalten kann. Ansonsten verpufft der Zauberspruch wirkungslos. Will ein Ziel nicht ber\u00fchrt werden, ist eine gelungene, nicht verteidigte Raufen-AT +2 oder eine AT +2 mit dem Traditionsartefakt notwendig. \n\n_QS 1:_ keine zus\u00e4tzliche Wirkung _QS 2:_ 1 Stufe Schmerz, 0 SP _QS 3:_ 1 Stufe Schmerz, 2 SP _QS 4:_ 2 Stufen Schmerz, 2 SP _QS 5:_ 2 Stufen Schmerz, 4 SP _QS 6:_ 3 Stufen Schmerz, 4 SP"
+              },
+              {
+                "source": "grimorum_cantiones",
+                "title": "Grimorum Cantiones",
+                "page": 322,
+                "score": 8.82069,
+                "chunk_id": "grimorum_cantiones_p322_c001",
+                "doc_id": "grimorum_cantiones",
+                "excerpt": "- # Halbkreis (FW 12, 6 AP): Der Zauber wirkt nur in einem Halbkreis vor dem Zauberer. \n\n- # Anhaltende Agonie (FW 14, 6 AP): Die Stufe Schmerz baut sich erst nach QS/2 Stunden ab. \n\n# Peinigender Schmerz (FW 16, 9 AP): Der Zauber verursacht stattdessen 2 Stufen Schmerz. \n\n## _Geste und Formel:_ \n\n# Gildenmagier: Der Magier spricht die Formel: \u201eZona Dolorum! (bosp.) / Mawjat Saqhrat[\u201a] a! (tul.) / Sveithi Verkyr! (thorw.)\u201c und tritt sich selbst kr\u00e4ftig auf den Fu\u00df. \n\n# Hexen: Die Hexe tritt sich unauff\u00e4llig auf den Fu\u00df und gibt einen Schmerzlaut von sich. \n\n_Reversalis:_ Alle Lebewesen in Reichweite erhalten f\u00fcr 30 Minuten eine Erleichterung von +1 auf Kraftakt und Selbstbeherrschung. (Merkmal: Heilung) Alternativ verlieren alle Lebewesen in Reichweite 1 Stufe Schmerz. (Merkmal: Heilung) \n\nEin wirklich guter Spruch, um eine ganze Gruppe von Feinden zu \u00fcberraschen. W\u00e4hrend der Corpofesso \u00fcblicherweise nur auf eine Person abzielt, kann man hier eine halbe R\u00e4uberbande, aufst\u00e4ndische Sklaven oder eine Rotpelzsippe das F\u00fcrchten lehren. \n\n321"
+              },
+              {
+                "source": "grimorum_cantiones",
+                "title": "Grimorum Cantiones",
+                "page": 413,
+                "score": 8.82069,
+                "chunk_id": "grimorum_cantiones_p413_c000",
+                "doc_id": "grimorum_cantiones",
+                "excerpt": "## **tandhafter W\u00e4chter S** \n\n# Schmerzloser W\u00e4chter (FW 12, 4 AP): Das Ziel kann die Auswirkungen der h\u00f6chsten Stufe Schmerz ignorieren. Verf\u00fcgt es \u00fcber weitere F\u00e4higkeiten, um Auswirkungen von Schmerz zu ignorieren, dann addieren sich diese Wirkungen. Es kann also z. B zusammen mit der 3. Zaubererweiterung von \u00dcBERLEGENER KRIEGER die Auswirkungen der beiden h\u00f6chsten Stufen Schmerz ignorieren. Bei der vierten Stufe Schmerz wird das Ziel aber trotzdem Handlungsunf\u00e4hig. \n\nEine mit diesem Ritual verzauberte Person ist im Kampf deutlich schwerer zu \u00fcberwinden. _Probe:_ MU/IN/GE \n\n_Wirkung:_ Alle Verteidigungen des Ziels sind um +1 erleichtert, unabh\u00e4ngig davon, ob es Angriffe pariert oder ihnen ausweicht. _Ritualdauer:_ 5 Minuten \n\n_AsP-Kosten:_ 8 AsP (Kosten nicht modifizierbar) _Reichweite:_ selbst _Wirkungsdauer:_ QS x 10 Minuten _Zielkategorie:_ Kulturschaffende _Merkmal:_ Heilung _Verbreitung:_ Elfen _Steigerungsfaktor:_ B \n\n# Starker Verteidiger (FW 14, 4 AP): Alle PA-/AWProben des Ziels sind um +2 erleichtert."
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen dar\u00fcber, ab welchem Lebenspunkte-Verlust ein Held die erste Stufe Schmerz erh\u00e4lt oder wann diese wieder verschwindet. Die Dokumente behandeln lediglich die Erzeugung von Schmerz durch Zauber.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "category": "Magiesystem / Fraktionen",
+      "difficulty": "hard",
+      "question": "In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?",
+      "expected_answer": "Weisse Gilde: goettertreu/gesetzestreu, gegen Daemonenbeschwoerung und Nekromantie. Graue Gilde: wissenschaftlich und tolerant. Schwarze Gilde: liberaler Umgang, auch verpoente Kuenste.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Weisse Graue Schwarze Gilde Magier Aventurien",
+            "size": 5
+          },
+          "retrieved_count": 2,
+          "retrieved_chunk_ids": [
+            "rohals_erben_p5_c003",
+            "rohals_erben_p95_c000"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Weisse Graue Schwarze Gilde Magier Aventurien",
+              "size": 5
+            },
+            "count": 2,
+            "results": [
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 5,
+                "score": 23.615355,
+                "chunk_id": "rohals_erben_p5_c003",
+                "doc_id": "rohals_erben",
+                "excerpt": ". Obergeschoss 73<br>Medienhinweise 9 Dachgeschoss 73<br>Die Magie der Gildenmagier 9 Das Institut der Arkanen Analysen 73<br>Kleines Magierglossar 11 Forschung am IAA 74<br>Das Aventurien der Magier 13 Zu Gast am IAA 75<br>Magierakademien Aventuriens 13 Das IAA und andere Akademien 75<br>Magische Forschung 76<br>Die Gilden der Magier 20 Sitten und Gesetze \u2013 Was ist erlaubt? 76<br>Die Gilden heute 21<br>Finanzierung und Ver\u00f6ffentlichung 76<br>Zweitstudium & Gildenwechsel 22<br>Forschungen zu Karmakorth\u00e4on und Sternenfall 77<br>Die Wei\u00dfe Gilde  23<br>Zwischen Sikaryan und Nayrakis 77<br>Die Graue Gilde  25<br>Entwicklung neuer Zauber und Rituale 78<br>Die Schwarze Gilde  26<br>Forschung am Rande der Wei\u00dfen Gilde 78<br>Gildenlose Magier  29<br>Weitere ausgew\u00e4hlte Forschungsfelder 79<br>Die Lebensweise der Magier 31 Forschende Helden 79<br>Alltag 36<br>Gildenmagische Orden 80<br>Alltag an den Akademien 37<br>Anconiter (FCA) 81<br>Private Lehrmeister 38<br>Bund der Schatten (Schatten) 82<br>Magie im Alltag 39<br>Draconiter 82<br>Sprache & Schrift 40<br>Die Grauen St\u00e4be (ODL)"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 95,
+                "score": 22.999771,
+                "chunk_id": "rohals_erben_p95_c000",
+                "doc_id": "rohals_erben",
+                "excerpt": "Die Weltsicht der Magier ist nicht per se verschiedenen von der ihrer nichtmagischen Zeitgenossen. Auch unter ihnen gibt es treue Anh\u00e4nger der G\u00f6tter und sogar Geweihte, sie folgen oft den gleichen moralischen Grunds\u00e4tzen, k\u00f6nnen aber auch sehr eigene Ansichten entwickeln. Nicht zuletzt die simple Tatsache, dass sie Magier sind und somit ganz andere Lebenserfahrungen machen als die meisten Aventurier, beeinflusst \n\nihre Perspektive. Insbesondere viele Mitglieder der Schwarzen und einige der Grauen Gilde vertreten sehr individuelle Weltbilder. \n\nIn diesem Kapitel geht es auch darum, kulturelle Unterschiede herauszuarbeiten und historische Ver\u00e4nderungen aufzugreifen, die vielleicht noch vergessen scheinen, aber in Zeiten des Sternenfalls jederzeit wieder zur\u00fcck ins Bewusstsein der Welt dringen k\u00f6nnen. \n\n## Religion \n\nWie Magier zu den G\u00f6ttern stehen, h\u00e4ngt stark mit der Gilde zusammen, der sie angeh\u00f6ren oder mit der sie sympathisieren. \n\n- Die **Wei\u00dfe Gilde** findet sich ausschlie\u00dflich in Re-"
+              }
+            ]
+          },
+          "answer": "Die drei gro\u00dfen Gilden sind die **Wei\u00dfe Gilde**, die **Graue Gilde** und die **Schwarze Gilde**.\n\nDer bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die spezifischen Unterschiede in ihrer Haltung zur Magie.",
+          "llm_skipped": false
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Gildenmagier Einstellungen zur Magie weisse graue schwarze",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "rohals_erben_p51_c002",
+            "rohals_erben_p5_c005",
+            "rohals_erben_p131_c000",
+            "rohals_erben_p61_c002",
+            "rohals_erben_p44_c000"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Gildenmagier Einstellungen zur Magie weisse graue schwarze",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 51,
+                "score": 14.792843,
+                "chunk_id": "rohals_erben_p51_c002",
+                "doc_id": "rohals_erben",
+                "excerpt": "## **Akademische Grade & R\u00e4nge** \n\nDie Karrierestufen der aventurischen Gildenmagie beginnen mit den _Pr\u00e4gradualien._ Das sind Bezeichnungen f\u00fcr Studienstufen eines Magiers, bevor er nach seiner \n\n**==> picture [129 x 179] intentionally omitted <==**\n\n**----- Start of picture text -----**<br>\n Amtierende Erzmagier<br>sind: Dschelef ibn Jassafer<br>(Graue Gilde), Karjunon<br>Silberbraue (Schwarze<br>Gilde), Praiowine Westfar<br>zu Methumis (Wei\u00dfe Gilde),<br>Rakorium Muntagonus<br>(Graue Gilde), Robak von<br>Punin (Graue Gilde), Sefira<br>Alchadid (Schwarze Gilde),<br>Taph\u00eerel ar\u2019Ralahan (Graue<br>Gilde), Thomeg Atherion<br>(Schwarze Gilde), Virilys<br>Eibon (Wei\u00dfe Gilde)<br>**----- End of picture text -----**<br>\n\n\nAbschlusspr\u00fcfung an der Akademie mit dem Grad des _Adeptus_ den ersten richtigen akademischen Grad erwirbt. Grunds\u00e4tzlich kann w\u00e4hrend der gesamten Studienzeit bis zum ersten Abschluss immer von _Scholaren_ oder _Pr\u00e4gradualen_ gesprochen werden. Viele Akademien unterteilen die Scholaren nach Studien-"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 5,
+                "score": 13.922867,
+                "chunk_id": "rohals_erben_p5_c005",
+                "doc_id": "rohals_erben",
+                "excerpt": "92<br>Akademische Grade & R\u00e4nge 50<br>Ehrungen der Gildenmagie 51 Religion & Weltsicht 93<br>Kleidung & Tracht 52 Religion 94<br>Gesetzliche Kleidungsvorschriften 52 Innerhalb des Zw\u00f6lfg\u00f6tterglaubens 94<br>Kleidungsstile 54 Innerhalb anderer Religionen 97<br>Lebensunterhalt 55 Obskure Gottheiten 98<br>An den Akademien 55 Philosophie 99<br>Gildenmagier als Dienstleister 57 Madas Frevel und die Schuldfrage 99<br>Reisen als Gildenmagier 60 Bei Magiern verbreitete Philosophien 100<br>Rechte & Pflichten 61 Magie und Macht 101<br>Der Codex Albyricus 61<br>Das Garether Pamphlet 64 Rang & Namen 103<br>Was denken \u2026 \u00fcber \u2026 65 Bedeutendste Pers\u00f6nlichkeiten 104<br>Aus Eins mach Drei \u2013 Ein Magierturm 67 Saldor Foslarin<br>Einleitung 67 Convocatus primus der Wei\u00dfen Gilde 104<br>Bewohner 68 Salpikon Savertin<br>Wei\u00dfe Gilde  69 Convocatus primus der Schwarzen Gilde 104<br>Graue Gilde  70 Ashtarra Okharim<br>Schwarze Gilde  70 Convocata prima der Grauen Gilde  105<br>Kellergeschoss 72 Yppolita von Gareth<br>Erdgeschoss 72 Schwester der Kaiserin, Prinzessin des<br>**----- End of picture text"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 131,
+                "score": 13.88905,
+                "chunk_id": "rohals_erben_p131_c000",
+                "doc_id": "rohals_erben",
+                "excerpt": "Probe auf _Magiekunde_ \n\n## **Gro\u00dfe Graue Gilde des Geistes (Graue Gilde)** \n\n**QS 1** \u2013 Gildenmagische Magie unterscheidet sich von anderen Arten der Magie. Manche Zauberst\u00e4be k\u00f6nnen Zauber speichern. \n\n**QS 2** \u2013 Der Held wei\u00df, wie sich Gildenmagie von anderen Magiearten unterscheidet; er k\u00f6nnte einen Magier, der einen Zauber wirkt, erkennen. \n\n**QS 3+** \u2013 Gildenmagische Zauber bauen auf Thesen auf. Sie ben\u00f6tigen Geste und Formel und folgen einem streng analytisch-logischen Prinzip, mit dem sie astrale Matrizen erschaffen. Die Magie der Gildenmagier wurde von den g\u00fcldenl\u00e4ndischen Siedlern nach Aventurien gebracht, hat sich aber auch durch tulamidische und elfische Einfl\u00fcsse weiterentwickelt. \n\n## **Der Bund des Wei\u00dfen Pentagramms (Wei\u00dfe Gilde)** \n\n## Probe auf _Etikette (Klatsch & Tratsch)_"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 61,
+                "score": 13.740797,
+                "chunk_id": "rohals_erben_p61_c002",
+                "doc_id": "rohals_erben",
+                "excerpt": ". Die Art der Unterbringung ihrer kollegialen G\u00e4ste variiert dabei je nach Schule. Der Bund des Wei\u00dfen Pentagramms hat das Vorhandensein eines speziellen G\u00e4stezimmers auf dem Gel\u00e4nde einer Akademie zum Kriterium f\u00fcr eine Gildenmitgliedschaft gemacht. Besonders bei der Grauen Gilde wird von G\u00e4sten erwartet, sich f\u00fcr die Dauer des Verweilens aktiv am Unterrichtsgeschehen oder Akademiealltag zu beteiligen. Das gilden\u00fcbergreifende Gastrecht kann nat\u00fcrlich nur von anerkannten Gildenmagiern beansprucht werden, die sich durch ihr Siegel ausweisen und manchmal zus\u00e4tzliche Fragen beantworten k\u00f6nnen m\u00fcssen. Es obliegt einzelnen Schulen, ob das Gastrecht auch auf etwaige Begleiter eines Magiers ausgedehnt wird. Meist ist dies ausdr\u00fccklich nicht der Fall, wobei f\u00fcr Adlige und Geweihte h\u00e4ufig eine Ausnahme gemacht wird und an vielen Akademien der Grauen und Schwarzen Gilde auch Magiebegabte anderer Traditionen als G\u00e4ste willkommen sind, solange sie bereit sind, Teile ihres Wissens mit den Magiern zu teilen"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 44,
+                "score": 13.562005,
+                "chunk_id": "rohals_erben_p44_c000",
+                "doc_id": "rohals_erben",
+                "excerpt": "\u00fcber den sie konkret nichts wissen, wenigstens ein wenig zu tun hat. Das soll zwar meistens den Zuh\u00f6rern bei der Suche nach einer Antwort helfen, aber oftmals vermutlich nur die eigene Unwissenheit \u00fcberspielen. Allgemein ist eine gewisse Beredsamkeit bei den meisten Gildenmagiern zu finden. Vor allem die Vertreter der Grauen Gilde gelten als au\u00dfergew\u00f6hnlich diskussionsfreudig, w\u00e4hrend sowohl die Mitglieder der Wei\u00dfen als auch die der Schwarzen Gilde zu vielen Themen \u2013 aus unterschiedlichen Gr\u00fcnden \u2013 schweigen. \n\n## **Das geschriebene Wort**"
+              }
+            ]
+          },
+          "answer": "Die drei gro\u00dfen Gilden sind:\n\n1.  **Der Bund des Wei\u00dfen Pentagramms (Wei\u00dfe Gilde)**\n2.  **Die Gro\u00dfe Graue Gilde des Geistes (Graue Gilde)**\n3.  **Die Schwarze Gilde**\n\nDer bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die spezifischen Unterschiede in ihrer Haltung zur Magie.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Grosse Graue Gilde des Geistes",
+            "slop": 5,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "kodex_der_magie_p80_c000",
+            "rohals_erben_p26_c000",
+            "rohals_erben_p81_c001",
+            "rohals_erben_p135_c000",
+            "die_gestade_des_gottwals_p97_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Grosse Graue Gilde des Geistes",
+              "slop": 5,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "kodex_der_magie",
+                "title": "Kodex der Magie",
+                "page": 80,
+                "score": 15.460629,
+                "chunk_id": "kodex_der_magie_p80_c000",
+                "doc_id": "kodex_der_magie",
+                "excerpt": "Gilde legen ihren Fokus \u00fcblicherweise auf Antimagie, Hellsicht, Heilung und einige Kampfzauber. \n\nDie als **Gro\u00dfe Graue Gilde des Geistes** bekannte Graue Gilde steht f\u00fcr Forschung und Wissenschaft, aber auch f\u00fcr einen freigeistigen Umgang mit Magie und den mit ihr verbundenen Regeln. Gemeinhin werden Zauberer dieser Gilde als _Graumagier_ bezeichnet. Unter dem Dach der Gilde sammeln sich verschiedene philosophische Str\u00f6mungen und neben Magiern auch Alchimisten und Zauberer anderer magischer Traditionen, sodass sie eher wie ein Flickenteppich wirkt denn wie eine feste Institution. Entsprechend steht sie den meisten Spielarten der Magie tolerant gegen\u00fcber."
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 26,
+                "score": 15.460629,
+                "chunk_id": "rohals_erben_p26_c000",
+                "doc_id": "rohals_erben",
+                "excerpt": "## Die Graue Gilde \n\n**Vollst\u00e4ndiger Name:** Gro\u00dfe Graue Gilde des Geistes **Symbol:** schwarzes, halb geschlossenes Auge, umgeben von einem Hexagramm **Grundsatz:** Wissen f\u00fchrt zu Erleuchtung. **Verbreitung:** vor allem im Horasreich und den Tulamidenlanden, sowie n\u00f6rdlich des Mittelreichs **Convocata prima:** Ashtarra Okharim (seit 1044 BF) **Gildenrat:** Gro\u00dfer Rat der Grauen (wechselnde Mitgliederzahl) und Kleiner Gildenrat (st\u00e4ndiges Gremium) \n\n**Anzahl der Gildenmitglieder:** etwa 2.500 Gildenmagier, zudem einige weitere Gelehrte und Angeh\u00f6rige anderer Traditionen"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 81,
+                "score": 14.960277,
+                "chunk_id": "rohals_erben_p81_c001",
+                "doc_id": "rohals_erben",
+                "excerpt": "_Die Anconiter (FCA) verstehen sich auf die Heilkunst, die Me\u00ad phaliten (OM) auf das Aufsp\u00fcren Magiebegabter und der Or\u00ad den der Schlange der Erkenntnis (SHI) auf das Sammeln von Wissen._ \n\n_In der Gro\u00dfen Grauen Gilde des Geistes erf\u00fcllt der Ordo Defen\u00ad sores Lecturia (ODL) die Funktion des k\u00e4mpfenden Arms der Gilde und entsendet die sogenannten Grauen Garden. Der Or\u00ad den vom Pentagramm zu Vinsalt (OPV) wiederrum versteht sich exzellent auf die Kunst der Nachrichten\u00fcbermittlung und der dazugeh\u00f6rigen Kryptographie._"
+              },
+              {
+                "source": "rohals_erben",
+                "title": "Rohals Erben",
+                "page": 135,
+                "score": 14.560168,
+                "chunk_id": "rohals_erben_p135_c000",
+                "doc_id": "rohals_erben",
+                "excerpt": "**==> picture [257 x 363] intentionally omitted <==**\n\noder versucht einen Weg zu finden, k\u00fcnftige Umbr\u00fcche am Firmament vorhersagen zu k\u00f6nnen. \n\n- Als Angeh\u00f6riger der Gro\u00dfen Grauen Gilde des Geistes hat sich der Held der Erforschung und Kartographierung der Magietraditionen au\u00dferhalb der Gilden verschrieben. Zu diesem Zweck reist er mit Norbarden und ihrer Zibilja, versucht Kontakt zu Geoden- und Hexenzirkeln aufzubauen, wagt sich auf der Suche nach der Achaz-Kristallomantie in die Echsens\u00fcmpfe oder plant, zu den Urspr\u00fcngen der Elfen in die sagenumwobenen Salamandersteine vorzudringen. \n\n**==> picture [11 x 7] intentionally omitted <==**\n\n## **Hintergrundereignisse**"
+              },
+              {
+                "source": "die_gestade_des_gottwals",
+                "title": "Die Gestade des Gottwals",
+                "page": 97,
+                "score": 14.368035,
+                "chunk_id": "die_gestade_des_gottwals_p97_c003",
+                "doc_id": "die_gestade_des_gottwals",
+                "excerpt": "## **Die Halle des Windes zu Olport** \n\nDie Olporter Magierschule, die sich selbst _Runajasko_ nennt, ist eine Besonderheit unter den Schulen Aventuriens. Im Jahr 1025 BF wurde sie auf Beschluss des Gildenrats aus der Gro\u00dfen Grauen Gilde des Geistes ausgeschlossen \u2013 vorgeblich wegen Meinungsverschiedenheiten bei den Lehrmethoden und Zauberpraktiken. Tats\u00e4chlich waren die gut ausgebildeten Kapermagier den einflussreichen Akademien des Horasreichs und der Stadt Riva ein Dorn im Auge. Seither ist die Schule fast auf sich allein gestellt, h\u00e4lt aber noch Kontakt zur Akademie in Thorwal und einigen liberaleren Schulen Nordaventuriens. \n\nZauberei & Hexenwerk \n\n96"
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext nennt lediglich die **Gro\u00dfe Graue Gilde des Geistes** (Graue Gilde). Diese steht f\u00fcr Forschung, Wissenschaft und einen freigeistigen, toleranten Umgang mit Magie.\n\nDer Kontext enth\u00e4lt keine Informationen zu den anderen beiden Gilden oder deren Haltung zur Magie.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "category": "Ressourcen-Management / Schicksalspunkte",
+      "difficulty": "hard",
+      "question": "Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.",
+      "expected_answer": "Mindestens vier korrekte Optionen aus: Erster handeln, Wuerfel neu werfen, QS um 1 verbessern, W6 Schaden neu werfen, +4 Verteidigung, Zustaende eine Kampfrunde ignorieren.",
+      "answer_rule": "Mindestens 4 korrekte Optionen nennen.",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Schicksalspunkt Einsatzmoeglichkeiten Erster Neuer Wurf QS Verteidigung",
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Schicksalspunkt Einsatzmoeglichkeiten Erster Neuer Wurf QS Verteidigung",
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Schip Optionen neu wuerfeln QS Schaden Verteidigung Zustand ignorieren",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p33_c004",
+            "kodex_des_schwertes_p24_c005",
+            "kodex_des_go_tterwirkens_p91_c002",
+            "kodex_des_schwertes_p276_c005",
+            "kodex_des_schwertes_p24_c006"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Schip Optionen neu wuerfeln QS Schaden Verteidigung Zustand ignorieren",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 33,
+                "score": 26.124958,
+                "chunk_id": "regelwerk_p33_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "- _Verteidigung_ : Wer seine Verteidigung im Kampf st\u00e4rken will, der gibt 1 Schip aus und erh\u00e4lt bis zum Ende der aktuellen Kampfrunde einen Bonus von 4 auf alle Verteidigungen. Dies kann zu einem beliebigen Zeitpunkt der Kampfrunde erfolgen (aber vor dem W\u00fcrfeln der Verteidigung). Der Bonus erh\u00f6ht auch die Anzahl der maximalen Verteidigungen eines Helden, da bei mehreren Verteidigungen sein Verteidigungswert erst sp\u00e4ter auf 0 sinkt. \n\n_Beispiel: Mirhiban ist in ein Scharm\u00fctzel geraten. Sie wird angegriffen und die Attacke ihres Gegners gelingt. Mirhiban entscheidet sich, einen Schicksalspunkt f\u00fcr die Verteidigung auszugeben, und erh\u00f6ht ihre Verteidigungswerte, also auch ihren Paradewert, bis zum Ende der Kampfrunde um 4._ \n\n- _Zustand ignorieren_ : Es kostet ebenfalls 1 Schip, alle Zust\u00e4nde, durch die man betroffen ist, f\u00fcr eine Kampfrunde zu ignorieren."
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 24,
+                "score": 24.467499,
+                "chunk_id": "kodex_des_schwertes_p24_c005",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "- _Verteidigung st\u00e4rken_ : Wer seine Verteidigung im Kampf st\u00e4rken will, der gibt 1 Schip aus und erh\u00e4lt bis zum Ende der aktuellen Kampfrunde einen Bonus von 4 auf alle Verteidigungen. Dies kann zu einem beliebigen Zeitpunkt der Kampfrunde erfolgen (aber vor dem W\u00fcrfeln der Verteidigung). Der Bonus erh\u00f6ht auch die Anzahl der maximalen Verteidigungen eines Helden, da bei mehreren Verteidigungen sein Verteidigungswert erst sp\u00e4ter auf 0 sinkt. \n\n**==> picture [11 x 7] intentionally omitted <==**\n\n_Beispiel: Mirhiban ist in ein Scharm\u00fctzel geraten. Sie wird angegriffen und die Attacke ihres Gegners gelingt. Mirhiban entscheidet sich, einen Schicksalspunkt f\u00fcr die Verteidigung auszugeben, und erh\u00f6ht ihre Verteidigungswerte, also auch ihren Paradewert, bis zum Ende der Kampfrunde um 4._ \n\n- _Zustand ignorieren_ : Es kostet ebenfalls 1 Schip, alle Zust\u00e4nde, durch die man betroffen ist, f\u00fcr eine Kampfrunde zu ignorieren. \n\n**==> picture [11 x 7] intentionally omitted <==**"
+              },
+              {
+                "source": "kodex_des_go_tterwirkens",
+                "title": "Kodex des Go\u0308tterwirkens",
+                "page": 91,
+                "score": 22.323965,
+                "chunk_id": "kodex_des_go_tterwirkens_p91_c002",
+                "doc_id": "kodex_des_go_tterwirkens",
+                "excerpt": "- **Voraussetzungen:** Sonderfertigkeit Weg des Stabtr\u00e4gers, keine Sonderfertigkeit Gegenwehr des Stabtr\u00e4gers \n\n**Aspekt:** Reise \n\n**AP-Wert:** 8 Abenteuerpunkte \n\n**Wirkung:** Der Avesgeweihte kann einen Kulturschaffenden mit dem Avesstab segnen. Der Gesegnete kann sich f\u00fcr die n\u00e4chsten 12 Stunden beim Einsatz von Schicksalspunkten zur Wiederholung eines Wurfes (egal wie viele W\u00fcrfel) das jeweils bessere Ergebnis aussuchen. Der Einsatz dieser F\u00e4higkeit kostet 1 Aktion und verursacht 1 Stufe _Trance_ . \n\n- **Voraussetzungen:** Sonderfertigkeit Tradition (Aveskirche), keine Sonderfertigkeit Weg des Stabtr\u00e4gers \n\n**Aspekt:** Schicksal \n\n**AP-Wert:** 8 Abenteuerpunkte \n\n## **Macht des Schicksals** \n\n- **Wirkung:** Beim Einsatz von Schips kann der Avesgeweihte bei der Option Neuer Wurf das bessere Ergebnis w\u00e4hlen, bei Qualit\u00e4t verbessern erh\u00e4lt er insgesamt zwei zus\u00e4tzliche QS, bei Verteidigung erh\u00e4lt er einen Bonus von +8 auf alle Verteidigungen, bei Zustand ignorieren kann er alle Zustandsstufen f\u00fcr zwei Kampfrunden ignorieren."
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 276,
+                "score": 21.376247,
+                "chunk_id": "kodex_des_schwertes_p276_c005",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**Voraussetzungen:** keine \n\n**AP-Wert:** 15 Abenteuerpunkte \n\n_Beispiel: Carolans Spielerin m\u00f6chte bei einer Probe auf_ Verbergen _ihr ungl\u00fcckliches Ergebnis von 19, 19, 20 noch einmal w\u00fcrfeln. Sie gibt 1 Schip aus und w\u00fcrfelt alle drei W\u00fcrfel erneut. Das Ergebnis lautet 18,19,20, als nur unwesentlich besser. Allerdings verf\u00fcgt Carolan \u00fcber die Schicksalspunkte-Sonderfertigkeit_ Schicksalsmacht _, sodass die Spielerin noch einmal 1 Schip f\u00fcr diese Probe ausgeben darf, um neu zu w\u00fcrfeln. Dieses Mal ist das Ergebnis besser (12, 15, 1) und es werden 4 QS erzielt. Da es der Spielerin wichtig ist, eine m\u00f6glichst hohe QS zu erzielen, gibt sie einen weiteren Schip aus, um die Option Qualit\u00e4t verbessern einzusetzen und die QS auf 5 zu erh\u00f6hen._ \n\n## **Wachsamkeit** \n\nEin Charakter mit Wachsamkeit sp\u00fcrt eine f\u00fcr ihn gef\u00e4hrliche Situation, kurz bevor sie eintritt. Dies kann zum Beispiel ein Tierangriff oder der Hinterhalt einer R\u00e4uberbande sein. \n\n275"
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 24,
+                "score": 21.170654,
+                "chunk_id": "kodex_des_schwertes_p24_c006",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**==> picture [11 x 7] intentionally omitted <==**\n\n_Beispiel: Einige Kampfrunden sp\u00e4ter hat sich die Lage verschlechtert. Mirhiban ist mittlerweile schwer verletzt und hat zwei Stufen des Zustands_ Schmerz _und eine Stufe des Zustands_ Bet\u00e4ubung _erlitten. Ihr Gegner k\u00f6nnte sie t\u00f6ten, doch sie entscheidet sich f\u00fcr einen letzten verzweifelten Zauber: einen IGNIFAXIUS._ \n\n_Durch die Schmerzen und die Bet\u00e4ubung w\u00e4re ihre Probe um \u20133 erschwert. Sie \u00fcberlegt, wie sie ihren letzten Schip einsetzt. Sie k\u00f6nnte \u2013 falls ihr der Zauber misslingt \u2013 hohe W\u00fcrfelergebnisse noch einmal w\u00fcrfeln oder die Zust\u00e4nde unterdr\u00fccken und ohne Erschwernis zaubern. Weil sie sich mehr vom Unterdr\u00fccken verspricht, schlie\u00dflich k\u00f6nnte es sein, dass sie noch eine Parade w\u00fcrfeln muss und dort auch Einbu\u00dfen durch die Zust\u00e4nde h\u00e4tte, entscheidet sie sich f\u00fcr diese Option._ \n\nNeben diesen M\u00f6glichkeiten kann man Schips auch bei einigen Sonderfertigkeiten einsetzen. \n\n23"
+              }
+            ]
+          },
+          "answer": "Ein Spieler kann Schicksalspunkte (Schips) f\u00fcr folgende vier Optionen einsetzen:\n\n1. **Neuer Wurf:** Alle W\u00fcrfel einer Probe werden erneut gew\u00fcrfelt.\n2. **Qualit\u00e4t verbessern:** Die Qualit\u00e4tsstufen (QS) einer Probe werden erh\u00f6ht.\n3. **Verteidigung st\u00e4rken:** Erhalt eines Bonus von +4 auf alle Verteidigungen bis zum Ende der aktuellen Kampfrunde.\n4. **Zustand ignorieren:** Alle Zust\u00e4nde, von denen man betroffen ist, werden f\u00fcr eine Kampfrunde ignoriert.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Schicksalspunkt einsetzen",
+            "slop": 6,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "kodex_der_magie_p146_c004",
+            "kodex_des_schwertes_p65_c000",
+            "archiv_der_da_monen_p282_c004",
+            "helden_des_gottwals_p44_c003",
+            "archiv_der_da_monen_p282_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Schicksalspunkt einsetzen",
+              "slop": 6,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "kodex_der_magie",
+                "title": "Kodex der Magie",
+                "page": 146,
+                "score": 12.887837,
+                "chunk_id": "kodex_der_magie_p146_c004",
+                "doc_id": "kodex_der_magie",
+                "excerpt": "**Wirkung:** Der Tr\u00e4ger der Schicksalsrune kann die Rune wie einen Schicksalspunkt einsetzen. Nach dem Einsatz erlischt die Rune. \n\n**AsP-Kosten:** 20 AsP \n\n- **Herstellungszeit (langsam / schnell):** 4 Tage / 4 Aktionen \n\n- **Wirkungsdauer (langsam / schnell):** QS Monate / QS x 10 Minuten \n\n145"
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 65,
+                "score": 11.164433,
+                "chunk_id": "kodex_des_schwertes_p65_c000",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**==> picture [159 x 31] intentionally omitted <==**\n\n## **Reihenfolge des Handelns** \n\n> Um zu Beginn eines **Handelns** \n\n> Kampfes sofort handeln zu h\u00f6chster INI-Wert k\u00f6nnen, kannst du einen bei Gleichstand: Schicksalspunkt einsetzen h\u00f6chste INI-Basis und als Erster reagieren. bei Gleichstand: h\u00f6heres Ergebnis eines W6-Wurfes \n\n_Beispiel: Arbosch und Geron stehen also drei Orks gegen\u00fcber. Arbosch hat einen Initiative-Basiswert von 14, Geron einen von 11, die Orks haben einen von 10. Arboschs Spieler w\u00fcrfelt 1W6 und erzielt eine 4._"
+              },
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 282,
+                "score": 11.017109,
+                "chunk_id": "archiv_der_da_monen_p282_c004",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "- _Ungl\u00fcck:_ In einem Radius von 130 Schritt um den D\u00e4mon kann kein Held Schicksalspunkte einsetzen. \n\n- _Unkontrollierbar:_ Wenn der D\u00e4mon einen Dienst ausgef\u00fchrt hat, beginnt er automatisch, Lebewesen in seiner N\u00e4he anzugreifen und Objekte zu verw\u00fcsten, bis er gebannt wird oder die Anzahl der verbleibenden Dienste auf 0 sinkt und er in seine Sph\u00e4re zur\u00fcckkehrt. \n\n- _Verdunkelung:_ In einem Radius von 130 Schritt um den D\u00e4mon herrscht eine Dunkelheit mit Sichtmodifikator Stufe II. \n\n- _D\u00e4monen-Regeln:_ F\u00fcr Shihayazad gelten die allgemeinen D\u00e4monen-Regeln (siehe **Kodex der Magie** Seite **392** oder **Regelwerk** Seite **355** )."
+              },
+              {
+                "source": "helden_des_gottwals",
+                "title": "Helden des Gottwals",
+                "page": 44,
+                "score": 10.464743,
+                "chunk_id": "helden_des_gottwals_p44_c003",
+                "doc_id": "helden_des_gottwals",
+                "excerpt": "- **Herstellungszeit (langsam / schnell):** 2 Tage / 2 Aktionen \n\n- **Wirkungsdauer (normal / schnell):** QS Monate / QS x 3 KR \n\n**Merkmal:** Heilung **Steigerungsfaktor:** C \n\n## **Schicksalsrune** (Wyrdruna) \n\n## **Probe:** IN/IN/CH \n\n**Wirkung:** Der Tr\u00e4ger der Schicksalsrune kann die Rune wie einen Schicksalspunkt einsetzen. Nach dem Einsatz erlischt die Rune. \n\n**AsP-Kosten:** 20 AsP \n\n**Herstellungszeit (langsam / schnell):** 4 Tage \n\n/ 4 Aktionen \n\n- **Wirkungsdauer (langsam / schnell):** QS Monate / QS x 10 Minuten \n\n**Merkmal:** Hellsicht \n\n**Steigerungsfaktor:** D \n\n## **Schutzrune vor Zauberei** (Galderbanruna) \n\n## **Probe:** MU/IN/CH"
+              },
+              {
+                "source": "archiv_der_da_monen",
+                "title": "Archiv der Da\u0308monen",
+                "page": 282,
+                "score": 9.732783,
+                "chunk_id": "archiv_der_da_monen_p282_c003",
+                "doc_id": "archiv_der_da_monen",
+                "excerpt": "- **QS 1:** Shihayazad ist einer der m\u00e4chtigsten D\u00e4monen \u00fcberhaupt. Er ist angeblich einer der Tagesherrscher der Namenlosen Tage. \n\n- **QS 2:** Shihayazads Sinn und Zweck ist das Zerst\u00fcckeln und Zerfleischen allen Lebens in seiner n\u00e4heren Umgebung. \n\n- **QS 3+:** Shihayazads Macht basiert u. a. darauf, dass er von keiner Waffe wirklich ernsthaft verletzt werden kann. Er ist der Tagesherrscher des 5. Namenlosen Tages. \n\n## **Sonderregeln:** \n\n- _Einzigartiger D\u00e4mon:_ Shihayazad unterliegt den Regeln f\u00fcr einzigartige D\u00e4monen (siehe Seite **309** ). \n\n- _Keine Empfindlichkeit gegen\u00fcber gesegneten und geweihten Objekten:_ Anders als viele D\u00e4monen, verf\u00fcgt Shihayazad \u00fcber keine Empfindlichkeit gegen\u00fcber gesegneten/geweihten Objekten/Waffen einer Gegengottheit. \n\n- _Ungl\u00fcck:_ In einem Radius von 130 Schritt um den D\u00e4mon kann kein Held Schicksalspunkte einsetzen."
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine vollst\u00e4ndige Liste der Einsatzm\u00f6glichkeiten f\u00fcr Schicksalspunkte. Er nennt lediglich eine spezifische Option:\n\n1. **Initiative:** Ein Schicksalspunkt kann eingesetzt werden, um zu Beginn eines Kampfes sofort als Erster zu handeln.\n\nDie weiteren bereitgestellten Dokumente erw\u00e4hnen lediglich, dass Schicksalsrunen wie Schicksalspunkte eingesetzt werden k\u00f6nnen und dass der Einsatz von Schicksalspunkten in der N\u00e4he bestimmter D\u00e4monen (z. B. Shihayazad) unterbunden werden kann. Weitere Einsatzm\u00f6glichkeiten gehen aus dem Kontext nicht hervor.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "category": "Spezieswerte",
+      "difficulty": "easy",
+      "question": "Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?",
+      "expected_answer": "Zwerg: LE 8, SK -4, ZK -4, GS 6.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "Zwerg LE SK ZK GS",
+            "size": 5
+          },
+          "retrieved_count": 3,
+          "retrieved_chunk_ids": [
+            "regelwerk_p43_c004",
+            "regelwerk_p97_c003",
+            "kodex_der_helden_p11_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "Zwerg LE SK ZK GS",
+              "size": 5
+            },
+            "count": 3,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 43,
+                "score": 21.185629,
+                "chunk_id": "regelwerk_p43_c004",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Spezies in der \u00dcbersicht** \n\n|**Spezies**|**LE**|**SK**|**ZK**|**GS**|**Eigenschaften**|**Vorteile**|**Nachteile**|**AP-Wert**|\n|---|---|---|---|---|---|---|---|---|\n|**Mensch**|5|\u20135|\u20135|8|eine beliebige +1|keine|keine|0 AP|\n|**Elf**|2|\u20134|_\u2013_6|8|IN und GE +1; KL oder KK \u20132|Zauberer, Zweistimmiger|keine|18 AP|\n|||||||Gesang|||\n|**Halbelf**|5|\u20134|\u20136|8|eine beliebige +1|keine|keine|0 AP|\n|**Zwerg**|8|\u20134|\u20134|6|KO und KK +1; CH oder GE \u20132|keine|keine|61 AP|\n\n\n\nKapitel 3: Heldenerschaffung \n\n40"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 97,
+                "score": 17.285686,
+                "chunk_id": "regelwerk_p97_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Augenfarbe (1W20)** \n\ndunkelbraun (1-2), braun (3-5), gr\u00fcn (6-9), blau (10), grau (11-14), schwarz (15-20) \n\n## **K\u00f6rpergr\u00f6\u00dfe** \n\n128 Halbfinger + 2W6 (1,30 bis 1,40 Schritt) \n\n## **Gewicht** \n\nGr\u00f6\u00dfe \u2013 80 \u2013 1W6 + 2W6 Stein \n\n## **Spezies in der \u00dcbersicht** \n\n|**Spezies**|**LE**|**SK**|**ZK**|**GS**|**Eigenschaften**|**Vorteile**|**Nachteile**|**AP-Wert**|\n|---|---|---|---|---|---|---|---|---|\n|**Mensch**|5|\u20135|\u20135|8|eine beliebige +1|keine|keine|0 AP|\n|**Elf**|2|_\u2013_4|_\u2013_6|8|IN und GE +1; KL oder KK \u20132|Zauberer, Zwei-|keine|18 AP|\n|||||||stimmiger Gesang|||\n|**Halbelf**|5|\u20134|\u20136|8|eine beliebige +1|keine|keine|0 AP|\n|**Zwerg**|8|_\u2013_4|_\u2013_4|6|KO und KK +1; CH oder GE \u20132|keine|keine|61 AP|\n\n\n\n**==> picture [524 x 142] intentionally omitted <==**\n\nKapitel 4: Spezies \n\n94"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 11,
+                "score": 13.879118,
+                "chunk_id": "kodex_der_helden_p11_c003",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "||||||**Spezies in der \u00dcbersicht**|**Spezies in der \u00dcbersicht**|||\n|---|---|---|---|---|---|---|---|---|\n|**Spezies**|**LE**|**SK **|**ZK **|**GS**|**Eigenschaften**|**Vorteile**|**Nachteile**|**AP-Wert**|\n|**Achaz**|5|\u20134|\u20135|8|IN und KO +1; MU oder KK|Dunkelsicht I, Zus\u00e4tzliche|K\u00e4ltestarre|25 AP|\n||||||\u20131|Gliedma\u00dfe (Schwanz)|||\n|**Elf**|2|\u20134|_\u20136_|8|IN und GE +1; KL oder KK \u20132|Zauberer, Zweistimmiger|keine|18 AP|\n|||||||Gesang|||\n|**Goblin**|3|\u20136|\u20135|8|FF +1 und GE +1, MU \u20131|Dunkelsicht I, Heraus-|keine|5 AP|\n||||||oder KL \u20131|ragender Sinn (Geh\u00f6r),|||\n|||||||Herausragender Sinn|||\n|||||||(Geruch & Geschmack),|||\n|||||||Krankheitsresistenz I|||\n|**Halbelf**|5|\u20134|\u20136|8|eine beliebige +1|keine|keine|0 AP|\n|**Halbork**|6|\u20136|\u20135|8|KO +1, CH -1|Z\u00e4her Hund|keine|1 AP|\n|**Holberker**|6|\u20136|\u20135|8|KL \u20131, KO +1|Z\u00e4her Hund|keine|1 AP|\n|**Mensch**|5|\u20135|\u20135|8|eine beliebige +1|keine|keine|0 AP|\n|**Ork**|8|\u20136|\u20134|8|MU +1 und KO +1, KL \u20131 oder|keine|keine|18 AP|\n||||||CH \u20131||||\n|**Zwerg**|8|\u20134|\u20134|6|KO und KK +1; CH oder GE \u20132|keine|keine|61 AP|\n\n\n\nKapitel I \u2013 Heldenschaffung \n\n10"
+              }
+            ]
+          },
+          "answer": "Ein Spielercharakter der Spezies Zwerg erh\u00e4lt folgende Grundwerte:\n\n*   **LE:** 8\n*   **SK:** \u20134\n*   **ZK:** \u20134\n*   **GS:** 6",
+          "llm_skipped": false
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Spezies Zwerg Grundwerte Lebensenergie Seelenkraft Zaehigkeit Geschwindigkeit",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p43_c001",
+            "regelwerk_p91_c001",
+            "regelwerk_p60_c001",
+            "kodex_der_helden_p23_c001",
+            "kodex_der_helden_p32_c001"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Spezies Zwerg Grundwerte Lebensenergie Seelenkraft Zaehigkeit Geschwindigkeit",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 43,
+                "score": 69.511345,
+                "chunk_id": "regelwerk_p43_c001",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Schritt 3: Spezies w\u00e4hlen** \n\nAls N\u00e4chstes muss eine _Spezies_ f\u00fcr den Helden ausgew\u00e4hlt werden. Die Spezies ist das Volk, dem dein Held angeh\u00f6rt, also z.B. Mensch, Elf oder Zwerg. Damit legst du nicht nur den Rahmen des Aussehens deines Charakters fest, sondern zus\u00e4tzlich einige Grundwerte und Eigenschafts\u00e4nderungen sowie eine Auswahl potenziell w\u00e4hlbarer Kulturen. \n\nJede Spezies kostet einen Betrag in Abenteuerpunkten, den du von deinem AP-Konto abziehen musst. Im Kapitel **Spezies** ab Seite **87** sind alle spielbaren Spezies dieses Buches aufgef\u00fchrt, ebenso alle wertetechnischen Angaben und Vorgaben zum Aussehen. \n\nDu bekommst durch die Spezies Folgendes: \n\n- Grundwert der Lebensenergie \n\n- Grundwert der Seelenkraft \n\n- Grundwert der Z\u00e4higkeit \n\n- Grundwert der Geschwindigkeit (eventuell) Eigenschafts\u00e4nderungen durch die Spezies \n\nAu\u00dferdem sind noch einige Empfehlungen beigef\u00fcgt: \n\n- Welche Vor- und Nachteile sind typisch f\u00fcr diese Spezies? \n\n- Welche Vor- und Nachteile sind eher ungeeignet? \n\n- Welche sind die \u00fcblichen Kulturen?"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 91,
+                "score": 34.074524,
+                "chunk_id": "regelwerk_p91_c001",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Werte** \n\nZus\u00e4tzlich zur Speziesbeschreibung ist ein Wertekasten aufgef\u00fchrt, der regeltechnische Informationen \u00fcber die Spezies enth\u00e4lt. \n\n- **AP-Wert:** Wie viele Abenteuerpunkte kostet die Spezies bei der Heldenerschaffung? Darin enthalten sind sowohl die Kosten f\u00fcr automatische Vor- und Nachteile als auch die Kosten f\u00fcr Grundwerte (Lebenspunkte, Seelenkraft, Z\u00e4higkeit, Geschwindigkeit). \n\n- **Lebensenergie-Grundwert:** der zu der Spezies geh\u00f6rige Lebensenergie-Grundwert. \n\n- **Seelenkraft-Grundwert:** der zu der Spezies geh\u00f6rige Seelenkraft-Grundwert \n\n- **Z\u00e4higkeit-Grundwert:** der zu der Spezies geh\u00f6rige Z\u00e4higkeit-Grundwert \n\n- **Geschwindigkeit-Grundwert:** Dieser Wert gibt die taktische Geschwindigkeit einer Spezies an, die insbesondere f\u00fcr den Kampf eine Rolle spielt. Insbesondere bei Verfolgungsjagden wichtig."
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 60,
+                "score": 33.311066,
+                "chunk_id": "regelwerk_p60_c001",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Ausweichen** \n\nGewandtheit / 2 \n\n## **Initiative** \n\n(Mut + Gewandtheit) / 2 +/\u2013 Punkte aus Vor- und Nachteilen \n\n## **Geschwindigkeit** \n\nGeschwindigkeit-Grundwert der Spezies +/\u2013 Punkte aus Vor- und Nachteilen \n\n_Louisa:_ \n\n_Lebensenergie Basiswert: Lebensenergie-Grundwert 5 + KO 10 + KO 10 = 25_ \n\n_Seelenkraft Basiswert: Seelenkraft-Grundwert \u20135 + (MU 14 + KL 12 + IN 14) / 6 = 2 Z\u00e4higkeit Basiswert: Z\u00e4higkeit-Grundwert \u20135 + (KO 10 + KO 10 + KK 9) / 6 = 0 Ausweichen Gewandtheit 14 / 2 = 7 Initiative (Mut 14 + Gewandtheit 14) / 2 = 14 Geschwindigkeit Basiswert: Geschwindigkeit-Grundwert 8_ \n\n_Chris:_"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 23,
+                "score": 32.22166,
+                "chunk_id": "kodex_der_helden_p23_c001",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "Basiswert: Seelenkraft-Grundwert der Spezies + (Mut + Klugheit + Intuition) / 6 +/\u2013 Punkte aus Vor- und Nachteilen \n\n## **Ausweichen** \n\nGewandtheit / 2 \n\n## **Initiative** \n\n(Mut + Gewandtheit) / 2 \n\n|**Seelenkraft-Berechnung**||\n|---|---|\n|**Summe von MU + KL + IN**|**Ergebnis**|\n|||\n|**24\u201326**|4|\n|**27\u201332**|5|\n|**33\u201338**|6|\n|||\n|**39\u201344**|7|\n|**45\u201350**|8|\n|**51\u201356**|9|\n|||\n|**57\u201362**|10|\n\n\n\n_Anmerkung:_ Das Ergebnis muss noch mit dem Grundwert der Seelenkraft des Helden und ggf. mit Punkten aus Vor- und Nachteilen verrechnet werden. \n\n## **Z\u00e4higkeit** \n\nBasiswert: Z\u00e4higkeit-Grundwert der Spezies + (Konstitution + Konstitution + K\u00f6rperkraft) / 6 \n\n+/\u2013 Punkte aus Vor- und Nachteilen \n\n## **Geschwindigkeit** \n\nGeschwindigkeit-Grundwert der Spezies +/\u2013 Punkte aus Vor- und Nachteilen \n\n_Beispiel: Die drei Spieler berechnen schnell ihre Basiswerte:_ \n\n_Louisa:_ \n\n_Lebensenergie Basiswert: Lebensenergie-Grundwert 5 + KO 10 + KO 10 = 25 Seelenkraft Basiswert: Seelenkraft-Grundwert \u20135 + (MU 14 + KL 12 + IN 14) / 6 = 2_ \n\n_Z\u00e4higkeit_"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 32,
+                "score": 31.679825,
+                "chunk_id": "kodex_der_helden_p32_c001",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "**==> picture [12 x 7] intentionally omitted <==**\n\n## **Werte** \n\nZus\u00e4tzlich zur Speziesbeschreibung ist ein Wertekasten aufgef\u00fchrt, der regeltechnische Informationen \u00fcber die Spezies enth\u00e4lt. \n\n- **AP-Wert:** Wie viele Abenteuerpunkte kostet die Spezies bei der Heldenerschaffung? Darin enthalten sind sowohl die Kosten f\u00fcr automatische Vor- und Nachteile als auch die Kosten f\u00fcr Grundwerte (Lebenspunkte, Seelenkraft, Z\u00e4higkeit, Geschwindigkeit). \n\n**==> picture [12 x 7] intentionally omitted <==**\n\n- **Lebensenergie-Grundwert:** der zu der Spezies geh\u00f6rige Lebensenergie-Grundwert \n\n**==> picture [12 x 7] intentionally omitted <==**\n\n- **Seelenkraft-Grundwert:** der zu der Spezies geh\u00f6rige Seelenkraft-Grundwert \n\n**==> picture [12 x 7] intentionally omitted <==**\n\n- **Z\u00e4higkeit-Grundwert:** der zu der Spezies geh\u00f6rige Z\u00e4higkeit-Grundwert \n\n**==> picture [12 x 7] intentionally omitted <==**\n\n- **Geschwindigkeit-Grundwert:** Dieser Wert gibt die taktische Geschwindigkeit einer Spezies an, die f\u00fcr den Kampf eine Rolle spielt. Insbesondere bei Verfolgungsjagden wichtig."
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine spezifischen Zahlenwerte f\u00fcr die Grundwerte (LE, SK, ZK, GS) der Spezies Zwerg. Er verweist lediglich darauf, dass diese Informationen im Kapitel \u201eSpezies\u201c (ab Seite 87 des Regelwerks) in einem entsprechenden Wertekasten aufgef\u00fchrt sind.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Spezies Zwerg",
+            "slop": 5,
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p68_c003",
+            "kodex_der_helden_p439_c003",
+            "kodex_der_helden_p439_c001",
+            "helden_des_wolfsfrosts_p40_c002",
+            "kodex_des_schwertes_p333_c003"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Spezies Zwerg",
+              "slop": 5,
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 68,
+                "score": 12.4049635,
+                "chunk_id": "regelwerk_p68_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "**Spezies:** Zwerg **Kultur:** Erzzwerge **Profession:** Krieger **Erfahrungsgrad:** Erfahren \n\n**==> picture [302 x 742] intentionally omitted <==**"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 439,
+                "score": 11.539991,
+                "chunk_id": "kodex_der_helden_p439_c003",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "|**Gareth-Stil**|GE 13,Lanzenangriff|Lanzen|10 AP|\n|**Gladiatoren-Stil**|GE 13 oder KK 13|Raufen|5 AP|\n|**Hammerfaust-Stil**|KK 13|Raufen|10 AP|\n|**Hand Borons-Stil**|GE 13|Dolche,Raufen|15 AP|\n|**Hardas-Stil**|KK 13, Spezies Zwerg|Hiebwaffen, Raufen,|15 AP|\n|||Zweihandhiebwaffen||\n|**Hruruzat**|GE 13|Raufen|12 AP|\n|**Hylailos-Stil**|GE 13|Stangenwaffen|15 AP|\n|**Irbrasch-Stil**|FF 13, Spezies Zwerg|Armbr\u00fcste (nur Ball\u00e4ster, Eisen-|12 AP|\n|||w\u00e4lder und Leichte Armbrust)||"
+              },
+              {
+                "source": "kodex_der_helden",
+                "title": "Kodex der Helden",
+                "page": 439,
+                "score": 9.263478,
+                "chunk_id": "kodex_der_helden_p439_c001",
+                "doc_id": "kodex_der_helden",
+                "excerpt": "|**Sonderfertigkeit**|**Voraussetzungen**|**Kampftechnik**|**AP-Wert**|\n|---|---|---|---|\n|**Adersin-Stil**|GE 13|Zweihandschwerter (nur|15 AP|\n|||Anderthalbh\u00e4nder)||\n|**Al\u2019Drakorhim-Stil**|GE 13|Schwerter,Stangenwaffen|10 AP|\n|**Ardariten-Stil**|GE 13|alle|15 AP|\n|**Arivor-Stil**|MU 13|Schwerter,Zweihandschwerter|12 AP|\n|**Ayshara-Stil**|FF 13|Wurfwaffen (nur|10 AP|\n|||Wurfdolche und||\n|||Wurfsterne/-scheiben/-ringe)||\n|**Azilajid-Stil**|MU 13,GE 13|Zweihandschwerter|15 AP|\n|**Baburin-Stil**|IN 13|alle|10 AP|\n|**Balboram-Stil**|GE 13, Beidh\u00e4ndiger Kampf I,|Schilde (nur brillantzwergischer|12 AP|\n||Spezies Zwerg|Buckler), Schwerter (nur bril-||\n|||lantzwergisches Kurzschwert)||\n|**Baliho-Stil**|MU 13,Berittener Kampf|alle Nahkampftechniken|12 AP|\n|**Bannstrahler-Stil**|KK 13|alle|15 AP|\n|**Beni Uchak\u00e2ni-Stil**|KK 13|Schwerter|12 AP|\n|**Birkholt-Stil**|MU 13|Hiebwaffen,Schwerter|12 AP|\n|**Bornl\u00e4ndisches Raufen**|GE 13 oder KK 13|Raufen|5 AP|\n|**Boxer-Stil**|KK 13|Raufen|15 AP|\n|**Cendrasch-Stil**|KK 13, Spezies Zwerg|Hiebwaffen,|15 AP|\n|||Zweihandhiebwaffen||"
+              },
+              {
+                "source": "helden_des_wolfsfrosts",
+                "title": "Helden des Wolfsfrosts",
+                "page": 40,
+                "score": 9.055775,
+                "chunk_id": "helden_des_wolfsfrosts_p40_c002",
+                "doc_id": "helden_des_wolfsfrosts",
+                "excerpt": "- Brobim-Geoden k\u00f6nnen eines der folgenden Vertrautentiere an sich binden (abh\u00e4ngig vom gew\u00e4hlten Element): Wildkatze (Feuer), Falke (Luft) und Hund (Erz). \n\nDie Leiteigenschaft der Tradition ist Charisma. **Voraussetzungen:** Vorteil _Zauberer_ , kein Vorteil _Eisenaffine Aura_ , Spezies Zwerg, Kultur: Wildzwerge **AP-Wert:** 130 Abenteuerpunkte \n\n## **Der Lebensring** \n\nBrobim-Geoden verf\u00fcgen \u00fcber ein Traditionsartefakt, den Lebensring (auch Schlangenring oder Ring des Lebens genannt). Dabei handelt es sich um einen Halsreif aus Gold in Form einer sich in den Schwanz bei\u00dfenden Schlange. Obwohl er aus Metall besteht, hat er aufgrund seiner magischen Natur keine negativen Auswirkungen auf die Zauberkr\u00e4fte der Geoden."
+              },
+              {
+                "source": "kodex_des_schwertes",
+                "title": "Kodex des Schwertes",
+                "page": 333,
+                "score": 9.055775,
+                "chunk_id": "kodex_des_schwertes_p333_c003",
+                "doc_id": "kodex_des_schwertes",
+                "excerpt": "**Regel:** Ein Xorloscher Krieger muss im Kampf gegen Wesen des Typus Drachen oder solche der Gr\u00f6\u00dfenkategorie _riesig_ nur 1 freie Aktion aufwenden, um gegen\u00fcber seinem Gegner in eine _vorteilhafte Position_ zu gelangen (siehe Seite **75** ). Au\u00dferdem ist die Probe auf _K\u00f6rperbeherrschung (Kampfman\u00f6ver)_ um +2 erleichtert. Drachen und Wesen der Gr\u00f6\u00dfenkategorie _riesig_ erleiden zudem eine Erschwernis von \u20132 auf AT und FK, wenn sie gegen einen Xorloscher Krieger k\u00e4mpfen. \n\n**Erweiterte Kampfsonderfertigkeiten:** Aufspie\u00dfen, Drachentod, Erweiterte Drachenkampf-Taktik **Voraussetzungen:** KK 13, Spezies Zwerg **Kampftechniken:** alle **AP-Wert:** 10 Abenteuerpunkte \n\n## **Yppolitaner-Stil**"
+              }
+            ]
+          },
+          "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen zu den Grundwerten (LE, SK, ZK, GS) f\u00fcr die Spezies Zwerg.",
+          "llm_skipped": false
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "category": "Artefaktmagie",
+      "difficulty": "medium",
+      "question": "Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?",
+      "expected_answer": "Benoetigt wird ARCANOVI, dazu permanente AsP ins Objekt binden.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_exact_keyword": {
+          "tool_args": {
+            "query": "ARCANOVI Spruchzauber Gegenstand Zauberspeicher permanente AsP",
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_exact_keyword",
+            "index": "lara_documents",
+            "query": {
+              "query": "ARCANOVI Spruchzauber Gegenstand Zauberspeicher permanente AsP",
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        },
+        "search_fuzzy": {
+          "tool_args": {
+            "query": "Ritual Zauberspeicher Artefakt ARCANOVI permanente Astralpunkte",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "arkane_schmieden_und_labore_p35_c002",
+            "arkane_schmieden_und_labore_p35_c001",
+            "regelwerk_p270_c003",
+            "arkane_schmieden_und_labore_p33_c002",
+            "kodex_der_magie_p304_c004"
+          ],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_fuzzy",
+            "index": "lara_documents",
+            "query": {
+              "query": "Ritual Zauberspeicher Artefakt ARCANOVI permanente Astralpunkte",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "arkane_schmieden_und_labore",
+                "title": "Arkane Schmieden und Labore",
+                "page": 35,
+                "score": 29.281994,
+                "chunk_id": "arkane_schmieden_und_labore_p35_c002",
+                "doc_id": "arkane_schmieden_und_labore",
+                "excerpt": "||Zauberspruch sowie 25-fache AsP-Kosten des Zauberspruchs|\n|**_Permanent wirkendes_**|F\u00fcr unendliche Ladungen/Wirkung zus\u00e4tzlich INFINITUM IMMERDAR auf Artefaktverzaube-|\n|**_Artefakt (optional):_**|rer wirken. Die Probe des ARCANOVI ist zus\u00e4tzlich um 10 \u2013 QS des INFINITUM erschwert. Die|\n||Kosten steigen um zus\u00e4tzlich 64 AsP,davon 8pAsP.|\n|**Matrixspeicher**|ARCANOVI + Zauberspruch/Zaubertrick/Ritual|\n|**_Voraussetzung: _**|SF_Matrixgeber_undggf. SF_Zaubertrick-Artefakte herstellen_bzw._Ritual-Artefakte herstellen_|\n|**_Ladungen:_**|QS + 4 des ARCANOVI|\n|**_Kosten:_**|ARCANOVI(16 AsP)+ Zauber,davon 1/10 Gesamtkosten alspAsP|\n|**_Selbstaufadendes oder per-_**|siehe Zauberspeicher|\n|**_manent wirkendes Artefakt:_**||\n|**Zaubertalismane**|ARCANOVI + Zauberspruch/Ritual|\n|**_Voraussetzung: _**|SF_Auxiliator_undggf._Ritual-Artefakte herstellen_|\n|**_Ladungen:_**|QS + 4 des ARCANOVI|\n|**_Kosten:_**|ARCANOVI(16 AsP)+ Zauber|\n|**_Selbstaufadendes oder per-_**|siehe Zauberspeicher, zus\u00e4tzlich 1/10 der Kosten als pAsP|\n|**_manent wirkendes Artefakt:_**||\n|**Kraftspeicher**|ARCANOVI|"
+              },
+              {
+                "source": "arkane_schmieden_und_labore",
+                "title": "Arkane Schmieden und Labore",
+                "page": 35,
+                "score": 26.81752,
+                "chunk_id": "arkane_schmieden_und_labore_p35_c001",
+                "doc_id": "arkane_schmieden_und_labore",
+                "excerpt": "|**\u00dcbersicht der Artefaktarten**|**\u00dcbersicht der Artefaktarten**|\n|---|---|\n|**Art**|**Verzauberung**|\n|**Zauberspeicher**|ARCANOVI + Zauberspruch/Zaubertrick/Ritual oder APPLICATUS + Zauberspruch/Zaubertrick/Ritual|\n|**_Voraussetzung:_**|ggf. SF_Zaubertrick-Artefakte herstellen_bzw._Ritual-Artefakte herstellen_|\n|**_Ladungen:_**|maximal 7(ARCANOVI)bzw. einmalig (APPLICATUS)|\n|**_Kosten:_**|ARCANOVI (16 AsP) + jede Ladung des Zaubers einzeln; davon beim initialen Verzaubern zum|\n||Artefakt 1/10 der Gesamtkosten als pAsP bzw.|\n||alternativ APPLICATUS(8 AsP)+ Zauber|\n|**_Selbstaufadendes Artefakt_**|1 Ladung regeneriert pro Monat/Woche/Tag f\u00fcr \u20131 Erschwernis auf ARCANOVI und Zauber-|\n|**_(optional):_**|spruch sowie 5-fache AsP-Kosten des Zauberspruchs / \u20132 Erschwernis auf ARCANOVI und Zau-|\n||berspruch sowie 10-fache AsP-Kosten des Zauberspruchs / \u20133 Erschwernis auf ARCANOVI und|\n||Zauberspruch sowie 25-fache AsP-Kosten des Zauberspruchs|\n|**_Permanent wirkendes_**|F\u00fcr unendliche Ladungen/Wirkung zus\u00e4tzlich INFINITUM IMMERDAR auf Artefaktverzaube-|"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 270,
+                "score": 25.304382,
+                "chunk_id": "regelwerk_p270_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Zauberspeicher-Artefakte** \n\nBei der einfachsten Variante der Artefakterschaffung werden ein oder mehrere Zauberspr\u00fcche im Artefakt gespeichert. Hierzu wird im ARCANOVI-Ritual zuerst das Objekt vorbereitet und dann der n\u00f6tige Zauberspruch im Objekt verankert. Der ARCANOVI und der anschlie\u00dfende Zauberspruch m\u00fcssen direkt aufeinanderfolgen. Soll der gleiche Zauber mehrfach im Artefakt verankert sein, m\u00fcssen die AsP-Kosten des Zauberspruchs auch mehrfach gezahlt werden. Au\u00dferdem wird sowohl die Ritualprobe auf den ARCANOVI als auch die Probe auf den Zauberspruch um 1 pro zus\u00e4tzlicher Aufladung erschwert. Der Zauberspruch kann nicht durch Zaubermodifikationen ver\u00e4ndert werden. 1/10 der so durch den ARCANOVI und den verankerten Zauberspruch aufgewendeten AsP werden permanent verbraucht. Diese permanenten AsP gehen mit dem Wirken der Zauber verloren und m\u00fcssen nicht nocheinmal extra abgezogen werden (wenn also ein Artefakt 40 AsP kostet, verliert der Zauberer 40 AsP und 4 AsP davon gehen permanent verloren)."
+              },
+              {
+                "source": "arkane_schmieden_und_labore",
+                "title": "Arkane Schmieden und Labore",
+                "page": 33,
+                "score": 22.974092,
+                "chunk_id": "arkane_schmieden_und_labore_p33_c002",
+                "doc_id": "arkane_schmieden_und_labore",
+                "excerpt": "Die Herstellung von g\u00f6ttlichen Artefakten durch Sterbliche ist mittels der Liturgie Objektweihe und der Sonderfertigkeit _Liturgiebindung_ m\u00f6glich. Mehr dazu findet sich im Regelerweiterungsband **Kodex des G\u00f6tterwirkens** . Der vorliegende Band konzentriert sich im Folgenden auf die Herstellung magischer Artefakte. \n\n## **Zauberspeicher** \n\nZauberspeicher sind die verbreitetsten magischen Artefakte. Sie werden mit dem magischen Ritual ARCANOVI hergestellt. Es verzaubert ein Objekt, indem es einen bestimmten Zauberspruch in ihn verankert, der unmittelbar nach dem ARCANOVI gewirkt wurde. Mithilfe der Sonderfertigkeiten _Ritual-Artefakte herstellen_ und _Zaubertrick-Artefakte herstellen_ lassen sich auch jene Zaubertypen verankern. Auch Zaubererweiterungen k\u00f6nnen verankert werden. Der verankerte Zauberspruch kann jedoch nicht modifiziert werden, um etwa Kosten zu sparen oder die Reichweite zu erh\u00f6hen."
+              },
+              {
+                "source": "kodex_der_magie",
+                "title": "Kodex der Magie",
+                "page": 304,
+                "score": 21.134567,
+                "chunk_id": "kodex_der_magie_p304_c004",
+                "doc_id": "kodex_der_magie",
+                "excerpt": "## **Spielarten der Artefaktmagie** \n\nGrundlegend lassen sich zwei Arten von Artefakten unterscheiden: Solche, die Zauberspr\u00fcche in sich tragen und freisetzen k\u00f6nnen, und magische Waffen. W\u00e4hrend Erstere h\u00e4ufig als Schmuckst\u00fccke oder Gebrauchsgegenst\u00e4nde und mit dem Ritual ARCANOVI erschaffen werden, sind Letztere mit dem Ritual ZAUBERKLINGE verzauberte Waffen, die oft im Kampf gegen D\u00e4monen und andere magische Wesen ihren Einsatz finden. Auch eine Kombination aus beidem ist nat\u00fcrlich m\u00f6glich. \n\nMagische Waffen, die nachtr\u00e4glich mit einem ARCANOVI verzaubert wurden, um Zauberspr\u00fcche in sich zu tragen, sind durchaus nicht ungew\u00f6hnlich. \n\nIn allen F\u00e4llen ist es vonn\u00f6ten, dass der Erschaffer des Artefakts permanente AsP in das Objekt bindet, um es l\u00e4ngerfristig mit einer magischen Matrix zu versehen. Um einen Zauberspruch in einen Gegenstand zu binden, ist das Ritual ARCANOVI n\u00f6tig."
+              }
+            ]
+          },
+          "answer": "Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen, ist das Ritual **ARCANOVI** erforderlich. Alternativ kann f\u00fcr Zauberspeicher auch der **APPLICATUS** verwendet werden.",
+          "llm_skipped": false
+        },
+        "search_phrase_proximity": {
+          "tool_args": {
+            "phrase": "Spruchzauber in einen Gegenstand binden",
+            "slop": 6,
+            "size": 5
+          },
+          "retrieved_count": 0,
+          "retrieved_chunk_ids": [],
+          "expected_chunk_ids": [],
+          "retrieval_payload": {
+            "tool": "search_phrase_proximity",
+            "index": "lara_documents",
+            "query": {
+              "phrase": "Spruchzauber in einen Gegenstand binden",
+              "slop": 6,
+              "size": 5
+            },
+            "count": 0,
+            "results": []
+          },
+          "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
+          "llm_skipped": true
+        }
+      }
+    }
+  ]
+}

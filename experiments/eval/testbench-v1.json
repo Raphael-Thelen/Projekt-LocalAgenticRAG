@@ -1,0 +1,475 @@
+{
+  "benchmark_id": "dsa-testbench-v1",
+  "description": "10 Fragen x 3 Retrieval-Tools mit getrennter Chunk- und Antwortbewertung.",
+  "tools": ["search_exact_keyword", "search_fuzzy", "search_phrase_proximity"],
+  "questions": [
+    {
+      "id": "Q1",
+      "category": "Lore / Hintergrundwissen",
+      "difficulty": "easy",
+      "question": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+      "expected_answer": "Das Mittelreich wird von der jungen Kaiserin Rohaja regiert und zusammengehalten. Die Hauptstadt und der Mittelpunkt des Reiches ist Gareth.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "regiert Mittelreich Hauptstadt",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Mittelreich Kaiserin Rohaja Gareth",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Mittelreich Rohaja Hauptstadt Gareth",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Kaiserin Rohaja",
+          "slop": 4,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p108_c000",
+            "aventurischer_almanach_p12_c006",
+            "aventurischer_almanach_p206_c001"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q2",
+      "category": "Goetter & Kosmologie",
+      "difficulty": "medium",
+      "question": "Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?",
+      "expected_answer": "Die primaeren Widersacher der Goetter sind der Namenlose sowie die Erzdämonen, welche als groteske Zerrbilder der Zwoelfgoetter beschrieben werden.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Widersacher der Zwoelfgoetter",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Namenlose Erzdämonen Zwoelfgoetter",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Widersacher Zwoelfgoetter Namenlose Erzdämonen",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Widersacher der Zwoelfgoetter",
+          "slop": 5,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "archiv_der_da_monen_p41_c001",
+            "archiv_der_da_monen_p41_c000",
+            "aventurischer_almanach_p185_c003"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q3",
+      "category": "Grundregeln / Wuerfelmechanik",
+      "difficulty": "hard",
+      "question": "Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?",
+      "expected_answer": "Eine Fertigkeitsprobe wird mit 3W20 abgelegt. Jeder Wurf wird mit einem Eigenschaftswert verglichen. Zu hohe Wuerfe koennen mit FW ausgeglichen werden. Uebrig gebliebene Punkte ergeben FP und bestimmen die QS.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Fertigkeitsprobe Fertigkeitswert",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Fertigkeitsprobe 3W20 Fertigkeitswert FW FP QS",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Fertigkeitsprobe Wuerfel Eigenschaftswerte FW FP QS",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Fertigkeitsprobe 3W20",
+          "slop": 6,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p24_c005",
+            "regelwerk_p314_c002",
+            "kodex_des_schwertes_p16_c004"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q4",
+      "category": "Kampfregeln",
+      "difficulty": "medium",
+      "question": "Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?",
+      "expected_answer": "Wenn bei Attacke 20 und Bestaetigungswurf misslungen, ist der Patzer bestaetigt und der Angreifer erleidet 1W6+2 SP.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Patzer Nahkampf Attacke",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Patzer Nahkampf Attacke Bestaetigungswurf 1W6+2 SP",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Patzer Attacke Bestaetigungswurf Schaden 1W6+2",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Patzer bestaetigt",
+          "slop": 5,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p234_c003",
+            "kodex_des_schwertes_p68_c004"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "category": "Charaktererschaffung",
+      "difficulty": "hard",
+      "question": "Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?",
+      "expected_answer": "Erfahren: Eigenschaften max 14 und Summe max 100, Fertigkeiten max 10, Kampftechniken max 12.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Heldenerschaffung Erfahrungsgrad Erfahren",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Heldenerschaffung Erfahren maximal Eigenschaften Fertigkeiten Kampftechniken",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Erfahrungsgrad Erfahren AP 1100 Maximalwerte",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Maximalwerte bei Heldenerschaffung",
+          "slop": 4,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "kodex_der_helden_p10_c002",
+            "kodex_der_helden_p10_c004",
+            "regelwerk_p42_c004"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "category": "Spielmechanik / Zustaende",
+      "difficulty": "medium",
+      "question": "Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?",
+      "expected_answer": "Schmerz Stufe 1 bei 75% LE. Sie verschwindet bei Heilung ueber die Grenze oder nach jeweils 4 Stunden Ruhe um eine Stufe.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Stufe Schmerz Lebenspunkte",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Schmerz Stufe 1 75% Lebenspunkte 4 Stunden Ruhe",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Zustand Schmerz Dreiviertel Lebensenergie verschwindet Heilung Ruhe",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Stufe Schmerz",
+          "slop": 6,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p37_c001",
+            "kodex_des_schwertes_p27_c003"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q7",
+      "category": "Magiesystem / Fraktionen",
+      "difficulty": "hard",
+      "question": "In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?",
+      "expected_answer": "Weisse Gilde: goettertreu/gesetzestreu, gegen Daemonenbeschwoerung und Nekromantie. Graue Gilde: wissenschaftlich und tolerant. Schwarze Gilde: liberaler Umgang, auch verpoente Kuenste.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "drei grossen Gilden Aventuriens",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Weisse Graue Schwarze Gilde Magier Aventurien",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Gildenmagier Einstellungen zur Magie weisse graue schwarze",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Grosse Graue Gilde des Geistes",
+          "slop": 5,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "rohals_erben_p26_c000",
+            "kodex_der_magie_p80_c000",
+            "rohals_erben_p131_c000"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q8",
+      "category": "Ressourcen-Management / Schicksalspunkte",
+      "difficulty": "hard",
+      "question": "Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.",
+      "expected_answer": "Mindestens vier korrekte Optionen aus: Erster handeln, Wuerfel neu werfen, QS um 1 verbessern, W6 Schaden neu werfen, +4 Verteidigung, Zustaende eine Kampfrunde ignorieren.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Schicksalspunkt Wuerfel Kampfgeschehen",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Schicksalspunkt Einsatzmoeglichkeiten Erster Neuer Wurf QS Verteidigung",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Schip Optionen neu wuerfeln QS Schaden Verteidigung Zustand ignorieren",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Schicksalspunkt einsetzen",
+          "slop": 6,
+          "size": 5
+        }
+      },
+      "answer_rule": "Mindestens 4 korrekte Optionen nennen.",
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p33_c004",
+            "kodex_des_schwertes_p24_c005",
+            "kodex_des_schwertes_p65_c000"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "category": "Spezieswerte",
+      "difficulty": "easy",
+      "question": "Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?",
+      "expected_answer": "Zwerg: LE 8, SK -4, ZK -4, GS 6.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Spezies Zwerg Grundwerte",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Zwerg LE SK ZK GS",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Spezies Zwerg Grundwerte Lebensenergie Seelenkraft Zaehigkeit Geschwindigkeit",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Spezies Zwerg",
+          "slop": 5,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "regelwerk_p43_c004",
+            "kodex_der_helden_p11_c003"
+          ]
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "category": "Artefaktmagie",
+      "difficulty": "medium",
+      "question": "Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?",
+      "expected_answer": "Benoetigt wird ARCANOVI, dazu permanente AsP ins Objekt binden.",
+      "realistic_tool_args": {
+        "search_exact_keyword": {
+          "query": "Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Spruchzauber Gegenstand Zauberspeicher Artefakt",
+          "slop": 8,
+          "size": 5
+        }
+      },
+      "diagnostic_tool_args": {
+        "search_exact_keyword": {
+          "query": "ARCANOVI Spruchzauber Gegenstand Zauberspeicher permanente AsP",
+          "size": 5
+        },
+        "search_fuzzy": {
+          "query": "Ritual Zauberspeicher Artefakt ARCANOVI permanente Astralpunkte",
+          "size": 5
+        },
+        "search_phrase_proximity": {
+          "phrase": "Spruchzauber in einen Gegenstand binden",
+          "slop": 6,
+          "size": 5
+        }
+      },
+      "chunk_goldtruth": {
+        "shared": {
+          "source": "diagnostic_run_20260602-155543_seed_v1",
+          "expected_chunk_ids": [
+            "arkane_schmieden_und_labore_p35_c001",
+            "arkane_schmieden_und_labore_p35_c002",
+            "regelwerk_p270_c003"
+          ]
+        }
+      }
+    }
+  ]
+}

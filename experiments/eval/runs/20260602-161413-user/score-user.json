@@ -1,0 +1,77 @@
+{
+  "run_id": "20260602-161413-user",
+  "eval_mode": "user",
+  "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json",
+  "run_json_path": "experiments/eval/runs/20260602-161413-user/run-user.json",
+  "review_txt_path": "experiments/eval/runs/20260602-161413-user/manual-review-user.txt",
+  "overall": {
+    "retrieval": {
+      "evaluated_rows": 30,
+      "macro_precision": 0.07333333333333333,
+      "macro_recall": 0.15,
+      "hit_rate": 0.26666666666666666
+    },
+    "answer": {
+      "rated_rows": 30,
+      "count_C": 10,
+      "count_P": 0,
+      "count_W": 20,
+      "strict_precision": 0.3333333333333333,
+      "lenient_recall": 0.3333333333333333,
+      "weighted_score": 0.3333333333333333
+    }
+  },
+  "by_tool": {
+    "search_exact_keyword": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "hit_rate": 0.0
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 0,
+        "count_P": 0,
+        "count_W": 10,
+        "strict_precision": 0.0,
+        "lenient_recall": 0.0,
+        "weighted_score": 0.0
+      }
+    },
+    "search_fuzzy": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.22000000000000003,
+        "macro_recall": 0.45,
+        "hit_rate": 0.8
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 10,
+        "count_P": 0,
+        "count_W": 0,
+        "strict_precision": 1.0,
+        "lenient_recall": 1.0,
+        "weighted_score": 1.0
+      }
+    },
+    "search_phrase_proximity": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "hit_rate": 0.0
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 0,
+        "count_P": 0,
+        "count_W": 10,
+        "strict_precision": 0.0,
+        "lenient_recall": 0.0,
+        "weighted_score": 0.0
+      }
+    }
+  }
+}
