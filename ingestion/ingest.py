@@ -8,6 +8,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 PDF_PATH = "../data/dsa-regelwerk.pdf"
 INDEX_NAME = "lara_documents"
 ES_HOST = "http://127.0.0.1:9200" 
+DOC_ID = "dsa_regelwerk"
+DOC_TITLE = "DSA Regelwerk"
 
 def setup_elasticsearch():
     """Verbindet sich mit ES und erstellt den Index mit deutschen Settings."""
@@ -29,6 +31,14 @@ def setup_elasticsearch():
     mapping = {
         "mappings": {
             "properties": {
+                "doc_id": {"type": "keyword"},
+                "chunk_id": {"type": "keyword"},
+                "title": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {"type": "keyword"}
+                    }
+                },
                 "source": {"type": "keyword"}, 
                 "page": {"type": "integer"},   
                 "content": {
@@ -73,12 +83,17 @@ def extract_and_chunk_pdf():
         # Text zerteilen
         chunks = text_splitter.split_text(text)
         
-        for chunk in chunks:
+        for chunk_index, chunk in enumerate(chunks):
+            chunk_id = f"{DOC_ID}_p{page_num}_c{chunk_index:03d}"
+
             # Ein Dokument-Objekt für Elasticsearch vorbereiten
             doc = {
                 "_index": INDEX_NAME,
                 "_source": {
-                    "source": "dsa_regelwerk",
+                    "doc_id": DOC_ID,
+                    "chunk_id": chunk_id,
+                    "title": DOC_TITLE,
+                    "source": DOC_ID,
                     "page": page_num,
                     "content": chunk
                 }

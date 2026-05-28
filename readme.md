@@ -1,14 +1,12 @@
-<!--
-Hier ist deine komplette README.md als ungerenderter Quellcode,
-genau wie von dir gewünscht. Du kannst alles ab dem h1-Tag (#)
-direkt in deine Datei kopieren.
--->
-
 # Projekt L.A.R.A.
 
 **L**ocal **A**gentic **R**etrieval **A**rchitecture
 
 L.A.R.A. ist ein Forschungsprototyp (Stand: Mai 2026) zur Evaluation von privatsphärendem, lokalem "Agentic RAG" (Retrieval-Augmented Generation). Das System kombiniert komplexe lokale PDF-Dokumente, Elasticsearch, das Model Context Protocol (MCP) und lokale Large Language Models (LLMs) zu einer vollständig offline-fähigen Chat-Architektur.
+
+Aktuell ist ein Hybrid-Betrieb vorgesehen: Gemini API fuer schnelle Entwicklung auf schwacher Hardware, spaeter lokale Modelle auf einem staerkeren PC.
+
+Dokumentationsprozess: Alle Umsetzungsstaende, Testlaeufe und Zwischenergebnisse werden fortlaufend in docs/diary.md gepflegt.
 
 ## Systemvoraussetzungen
 
@@ -16,7 +14,8 @@ L.A.R.A. ist ein Forschungsprototyp (Stand: Mai 2026) zur Evaluation von privats
 - **Docker & Docker Compose:** Für den Elasticsearch-Container.
 - **Node.js (v20+):** Für den TypeScript MCP-Server.
 - **Python (3.10+):** Für die Ingestion-Pipeline und den KI-Agenten.
-- **Ollama:** Lokal installiert (als macOS Cask-App für M-Chip Beschleunigung).
+- **Gemini API Key:** Fuer den Cloud-basierten Entwicklungsmodus.
+- **Ollama (optional):** Fuer spaetere lokale Modelltests.
 
 ---
 
@@ -28,22 +27,36 @@ lara-project/
 ├── docker/        # Docker-Compose Konfiguration (Elasticsearch & Kibana)
 ├── ingestion/     # Python-Skript (PyMuPDF4LLM) zum Parsen & Indexieren
 ├── mcp-server/    # TypeScript MCP-Server (Stellt Such-Tools für die KI bereit)
-└── mcp-client/    # Python MCP-Client (Der Mistral Agentic Loop)
+├── mcp-client/    # Python MCP-Client (Agentic Loop mit Gemini/Ollama)
+└── .env.example   # Beispielkonfiguration fuer LLM-Provider
 ```
 
 ---
 
 ## Schritt-für-Schritt Startanleitung
 
-### 1. Lokales KI-Modell hochfahren
+### 1. LLM-Provider konfigurieren (Gemini empfohlen)
 
-Stelle sicher, dass die Ollama-App auf dem Mac im Hintergrund läuft (Sichtbar im System-Tray). Lade und starte das Mistral-Modell:
+Im Projekt-Root eine lokale .env anlegen und Provider setzen:
 
 ```bash
-ollama run mistral
+cp .env.example .env
 ```
 
-_(Du kannst das Terminal danach schließen, der Dienst läuft im Hintergrund auf `http://localhost:11434` weiter)._
+Dann in .env mindestens den API Key eintragen:
+
+```env
+LARA_LLM_PROVIDER=gemini
+GEMINI_API_KEY=dein_key
+GEMINI_MODEL_NAME=gemini-2.5-flash
+```
+
+Optional fuer lokale Tests spaeter:
+
+```env
+LARA_LLM_PROVIDER=ollama
+OLLAMA_MODEL_NAME=llama3.1
+```
 
 ### 2. Infrastruktur (Elasticsearch) starten
 
@@ -95,6 +108,16 @@ pip install mcp openai
 python agent.py
 ```
 
+Der Agent liest automatisch die .env aus dem Projekt-Root und zeigt beim Start den aktiven Provider an.
+
+### Optional: Lokales Modell mit Ollama starten
+
+Nur falls in .env `LARA_LLM_PROVIDER=ollama` gesetzt ist:
+
+```bash
+ollama run llama3.1
+```
+
 ## Fehlerbehebung (Troubleshooting für Apple M1)
 
 - **Mac wird extrem langsam (Swapping):** Elasticsearch, Docker und das 7B-Modell von Mistral benötigen zusammen ca. 6-7 GB Unified Memory. Schließe bei einem 8GB Mac RAM-hungrige Anwendungen (wie dutzende Browser-Tabs) während der Ausführung von `agent.py`.
@@ -104,7 +127,34 @@ python agent.py
 
 Um für Evaluationen verschiedene Modelle zu testen:
 
-1. Lade ein neues Modell via Ollama (z.B. `ollama pull qwen2.5:7b-instruct`).
-2. Öffne `mcp-client/agent.py`.
-3. Ändere die Konstante `MODEL_NAME = "mistral"` zum neuen Modellnamen.
-4. Führe `agent.py` erneut aus.
+1. Fuer Cloud-Tests: In .env `GEMINI_MODEL_NAME` wechseln.
+2. Fuer lokale Tests: In .env `LARA_LLM_PROVIDER=ollama` setzen und `OLLAMA_MODEL_NAME` anpassen.
+3. Agent erneut starten und Latenz/Qualitaet vergleichen.
+
+## Evaluation und Berichtsartefakte
+
+Aktuelle Kernartefakte fuer Retrieval-Evaluation und Modellvergleich:
+
+- Retrieval-Runner: `experiments/eval/run_eval.py`
+- Gold-Truth (aktuell): `experiments/eval/gold-truth-v4.csv`
+- Eval-Report (aktuell): `experiments/eval/eval-report-v4.md`
+- Modellvergleich-Runner: `experiments/model_compare/run_model_compare.py`
+- Modellvergleich-Konfiguration: `experiments/model_compare/query-set.json`
+- Modellvergleich-Report: `experiments/model_compare/model-compare-report.md`
+
+Beispiel: Eval laufen lassen
+
+```bash
+source .venv/bin/activate
+python experiments/eval/run_eval.py \
+	--input experiments/eval/gold-truth-v4.csv \
+	--output experiments/eval/eval-report-v4.md \
+	--title '# Eval Report v4'
+```
+
+Beispiel: Modellvergleich laufen lassen
+
+```bash
+source .venv/bin/activate
+python experiments/model_compare/run_model_compare.py
+```

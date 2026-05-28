@@ -18,3 +18,8 @@ data/
 
 # ignore node modules
 node_modules/
+
+# ignore local environment secrets
+.env
+.env.*
+!.env.example
