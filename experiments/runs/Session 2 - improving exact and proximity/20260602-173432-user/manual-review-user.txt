@@ -1,0 +1,258 @@
+MANUELLE BEWERTUNG (C/P/W)
+
+Regeln:
+- C = Correct (inhaltlich korrekt)
+- P = Partly correct (teilweise korrekt)
+- W = Wrong (falsch / nicht ausreichend)
+
+Wichtig:
+- Nur die RATING-Zeilen bearbeiten.
+- Format muss exakt bleiben: RATING|Qx|tool_name|C
+
+Eval Mode: user
+
+========Q1=======
+Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?
+
+Expected: Das Mittelreich wird von der jungen Kaiserin Rohaja regiert und zusammengehalten. Die Hauptstadt und der Mittelpunkt des Reiches ist Gareth.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q1|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt ist Gareth.
+
+RATING|Q1|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über die Regierung oder die Hauptstadt des Mittelreichs.
+
+RATING|Q1|search_phrase_proximity|W
+
+
+========Q2=======
+Welche Entitaeten gelten im aventurischen Hintergrund als die groessten Widersacher der Zwoelfgoetter?
+
+Expected: Die primaeren Widersacher der Goetter sind der Namenlose sowie die Erzdämonen, welche als groteske Zerrbilder der Zwoelfgoetter beschrieben werden.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q2|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Als größte Widersacher der Zwölfgötter gelten:
+
+*   **Der Namenlose:** Er wird in vielen Ländern als der größte Widersacher der Zwölfgötter betrachtet.
+*   **Die Erzdämonen:** Diese Wesen stammen aus der Siebten Sphäre (dem Chaos/dem Draußen) und stehen außerhalb der Schöpfung. Es manifestiert sich zu jedem Zwölfgott ein eigener erzdämonischer Widersacher, die danach streben, das Wirken der Götter zu vernichten oder zu pervertieren. Ein explizit genanntes Beispiel ist Belkelel als Widersacherin Rahjas.
+
+RATING|Q2|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q2|search_phrase_proximity|W
+
+
+========Q3=======
+Aus welchen Schritten und Wuerfen setzt sich eine Fertigkeitsprobe zusammen und welche Funktion erfuellt dabei der Fertigkeitswert (FW)?
+
+Expected: Eine Fertigkeitsprobe wird mit 3W20 abgelegt. Jeder Wurf wird mit einem Eigenschaftswert verglichen. Zu hohe Wuerfe koennen mit FW ausgeglichen werden. Uebrig gebliebene Punkte ergeben FP und bestimmen die QS.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q3|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Eine Fertigkeitsprobe besteht aus drei Teilproben auf die dem Talent zugeordneten Eigenschaften.
+
+**Ablauf:**
+1. Für jede der drei Eigenschaften wird ein W20 gewürfelt.
+2. Liegt das Wurfergebnis über dem Eigenschaftswert, muss die Differenz durch Punkte aus dem Fertigkeitswert (FW) ausgeglichen werden.
+3. Die eingesetzten Punkte werden vom FW abgezogen und stehen für die weiteren Teilproben nicht mehr zur Verfügung.
+4. Ist der FW aufgebraucht und kann ein Wurf nicht mehr korrigiert werden, ist die Probe misslungen.
+
+**Funktion des Fertigkeitswerts (FW):**
+Der FW dient als Puffer, um Wurfergebnisse, die den Eigenschaftswert übersteigen, auszugleichen. Er steht bei jeder neuen Fertigkeitsprobe wieder in voller Höhe zur Verfügung. Zudem bestimmt die Höhe des FW bei Routineproben, ob eine Probe ohne Würfeln gelingt.
+
+RATING|Q3|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q3|search_phrase_proximity|W
+
+
+========Q4=======
+Welche mechanischen Konsequenzen hat ein Patzer (20) bei einer Nahkampf-Attacke, wenn der Bestaetigungswurf ebenfalls misslingt?
+
+Expected: Wenn bei Attacke 20 und Bestaetigungswurf misslungen, ist der Patzer bestaetigt und der Angreifer erleidet 1W6+2 SP.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q4|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Wenn der Bestätigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann bei Verwendung der optionalen Regel die Nahkampf-Patzertabelle genutzt werden.
+
+RATING|Q4|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q4|search_phrase_proximity|W
+
+
+========Q5=======
+Welche maximalen Obergrenzen gelten bei der Heldenerschaffung fuer Erfahrungsgrad Erfahren bei Eigenschaften, Fertigkeiten und Kampftechniken?
+
+Expected: Erfahren: Eigenschaften max 14 und Summe max 100, Fertigkeiten max 10, Kampftechniken max 12.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q5|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Für den Erfahrungsgrad „Erfahren“ gelten bei der Heldenerschaffung folgende maximale Obergrenzen:
+
+*   **Eigenschaften:** 14
+*   **Fertigkeiten:** 10
+*   **Kampftechniken:** 12
+
+Zusätzlich darf die Gesamtanzahl der Eigenschaftspunkte 100 nicht übersteigen.
+
+RATING|Q5|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q5|search_phrase_proximity|W
+
+
+========Q6=======
+Ab welchem Lebenspunkte-Verlust erhaelt ein Held die erste Stufe Schmerz und wann verschwindet diese wieder?
+
+Expected: Schmerz Stufe 1 bei 75% LE. Sie verschwindet bei Heilung ueber die Grenze oder nach jeweils 4 Stunden Ruhe um eine Stufe.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q6|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Die erste Stufe Schmerz erhält ein Held, sobald seine Lebenspunkte auf drei Viertel der Gesamt-Lebensenergie gesunken sind.
+
+Die Stufe verschwindet wieder, sobald die Lebenspunkte über diese Begrenzung (drei Viertel) steigen. Alternativ verliert der Held, sofern nichts anderes genannt ist, nach jeweils 4 Stunden eine Stufe des Zustands.
+
+RATING|Q6|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q6|search_phrase_proximity|W
+
+
+========Q7=======
+In welche drei grossen Gilden sind Gildenmagier Aventuriens organisiert und wie unterscheiden sie sich in ihrer Haltung zur Magie?
+
+Expected: Weisse Gilde: goettertreu/gesetzestreu, gegen Daemonenbeschwoerung und Nekromantie. Graue Gilde: wissenschaftlich und tolerant. Schwarze Gilde: liberaler Umgang, auch verpoente Kuenste.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q7|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Die drei Gilden sind:
+
+1.  **Bund des Weißen Pentagramms (Weiße Gilde):** Ihre Mitglieder sind gesetzestreu und streng götterfürchtig.
+2.  **Große Graue Gilde des Geistes (Graue Gilde):** Ihre Mitglieder zeichnen sich durch Toleranz und Wissensdurst aus.
+3.  **Bruderschaft der Wissenden (Schwarze Gilde):** Ihre Mitglieder sind freigeistig und nicht selten skrupellos.
+
+RATING|Q7|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q7|search_phrase_proximity|W
+
+
+========Q8=======
+Welche Einsatzmoeglichkeiten hat ein Spieler mit einem Schicksalspunkt, um in Wuerfel- oder Kampfgeschehen einzugreifen? Nenne vier Optionen.
+
+Expected: Mindestens vier korrekte Optionen aus: Erster handeln, Wuerfel neu werfen, QS um 1 verbessern, W6 Schaden neu werfen, +4 Verteidigung, Zustaende eine Kampfrunde ignorieren.
+
+Answer Rule: Mindestens 4 korrekte Optionen nennen.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q8|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Ein Spieler kann Schicksalspunkte für folgende vier Optionen einsetzen:
+
+1. **Neuer Wurf:** Wiederholung von einem, zwei oder allen Würfeln bei einer Eigenschafts-, Fertigkeits-, Attacke-, Verteidigungs- oder Fernkampfprobe (außer bei einem Patzer).
+2. **Erster:** Um schneller als alle anderen zu handeln.
+3. **Zustand ignorieren:** Um einen Zustand zu ignorieren.
+4. **Qualität verbessern:** Zur Verbesserung der Qualität einer Probe (oder alternativ: **Schadenswurf wiederholen**).
+
+RATING|Q8|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q8|search_phrase_proximity|W
+
+
+========Q9=======
+Welche Grundwerte in LE, SK, ZK und GS erhaelt ein Spielercharakter als Spezies Zwerg?
+
+Expected: Zwerg: LE 8, SK -4, ZK -4, GS 6.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q9|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Für die Spezies Zwerg gelten folgende Grundwerte:
+
+*   **LE:** 8
+*   **SK:** –4
+*   **ZK:** –4
+*   **GS:** 6
+
+RATING|Q9|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q9|search_phrase_proximity|W
+
+
+========Q10=======
+Welches Ritual wird benoetigt, um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen?
+
+Expected: Benoetigt wird ARCANOVI, dazu permanente AsP ins Objekt binden.
+
+--------search_exact_keyword--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q10|search_exact_keyword|W
+
+--------search_fuzzy--------
+AI-Answer: Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen, ist das Ritual **ARCANOVI** erforderlich.
+
+RATING|Q10|search_fuzzy|C
+
+--------search_phrase_proximity--------
+AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+
+RATING|Q10|search_phrase_proximity|W
+

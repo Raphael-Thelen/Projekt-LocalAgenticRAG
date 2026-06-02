@@ -1,0 +1,49 @@
+Testbench Score Summary
+
+Run ID: 20260602-161413-user
+Eval Mode: user
+Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json
+Run File: experiments/runs/session 1/20260602-161413-user/run-user.json
+Review File: experiments/runs/session 1/20260602-161413-user/manual-review-user.txt
+
+Overall Retrieval
+- Evaluated Rows: 30
+- Macro Precision: 0.073
+- Macro Recall: 0.150
+- Hit Rate: 0.267
+
+Overall Answer
+- Rated Rows: 30
+- C/P/W: 10/0/20
+- Strict Precision (C only): 0.333
+- Lenient Recall (C+P): 0.333
+- Weighted Score (C=1,P=0.5,W=0): 0.333
+
+By Tool
+
+[search_exact_keyword]
+- Retrieval Macro Precision: 0.000
+- Retrieval Macro Recall: 0.000
+- Retrieval Hit Rate: 0.000
+- Answer C/P/W: 0/0/10
+- Answer Strict Precision: 0.000
+- Answer Lenient Recall: 0.000
+- Answer Weighted Score: 0.000
+
+[search_fuzzy]
+- Retrieval Macro Precision: 0.220
+- Retrieval Macro Recall: 0.450
+- Retrieval Hit Rate: 0.800
+- Answer C/P/W: 10/0/0
+- Answer Strict Precision: 1.000
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 1.000
+
+[search_phrase_proximity]
+- Retrieval Macro Precision: 0.000
+- Retrieval Macro Recall: 0.000
+- Retrieval Hit Rate: 0.000
+- Answer C/P/W: 0/0/10
+- Answer Strict Precision: 0.000
+- Answer Lenient Recall: 0.000
+- Answer Weighted Score: 0.000

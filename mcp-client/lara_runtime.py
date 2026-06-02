@@ -218,6 +218,121 @@ def build_llm_client(
     )
 
 
+async def _plan_smart_query_with_same_llm(
+    llm_client: AsyncOpenAI,
+    *,
+    model: str,
+    user_query: str,
+    requested_top_k: int,
+    max_retries: int,
+    retry_base_seconds: float,
+    retry_max_seconds: float,
+    retry_jitter_seconds: float,
+    verbose: bool,
+) -> dict[str, Any] | None:
+    planner_prompt = (
+        "Du bist Query-Planer fuer Elasticsearch in der DSA/Aventurien-Domaene. "
+        "Gib ausschliesslich JSON mit exakt diesen Feldern zurueck: "
+        "normalized_query, keyword_terms, expanded_terms, retrieval_mode, top_k, confidence, rationale. "
+        "retrieval_mode muss einer von fuzzy_only|fuzzy_plus_exact|balanced sein. "
+        "Lege retrieval_mode eigenstaendig fest nach der Nutzerfrage: "
+        "fuzzy_only fuer unscharfe/allgemeine Fragen, "
+        "fuzzy_plus_exact fuer konkrete Regel-/Zahlen-/Begriffsfragen, "
+        "balanced fuer Mischfaelle aus Begriff + Kontext. "
+        "Beruecksichtige Schreibvarianten wie fuer/f\u00fcr und zwoelfgoetter/zw\u00f6lfgoetter. "
+        "keyword_terms sollen praezise Suchanker sein (2-6), expanded_terms sinnvolle Varianten/Synonyme (3-10)."
+    )
+
+    messages: list[dict[str, str]] = [
+        {"role": "system", "content": planner_prompt},
+        {
+            "role": "user",
+            "content": (
+                f"Frage: {user_query}\n"
+                f"TopK: {requested_top_k}\n"
+                "JSON only."
+            ),
+        },
+    ]
+
+    try:
+        response = await _chat_with_retry(
+            llm_client,
+            model=model,
+            messages=messages,
+            temperature=0.2,
+            max_retries=max_retries,
+            retry_base_seconds=retry_base_seconds,
+            retry_max_seconds=retry_max_seconds,
+            retry_jitter_seconds=retry_jitter_seconds,
+            verbose=verbose,
+            operation_label="smart_query_planner",
+        )
+    except Exception:
+        return None
+
+    raw = (response.choices[0].message.content or "").strip()
+    if not raw:
+        return None
+
+    parsed: dict[str, Any] | None = None
+    try:
+        loaded = json.loads(raw)
+        if isinstance(loaded, dict):
+            parsed = loaded
+    except json.JSONDecodeError:
+        start = raw.find("{")
+        end = raw.rfind("}")
+        if start >= 0 and end > start:
+            try:
+                loaded = json.loads(raw[start : end + 1])
+                if isinstance(loaded, dict):
+                    parsed = loaded
+            except json.JSONDecodeError:
+                parsed = None
+
+    if not parsed:
+        return None
+
+    normalized_query = str(parsed.get("normalized_query", "")).strip()
+    if not normalized_query:
+        return None
+
+    mode = str(parsed.get("retrieval_mode", "")).strip().lower()
+    if mode not in {"fuzzy_only", "fuzzy_plus_exact", "balanced"}:
+        return None
+
+    keyword_terms_raw = parsed.get("keyword_terms", [])
+    expanded_terms_raw = parsed.get("expanded_terms", [])
+    keyword_terms = [str(x).strip().lower() for x in keyword_terms_raw if str(x).strip()][:12]
+    expanded_terms = [str(x).strip().lower() for x in expanded_terms_raw if str(x).strip()][:12]
+
+    top_k_raw = parsed.get("top_k", requested_top_k)
+    try:
+        top_k = max(1, min(20, int(top_k_raw)))
+    except (TypeError, ValueError):
+        top_k = max(1, min(20, int(requested_top_k)))
+
+    confidence_raw = parsed.get("confidence", 0.5)
+    try:
+        confidence = float(confidence_raw)
+    except (TypeError, ValueError):
+        confidence = 0.5
+    confidence = max(0.0, min(1.0, confidence))
+
+    rationale = str(parsed.get("rationale", "client_planned")).strip()[:300] or "client_planned"
+
+    return {
+        "normalized_query": normalized_query,
+        "keyword_terms": keyword_terms,
+        "expanded_terms": expanded_terms,
+        "retrieval_mode": mode,
+        "top_k": top_k,
+        "confidence": confidence,
+        "rationale": rationale,
+    }
+
+
 async def run_query_once(
     user_query: str,
     provider_override: str | None = None,
@@ -366,18 +481,61 @@ async def run_query_with_forced_tool(
         cwd=str(ROOT / "mcp-server"),
     )
 
+    call_args = dict(tool_args)
+    if tool_name == "search_smart":
+        requested_top_k = call_args.get("size", 5)
+        try:
+            requested_top_k_int = int(requested_top_k)
+        except (TypeError, ValueError):
+            requested_top_k_int = 5
+
+        smart_plan = await _plan_smart_query_with_same_llm(
+            llm_client,
+            model=model_name,
+            user_query=user_query,
+            requested_top_k=requested_top_k_int,
+            max_retries=max_retries,
+            retry_base_seconds=retry_base_seconds,
+            retry_max_seconds=retry_max_seconds,
+            retry_jitter_seconds=retry_jitter_seconds,
+            verbose=verbose_retry,
+        )
+        if smart_plan:
+            call_args["plan"] = smart_plan
+            call_args["planner_source"] = f"client_{provider_key}"
+
     async with stdio_client(server_params) as (read_stream, write_stream):
         async with ClientSession(read_stream, write_stream) as session:
             await session.initialize()
 
-            tool_result = await session.call_tool(tool_name, tool_args)
+            tool_result = await session.call_tool(tool_name, call_args)
             text_blocks = [item.text for item in tool_result.content if item.type == "text"]
-            payload = {"count": 0, "results": []}
+            payload: dict[str, Any] = {"count": 0, "results": []}
             if text_blocks:
-                payload = json.loads(text_blocks[0])
+                first_block = text_blocks[0].strip()
+                try:
+                    payload = json.loads(first_block)
+                except json.JSONDecodeError:
+                    payload = {
+                        "count": 0,
+                        "results": [],
+                        "error": first_block,
+                    }
 
-            results = payload.get("results", [])
-            retrieved_count = int(payload.get("count", len(results)))
+            if not isinstance(payload, dict):
+                payload = {
+                    "count": 0,
+                    "results": [],
+                    "error": "Tool payload was not a JSON object.",
+                }
+
+            results_raw = payload.get("results", [])
+            results = results_raw if isinstance(results_raw, list) else []
+            count_raw = payload.get("count", len(results))
+            try:
+                retrieved_count = int(count_raw)
+            except (TypeError, ValueError):
+                retrieved_count = len(results)
             context_text = _build_context_from_results(results, limit=top_k_context)
 
             if skip_llm_on_zero_hits and retrieved_count == 0:
@@ -427,7 +585,7 @@ async def run_query_with_forced_tool(
                 "provider_label": provider_label,
                 "model": model_name,
                 "tool": tool_name,
-                "tool_args": tool_args,
+                "tool_args": call_args,
                 "retrieval_payload": payload,
                 "retrieved_count": retrieved_count,
                 "retrieved_chunk_ids": [

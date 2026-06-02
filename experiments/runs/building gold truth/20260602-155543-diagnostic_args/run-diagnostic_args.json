@@ -101,7 +101,8 @@
             ]
           },
           "answer": "Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Der bereitgestellte Kontext enth\u00e4lt keine explizite Information zur Hauptstadt des gesamten Mittelreiches.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -176,7 +177,8 @@
             ]
           },
           "answer": "Das Mittelreich wird von Kaiserin Rohaja von Gareth regiert. Die Hauptstadt des Mittelreichs ist Gareth.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -253,7 +255,8 @@
             ]
           },
           "answer": "Das Mittelreich wird von Kaiserin Rohaja regiert. Der bereitgestellte Kontext enth\u00e4lt keine Information \u00fcber den Namen der Hauptstadt des Mittelreiches.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -336,7 +339,8 @@
             ]
           },
           "answer": "Die gr\u00f6\u00dften Widersacher der Zw\u00f6lfg\u00f6tter sind:\n\n*   **Der Namenlose:** Er wird als Gegenspieler der G\u00f6tter genannt.\n*   **Die Erzd\u00e4monen:** Sie gelten als Widersacher aller G\u00f6tter und Schrecken aus der siebten Sph\u00e4re. Es wird angenommen, dass f\u00fcr jeden der Zw\u00f6lfg\u00f6tter ein eigener Erzd\u00e4mon als Widersacher existiert.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -409,7 +413,8 @@
             ]
           },
           "answer": "Die gr\u00f6\u00dften Widersacher der Zw\u00f6lfg\u00f6tter sind:\n\n*   **Der Namenlose:** Er gilt als bedeutender Gegenspieler der G\u00f6tter, ist jedoch kein Erzd\u00e4mon.\n*   **Die Erzd\u00e4monen:** Diese Wesen aus der Siebten Sph\u00e4re (dem Chaos) manifestieren sich als direkte Widersacher zu den einzelnen Zw\u00f6lfg\u00f6ttern, um deren Wirken zu vernichten oder zu pervertieren.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -464,7 +469,8 @@
             ]
           },
           "answer": "Als gr\u00f6\u00dfte Widersacher der Zw\u00f6lfg\u00f6tter gelten:\n\n*   **Der Namenlose:** Er wird in vielen L\u00e4ndern als der gr\u00f6\u00dfte Widersacher der Zw\u00f6lfg\u00f6tter betrachtet.\n*   **Die Erzd\u00e4monen:** Diese Entit\u00e4ten aus der Siebten Sph\u00e4re (dem Chaos) gelten als Widersacher aller G\u00f6tter. Es scheint, als habe sich zu jedem Zw\u00f6lfgott ein eigener Erzd\u00e4mon als Gegenspieler manifestiert, die danach streben, das Wirken der G\u00f6tter zu vernichten oder zu pervertieren.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -495,7 +501,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -568,7 +575,8 @@
             ]
           },
           "answer": "Eine Fertigkeitsprobe besteht aus folgenden Schritten:\n\n1.  **Zuordnung:** Vor dem Wurf muss festgelegt werden, welcher W\u00fcrfel welcher der drei f\u00fcr das Talent, den Zauber oder die Liturgie angegebenen Eigenschaften zugeordnet ist.\n2.  **Wurf:** Es werden 3W20 geworfen.\n3.  **Vergleich:** Jeder der drei W\u00fcrfel wird einzeln mit seinem zugeordneten Eigenschaftswert verglichen. Die Ergebnisse werden nicht addiert.\n\n**Funktion des Fertigkeitswerts (FW):**\nDer bereitgestellte Kontext enth\u00e4lt keine explizite Definition der Funktion des Fertigkeitswerts (FW) innerhalb einer Fertigkeitsprobe. Er erw\u00e4hnt lediglich den Einsatz von Fertigkeitspunkten (FP) zum Ausgleich von Proben.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -613,7 +621,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die Schritte, die W\u00fcrfe oder die Funktion des Fertigkeitswerts (FW) bei einer Fertigkeitsprobe. Er beschreibt lediglich, dass Fertigkeitsproben mit 3W20 durchgef\u00fchrt werden und keine Best\u00e4tigungsw\u00fcrfe f\u00fcr kritische Erfolge oder Patzer erfordern.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -656,7 +665,8 @@
             ]
           },
           "answer": "Wenn der Best\u00e4tigungswurf bei einer 20 misslingt, erleidet der Held 1W6+2 SP. Alternativ kann die optionale Nahkampf-Patzertabelle verwendet werden.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -729,7 +739,8 @@
             ]
           },
           "answer": "Wenn der Best\u00e4tigungswurf bei einem Patzer (20) misslingt, erleidet der Held 1W6+2 SP. Alternativ kann als optionale Regel die Nahkampf-Patzertabelle verwendet werden.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -804,7 +815,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen zu den allgemeinen mechanischen Konsequenzen eines nicht best\u00e4tigten Patzers bei einer Nahkampf-Attacke. Die vorliegenden Informationen beziehen sich ausschlie\u00dflich auf spezifische Waffennachteile (Ladehemmungen bei Fernkampfwaffen) oder die Konsequenzen eines *best\u00e4tigten* Patzers.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -835,7 +847,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -908,7 +921,8 @@
             ]
           },
           "answer": "F\u00fcr den Erfahrungsgrad \u201eErfahren\u201c gelten bei der Heldenerschaffung folgende Obergrenzen:\n\n*   **Eigenschaften:** 14\n*   **Fertigkeiten:** 10\n*   **Kampftechniken:** 12",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -963,7 +977,8 @@
             ]
           },
           "answer": "F\u00fcr den Erfahrungsgrad **Erfahren** gelten bei der Heldenerschaffung folgende Maximalwerte:\n\n*   **Eigenschaften:** 14\n*   **Fertigkeiten:** 10\n*   **Kampftechniken:** 12",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -994,7 +1009,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -1067,7 +1083,8 @@
             ]
           },
           "answer": "Die erste Stufe Schmerz erh\u00e4lt ein Held, sobald seine Lebenspunkte auf drei Viertel der Gesamt-Lebensenergie gesunken sind.\n\nDie Stufe verschwindet, sobald die Lebenspunkte wieder \u00fcber diese Begrenzung steigen. Alternativ verliert der Held, sofern nichts anderes genannt ist, nach jeweils 4 Stunden eine Stufe des Zustands.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -1142,7 +1159,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen dar\u00fcber, ab welchem Lebenspunkte-Verlust ein Held die erste Stufe Schmerz erh\u00e4lt oder wann diese wieder verschwindet. Die Dokumente behandeln lediglich die Erzeugung von Schmerz durch Zauber.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -1195,7 +1213,8 @@
             ]
           },
           "answer": "Die drei gro\u00dfen Gilden sind die **Wei\u00dfe Gilde**, die **Graue Gilde** und die **Schwarze Gilde**.\n\nDer bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die spezifischen Unterschiede in ihrer Haltung zur Magie.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -1268,7 +1287,8 @@
             ]
           },
           "answer": "Die drei gro\u00dfen Gilden sind:\n\n1.  **Der Bund des Wei\u00dfen Pentagramms (Wei\u00dfe Gilde)**\n2.  **Die Gro\u00dfe Graue Gilde des Geistes (Graue Gilde)**\n3.  **Die Schwarze Gilde**\n\nDer bereitgestellte Kontext enth\u00e4lt keine Informationen \u00fcber die spezifischen Unterschiede in ihrer Haltung zur Magie.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -1343,7 +1363,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext nennt lediglich die **Gro\u00dfe Graue Gilde des Geistes** (Graue Gilde). Diese steht f\u00fcr Forschung, Wissenschaft und einen freigeistigen, toleranten Umgang mit Magie.\n\nDer Kontext enth\u00e4lt keine Informationen zu den anderen beiden Gilden oder deren Haltung zur Magie.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -1374,7 +1395,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -1447,7 +1469,8 @@
             ]
           },
           "answer": "Ein Spieler kann Schicksalspunkte (Schips) f\u00fcr folgende vier Optionen einsetzen:\n\n1. **Neuer Wurf:** Alle W\u00fcrfel einer Probe werden erneut gew\u00fcrfelt.\n2. **Qualit\u00e4t verbessern:** Die Qualit\u00e4tsstufen (QS) einer Probe werden erh\u00f6ht.\n3. **Verteidigung st\u00e4rken:** Erhalt eines Bonus von +4 auf alle Verteidigungen bis zum Ende der aktuellen Kampfrunde.\n4. **Zustand ignorieren:** Alle Zust\u00e4nde, von denen man betroffen ist, werden f\u00fcr eine Kampfrunde ignoriert.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -1522,7 +1545,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine vollst\u00e4ndige Liste der Einsatzm\u00f6glichkeiten f\u00fcr Schicksalspunkte. Er nennt lediglich eine spezifische Option:\n\n1. **Initiative:** Ein Schicksalspunkt kann eingesetzt werden, um zu Beginn eines Kampfes sofort als Erster zu handeln.\n\nDie weiteren bereitgestellten Dokumente erw\u00e4hnen lediglich, dass Schicksalsrunen wie Schicksalspunkte eingesetzt werden k\u00f6nnen und dass der Einsatz von Schicksalspunkten in der N\u00e4he bestimmter D\u00e4monen (z. B. Shihayazad) unterbunden werden kann. Weitere Einsatzm\u00f6glichkeiten gehen aus dem Kontext nicht hervor.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -1585,7 +1609,8 @@
             ]
           },
           "answer": "Ein Spielercharakter der Spezies Zwerg erh\u00e4lt folgende Grundwerte:\n\n*   **LE:** 8\n*   **SK:** \u20134\n*   **ZK:** \u20134\n*   **GS:** 6",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -1658,7 +1683,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine spezifischen Zahlenwerte f\u00fcr die Grundwerte (LE, SK, ZK, GS) der Spezies Zwerg. Er verweist lediglich darauf, dass diese Informationen im Kapitel \u201eSpezies\u201c (ab Seite 87 des Regelwerks) in einem entsprechenden Wertekasten aufgef\u00fchrt sind.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -1733,7 +1759,8 @@
             ]
           },
           "answer": "Der bereitgestellte Kontext enth\u00e4lt keine Informationen zu den Grundwerten (LE, SK, ZK, GS) f\u00fcr die Spezies Zwerg.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         }
       }
     },
@@ -1764,7 +1791,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -1837,7 +1865,8 @@
             ]
           },
           "answer": "Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen, ist das Ritual **ARCANOVI** erforderlich. Alternativ kann f\u00fcr Zauberspeicher auch der **APPLICATUS** verwendet werden.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "?"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -1860,7 +1889,8 @@
             "results": []
           },
           "answer": "Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.",
-          "llm_skipped": true
+          "llm_skipped": true,
+          "manual_rating": "?"
         }
       }
     }

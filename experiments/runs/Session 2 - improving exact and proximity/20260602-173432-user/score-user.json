@@ -1,24 +1,24 @@
 {
-  "run_id": "20260602-160128-realistic_args",
-  "eval_mode": "realistic_args",
-  "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json",
-  "run_json_path": "experiments/eval/runs/20260602-160128-realistic_args/run-realistic_args.json",
-  "review_txt_path": "experiments/eval/runs/20260602-160128-realistic_args/manual-review-realistic_args.txt",
+  "run_id": "20260602-173432-user",
+  "eval_mode": "user",
+  "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/testbench-v1.json",
+  "run_json_path": "experiments/runs/Session 2 - improving exact and proximity/20260602-173432-user/run-user.json",
+  "review_txt_path": "experiments/runs/Session 2 - improving exact and proximity/20260602-173432-user/manual-review-user.txt",
   "overall": {
     "retrieval": {
       "evaluated_rows": 30,
-      "macro_precision": 0.08166666666666668,
-      "macro_recall": 0.1611111111111111,
-      "hit_rate": 0.3
+      "macro_precision": 0.07333333333333333,
+      "macro_recall": 0.15,
+      "hit_rate": 0.26666666666666666
     },
     "answer": {
       "rated_rows": 30,
-      "count_C": 12,
+      "count_C": 10,
       "count_P": 0,
-      "count_W": 18,
-      "strict_precision": 0.4,
-      "lenient_recall": 0.4,
-      "weighted_score": 0.4
+      "count_W": 20,
+      "strict_precision": 0.3333333333333333,
+      "lenient_recall": 0.3333333333333333,
+      "weighted_score": 0.3333333333333333
     }
   },
   "by_tool": {
@@ -59,18 +59,18 @@
     "search_phrase_proximity": {
       "retrieval": {
         "evaluated_rows": 10,
-        "macro_precision": 0.025,
-        "macro_recall": 0.03333333333333333,
-        "hit_rate": 0.1
+        "macro_precision": 0.0,
+        "macro_recall": 0.0,
+        "hit_rate": 0.0
       },
       "answer": {
         "rated_rows": 10,
-        "count_C": 2,
+        "count_C": 0,
         "count_P": 0,
-        "count_W": 8,
-        "strict_precision": 0.2,
-        "lenient_recall": 0.2,
-        "weighted_score": 0.2
+        "count_W": 10,
+        "strict_precision": 0.0,
+        "lenient_recall": 0.0,
+        "weighted_score": 0.0
       }
     }
   }

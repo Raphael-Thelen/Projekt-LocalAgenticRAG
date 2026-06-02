@@ -8,7 +8,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 CLIENT_DIR = ROOT / "mcp-client"
 if str(CLIENT_DIR) not in sys.path:
     sys.path.insert(0, str(CLIENT_DIR))
@@ -16,16 +16,17 @@ if str(CLIENT_DIR) not in sys.path:
 from lara_runtime import run_query_with_forced_tool  # noqa: E402
 from score_testbench import score_run  # noqa: E402
 
-DEFAULT_SPEC = ROOT / "experiments" / "eval" / "testbench-v1.json"
-RUNS_DIR = ROOT / "experiments" / "eval" / "runs"
+DEFAULT_SPEC = ROOT / "experiments" / "testbench-v1.json"
+RUNS_DIR = ROOT / "experiments" / "runs"
 
 TOOLS = [
     "search_exact_keyword",
     "search_fuzzy",
     "search_phrase_proximity",
+    "search_smart",
 ]
 
-MODES = ["user", "realistic_args", "diagnostic_args"]
+MODES = ["user", "realistic_args", "diagnostic_args", "smart_args"]
 
 
 def parse_tools(raw: str) -> list[str]:
@@ -39,11 +40,16 @@ def parse_tools(raw: str) -> list[str]:
     return picked
 
 
-def parse_mode(raw: str) -> str:
-    mode = (raw or "realistic_args").strip().lower()
-    if mode not in MODES:
-        raise ValueError(f"Unsupported mode: {mode}. Allowed: {MODES}")
-    return mode
+def parse_modes(raw: str) -> list[str]:
+    value = (raw or "realistic_args").strip().lower()
+    if value == "all":
+        return MODES[:]
+
+    picked = [part.strip() for part in value.split(",") if part.strip()]
+    invalid = [mode for mode in picked if mode not in MODES]
+    if invalid:
+        raise ValueError(f"Unsupported mode(s): {invalid}. Allowed: {MODES}")
+    return picked
 
 
 def _trim_question(text: str) -> str:
@@ -52,7 +58,7 @@ def _trim_question(text: str) -> str:
 
 def _build_user_args(question_text: str, tool: str) -> dict[str, Any]:
     q = question_text.strip()
-    if tool in {"search_exact_keyword", "search_fuzzy"}:
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
         return {"query": q, "size": 5}
     return {"phrase": q, "slop": 8, "size": 5}
 
@@ -67,6 +73,14 @@ def _build_realistic_fallback_args(question_text: str, tool: str) -> dict[str, A
     return {"phrase": short_phrase or q, "slop": 6, "size": 5}
 
 
+def _build_smart_fallback_args(question_text: str, tool: str) -> dict[str, Any]:
+    q = question_text.strip()
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
+        return {"query": q, "size": 5}
+    short_phrase = " ".join(_trim_question(q).split()[:8]).strip()
+    return {"phrase": short_phrase or q, "slop": 8, "size": 5}
+
+
 def resolve_tool_args(question: dict[str, Any], tool: str, mode: str) -> dict[str, Any]:
     question_text = str(question.get("question", "")).strip()
     if mode == "user":
@@ -78,11 +92,16 @@ def resolve_tool_args(question: dict[str, Any], tool: str, mode: str) -> dict[st
             return dict(realistic[tool])
         return _build_realistic_fallback_args(question_text, tool)
 
+    if mode == "smart_args":
+        smart = question.get("smart_tool_args", {})
+        if isinstance(smart, dict) and smart.get(tool):
+            return dict(smart[tool])
+        return _build_smart_fallback_args(question_text, tool)
+
     diagnostic = question.get("diagnostic_tool_args", {})
     if isinstance(diagnostic, dict) and diagnostic.get(tool):
         return dict(diagnostic[tool])
 
-    # Backward-compatible fallback for older specs.
     legacy = question.get("tool_args", {})
     if isinstance(legacy, dict) and legacy.get(tool):
         return dict(legacy[tool])
@@ -100,14 +119,12 @@ def resolve_expected_chunk_ids(question: dict[str, Any], tool: str) -> list[str]
     chunk_goldtruth = question.get("chunk_goldtruth", {})
 
     if isinstance(chunk_goldtruth, dict):
-        # Preferred compact format: one shared goldtruth per question.
         shared = chunk_goldtruth.get("shared")
         if isinstance(shared, dict):
             shared_ids = [str(cid) for cid in shared.get("expected_chunk_ids", [])]
             if shared_ids:
                 return shared_ids
 
-        # Backward-compatible aliases.
         for alias in ("all_tools", "global"):
             alias_row = chunk_goldtruth.get(alias)
             if isinstance(alias_row, dict):
@@ -115,7 +132,6 @@ def resolve_expected_chunk_ids(question: dict[str, Any], tool: str) -> list[str]
                 if alias_ids:
                     return alias_ids
 
-        # Legacy per-tool format.
         tool_row = chunk_goldtruth.get(tool, {})
         if isinstance(tool_row, dict):
             return [str(cid) for cid in tool_row.get("expected_chunk_ids", [])]
@@ -182,6 +198,7 @@ async def run_testbench(
     model: str | None,
     tools: list[str],
     mode: str,
+    runs_root: Path,
     max_retries: int,
     retry_base_seconds: float,
     retry_max_seconds: float,
@@ -193,7 +210,7 @@ async def run_testbench(
 
     run_id = datetime.now().strftime("%Y%m%d-%H%M%S")
     run_id_with_mode = f"{run_id}-{mode}"
-    run_dir = RUNS_DIR / run_id_with_mode
+    run_dir = runs_root / run_id_with_mode
     run_dir.mkdir(parents=True, exist_ok=False)
 
     run_payload: dict[str, Any] = {
@@ -206,6 +223,7 @@ async def run_testbench(
         "provider_label": "pending",
         "model": model or "default",
         "selected_tools": tools,
+        "runs_root": str(runs_root),
         "retry_policy": {
             "max_retries": max_retries,
             "retry_base_seconds": retry_base_seconds,
@@ -294,6 +312,21 @@ async def run_testbench(
                 "llm_skipped": bool(result.get("llm_skipped", False)),
             }
 
+            retrieval_payload = result.get("retrieval_payload", {})
+            if isinstance(retrieval_payload, dict):
+                query_info = retrieval_payload.get("query", {})
+                if isinstance(query_info, dict) and isinstance(query_info.get("plan"), dict):
+                    q_out["tool_results"][tool]["smart_plan"] = query_info.get("plan")
+                    q_out["tool_results"][tool]["smart_plan_planner_source"] = query_info.get(
+                        "planner_source", "unknown"
+                    )
+                    print(
+                        "    Smart plan: "
+                        f"source={q_out['tool_results'][tool]['smart_plan_planner_source']} "
+                        f"mode={q_out['tool_results'][tool]['smart_plan'].get('retrieval_mode', 'n/a')} "
+                        f"confidence={q_out['tool_results'][tool]['smart_plan'].get('confidence', 'n/a')}"
+                    )
+
         print(f"[{qid}] abgeschlossen")
 
         run_payload["questions"].append(q_out)
@@ -324,33 +357,42 @@ def open_editor_wait(path: Path) -> None:
 
 async def main_async(args: argparse.Namespace) -> None:
     tools = parse_tools(args.tools)
-    mode = parse_mode(args.mode)
-    result = await run_testbench(
-        spec_path=args.spec,
-        provider=args.provider,
-        model=args.model,
-        tools=tools,
-        mode=mode,
-        max_retries=args.max_retries,
-        retry_base_seconds=args.retry_base_seconds,
-        retry_max_seconds=args.retry_max_seconds,
-        retry_jitter_seconds=args.retry_jitter_seconds,
-        skip_llm_on_zero_hits=args.skip_llm_on_zero_hits,
-        top_k_context=args.top_k_context,
-    )
+    modes = parse_modes(args.modes)
+    runs_root = args.runs_root
+    if not runs_root.is_absolute():
+        runs_root = ROOT / runs_root
+    if args.run_group:
+        runs_root = runs_root / args.run_group
+    runs_root.mkdir(parents=True, exist_ok=True)
 
-    print(f"Wrote {result['run_json']}")
-    print(f"Wrote {result['review_txt']}")
+    for mode in modes:
+        result = await run_testbench(
+            spec_path=args.spec,
+            provider=args.provider,
+            model=args.model,
+            tools=tools,
+            mode=mode,
+            runs_root=runs_root,
+            max_retries=args.max_retries,
+            retry_base_seconds=args.retry_base_seconds,
+            retry_max_seconds=args.retry_max_seconds,
+            retry_jitter_seconds=args.retry_jitter_seconds,
+            skip_llm_on_zero_hits=args.skip_llm_on_zero_hits,
+            top_k_context=args.top_k_context,
+        )
 
-    if args.score_after_review:
-        review_path = Path(result["review_txt"])
-        run_json_path = Path(result["run_json"])
-        open_editor_wait(review_path)
-        score = score_run(run_json_path, review_path)
-        print(f"Wrote {score['score_json']}")
-        print(f"Wrote {score['score_txt']}")
-        review_path.unlink(missing_ok=True)
-        print(f"Deleted {review_path}")
+        print(f"Wrote {result['run_json']}")
+        print(f"Wrote {result['review_txt']}")
+
+        if args.score_after_review:
+            review_path = Path(result["review_txt"])
+            run_json_path = Path(result["run_json"])
+            open_editor_wait(review_path)
+            score = score_run(run_json_path, review_path)
+            print(f"Wrote {score['score_json']}")
+            print(f"Wrote {score['score_txt']}")
+            review_path.unlink(missing_ok=True)
+            print(f"Deleted {review_path}")
 
 
 def parse_args() -> argparse.Namespace:
@@ -362,13 +404,24 @@ def parse_args() -> argparse.Namespace:
         "--tools",
         type=str,
         default="all",
-        help="all or comma separated: search_exact_keyword,search_fuzzy,search_phrase_proximity",
+        help="all or comma separated: search_exact_keyword,search_fuzzy,search_phrase_proximity,search_smart",
     )
     parser.add_argument(
-        "--mode",
+        "--modes",
         type=str,
         default="realistic_args",
-        help="Evaluation mode: user, realistic_args, diagnostic_args",
+        help="Evaluation modes: user, realistic_args, diagnostic_args, smart_args (or comma separated, or all)",
+    )
+    parser.add_argument(
+        "--runs-root",
+        type=Path,
+        default=RUNS_DIR,
+        help="Root directory where run folders are created.",
+    )
+    parser.add_argument(
+        "--run-group",
+        type=str,
+        help="Optional subfolder under runs-root for this batch (e.g. session-3-smart).",
     )
     parser.add_argument("--max-retries", type=int, default=12)
     parser.add_argument("--retry-base-seconds", type=float, default=20.0)

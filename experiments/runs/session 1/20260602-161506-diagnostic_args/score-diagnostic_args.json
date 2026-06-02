@@ -1,0 +1,77 @@
+{
+  "run_id": "20260602-161506-diagnostic_args",
+  "eval_mode": "diagnostic_args",
+  "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json",
+  "run_json_path": "experiments/runs/session 1/20260602-161506-diagnostic_args/run-diagnostic_args.json",
+  "review_txt_path": "experiments/runs/session 1/20260602-161506-diagnostic_args/manual-review-diagnostic_args.txt",
+  "overall": {
+    "retrieval": {
+      "evaluated_rows": 30,
+      "macro_precision": 0.2822222222222222,
+      "macro_recall": 0.4277777777777778,
+      "hit_rate": 0.5666666666666667
+    },
+    "answer": {
+      "rated_rows": 30,
+      "count_C": 10,
+      "count_P": 8,
+      "count_W": 12,
+      "strict_precision": 0.3333333333333333,
+      "lenient_recall": 0.6,
+      "weighted_score": 0.4666666666666667
+    }
+  },
+  "by_tool": {
+    "search_exact_keyword": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.24666666666666667,
+        "macro_recall": 0.2833333333333333,
+        "hit_rate": 0.4
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 3,
+        "count_P": 2,
+        "count_W": 5,
+        "strict_precision": 0.3,
+        "lenient_recall": 0.5,
+        "weighted_score": 0.4
+      }
+    },
+    "search_fuzzy": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.44000000000000006,
+        "macro_recall": 0.8,
+        "hit_rate": 0.9
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 6,
+        "count_P": 3,
+        "count_W": 1,
+        "strict_precision": 0.6,
+        "lenient_recall": 0.9,
+        "weighted_score": 0.75
+      }
+    },
+    "search_phrase_proximity": {
+      "retrieval": {
+        "evaluated_rows": 10,
+        "macro_precision": 0.16,
+        "macro_recall": 0.2,
+        "hit_rate": 0.4
+      },
+      "answer": {
+        "rated_rows": 10,
+        "count_C": 1,
+        "count_P": 3,
+        "count_W": 6,
+        "strict_precision": 0.1,
+        "lenient_recall": 0.4,
+        "weighted_score": 0.25
+      }
+    }
+  }
+}

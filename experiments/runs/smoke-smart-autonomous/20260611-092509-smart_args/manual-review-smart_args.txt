@@ -1,0 +1,23 @@
+MANUELLE BEWERTUNG (C/P/W)
+
+Regeln:
+- C = Correct (inhaltlich korrekt)
+- P = Partly correct (teilweise korrekt)
+- W = Wrong (falsch / nicht ausreichend)
+
+Wichtig:
+- Nur die RATING-Zeilen bearbeiten.
+- Format muss exakt bleiben: RATING|Qx|tool_name|C
+
+Eval Mode: smart_args
+
+========Q1=======
+Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?
+
+Expected: Das Mittelreich wird von Rohaja regiert, Hauptstadt ist Gareth.
+
+--------search_smart--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt ist Gareth.
+
+RATING|Q1|search_smart|?
+

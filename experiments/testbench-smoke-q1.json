@@ -1,0 +1,19 @@
+{
+  "benchmark_id": "dsa-testbench-smoke-q1",
+  "description": "Smoke run with one question for planner source validation.",
+  "tools": ["search_smart"],
+  "questions": [
+    {
+      "id": "Q1",
+      "category": "Lore",
+      "difficulty": "easy",
+      "question": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+      "expected_answer": "Das Mittelreich wird von Rohaja regiert, Hauptstadt ist Gareth.",
+      "chunk_goldtruth": {
+        "shared": {
+          "expected_chunk_ids": ["regelwerk_p108_c000"]
+        }
+      }
+    }
+  ]
+}

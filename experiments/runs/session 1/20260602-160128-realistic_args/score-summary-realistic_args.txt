@@ -3,8 +3,8 @@ Testbench Score Summary
 Run ID: 20260602-160128-realistic_args
 Eval Mode: realistic_args
 Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json
-Run File: experiments/eval/runs/20260602-160128-realistic_args/run-realistic_args.json
-Review File: experiments/eval/runs/20260602-160128-realistic_args/manual-review-realistic_args.txt
+Run File: experiments/runs/session 1/20260602-160128-realistic_args/run-realistic_args.json
+Review File: experiments/runs/session 1/20260602-160128-realistic_args/manual-review-realistic_args.txt
 
 Overall Retrieval
 - Evaluated Rows: 30

@@ -1,0 +1,40 @@
+Testbench Score Summary
+
+Run ID: 20260611-093131-user
+Eval Mode: user
+Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/testbench-v1.json
+Run File: experiments/runs/benchmark-user-fuzzy-vs-smart-v2/20260611-093131-user/run-user.json
+Review File: experiments/runs/benchmark-user-fuzzy-vs-smart-v2/20260611-093131-user/manual-review-user.txt
+
+Overall Retrieval
+- Evaluated Rows: 20
+- Macro Precision: 0.210
+- Macro Recall: 0.425
+- Hit Rate: 0.800
+
+Overall Answer
+- Rated Rows: 20
+- C/P/W: 17/3/0
+- Strict Precision (C only): 0.850
+- Lenient Recall (C+P): 1.000
+- Weighted Score (C=1,P=0.5,W=0): 0.925
+
+By Tool
+
+[search_fuzzy]
+- Retrieval Macro Precision: 0.220
+- Retrieval Macro Recall: 0.450
+- Retrieval Hit Rate: 0.800
+- Answer C/P/W: 9/1/0
+- Answer Strict Precision: 0.900
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 0.950
+
+[search_smart]
+- Retrieval Macro Precision: 0.200
+- Retrieval Macro Recall: 0.400
+- Retrieval Hit Rate: 0.800
+- Answer C/P/W: 8/2/0
+- Answer Strict Precision: 0.800
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 0.900

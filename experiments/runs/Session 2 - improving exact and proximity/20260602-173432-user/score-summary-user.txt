@@ -1,10 +1,10 @@
 Testbench Score Summary
 
-Run ID: 20260602-161413-user
+Run ID: 20260602-173432-user
 Eval Mode: user
-Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/eval/testbench-v1.json
-Run File: experiments/eval/runs/20260602-161413-user/run-user.json
-Review File: experiments/eval/runs/20260602-161413-user/manual-review-user.txt
+Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/testbench-v1.json
+Run File: experiments/runs/Session 2 - improving exact and proximity/20260602-173432-user/run-user.json
+Review File: experiments/runs/Session 2 - improving exact and proximity/20260602-173432-user/manual-review-user.txt
 
 Overall Retrieval
 - Evaluated Rows: 30

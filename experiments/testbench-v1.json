@@ -1,7 +1,7 @@
 {
   "benchmark_id": "dsa-testbench-v1",
   "description": "10 Fragen x 3 Retrieval-Tools mit getrennter Chunk- und Antwortbewertung.",
-  "tools": ["search_exact_keyword", "search_fuzzy", "search_phrase_proximity"],
+  "tools": ["search_exact_keyword", "search_fuzzy", "search_phrase_proximity", "search_smart"],
   "questions": [
     {
       "id": "Q1",
