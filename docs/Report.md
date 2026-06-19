@@ -16,7 +16,7 @@ Lokales Agentic-RAG mit MCP und Elasticsearch fuer PDF-Wissensbestaende: Konzept
 
 1.5 Aufbau der Arbeit
 
-### 2. Technische und fachliche Grundlagen (ca. 3 Seiten)
+### 2. Technische und fachliche Grundlagen (ca. 3 Seiten) -> evtl. Zuschicken
 
 2.1 Retrieval-Augmented Generation und Agentic-RAG
 
