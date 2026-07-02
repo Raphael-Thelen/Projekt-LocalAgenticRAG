@@ -1,0 +1,49 @@
+% Shared LaTeX header/footer setup for Pandoc PDF output
+\usepackage{etoolbox}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{float}
+\usepackage{caption}
+
+\pagestyle{fancy}
+\fancyhf{}
+
+% Header
+\lhead{Lokales Agentic-RAG}
+\chead{Projektbericht}
+\rhead{\today}
+
+% Footer
+\lfoot{Raphael Thelen}
+\cfoot{Seite \thepage}
+\rfoot{Universität Trier}
+
+% The report class uses the plain page style for chapter openings and some frontmatter pages.
+% Mirror the fancy layout there so headers/footers do not disappear.
+\fancypagestyle{plain}{%
+\fancyhf{}
+\lhead{Lokales Agentic-RAG}
+\chead{Projektbericht}
+\rhead{\today}
+\lfoot{Raphael Thelen}
+\cfoot{Seite \thepage}
+\rfoot{Universität Trier}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+}
+
+% Format chapter headings as compact numbered headings.
+\titleformat{\chapter}[hang]
+	{\Large\bfseries}
+	{\thechapter.}
+	{0.7em}
+	{}
+
+\titlespacing*{\chapter}{0pt}{0pt}{1.0em}
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
