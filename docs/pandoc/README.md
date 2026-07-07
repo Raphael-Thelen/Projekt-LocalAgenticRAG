@@ -37,6 +37,12 @@ Eigenes Input/Output:
 ./docs/pandoc/build-report.sh docs/Report.md docs/Report-v2.pdf
 ```
 
+Mit expliziter Abstract- und Bibliographie-Datei:
+
+```bash
+./docs/pandoc/build-report.sh docs/Report.md docs/Report-v2.pdf docs/Abstract.md docs/references.bib
+```
+
 Eigenes Abstract (optional drittes Argument):
 
 ```bash
@@ -75,6 +81,25 @@ Tabelle (Markdown):
 | search_fuzzy | 0.92 | 1.00 |
 | search_exact_keyword | 0.90 | 1.00 |
 ```
+
+## Zitate und Quellenverzeichnis
+
+BibTeX-Datei:
+
+- `docs/references.bib`
+
+Zitieren im Text (Pandoc-Syntax):
+
+```md
+RAG wurde in der Literatur frueh etabliert [@lewis2020rag].
+
+MCP ist ein zentraler Interoperabilitaetsansatz [vgl. @mcpdocs].
+
+Siehe Elastic-Dokumentation fuer Mapping-Details [@elasticsearch].
+```
+
+Beim Build wird das Quellenverzeichnis automatisch als Abschnitt `Literaturverzeichnis` am Ende erzeugt.
+Optional kann ein CSL-Stil unter `docs/pandoc/citation-style.csl` abgelegt werden.
 
 ## Troubleshooting
 

@@ -1,0 +1,17 @@
+%%{init: { 'theme': 'base', 'themeVariables': { 'primaryColor': '#fff', 'primaryTextColor': '#000', 'primaryBorderColor': '#000', 'lineColor': '#000', 'secondaryColor': '#fff', 'tertiaryColor': '#fff', 'actorBkg': '#fff', 'actorBorder': '#000', 'actorTextColor': '#000', 'signalColor': '#000', 'signalLineColor': '#000', 'labelTextColor': '#000', 'noteBkgColor': '#fff', 'noteBorderColor': '#000', 'noteTextColor': '#000' }}}%%
+sequenceDiagram
+    autonumber
+    actor User as Nutzer / Applikation
+    participant LLM as Large Language Modell
+    participant DB as Externe Datenquellen
+
+    User->>LLM: Generiere DB-Query aus Prompt
+    LLM-->>User: Query
+
+    User->>DB: Abfrage mit Query (Retrieval)
+    DB-->>User: Relevante Kontexte (Wissen)
+
+    Note over User: Konstruktion:<br/>Original-Prompt + Kontexte
+
+    User->>LLM: Sende angereicherten Prompt (Augmentation)
+    LLM-->>User: Finale Antwort auf Prompt

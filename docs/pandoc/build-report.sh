@@ -8,6 +8,8 @@ PANDOC_DIR="$DOCS_DIR/pandoc"
 INPUT_MD="${1:-$DOCS_DIR/Report.md}"
 OUTPUT_PDF="${2:-$DOCS_DIR/Report.pdf}"
 ABSTRACT_MD="${3:-$DOCS_DIR/Abstract.md}"
+BIB_FILE="${4:-$DOCS_DIR/references.bib}"
+CSL_FILE="${5:-$PANDOC_DIR/citation-style.csl}"
 HEADER_FILE="$PANDOC_DIR/header-footer.tex"
 TITLEPAGE_FILE="$PANDOC_DIR/titlepage.tex"
 MERMAID_DIR="$DOCS_DIR/assets/mermaid"
@@ -42,6 +44,11 @@ fi
 
 if [[ ! -f "$ABSTRACT_MD" ]]; then
   echo "Error: abstract file not found: $ABSTRACT_MD"
+  exit 1
+fi
+
+if [[ ! -f "$BIB_FILE" ]]; then
+  echo "Error: bibliography file not found: $BIB_FILE"
   exit 1
 fi
 
@@ -91,6 +98,19 @@ awk -v abstract_file="$abstract_tex" '
 ' "$TITLEPAGE_FILE" > "$titlepage_generated"
 
 echo "Building PDF..."
+PANDOC_CITATION_ARGS=(
+  --citeproc
+  --bibliography="$BIB_FILE"
+  --metadata=reference-section-title:Literaturverzeichnis
+  --metadata=link-citations:true
+)
+
+if [[ -f "$CSL_FILE" ]]; then
+  PANDOC_CITATION_ARGS+=(--csl="$CSL_FILE")
+else
+  echo "Info: No CSL file found at $CSL_FILE, using Pandoc default citation style."
+fi
+
 pandoc "$INPUT_MD" \
   --standalone \
   --from markdown+pipe_tables+grid_tables+multiline_tables \
@@ -103,6 +123,7 @@ pandoc "$INPUT_MD" \
   -V geometry:margin=2.5cm \
   -H "$HEADER_FILE" \
   --include-before-body="$titlepage_generated" \
+  "${PANDOC_CITATION_ARGS[@]}" \
   -o "$OUTPUT_PDF"
 
 echo "Done: $OUTPUT_PDF"
