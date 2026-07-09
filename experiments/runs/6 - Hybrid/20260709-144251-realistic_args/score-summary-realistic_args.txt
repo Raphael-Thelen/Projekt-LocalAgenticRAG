@@ -1,0 +1,67 @@
+Testbench Score Summary
+
+Run ID: 20260709-144251-realistic_args
+Eval Mode: realistic_args
+Spec: experiments/testbench-v1.json
+Run File: experiments/runs/session-5-hybrid-full/20260709-144251-realistic_args/run-realistic_args.json
+Review File: experiments/runs/session-5-hybrid-full/20260709-144251-realistic_args/manual-review-realistic_args.txt
+
+Overall Retrieval
+- Evaluated Rows: 50
+- Macro Precision: 0.129
+- Macro Recall: 0.260
+- Hit Rate: 0.460
+
+Overall Answer
+- Rated Rows: 50
+- C/P/W: 27/3/20
+- Strict Precision (C only): 0.540
+- Lenient Recall (C+P): 0.600
+- Weighted Score (C=1,P=0.5,W=0): 0.570
+
+By Tool
+
+[search_exact_keyword]
+- Retrieval Macro Precision: 0.140
+- Retrieval Macro Recall: 0.300
+- Retrieval Hit Rate: 0.500
+- Answer C/P/W: 6/1/3
+- Answer Strict Precision: 0.600
+- Answer Lenient Recall: 0.700
+- Answer Weighted Score: 0.650
+
+[search_fuzzy]
+- Retrieval Macro Precision: 0.220
+- Retrieval Macro Recall: 0.450
+- Retrieval Hit Rate: 0.800
+- Answer C/P/W: 10/0/0
+- Answer Strict Precision: 1.000
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 1.000
+
+[search_phrase_proximity]
+- Retrieval Macro Precision: 0.065
+- Retrieval Macro Recall: 0.100
+- Retrieval Hit Rate: 0.200
+- Answer C/P/W: 2/1/7
+- Answer Strict Precision: 0.200
+- Answer Lenient Recall: 0.300
+- Answer Weighted Score: 0.250
+
+[search_semantic]
+- Retrieval Macro Precision: 0.220
+- Retrieval Macro Recall: 0.450
+- Retrieval Hit Rate: 0.800
+- Answer C/P/W: 9/1/0
+- Answer Strict Precision: 0.900
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 0.950
+
+[search_smart]
+- Retrieval Macro Precision: 0.000
+- Retrieval Macro Recall: 0.000
+- Retrieval Hit Rate: 0.000
+- Answer C/P/W: 0/0/10
+- Answer Strict Precision: 0.000
+- Answer Lenient Recall: 0.000
+- Answer Weighted Score: 0.000

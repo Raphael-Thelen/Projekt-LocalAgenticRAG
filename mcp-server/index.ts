@@ -10,6 +10,8 @@ import { Client } from "@elastic/elasticsearch";
 const ES_HOST = "http://localhost:9200";
 const INDEX_NAME = "lara_documents";
 const DEFAULT_SIZE = 5;
+const DEFAULT_SEMANTIC_MODEL = "nomic-embed-text";
+const DEFAULT_SEMANTIC_TIMEOUT_MS = 2500;
 
 // 2. Elasticsearch Client initialisieren
 const esClient = new Client({ node: ES_HOST });
@@ -103,6 +105,32 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
               description: "Anzahl Treffer (Default: 5)",
               minimum: 1,
               maximum: 20,
+            },
+          },
+          required: ["query"],
+        },
+      },
+      {
+        name: "search_semantic",
+        description:
+          "Embedding-basierte semantische Suche (optional hybrid mit lexicalen Should-Klauseln).",
+        inputSchema: {
+          type: "object",
+          properties: {
+            query: {
+              type: "string",
+              description: "Natuerliche Suchanfrage fuer semantisches Retrieval",
+            },
+            size: {
+              type: "integer",
+              description: "Anzahl Treffer (Default: 5)",
+              minimum: 1,
+              maximum: 20,
+            },
+            mode: {
+              type: "string",
+              description: "semantic_only oder hybrid (Default: hybrid)",
+              enum: ["semantic_only", "hybrid"],
             },
           },
           required: ["query"],
@@ -492,6 +520,96 @@ function extractFirstJsonObject(text: string): string | null {
   return null;
 }
 
+function normalizeOllamaBaseUrl(rawBaseUrl: string): string {
+  let endpoint = rawBaseUrl.replace(/\/$/, "");
+  if (endpoint.endsWith("/v1")) {
+    endpoint = endpoint.slice(0, -3);
+  }
+  return endpoint;
+}
+
+function normalizeSemanticMode(raw: unknown): "semantic_only" | "hybrid" {
+  const value = String(raw ?? "hybrid").trim().toLowerCase();
+  return value === "semantic_only" ? "semantic_only" : "hybrid";
+}
+
+async function buildQueryEmbedding(query: string): Promise<{
+  vector: number[] | null;
+  source: string;
+  error: string | null;
+}> {
+  const ollamaBaseUrl = String(
+    process.env.OLLAMA_BASE_URL ?? "http://127.0.0.1:11434",
+  ).trim();
+  const model = String(process.env.LARA_EMBED_MODEL ?? DEFAULT_SEMANTIC_MODEL).trim();
+  const timeoutRaw = Number(process.env.LARA_EMBED_TIMEOUT_MS ?? DEFAULT_SEMANTIC_TIMEOUT_MS);
+  const timeoutMs = Number.isFinite(timeoutRaw)
+    ? Math.max(200, Math.floor(timeoutRaw))
+    : DEFAULT_SEMANTIC_TIMEOUT_MS;
+
+  const endpoint = `${normalizeOllamaBaseUrl(ollamaBaseUrl)}/api/embeddings`;
+  const abortController = new AbortController();
+  const timeoutHandle = setTimeout(() => {
+    abortController.abort();
+  }, timeoutMs);
+
+  try {
+    const response = await fetch(endpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      signal: abortController.signal,
+      body: JSON.stringify({
+        model,
+        prompt: query,
+      }),
+    });
+
+    clearTimeout(timeoutHandle);
+
+    if (!response.ok) {
+      return {
+        vector: null,
+        source: `ollama:${model}`,
+        error: `Embedding-HTTP-Fehler ${response.status}`,
+      };
+    }
+
+    const data = await response.json() as { embedding?: unknown };
+    const embeddingRaw = data.embedding;
+    if (!Array.isArray(embeddingRaw) || !embeddingRaw.length) {
+      return {
+        vector: null,
+        source: `ollama:${model}`,
+        error: "Antwort enthaelt kein embedding-Array.",
+      };
+    }
+
+    const vector: number[] = embeddingRaw.map((value) => Number(value));
+    if (vector.some((value) => !Number.isFinite(value))) {
+      return {
+        vector: null,
+        source: `ollama:${model}`,
+        error: "Embedding enthaelt ungueltige Werte.",
+      };
+    }
+
+    return {
+      vector,
+      source: `ollama:${model}`,
+      error: null,
+    };
+  } catch (error: any) {
+    clearTimeout(timeoutHandle);
+    return {
+      vector: null,
+      source: `ollama:${model}`,
+      error: String(error?.message ?? "Unbekannter Embedding-Fehler"),
+    };
+  }
+}
+
 async function buildSmartPlan(query: string, size: number): Promise<{
   plan: SmartQueryPlan;
   planner_source: "ollama" | "heuristic";
@@ -522,10 +640,7 @@ async function buildSmartPlan(query: string, size: number): Promise<{
     `Requested top_k: ${size}`,
   ].join("\n");
 
-  let plannerEndpoint = ollamaBaseUrl.replace(/\/$/, "");
-  if (plannerEndpoint.endsWith("/v1")) {
-    plannerEndpoint = plannerEndpoint.slice(0, -3);
-  }
+  let plannerEndpoint = normalizeOllamaBaseUrl(ollamaBaseUrl);
   plannerEndpoint = `${plannerEndpoint}/api/generate`;
 
   const abortController = new AbortController();
@@ -936,6 +1051,102 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       });
 
       const payload = toMcpTextResult(toolName, { query, size }, hits.hits);
+      return {
+        content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
+      };
+    }
+
+    if (toolName === "search_semantic") {
+      const query = String(args.query ?? "").trim();
+      const size = clampSize(args.size);
+      const mode = normalizeSemanticMode(args.mode);
+
+      if (!query) {
+        throw new Error("'query' ist fuer search_semantic erforderlich.");
+      }
+
+      const embedding = await buildQueryEmbedding(query);
+
+      let shouldClauses: any[];
+      let semanticStatus = "active";
+
+      if (embedding.vector) {
+        shouldClauses = [
+          {
+            script_score: {
+              query: {
+                exists: {
+                  field: "content_vector",
+                },
+              },
+              script: {
+                source: "cosineSimilarity(params.query_vector, 'content_vector') + 1.0",
+                params: {
+                  query_vector: embedding.vector,
+                },
+              },
+              boost: mode === "semantic_only" ? 2.0 : 1.4,
+            },
+          },
+        ];
+
+        if (mode === "hybrid") {
+          shouldClauses = [
+            ...shouldClauses,
+            ...buildFuzzyShouldClauses(query).map((clause) => {
+              if (clause.multi_match) {
+                return {
+                  multi_match: {
+                    ...clause.multi_match,
+                    boost: 0.8,
+                  },
+                };
+              }
+              if (clause.match?.content) {
+                return {
+                  match: {
+                    content: {
+                      ...clause.match.content,
+                      boost: 0.55,
+                    },
+                  },
+                };
+              }
+              return clause;
+            }),
+          ];
+        }
+      } else {
+        semanticStatus = "fallback_lexical";
+        shouldClauses = buildFuzzyShouldClauses(query);
+      }
+
+      const { hits } = await esClient.search({
+        index: INDEX_NAME,
+        body: {
+          query: {
+            bool: {
+              should: shouldClauses,
+              minimum_should_match: 1,
+            },
+          },
+          size,
+        },
+      });
+
+      const payload = toMcpTextResult(
+        toolName,
+        {
+          query,
+          mode,
+          semantic_status: semanticStatus,
+          embedding_source: embedding.source,
+          embedding_error: embedding.error,
+          size,
+        },
+        hits.hits,
+      );
+
       return {
         content: [{ type: "text", text: JSON.stringify(payload, null, 2) }],
       };

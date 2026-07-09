@@ -1,0 +1,727 @@
+{
+  "benchmark_id": "dsa-fuzzy-vs-semantic-100-v1",
+  "description": "100 zunehmend schwierige Fragen fuer den direkten Vergleich von search_fuzzy vs search_semantic. Mix aus Regelwissen, Fluff und Cross-Band-Synthese.",
+  "tools": ["search_fuzzy", "search_semantic"],
+  "questions":[
+  {
+    "id": "Q001",
+    "category": "Lore",
+    "difficulty": "easy",
+    "question": "Wer regiert das Mittelreich und wie heißt die Hauptstadt?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q002",
+    "category": "Götter",
+    "difficulty": "easy",
+    "question": "Welcher der Zwölfgötter ist für Heilung, Landwirtschaft und Geburt zuständig?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q003",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Mit welchen Würfeln wird in DSA 5 eine gewöhnliche Eigenschaftsprobe abgelegt?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q004",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Woraus setzt sich eine Talentprobe zusammen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q005",
+    "category": "Kampf",
+    "difficulty": "easy",
+    "question": "Was passiert bei einer gewürfelten 1 auf dem W20 bei einer Attacke?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q006",
+    "category": "Kampf",
+    "difficulty": "easy",
+    "question": "Was bedeutet die Abkürzung 'LeP'?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q007",
+    "category": "Magie",
+    "difficulty": "easy",
+    "question": "Welcher Attributswert wird oft als Maßstab für die magische Energie eines Zauberers genutzt?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q008",
+    "category": "Götter",
+    "difficulty": "easy",
+    "question": "Wer ist der Götterfürst und Gott der Herrschaft, Sonne und Gerechtigkeit?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q009",
+    "category": "Lore",
+    "difficulty": "easy",
+    "question": "Wie heißt der bekannte Kontinent, auf dem die meisten DSA-Abenteuer spielen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q010",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Was bedeutet 'QS' im DSA 5 Regelsystem?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q011",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Wie viele Schicksalspunkte (Schips) hat ein Held standardmäßig zu Beginn einer Sitzung, wie kann der Wert erhöht werden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q012",
+    "category": "Bestiarium",
+    "difficulty": "easy",
+    "question": "Welche humanoiden Wesen sind für ihre Überfälle und ihren Kriegsgott Brazoragh bekannt? Welche Werte kann ich als Meister verwenden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q013",
+    "category": "Kampf",
+    "difficulty": "easy",
+    "question": "Was ist eine Parade im Kampf?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q014",
+    "category": "Lore",
+    "difficulty": "easy",
+    "question": "Welches Reich liegt direkt nördlich von Weiden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q015",
+    "category": "Magie",
+    "difficulty": "easy",
+    "question": "Wie heißen die magiebegabten Frauen, die oft mit Vertrautentieren reisen und Flüche wirken?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q016",
+    "category": "Götter",
+    "difficulty": "easy",
+    "question": "Welcher Gott herrscht über das Totenreich und den Schlaf?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q017",
+    "category": "Kampf",
+    "difficulty": "easy",
+    "question": "Wie berechnet sich der Rüstungsschutz (RS) bei einfachen Lederrüstungen typischerweise?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q018",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Was geschieht bei einer gewürfelten 20 bei einer Talentprobe?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q019",
+    "category": "Regional",
+    "difficulty": "easy",
+    "question": "Welche zwei verfeindeten Reiche werden als die 'Streitenden Königreiche' bezeichnet?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q020",
+    "category": "Magie",
+    "difficulty": "easy",
+    "question": "Was für eine Rüstung kann ein Magier nicht tragen, ohne seine Magie zu stören?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q021",
+    "category": "Regeln",
+    "difficulty": "easy",
+    "question": "Was beschreibt der Wert GS?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q022",
+    "category": "Lore",
+    "difficulty": "easy",
+    "question": "Wie hieß das mächtige, aber verfluchte Dämonenreich im Osten Aventuriens?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q023",
+    "category": "Götter",
+    "difficulty": "easy",
+    "question": "Wie nennt man die Anhänger des Namenlosen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q024",
+    "category": "Kampf",
+    "difficulty": "easy",
+    "question": "Was bedeutet 1W6+4 bei einem Langschwert?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q025",
+    "category": "Lore",
+    "difficulty": "easy",
+    "question": "Wer war Rohal der Weise?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q026",
+    "category": "Regeln",
+    "difficulty": "medium",
+    "question": "Wie berechnen sich die Qualitätsstufen (QS) bei einer bestandenen Talentprobe?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q027",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Welche Auswirkung hat der Status 'Liegend' im Nahkampf auf die eigenen Attacken?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q028",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Was bewirkt das Kampfmanöver 'Wuchtschlag I'?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q029",
+    "category": "Magie",
+    "difficulty": "medium",
+    "question": "Was ist der Modifikator beim Zaubern in fremder Tradition?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q030",
+    "category": "Götter",
+    "difficulty": "medium",
+    "question": "Was ist ein Mirakel?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q031",
+    "category": "Regional",
+    "difficulty": "medium",
+    "question": "Welches Gremium regiert das Bornland?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q032",
+    "category": "Bestiarium",
+    "difficulty": "medium",
+    "question": "Welche Besonderheit haben Trolle im Gegensatz zu Ogern?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q033",
+    "category": "Lore",
+    "difficulty": "medium",
+    "question": "Was geschah im Jahr des Feuers?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q034",
+    "category": "Regeln",
+    "difficulty": "medium",
+    "question": "Was passiert, wenn die Lebenspunkte (LeP) eines Helden auf 0 fallen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q035",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Was bewirkt die Sonderfertigkeit Finte I?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q036",
+    "category": "Magie",
+    "difficulty": "medium",
+    "question": "Was passiert, wenn ein Magier einen Zauber abbrechen muss?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q037",
+    "category": "Götter",
+    "difficulty": "medium",
+    "question": "Wer ist der Gegenspieler der Zwölfgötter und Herrscher der Niederhöllen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q038",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Wie berechnet sich der Ausweichen Wert",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q039",
+    "category": "Magie",
+    "difficulty": "medium",
+    "question": "Was zeichnet einen Gildenmagier der Grauen Gilde aus?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q040",
+    "category": "Regional",
+    "difficulty": "medium",
+    "question": "Welches Merkmal kennzeichnet die Landschaft von Nostria besonders?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q041",
+    "category": "Bestiarium",
+    "difficulty": "medium",
+    "question": "Was muss ich über Schrate wissen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q042",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Ab welcher distanz gibt es mit einer Stangenwaffe Boni gegen Dolche?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q043",
+    "category": "Lore",
+    "difficulty": "medium",
+    "question": "Welche drei aventurischen Magiergilden gibt es?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q044",
+    "category": "Magie",
+    "difficulty": "medium",
+    "question": "Welches Merkmal hat der Zauber 'Odem Arcanum'?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q045",
+    "category": "Regeln",
+    "difficulty": "medium",
+    "question": "Was bewirkt der Nachteil 'Blutrausch'?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q046",
+    "category": "Regional",
+    "difficulty": "medium",
+    "question": "Was sind Sumen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q047",
+    "category": "Kampf",
+    "difficulty": "medium",
+    "question": "Was ist der Unterschied zwischen Parierwaffe und Schild?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q048",
+    "category": "Götter",
+    "difficulty": "medium",
+    "question": "Was passiert bei Verwirrung Stufe 1?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q049",
+    "category": "Regeln",
+    "difficulty": "medium",
+    "question": "Kann man Schicksalspunkte nutzen, um den erlittenen Schaden nachträglich zu verringern?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q050",
+    "category": "Lore",
+    "difficulty": "medium",
+    "question": "Was ist die Lex Zwergia?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q051",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Ein Kämpfer mit einem Zweihandschwert greift einen Gegner mit einem Dolch an. Welchen Malus bekommt der Dolchkämpfer auf seine Parade?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q052",
+    "category": "Magie",
+    "difficulty": "hard",
+    "question": "Was sind die Vorbedingungen für die Erweiterte Sonderfertigkeit 'Matrixgeber erstellen'?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q053",
+    "category": "Regional",
+    "difficulty": "hard",
+    "question": "Welche Magierakademien gibt es in Festum?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q054",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Was bewirkt die Kampfsonderfertigkeit Klingensturm?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q055",
+    "category": "Regeln",
+    "difficulty": "hard",
+    "question": "Wie verhält sich Wundfieber?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q056",
+    "category": "Magie",
+    "difficulty": "hard",
+    "question": "Welcher Traditionsartefakt-Zauber der Hexen ermöglicht es ihnen, auf dem Besen zu fliegen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q057",
+    "category": "Götter",
+    "difficulty": "hard",
+    "question": "Welcher Erzdämon ist der Gegenspieler von Tsa?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q058",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Wie funktioniert ein Sturmangriff?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q059",
+    "category": "Bestiarium",
+    "difficulty": "hard",
+    "question": "Welche Kampfwerte hat ein Westwinddrache?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q060",
+    "category": "Regeln",
+    "difficulty": "hard",
+    "question": "Wie wirkt Belastung 2 auf die Regenerationsphasen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q061",
+    "category": "Lore",
+    "difficulty": "hard",
+    "question": "Was ist der Drachenorden im Mittelreich?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q062",
+    "category": "Magie",
+    "difficulty": "hard",
+    "question": "Welche SF eigenen sich für eine tulamidische Dämonenjägerin?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q063",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Was passiert beim Einsatz von Ausfall?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q064",
+    "category": "Lore",
+    "difficulty": "hard",
+    "question": "Wer ist die Königin der Hexen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q065",
+    "category": "Magie",
+    "difficulty": "hard",
+    "question": "Welche Erschwernis erhält ein Magier auf das Zaubern in Kettenhemd?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q066",
+    "category": "Götter",
+    "difficulty": "hard",
+    "question": "Wie wird Karmaenergie von einem Geweihten regeneriert?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q067",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Welche Kampftechnik wird für ein 'Bastardschwert' verwendet?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q068",
+    "category": "Regeln",
+    "difficulty": "hard",
+    "question": "Kann eine Hexe eine weitere Person auf ihrem Besen mitnehmen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q069",
+    "category": "Regeln",
+    "difficulty": "hard",
+    "question": "Was bewirkt der Vorteil Zäher Hund?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q070",
+    "category": "Magie",
+    "difficulty": "hard",
+    "question": "Welches Merkmal hat der Balsam?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q071",
+    "category": "Regional",
+    "difficulty": "hard",
+    "question": "Welche Ritter gibt es in den Streitenkönigreichen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q072",
+    "category": "Kampf",
+    "difficulty": "hard",
+    "question": "Was benötigt man, um Meisterliche Parade einzusetzen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q073",
+    "category": "Götter",
+    "difficulty": "hard",
+    "question": "Wer ist Phex' Gegenpart bei den Erzdämonen und was zeichnet ihn aus?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q074",
+    "category": "Bestiarium",
+    "difficulty": "hard",
+    "question": "Was unterscheidet den Biss einer Gruftassel von normalen Tieren?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q075",
+    "category": "Lore",
+    "difficulty": "hard",
+    "question": "Wer ist Aikar Brazoragh?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q076",
+    "category": "Magie",
+    "difficulty": "expert",
+    "question": "Wie kann ich einen Ignisphaero modifizieren?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q077",
+    "category": "Kampf",
+    "difficulty": "expert",
+    "question": "Kann man zu Fall bringen mit Hammerschlag kombinieren?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q078",
+    "category": "Regeln",
+    "difficulty": "expert",
+    "question": "Wie wirkt sich die Dunkelheit 3 auf Fernkampfangriffe aus?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q079",
+    "category": "Götter",
+    "difficulty": "expert",
+    "question": "Welcher Liturgie-Modifikator greift, wenn ein Geweihter in einem entweihten oder namenlosen Tempel betet?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q080",
+    "category": "Magie",
+    "difficulty": "expert",
+    "question": "Wie viele KR dauert Elementarer Diener?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q081",
+    "category": "Kampf",
+    "difficulty": "expert",
+    "question": "Wie funktioniert das abrichten von Wildtieren?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q082",
+    "category": "Regional",
+    "difficulty": "expert",
+    "question": "Was zeichnet das 'Kampfseminar zu Andergast' aus?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q083",
+    "category": "Kampf",
+    "difficulty": "expert",
+    "question": "Wie funktioniert der 'Windmühlen'-Angriff (Windmühle SF)?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q084",
+    "category": "Regeln",
+    "difficulty": "expert",
+    "question": "Kann ein Held mit Paralyse noch Zauber sprechen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q085",
+    "category": "Magie",
+    "difficulty": "expert",
+    "question": "Wer kann Auge des Basilisken verwenden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q086",
+    "category": "Kampf",
+    "difficulty": "expert",
+    "question": "Kann der Wuchtschlag III mit Sturmangriff kombiniert werden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q087",
+    "category": "Regional",
+    "difficulty": "expert",
+    "question": "Wo liegt der alte Tanzplatz der nostrischen Hexen?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q088",
+    "category": "Bestiarium",
+    "difficulty": "expert",
+    "question": "Ist ein Elenviner Vollblut schneller oder ein Orklandpony?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q089",
+    "category": "Regeln",
+    "difficulty": "expert",
+    "question": "Welcher Status ist passend um Müdigkeit abzubilden?",
+    "expected_anser": "",
+    "answer_rule": ""
+  },
+  {
+    "id": "Q90",
+    "category": "Magie",
+    "difficulty": "expert",
+    "question": "Wie lange dauert das Aktivieren eines im Artefakt gespeicherten Spruchs?",
+    "expected_anser": "",
+    "answer_rule": ""
+  }
+]
+}

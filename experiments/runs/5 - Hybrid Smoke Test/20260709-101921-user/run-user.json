@@ -1,0 +1,112 @@
+{
+  "run_id": "20260709-101921-user",
+  "run_id_base": "20260709-101921",
+  "created_at": "2026-07-09T10:19:21.637886",
+  "spec_path": "experiments/testbench-smoke-q1.json",
+  "eval_mode": "user",
+  "provider": "gemini",
+  "provider_label": "Gemini API",
+  "model": "gemini-3.1-flash-lite",
+  "selected_tools": [
+    "search_semantic"
+  ],
+  "runs_root": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/runs/session-5-hybrid-semantic",
+  "retry_policy": {
+    "max_retries": 12,
+    "retry_base_seconds": 20.0,
+    "retry_max_seconds": 300.0,
+    "retry_jitter_seconds": 3.0
+  },
+  "skip_llm_on_zero_hits": true,
+  "questions": [
+    {
+      "id": "Q1",
+      "category": "Lore",
+      "difficulty": "easy",
+      "question": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+      "expected_answer": "Das Mittelreich wird von Rohaja regiert, Hauptstadt ist Gareth.",
+      "answer_rule": "",
+      "tool_results": {
+        "search_semantic": {
+          "tool_args": {
+            "query": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+            "size": 5
+          },
+          "retrieved_count": 5,
+          "retrieved_chunk_ids": [
+            "regelwerk_p108_c000",
+            "regelwerk_p231_c003",
+            "regelwerk_p76_c000",
+            "regelwerk_p10_c003",
+            "regelwerk_p7_c002"
+          ],
+          "expected_chunk_ids": [
+            "regelwerk_p108_c000"
+          ],
+          "retrieval_payload": {
+            "tool": "search_semantic",
+            "index": "lara_documents",
+            "query": {
+              "query": "Wer regiert laut dem Regelwerk das Mittelreich und wie heisst dessen Hauptstadt?",
+              "mode": "hybrid",
+              "semantic_status": "fallback_lexical",
+              "embedding_source": "none",
+              "embedding_error": "OLLAMA_BASE_URL ist nicht gesetzt.",
+              "size": 5
+            },
+            "count": 5,
+            "results": [
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 108,
+                "score": 13.7993145,
+                "chunk_id": "regelwerk_p108_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "Hauptstadt Elenvina. Traditionell sind die unverbr\u00fcchlich treuen Nordm\u00e4rker und die freiheitsliebenden Albernier sich spinnefeind. \n\nOrks Menschenblut opfern, um ihren G\u00f6tzen zu huldigen. \u00d6stlich des Kosch kommt nun das **K\u00f6nigreich Garetien** , die zentrale Provinz des Mittelreichs, auf der sich auch die Hausmacht der Kaiser des Mittelreiches gr\u00fcndet, denn Kaiserin Rohaja ist zugleich K\u00f6nigin Garetiens. Das Land ist fruchtbar und Handel und Handwerk florieren. Und doch scheint das ganze K\u00f6nigreich damit besch\u00e4ftigt, die vielen hungrigen M\u00e4uler der Metropole Gareth zu stopfen. Denn die Hauptstadt Garetiens und des Mittelreichs ist die gr\u00f6\u00dfte Stadt des Kontinents, zu der fast alle gro\u00dfen Stra\u00dfen f\u00fchren. Es ist eine Stadt der B\u00fcrger und Z\u00fcnfte, der Geweihten und Krieger, der Diebe und Streuner, regiert von einem Rat der Helden. Unheimlichster Ort Garetiens ist der verfluchte Wald s\u00fcdwestlich der Hauptstadt, die sogenannte D\u00e4monenbrache, wo einst die Erste D\u00e4monenschlacht stattfand."
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 231,
+                "score": 7.684463,
+                "chunk_id": "regelwerk_p231_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "## **Aktionen** \n\nAls Aktion z\u00e4hlen Handlungen wie beispielsweise Angriffe oder Zauberspr\u00fcche. Aktionen k\u00f6nnen erst ausgef\u00fchrt werden, wenn der entsprechende Spieler laut Initiative an der Reihe ist. Durch Hinausz\u00f6gern kannst du auch zu einem sp\u00e4teren Zeitpunkt innerhalb der laufenden Kampfrunde deine Aktion einsetzen. \n\n## **Beispiele f\u00fcr Aktionen** \n\nAttacke Fernkampfangriffe bis zu Geschwindigkeitswert in Schritt laufen versuchen, eine T\u00fcr einzutreten eine Waffe ziehen einen Hebel umlegen Schusswaffe laden, je nach Ladezeit mehrere Aktionen Zauber sprechen, je nach Zauber mehrere Aktionen Liturgie wirken, je nach Liturgie mehrere Aktionen \n\n## **Freie Aktionen** \n\nBei freien Aktionen handelt es sich um sehr kurze Handlungen, die man schnell und ohne viel Aufmerksamkeit und Aufwand jederzeit ausf\u00fchren kann. \n\n## **Beispiele f\u00fcr freie Aktionen** \n\neinen kurzen Satz rufen einen Gegenstand fallen lassen von einem Stuhl aufstehen sich zu Boden werfen sich umdrehen \n\nbis zu Geschwindigkeitswert in Schritt laufen (nur, wenn man laut Initiative an der Reihe ist)"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 76,
+                "score": 7.3924246,
+                "chunk_id": "regelwerk_p76_c000",
+                "doc_id": "regelwerk",
+                "excerpt": "_Er wird nicht fliehen oder aufgeben. Daf\u00fcr ist ein Oger zu dumm. Er oder ich \u2013 einer von uns wird heute sterben._ Noch wusste Orestas nicht genau, wie er gegen den Oger vorgehen sollte, da wurde ihm die Entscheidung abgenommen. Der Menschenfresser versuchte, den Kessel umzukippen! Der S\u00f6ldner reagierte augenblicklich und sprang auf einen Felsen, um der kochend hei\u00dfen Br\u00fche zu entgehen. Orestas hatte schon gegen viele Feinde gek\u00e4mpft, auch schon gegen einen der klugen Schwarzoger, die in den Dschungeln Meridianas lebten und Menschenfallen bauten. An Wildheit hatte er bislang keinem schlimmeren Gegner gegen\u00fcbergestanden als diesem Scheusal. Als der Oger merkte, dass sein Plan nicht aufging, war es bereits zu sp\u00e4t. Orestas hatte seine Waffe in Richtung seiner Kehle geschwungen und ihn erwischt. Der Menschenfresser lie\u00df seine Keule fallen und sank auf die Knie. Er war sogar zu dumm, um zu merken, dass sein Ende gekommen war, denn noch immer versuchte er, mit seiner Hand die Keule zu ergreifen. Ohne zu z\u00f6gern, gab der S\u00f6ldner ihm den Rest und stieg \u00fcber Zwiebelst\u00fccke und Mohrr\u00fcben hinweg"
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 10,
+                "score": 7.383766,
+                "chunk_id": "regelwerk_p10_c003",
+                "doc_id": "regelwerk",
+                "excerpt": "Im Nordwesten Aventuriens leben die Thorwaler, mutige Seefahrer, die kaum etwas schrecken kann, solange sie ihren Walgott Swafnir mit sich wissen. Von ihrer Heimat **Thorwal** (3) aus segeln sie die K\u00fcsten entlang und genie\u00dfen den Ruf als gef\u00fcrchtete Piraten. S\u00fcdlich von Thorwal und des Orklands liegen die beiden K\u00f6nigreiche **Nostria** (4) und **Andergast** (5). In den Augen anderer Menschen gelten ihre Bewohner als r\u00fcckst\u00e4ndig und hinterw\u00e4ldlerisch. Die beiden L\u00e4nder verbindet eine gemeinsame Geschichte mit zahlreichen Kriegen und Scharm\u00fctzeln, denn die Bewohner beider Reiche sind sich spinnefeind. \n\nS\u00fcdlich des Mittelreichs liegt das fortschrittliche **Horasreich** (6), das Land der K\u00fcnstler und Dichter. \u00dcber die St\u00e4dte dieses fruchtbaren Landstrichs herrschen Patrizier, Adlige und Stadtr\u00e4te und versuchen ihre Konkurrenten zu \u00fcbertrumpfen oder sie durch Intrigen zu schw\u00e4chen. An der Spitze des Staats steht der Horas, der das ganze Reich mit Weitblick regiert, und dessen Vater ein leibhaftiger Drache sein soll."
+              },
+              {
+                "source": "regelwerk",
+                "title": "Regelwerk",
+                "page": 7,
+                "score": 7.283245,
+                "chunk_id": "regelwerk_p7_c002",
+                "doc_id": "regelwerk",
+                "excerpt": "DSA lebt von seinen kreativen Fans, die jederzeit die M\u00f6glichkeit haben sich einzubringen, beispielsweise \u00fcber den Aventurischen Boten, das Magazin des Schwarzen Auges. Die Chancen stehen gut, dass man auf diese Weise etwas zu seinem Lieblingsspiel beitragen kann. \n\nAu\u00dferdem sind es die vielen kleinen Details der Spielwelt, die sie so liebenswert macht. Manch ein Spieler kennt sich in der aventurischen Flora, Geographie und dem Rechtssystem des Mittelreichs besser aus als in der Wirklichkeit. \n\nIm Gegensatz zu den vorherigen Editionen gab es dieses Mal eine Besonderheit bei der Entwicklung der Regeln. Wir Redakteure hatten uns entschlossen, das Regelwerk nicht im stillen K\u00e4mmerlein zu entwickeln und erst bei Fertigstellung zu pr\u00e4sentieren, sondern wir wollten die Meinung der Spielerschaft ber\u00fccksichtigen. Aus diesem Grund starteten wir lange Zeit vor der Ver\u00f6ffentlichung Umfragen und ver\u00f6ffentlichten auf der Role Play Convention 2014 ein Beta-Regelwerk."
+              }
+            ]
+          },
+          "answer": "Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt des Mittelreichs ist Gareth.",
+          "llm_skipped": false
+        }
+      }
+    }
+  ]
+}

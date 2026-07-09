@@ -1,0 +1,1705 @@
+MANUELLE BEWERTUNG (C/P/W)
+
+Regeln:
+- C = Correct (inhaltlich korrekt)
+- P = Partly correct (teilweise korrekt)
+- W = Wrong (falsch / nicht ausreichend)
+
+Wichtig:
+- Nur die RATING-Zeilen bearbeiten.
+- Format muss exakt bleiben: RATING|Qx|tool_name|C
+
+Eval Mode: realistic_args
+
+========Q001=======
+Wer regiert das Mittelreich und wie heißt die Hauptstadt?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt des Mittelreichs ist Gareth.
+
+RATING|Q001|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt ist Gareth.
+
+RATING|Q001|search_semantic|C
+
+
+========Q002=======
+Welcher der Zwölfgötter ist für Heilung, Landwirtschaft und Geburt zuständig?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Göttin **Peraine** ist für Heilung und Landwirtschaft zuständig. Der Aspekt der Geburt wird im Kontext der Tsakirche explizit der Göttin **Tsa** zugeordnet.
+
+RATING|Q002|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die Göttin **Peraine** ist für Heilung und Landwirtschaft zuständig. Der Aspekt der Geburt wird im Kontext der Tsakirche explizit der Göttin **Tsa** zugeordnet.
+
+RATING|Q002|search_semantic|C
+
+
+========Q003=======
+Mit welchen Würfeln wird in DSA 5 eine gewöhnliche Eigenschaftsprobe abgelegt?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Eine gewöhnliche Eigenschaftsprobe wird mit 1W20 abgelegt.
+
+RATING|Q003|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Eine gewöhnliche Eigenschaftsprobe wird mit 1W20 abgelegt.
+
+RATING|Q003|search_semantic|C
+
+
+========Q004=======
+Woraus setzt sich eine Talentprobe zusammen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, woraus sich eine Talentprobe zusammensetzt.
+
+RATING|Q004|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, woraus sich eine Talentprobe zusammensetzt.
+
+RATING|Q004|search_semantic|W
+
+
+========Q005=======
+Was passiert bei einer gewürfelten 1 auf dem W20 bei einer Attacke?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, was bei einer gewürfelten 1 bei einer Attacke passiert.
+
+RATING|Q005|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, was bei einer gewürfelten 1 bei einer Attacke passiert.
+
+RATING|Q005|search_semantic|W
+
+
+========Q006=======
+Was bedeutet die Abkürzung 'LeP'?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zur Bedeutung der Abkürzung „LeP“.
+
+RATING|Q006|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zur Bedeutung der Abkürzung 'LeP'.
+
+RATING|Q006|search_semantic|W
+
+
+========Q007=======
+Welcher Attributswert wird oft als Maßstab für die magische Energie eines Zauberers genutzt?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welcher Attributswert als Maßstab für die magische Energie eines Zauberers genutzt wird. Er definiert lediglich die Astralenergie (AE) als die magische Kraft eines Zauberers.
+
+RATING|Q007|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welcher Attributswert als Maßstab für die magische Energie eines Zauberers genutzt wird. Er definiert lediglich die Astralenergie (AE) als die magische Kraft eines Zauberers.
+
+RATING|Q007|search_semantic|W
+
+
+========Q008=======
+Wer ist der Götterfürst und Gott der Herrschaft, Sonne und Gerechtigkeit?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der Götterfürst und Gott der Herrschaft, Sonne und Gerechtigkeit ist **Praios**.
+
+RATING|Q008|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der Götterfürst und Gott der Herrschaft, Sonne und Gerechtigkeit ist **Praios**.
+
+RATING|Q008|search_semantic|C
+
+
+========Q009=======
+Wie heißt der bekannte Kontinent, auf dem die meisten DSA-Abenteuer spielen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie der Kontinent heißt, auf dem die meisten DSA-Abenteuer spielen.
+
+RATING|Q009|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie der Kontinent heißt, auf dem die meisten DSA-Abenteuer spielen.
+
+RATING|Q009|search_semantic|W
+
+
+========Q010=======
+Was bedeutet 'QS' im DSA 5 Regelsystem?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Definition der Abkürzung „QS“ im DSA 5 Regelsystem.
+
+RATING|Q010|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Definition für die Abkürzung „QS“ im DSA 5 Regelsystem.
+
+RATING|Q010|search_semantic|W
+
+
+========Q011=======
+Wie viele Schicksalspunkte (Schips) hat ein Held standardmäßig zu Beginn einer Sitzung, wie kann der Wert erhöht werden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Zu Beginn einer Spielsitzung während eines laufenden Abenteuers erhält ein Held standardmäßig **1 Schicksalspunkt (Schip)** zurück.
+
+Die Anzahl der Schicksalspunkte kann durch folgende Ereignisse erhöht werden:
+* **Ende eines Abenteuerkapitels:** Der Meister gewährt in der Regel 1 oder mehr Schips.
+* **Ende eines Abenteuers:** Alle überlebenden Helden erhalten ihre gesamten Schicksalspunkte zurück.
+* **Heldentat:** Der Meister kann allen Helden für eine besondere Leistung 1 Schip gewähren.
+
+Der bereitgestellte Kontext enthält keine Informationen über einen festen Startwert zu Beginn einer Kampagne oder Charaktererschaffung, sondern verweist lediglich auf ein Feld für die „Maximalzahl“ auf dem Heldenbogen.
+
+RATING|Q011|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Information darüber, wie viele Schicksalspunkte (Schips) ein Held **standardmäßig zu Beginn** einer Sitzung besitzt (d. h. wie hoch sein maximaler Vorrat ist).
+
+Zur Erhöhung bzw. Rückgewinnung von Schicksalspunkten während des Spiels nennt der Kontext folgende Möglichkeiten:
+
+*   **Beginn einer Spielsitzung:** Der Meister sollte allen Helden, die am letzten Abenteuer teilgenommen haben, 1 Schip zurückgeben.
+*   **Ende eines Abenteuerkapitels:** Der Meister sollte den Helden wenigstens 1 Schip zurückgeben.
+*   **Ende eines Abenteuers:** Alle überlebenden Helden erhalten ihre gesamten Schicksalspunkte zurück.
+*   **Heldentat:** Der Meister kann allen Helden für eine besondere Leistung 1 Schip zugestehen.
+
+Zudem können Helden Schicksalspunkte in einen **Gruppentopf** einzahlen, wobei sie diese von ihrem eigenen Höchstwert abziehen. Verlässt ein Held die Gruppe, erhält er seinen eingezahlten Schip zurück und sein Höchstwert erhöht sich entsprechend.
+
+RATING|Q011|search_semantic|P
+
+
+========Q012=======
+Welche humanoiden Wesen sind für ihre Überfälle und ihren Kriegsgott Brazoragh bekannt? Welche Werte kann ich als Meister verwenden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die humanoiden Wesen, die für ihre kriegerische Kultur und die Verehrung des Kriegsgottes Brazoragh bekannt sind, sind die **Orks** (auch Schwarzpelze genannt).
+
+Der bereitgestellte Kontext enthält **keine Werte** (Spielwerte), die du als Meister verwenden kannst.
+
+RATING|Q012|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Die humanoiden Wesen, die für ihre kriegerische Kultur und die Verehrung des Kriegsgottes Brazoragh bekannt sind, sind die **Orks** (auch Schwarzpelze genannt).
+
+Der bereitgestellte Kontext enthält **keine Werte** (Spielwerte), die du als Meister verwenden kannst.
+
+RATING|Q012|search_semantic|W
+
+
+========Q013=======
+Was ist eine Parade im Kampf?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition des Begriffs „Parade“. Er beschreibt lediglich spezifische Aspekte wie die Parade mit einem Schild, die Formationsparade sowie den kritischen Erfolg bei einer Parade.
+
+RATING|Q013|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition des Begriffs „Parade“. Er beschreibt lediglich spezifische Aspekte wie die Parade mit Schilden, die Formationsparade sowie die Auswirkungen eines kritischen Erfolgs bei einer Parade.
+
+RATING|Q013|search_semantic|W
+
+
+========Q014=======
+Welches Reich liegt direkt nördlich von Weiden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welches Reich direkt nördlich von Weiden liegt. Es wird lediglich erwähnt, dass das Herzogtum Weiden die nördlichste Provinz des Reiches ist und sich als „Schild des Reiches gen Norden“ versteht.
+
+RATING|Q014|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welches Reich direkt nördlich von Weiden liegt. Es wird lediglich erwähnt, dass das Herzogtum Weiden die nördlichste Provinz des Reiches ist und sich als „Schild des Reiches gen Norden“ versteht.
+
+RATING|Q014|search_semantic|W
+
+
+========Q015=======
+Wie heißen die magiebegabten Frauen, die oft mit Vertrautentieren reisen und Flüche wirken?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über magiebegabte Frauen, die allgemein als solche bezeichnet werden, die mit Vertrautentieren reisen und Flüche wirken.
+
+Der Kontext erwähnt lediglich:
+*   **Hexen** im Zusammenhang mit Vertrautentieren (ohne nähere Beschreibung ihrer Flüche).
+*   **Geoden** (keine Frauen) im Zusammenhang mit Vertrautentieren.
+*   **Weiße Frauen** als körperlose Geister (keine Vertrautentiere).
+
+RATING|Q015|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über magiebegabte Frauen, die allgemein als solche bezeichnet werden, die mit Vertrautentieren reisen und Flüche wirken.
+
+Der Kontext erwähnt lediglich:
+*   **Geoden** (die Vertrautentiere haben, aber nicht als "magiebegabte Frauen" definiert werden).
+*   **Weiße Frauen** (Geister, die keine Vertrautentiere haben).
+*   **Hexen** (werden im Kontext [5] lediglich im Zusammenhang mit Vertrautentierarten genannt, jedoch ohne die Beschreibung von Flüchen oder dem Reisen mit Vertrauten).
+
+RATING|Q015|search_semantic|P
+
+
+========Q016=======
+Welcher Gott herrscht über das Totenreich und den Schlaf?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Boron ist der Gott, der über das Totenreich sowie über Schlaf und Traum herrscht.
+
+RATING|Q016|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Boron ist der Gott, der über das Totenreich sowie über Schlaf und Traum herrscht.
+
+RATING|Q016|search_semantic|C
+
+
+========Q017=======
+Wie berechnet sich der Rüstungsschutz (RS) bei einfachen Lederrüstungen typischerweise?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Formel zur Berechnung des Rüstungsschutzes (RS) für Lederrüstungen. Er führt lediglich spezifische Varianten (wie die Gjalsker Lederrüstung, die Gladiatorenrüstung oder die Krötenhaut) mit festen RS-Werten auf.
+
+RATING|Q017|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Formel zur Berechnung des Rüstungsschutzes (RS) für Lederrüstungen. Er führt lediglich spezifische Varianten (wie die Gjalsker Lederrüstung, die Gladiatorenrüstung oder die Krötenhaut) mit jeweils festen RS-Werten auf.
+
+RATING|Q017|search_semantic|W
+
+
+========Q018=======
+Was geschieht bei einer gewürfelten 20 bei einer Talentprobe?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält Informationen zu Patzern bei **Eigenschaftsproben** und bei Fernkampfwaffen (Waffennachteil), jedoch keine expliziten Regeln für eine gewürfelte 20 bei einer allgemeinen **Talentprobe**.
+
+Für Eigenschaftsproben gilt: Eine gewürfelte 20 erfordert einen Bestätigungswurf (erneuter Wurf gegen den effektiven Eigenschaftswert). Wird dieser ebenfalls verpatzt (oder eine 20 gewürfelt), tritt ein Patzer mit schwerwiegenderen Konsequenzen ein. Bei Fernkampfwaffen führt eine 20 unabhängig von der Bestätigung zu einer schweren Ladehemmung.
+
+RATING|Q018|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält Informationen zu Patzern bei **Eigenschaftsproben** und bei Fernkampfwaffen (Waffennachteil), jedoch keine explizite Regelung für den allgemeinen Fall einer gewürfelten 20 bei einer **Talentprobe**.
+
+Für Eigenschaftsproben gilt: Eine 20 erfordert einen Bestätigungswurf (erneuter Wurf gegen den effektiven Eigenschaftswert). Wird dieser ebenfalls verpatzt (oder eine 20 gewürfelt), tritt ein Patzer mit schwerwiegenderen Konsequenzen ein. Bei Fernkampfwaffen führt eine 20 unabhängig von der Bestätigung zu einer schweren Ladehemmung.
+
+RATING|Q018|search_semantic|W
+
+
+========Q019=======
+Welche zwei verfeindeten Reiche werden als die 'Streitenden Königreiche' bezeichnet?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die zwei als „Streitenden Königreiche“ bezeichneten Reiche sind Nostria und Andergast.
+
+RATING|Q019|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die zwei als „Streitenden Königreiche“ bezeichneten Reiche sind Nostria und Andergast.
+
+RATING|Q019|search_semantic|C
+
+
+========Q020=======
+Was für eine Rüstung kann ein Magier nicht tragen, ohne seine Magie zu stören?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Information darüber, welche spezifischen Rüstungen die Magie eines Magiers stören.
+
+Es wird lediglich im *Kodex der Helden* (S. 463) festgehalten, dass Gildenmagiern das Tragen von Rüstungen generell verboten ist und lediglich ein Gambeson gestattet ist.
+
+RATING|Q020|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Information darüber, welche spezifischen Rüstungen die Magie eines Magiers stören.
+
+Es wird lediglich im *Kodex der Helden* (S. 463) festgehalten, dass Gildenmagiern das Tragen von Rüstungen generell verboten ist und lediglich ein Gambeson gestattet ist.
+
+RATING|Q020|search_semantic|W
+
+
+========Q021=======
+Was beschreibt der Wert GS?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition des Wertes GS. Er wird lediglich als Bewegungsmaßstab verwendet (z. B. „GS 2“ als maximale Bewegungsgeschwindigkeit in einer Formation [1]) oder als Attribut, das durch Verwandlungen modifiziert werden kann (z. B. „GS +4“ in Wergestalt [2, 3]).
+
+RATING|Q021|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext definiert den Begriff „GS“ nicht explizit. Er wird lediglich als Wert verwendet, der die Bewegungsgeschwindigkeit (z. B. in der Kha-Formation) oder eine Eigenschaftsmodifikation (z. B. bei der Wergestalt) beschreibt.
+
+RATING|Q021|search_semantic|W
+
+
+========Q022=======
+Wie hieß das mächtige, aber verfluchte Dämonenreich im Osten Aventuriens?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das mächtige, verfluchte Dämonenreich im Osten Aventuriens hieß Oron.
+
+RATING|Q022|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Das mächtige, verfluchte Dämonenreich im Osten Aventuriens hieß Oron.
+
+RATING|Q022|search_semantic|P
+
+
+========Q023=======
+Wie nennt man die Anhänger des Namenlosen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Anhänger des Namenlosen werden als **Kultisten** oder **Geweihte** bezeichnet. Zudem werden sie in den bereitgestellten Dokumenten allgemein als **Anhänger** des Namenlosen oder des Dreizehnten Gottes erwähnt.
+
+RATING|Q023|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die Anhänger des Namenlosen werden im bereitgestellten Kontext als **Kultisten** oder **Geweihte** bezeichnet. Zudem werden sie als Anhänger des „Dreizehnten Gottes“ oder des „Älteren der Äonen“ erwähnt.
+
+RATING|Q023|search_semantic|C
+
+
+========Q024=======
+Was bedeutet 1W6+4 bei einem Langschwert?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition für die Notation „1W6+4“ bei einem Langschwert. Er führt lediglich in einer Tabelle auf, dass ein „Bannschwert, mittel (Langschwert)“ den TP-Wert (Trefferpunkte) 1W6+4 besitzt.
+
+RATING|Q024|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition für die Notation „1W6+4“ bei einem Langschwert. Er führt lediglich in einer Tabelle auf, dass ein „Bannschwert, mittel (Langschwert)“ den TP-Wert (Trefferpunkte) 1W6+4 besitzt.
+
+RATING|Q024|search_semantic|P
+
+
+========Q025=======
+Wer war Rohal der Weise?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Rohal der Weise ist ein Alveraniar des Gottes Nandus und verkörpert den Aspekt des verborgenen Wissens. Er wird häufig als weißes Einhorn dargestellt und hat Entsprechungen am aventurischen Himmel.
+
+In der Geschichte Aventuriens tritt er als mächtiger Magier auf, der für Weisheit und einen verantwortungsvollen Umgang mit Wissen steht. Er ist bekannt für seine philosophischen Lehren zu Themen wie Moral, Ethik und Magie, die in den „Gesprächen Rohals des Weisen“ gesammelt wurden. Rohal ist der ewige Gegenspieler von Borbarad, dem Alveraniar des verbotenen Wissens; beide werden in verschiedenen Zeitaltern immer wiedergeboren und bekämpfen sich.
+
+RATING|Q025|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Rohal der Weise ist ein Alveraniar des Gottes Nandus und verkörpert den Aspekt des verborgenen Wissens. In der zwölfgöttlichen Mythologie wird er als Sohn Nandus und Enkel von Hesinde und Phex angesehen.
+
+Zu seinen wesentlichen Merkmalen und Rollen gehören:
+
+*   **Wesen:** Er ist kein menschlicher Zauberer, sondern ein Alveraniar, der in verschiedenen Zeitaltern immer wiedergeboren wurde. Er steht für Weisheit und einen verantwortungsvollen Umgang mit Wissen.
+*   **Gegenspieler:** Er steht in einem uralten Zwist mit Borbarad, dem Alveraniar des verbotenen Wissens. Beide bekämpften sich mehrfach in der Geschichte, etwa vor den Magierkriegen um 590 BF und während der borbaradianischen Invasion.
+*   **Philosophie:** Er ist bekannt für seine Lehren zu Moral, Ethik, Magie und dem Wesen der Welt. Diese sind in dem Werk „Die Gespräche Rohals des Weisen“ überliefert, das in Form von Schülerfragen und seinen Antworten verfasst ist.
+*   **Symbolik:** Er wird häufig als weißes Einhorn dargestellt, dem Symboltier des Nandus. Am aventurischen Himmel besitzt er eine Entsprechung als Stern.
+
+RATING|Q025|search_semantic|C
+
+
+========Q026=======
+Wie berechnen sich die Qualitätsstufen (QS) bei einer bestandenen Talentprobe?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Qualitätsstufen (QS) werden anhand der verbleibenden Fertigkeitspunkte (FP) nach einer bestandenen Talentprobe wie folgt berechnet:
+
+*   **0–3 FP:** QS 1
+*   **4–6 FP:** QS 2
+*   **7–9 FP:** QS 3
+*   **10–12 FP:** QS 4
+*   **13–15 FP:** QS 5
+*   **16+ FP:** QS 6
+
+Wird eine Probe bestanden, bei der 0 FP übrig bleiben (z. B. durch Ausgleich von Würfen oder einen FW von 0), zählt dies als 1 FP und entspricht somit einer QS von 1.
+
+RATING|Q026|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die Qualitätsstufen (QS) werden anhand der verbleibenden Fertigkeitspunkte (FP) nach einer bestandenen Talentprobe wie folgt berechnet:
+
+*   **0–3 FP:** QS 1
+*   **4–6 FP:** QS 2
+*   **7–9 FP:** QS 3
+*   **10–12 FP:** QS 4
+*   **13–15 FP:** QS 5
+*   **16+ FP:** QS 6
+
+Wird eine Probe bestanden, bei der keine FP übrig bleiben (z. B. durch Ausgleich von Würfen oder einen FW von 0), zählt dies als 1 FP und entspricht somit einer QS von 1.
+
+RATING|Q026|search_semantic|C
+
+
+========Q027=======
+Welche Auswirkung hat der Status 'Liegend' im Nahkampf auf die eigenen Attacken?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu den Auswirkungen des Status „Liegend“ auf die eigenen Attacken im Nahkampf.
+
+RATING|Q027|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu den Auswirkungen des Status „Liegend“ auf die eigenen Attacken im Nahkampf.
+
+RATING|Q027|search_semantic|W
+
+
+========Q028=======
+Was bewirkt das Kampfmanöver 'Wuchtschlag I'?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der Wuchtschlag I bewirkt, dass ein Kämpfer mit einem harten Schlag mehr Schaden verursachen kann. Die Attacke wird um 2 erschwert, bei Erfolg erhöht sich der Schaden (Trefferpunkte) um 2.
+
+RATING|Q028|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Kampfmanöver „Wuchtschlag I“ ermöglicht es, mit einem harten Schlag mehr Schaden zu verursachen.
+
+**Regel:**
+*   Die Attacke wird um 2 erschwert.
+*   Bei Erfolg werden die Trefferpunkte um 2 erhöht.
+
+RATING|Q028|search_semantic|C
+
+
+========Q029=======
+Was ist der Modifikator beim Zaubern in fremder Tradition?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Grundsätzlich lassen sich Zaubersprüche fremder Traditionen nicht modifizieren [1].
+
+Es gibt jedoch Ausnahmen:
+*   **Liberale Gildenmagier:** Zauber in einer fremden Tradition sind für sie um –1 erschwert (statt um –2) [4].
+*   **Wissensaustausch (Achaz):** Mit dem passenden Zauberstil können Modifikationen bei Zaubern aus einer anderen Tradition durchgeführt werden [3].
+
+RATING|Q029|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Zaubersprüche fremder Traditionen lassen sich grundsätzlich nicht modifizieren [1].
+
+Für liberale Gildenmagier gilt jedoch eine Erschwernis von –1 (statt –2) auf die Zauberprobe bei der Anwendung fremder Traditionen [2]. Zudem können Achaz mit dem passenden Zauberstil Modifikationen bei Zaubern aus anderen Traditionen durchführen [3].
+
+RATING|Q029|search_semantic|P
+
+
+========Q030=======
+Was ist ein Mirakel?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Ein Mirakel ist ein Stoßgebet, bei dem ein Geweihter für den Einsatz von 4 Karmapunkten 2 Punkte auf den Fertigkeitswert (FW) eines der Gottheit wohlgefälligen Talents erhält. Diese Punkte müssen unmittelbar vor dem Ablegen der Probe eingesetzt werden. Mirakel sind weniger ritualisierte Anwendungen göttlicher Kräfte als Liturgien oder Zeremonien.
+
+RATING|Q030|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Ein Mirakel ist ein Stoßgebet, bei dem ein Geweihter für den Einsatz von 4 Karmapunkten 2 Punkte auf den Fertigkeitswert (FW) eines der Gottheit wohlgefälligen Talents hinzugewinnen kann. Die Punkte müssen unmittelbar vor dem Ablegen der Probe eingesetzt werden. Mirakel sind weniger ritualisierte Anwendungen göttlicher Kraft als Liturgien oder Zeremonien.
+
+RATING|Q030|search_semantic|C
+
+
+========Q031=======
+Welches Gremium regiert das Bornland?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Bornland wird von den Bronnjaren (einer Adels- bzw. Theaterritterschicht) regiert. Die wichtigste Institution des Staates ist die zweimal jährlich stattfindende Adelsversammlung.
+
+RATING|Q031|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Bornland wird von den Bronnjaren regiert. Als wichtigste Institution des Staates, der als Adelsrepublik organisiert ist, fungiert die zweimal jährlich stattfindende Adelsversammlung.
+
+RATING|Q031|search_semantic|C
+
+
+========Q032=======
+Welche Besonderheit haben Trolle im Gegensatz zu Ogern?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über spezifische Besonderheiten von Trollen im Gegensatz zu Ogern.
+
+RATING|Q032|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über die Besonderheiten von Trollen im Gegensatz zu Ogern.
+
+RATING|Q032|search_semantic|W
+
+
+========Q033=======
+Was geschah im Jahr des Feuers?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Im Jahr des Feuers (1027 BF) ereigneten sich folgende Ereignisse:
+
+*   **4. Peraine:** Udalbert von Wertlingen überbrachte auf dem Frühlingsturnier in Gareth ein Ultimatum Galottas.
+*   **Invasion:** Der „Endlose Heerwurm“ (eine Armee aus Untoten) fiel aus der Trollpforte kommend in das Mittelreich ein.
+*   **24. Peraine:** In der Schlacht auf dem Mythraelsfeld vor Wehrheim wurde der Heerwurm geschlagen. Das daraufhin entfachte „Magnum Opus des Weltenbrandes“ zerstörte die Stadt Wehrheim.
+*   **Folgen:** Rohaja von Gareth verschwand spurlos, und die fliegende Festung *Kholak-Kai* zog weiter nach Gareth, wo sie am 29. Peraine in der „Schlacht in den Wolken“ abstürzte. Der Absturz der Festung in Gareth hinterließ bis heute sichtbare Wunden.
+
+RATING|Q033|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Jahr des Feuers fand im Jahr **1027 BF** statt. Zu den zentralen Ereignissen gehörten:
+
+*   **Der Einfall des Endlosen Heerwurms:** Nach einem Ultimatum Galottas am 4. Peraine brach eine Armee aus Untoten aus der Trollpforte hervor.
+*   **Schlacht auf dem Mythraelsfeld:** Am 24. Peraine wurde der Heerwurm geschlagen, doch die Stadt Wehrheim wurde durch das Magnum Opus des Weltenbrandes zerstört.
+*   **Schlacht in den Wolken:** Am 29. Peraine wurde Galotta über Gareth besiegt, wobei die fliegende Festung *Kholak-Kai* abstürzte.
+*   **Folgen:** Die Absturzstelle der Festung in Gareth ist heute als „Gesplitterter Berg“ bekannt. Zudem kam es zu Verwüstungen in der Wildermark (heute Rommilyser Mark) und zur Beschädigung des Stabes des Vergessens.
+
+RATING|Q033|search_semantic|C
+
+
+========Q034=======
+Was passiert, wenn die Lebenspunkte (LeP) eines Helden auf 0 fallen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Wenn die Lebenspunkte (LeP) eines Helden auf 0 oder darunter fallen, passiert Folgendes:
+
+*   **Zustand:** Der Held liegt im Sterben.
+*   **Zeitlimit:** Er stirbt, wenn er nicht innerhalb einer Anzahl von Kampfrunden, die seinem Konstitutionswert entspricht, behandelt wird.
+*   **Sofortiger Tod:** Fällt die Lebensenergie unter den negativen Wert der Konstitution, stirbt der Held augenblicklich.
+*   **Stabilisierung:** Der Tod kann durch eine Probe *Heilkunde Wunden (Stabilisieren)* abgewendet werden. Diese ist um die halben Lebenspunkte unter 0 erschwert, dauert etwa 15 Minuten und hebt die Lebensenergie bei Erfolg auf 1 LeP an. Misslingt die Probe, stirbt der Held.
+
+RATING|Q034|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Wenn die Lebenspunkte (LeP) eines Helden auf 0 oder darunter fallen, passiert Folgendes:
+
+*   **Zustand:** Der Held liegt im Sterben.
+*   **Zeitlimit:** Er stirbt, wenn er nicht innerhalb einer Anzahl von Kampfrunden, die seinem Konstitutionswert entspricht, behandelt wird.
+*   **Sofortiger Tod:** Fällt die Lebensenergie unter den negativen Wert der Konstitution, stirbt der Held augenblicklich.
+*   **Stabilisierung:** Der Tod kann durch eine Probe *Heilkunde Wunden (Stabilisieren)* abgewendet werden. Diese ist um die halben Lebenspunkte unter 0 erschwert, dauert etwa 15 Minuten und hebt die Lebensenergie bei Erfolg auf 1 LeP an. Misslingt die Probe, stirbt der Held.
+
+RATING|Q034|search_semantic|C
+
+
+========Q035=======
+Was bewirkt die Sonderfertigkeit Finte I?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, was die Sonderfertigkeit Finte I bewirkt. Er nennt lediglich Voraussetzungen (GE 13) und listet die Fertigkeit als Teil verschiedener Professionspakete oder bei Kreaturen auf.
+
+RATING|Q035|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, was die Sonderfertigkeit Finte I bewirkt. Er nennt lediglich Voraussetzungen (GE 13) und listet die Fertigkeit als Teil verschiedener Professionspakete oder bei Kreaturen auf.
+
+RATING|Q035|search_semantic|W
+
+
+========Q036=======
+Was passiert, wenn ein Magier einen Zauber abbrechen muss?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Wenn ein Magier die Sonderfertigkeit „Zauber abbrechen“ besitzt, kann er jeden seiner gewirkten Zauber zu einem beliebigen Zeitpunkt der Wirkungsdauer beenden, ohne bis zum Ende warten zu müssen. Hierfür muss er 1 freie Aktion aufwenden.
+
+RATING|Q036|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Wenn ein Magier die Sonderfertigkeit „Zauber abbrechen“ besitzt, kann er jeden seiner gewirkten Zauber zu einem beliebigen Zeitpunkt während der Wirkungsdauer beenden, sodass die Auswirkungen vorzeitig enden. Hierfür muss der Held 1 freie Aktion aufwenden.
+
+RATING|Q036|search_semantic|W
+
+
+========Q037=======
+Wer ist der Gegenspieler der Zwölfgötter und Herrscher der Niederhöllen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Information darüber, wer der allgemeine Gegenspieler der Zwölfgötter ist.
+
+Als Herrscher der 7. Sphäre (Niederhöllen) wird der sagenumwobene **Dämonensultan** genannt, wobei unklar ist, ob er tatsächlich existiert. Die Niederhöllen werden zudem von zwölf Erzdämonen regiert, von denen einige als Gegenspieler einzelner Zwölfgötter aufgeführt sind (z. B. Blakharaz für Praios, Belhalhar für Rondra, Charyptoroth für Efferd, Lolgramoth für Travia).
+
+RATING|Q037|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Information darüber, wer ein einzelner „Gegenspieler der Zwölfgötter“ ist.
+
+Hinsichtlich der Herrschaft über die Niederhöllen (7. Sphäre) nennt der Kontext den sagenumwobenen **Dämonensultan**, wobei unklar bleibt, ob dieser tatsächlich existiert. Zudem werden zwölf Erzdämonen als Regenten der Unterreiche erwähnt, von denen einige als spezifische Gegenspieler einzelner Zwölfgötter aufgeführt sind (z. B. Blakharaz für Praios, Belhalhar für Rondra, Charyptoroth für Efferd, Lolgramoth für Travia).
+
+RATING|Q037|search_semantic|P
+
+
+========Q038=======
+Wie berechnet sich der Ausweichen Wert
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die bereitgestellten Dokumente enthalten keine Informationen zur Berechnung des Ausweichen-Wertes.
+
+RATING|Q038|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zur Berechnung des Ausweichen-Wertes.
+
+RATING|Q038|search_semantic|W
+
+
+========Q039=======
+Was zeichnet einen Gildenmagier der Grauen Gilde aus?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition, was einen Gildenmagier der Grauen Gilde auszeichnet.
+
+Er nennt lediglich folgende spezifische Aspekte:
+* **Auszeichnung:** Die Graue Gilde verleiht das „Graue Einhorn“ für Verdienste um das Ansehen der Zauberei und die Förderung der Harmonie auf der Welt.
+* **Persönlichkeiten:** Zu den bekannten Vertretern zählen Rakorium Muntagonus, Robak von Punin, Taphîrel ar’Ralahan, Dschelef ibn Jassafer und Ashtarra Okharim (Convocata prima).
+
+RATING|Q039|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Definition oder Beschreibung, was einen Gildenmagier der Grauen Gilde inhaltlich auszeichnet.
+
+Erwähnt wird lediglich, dass die Graue Gilde für Verdienste um das Ansehen der Zauberei und die Förderung der Harmonie auf der Welt die Auszeichnung „Graues Einhorn“ verleiht. Zudem werden namentlich bekannte Mitglieder (z. B. Rakorium Muntagonus, Robak von Punin, Taphîrel ar’Ralahan) sowie die Convocata prima Ashtarra Okharim genannt.
+
+RATING|Q039|search_semantic|W
+
+
+========Q040=======
+Welches Merkmal kennzeichnet die Landschaft von Nostria besonders?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Beschreibung, die ein einzelnes landschaftliches Merkmal als besonders kennzeichnend für ganz Nostria hervorhebt.
+
+Erwähnt werden jedoch verschiedene landschaftliche Aspekte:
+*   Die **Westküste** Aventuriens.
+*   Die **Waldwildnis** im Osten (geteilt mit Andergast).
+*   Das **Seenland**.
+*   Die **Tommelauen**.
+*   Die Prägung durch den steten Kampf gegen die **Gewalten Efferds** (insbesondere in Bezug auf die Küstenlage und den Fischfang).
+
+RATING|Q040|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Beschreibung der gesamten nostrischen Landschaft. Er erwähnt lediglich, dass Nostria an der Westküste Aventuriens liegt, im Osten in die Waldwildnis übergeht und über ein Seenland verfügt.
+
+RATING|Q040|search_semantic|W
+
+
+========Q041=======
+Was muss ich über Schrate wissen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über Schrate.
+
+RATING|Q041|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über Schrate.
+
+RATING|Q041|search_semantic|W
+
+
+========Q042=======
+Ab welcher distanz gibt es mit einer Stangenwaffe Boni gegen Dolche?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ab welcher spezifischen Distanz Stangenwaffen Boni gegen Dolche erhalten. Er erwähnt lediglich, dass Kämpfer mit größerer Reichweite (wie bei Stangenwaffen) versuchen, ihre Feinde auf Distanz zu halten, um ihren Vorteil zu nutzen.
+
+RATING|Q042|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ab welcher spezifischen Distanz Stangenwaffen Boni gegen Dolche erhalten. Er erwähnt lediglich, dass Kämpfer mit Stangenwaffen versuchen, ihre Feinde auf Distanz zu halten, um ihren Vorteil zu nutzen.
+
+RATING|Q042|search_semantic|W
+
+
+========Q043=======
+Welche drei aventurischen Magiergilden gibt es?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext nennt explizit nur die **Graue Gilde**. Die Namen der anderen beiden Gilden gehen aus den vorliegenden Dokumenten nicht hervor.
+
+RATING|Q043|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext nennt explizit die **Graue Gilde** sowie die **Schwarzmagier** (bzw. Schwarzmagierin). Die dritte Gilde wird im Kontext nicht namentlich aufgeführt, obwohl die Existenz von drei Magiergilden mehrfach erwähnt wird.
+
+RATING|Q043|search_semantic|W
+
+
+========Q044=======
+Welches Merkmal hat der Zauber 'Odem Arcanum'?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der Zauber 'Odem Arcanum' hat das Merkmal **Hellsicht**.
+
+RATING|Q044|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der Zauber 'Odem Arcanum' hat das Merkmal **Hellsicht**.
+
+RATING|Q044|search_semantic|C
+
+
+========Q045=======
+Was bewirkt der Nachteil 'Blutrausch'?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der Nachteil „Blutrausch“ bewirkt, dass der Held unter speziellen Umständen den gleichnamigen Status erhält. Dies geschieht, wenn:
+
+*   der Held durch einen Angriff eine Stufe des Zustands *Schmerz* erleidet, oder
+*   die Probe auf *Willenskraft* zur Aktivierung der Schlechten Eigenschaft *Jähzorn* misslingt.
+
+Der Status kann zudem durch externe Effekte (z. B. Liturgien oder Fähigkeiten anderer Wesen) ausgelöst werden.
+
+RATING|Q045|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der Nachteil „Blutrausch“ bewirkt, dass der Held unter speziellen Umständen den gleichnamigen Status erhält. Dies geschieht, wenn:
+
+*   der Held durch einen Angriff eine Stufe des Zustands *Schmerz* erleidet, oder
+*   die Probe auf *Willenskraft* zur Aktivierung der Schlechten Eigenschaft *Jähzorn* misslingt.
+
+RATING|Q045|search_semantic|C
+
+
+========Q046=======
+Was sind Sumen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Sumen sind die andergastischen Druiden, die als Priester und Mittler der Urmutter Sumu fungieren. Sie leben meist als eigenbrötlerische Einsiedler zurückgezogen in der Waldwildnis und verkünden den Willen des Waldes. In der andergastischen Gesellschaft genießen sie großen Einfluss, sind von Abgaben befreit und nehmen eine besondere Stellung im Recht ein.
+
+RATING|Q046|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Sumen sind die andergastischen Druiden, die als Priester und Mittler der Urmutter Sumu fungieren. Sie leben meist als eigenbrötlerische Einsiedler zurückgezogen in der Waldwildnis und verkünden den Willen des Waldes. In der andergastischen Gesellschaft genießen sie großen Einfluss, sind von Abgaben befreit und nehmen eine besondere Stellung im Recht ein.
+
+RATING|Q046|search_semantic|C
+
+
+========Q047=======
+Was ist der Unterschied zwischen Parierwaffe und Schild?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Sowohl Parierwaffen als auch Schilde können zusätzlich zur Hauptwaffe geführt werden, um deren Parade-Wert um den jeweiligen passiven Parade-Bonus zu erhöhen. Bei gleichzeitigem Einsatz mehrerer Parierwaffen oder Schilde zählt nur der höchste Bonus.
+
+Beide können zudem als Waffen (z. B. im beidhändigen Kampf) eingesetzt werden, nutzen dafür jedoch unterschiedliche Kampftechniken. Spezifische Unterschiede ergeben sich aus der jeweiligen Waffeneigenschaft:
+
+*   **Parierwaffen:** Verleihen einen PA-Modifikator und folgen den entsprechenden Regeln für Parierwaffen.
+*   **Schilde:** Können (je nach Ausführung) spezifische Funktionen wie das Parieren von Geschossen ermöglichen.
+
+Der Kontext enthält keine weiteren expliziten Unterscheidungsmerkmale zwischen den beiden Kategorien.
+
+RATING|Q047|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Sowohl Parierwaffen als auch Schilde können zusätzlich zur Hauptwaffe geführt werden, um deren Parade-Wert um den jeweiligen passiven Parade-Bonus zu erhöhen. Bei gleichzeitigem Einsatz mehrerer Parierwaffen oder Schilde zählt nur der jeweils höchste Parade-Bonus.
+
+Beide können zudem als Waffen (z. B. im beidhändigen Kampf) oder als einzelne Nahkampfwaffen eingesetzt werden, wobei sie jeweils über ihre entsprechende Kampftechnik geführt werden.
+
+Ein spezifischer Unterschied ergibt sich aus den Kampftechniken: Parierwaffen verleihen einen PA-Modifikator, während Schilde (wie im Beispiel des Fächers) spezifische Regeln für die Parade von Geschossen oder Einschränkungen bei den parierbaren Kampftechniken aufweisen können.
+
+RATING|Q047|search_semantic|P
+
+
+========Q048=======
+Was passiert bei Verwirrung Stufe 1?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Bei Verwirrung Stufe I ist der Betroffene leicht verwirrt und alle seine Proben sind um –1 erschwert.
+
+RATING|Q048|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Bei Verwirrung Stufe I ist der Betroffene leicht verwirrt und alle seine Proben sind um –1 erschwert.
+
+RATING|Q048|search_semantic|C
+
+
+========Q049=======
+Kann man Schicksalspunkte nutzen, um den erlittenen Schaden nachträglich zu verringern?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob Schicksalspunkte genutzt werden können, um erlittenen Schaden nachträglich zu verringern. Es wird lediglich allgemein erwähnt, dass sie helfen, Unglück abzuwenden und das Leben zu retten.
+
+RATING|Q049|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob Schicksalspunkte genutzt werden können, um erlittenen Schaden nachträglich zu verringern. Es wird lediglich erwähnt, dass Schicksalspunkte genutzt werden können, um misslungene Proben neu zu würfeln, schneller zu handeln oder Zustände zu ignorieren.
+
+RATING|Q049|search_semantic|C
+
+
+========Q050=======
+Was ist die Lex Zwergia?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die *Lex Zwergia* ist ein seit 160 BF gültiges Vertragswerk zwischen dem zwergischen Hochkönig Greifax Rechtssetzer und dem mittelreichischen Kaiser Sighelm. Sie bildet die Grundlage für das Zusammenleben von Menschen und Zwergen im Raulschen Reich und garantiert den Angroschim eine rechtliche Sonderstellung.
+
+Wichtige Inhalte sind:
+*   **Rechtsprechung:** Zwerge, die ein Verbrechen begangen haben, müssen an ihren Bergkönig überstellt werden und dürfen nicht von Menschen gerichtet werden.
+*   **Gastrecht:** Die Rolle von Menschen als Besucher in zwergischen Stollen und Tunneln ist geregelt.
+*   **Gebietsstatus:** Die oberirdischen Gebiete der Bergkönigreiche werden als „Bergfreiheiten“ anerkannt.
+
+Zudem ist die *Lex Zwergia* der Titel eines Fachbuchs (Rechtskunde) von Sighelm von Gareth, das die rechtlichen Bestimmungen dokumentiert. Die Pergamente dieses Werks sind durch eine alchimistische Tinktur besonders feuerbeständig.
+
+RATING|Q050|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die *Lex Zwergia* ist ein seit 160 BF gültiges Vertragswerk zwischen dem zwergischen Hochkönig Greifax Rechtssetzer und dem mittelreichischen Kaiser Sighelm. Sie bildet die Grundlage für das friedliche Zusammenleben von Menschen und Zwergen im Raulschen Reich und gewährt den Angroschim eine rechtliche Sonderstellung.
+
+Wesentliche Inhalte sind:
+*   **Rechtsprechung:** Zwerge, die ein Verbrechen begangen haben, dürfen nicht von Menschen gerichtet werden, sondern müssen an ihren Bergkönig überstellt werden.
+*   **Gastrecht:** Die Rolle von Menschen als Besucher in zwergischen Stollen und Tunneln ist geregelt.
+*   **Gebietsstatus:** Die oberirdischen Gebiete der Bergkönigreiche werden als „Bergfreiheiten“ anerkannt.
+
+Zudem ist die *Lex Zwergia* der Titel eines Fachbuchs zur Rechtskunde von Sighelm von Gareth, das die rechtlichen Bestimmungen dokumentiert.
+
+RATING|Q050|search_semantic|C
+
+
+========Q051=======
+Ein Kämpfer mit einem Zweihandschwert greift einen Gegner mit einem Dolch an. Welchen Malus bekommt der Dolchkämpfer auf seine Parade?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keinen spezifischen Malus für den Dolchkämpfer bei einem Angriff mit einem Zweihandschwert.
+
+Er gibt jedoch an, dass Zweihandschwerter mit Dolchen normalerweise **nicht pariert werden können**, da diese zu kurz und zu leicht sind. Um dies dennoch zu ermöglichen, ist die Sonderfertigkeit „Kreuzblock“ sowie eine zweite geführte Waffe erforderlich.
+
+RATING|Q051|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keinen spezifischen Malus für den Dolchkämpfer bei einem Angriff mit einem Zweihandschwert.
+
+Er gibt jedoch an, dass Zweihandschwerter mit Dolchen normalerweise nicht pariert werden können, da diese zu kurz und zu leicht sind. Um dies dennoch zu ermöglichen, ist die Sonderfertigkeit „Kreuzblock“ und eine zweite geführte Waffe erforderlich.
+
+RATING|Q051|search_semantic|W
+
+
+========Q052=======
+Was sind die Vorbedingungen für die Erweiterte Sonderfertigkeit 'Matrixgeber erstellen'?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Voraussetzung für die erweiterte Sonderfertigkeit „Matrixgeber“ ist der Zauber ARCANOVI auf einem Wert von mindestens 12.
+
+RATING|Q052|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die Voraussetzung für die erweiterte Sonderfertigkeit „Matrixgeber“ ist der Zauber ARCANOVI auf einem Wert von mindestens 12.
+
+RATING|Q052|search_semantic|C
+
+
+========Q053=======
+Welche Magierakademien gibt es in Festum?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: In Festum befinden sich die Zinnober-Werkstätten der Halle des Quecksilbers sowie ein Standort des Bundes des Roten Salamanders. Beide werden als mögliche Ausbildungsstätten für Zauberalchimisten genannt.
+
+RATING|Q053|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: In Festum befinden sich die Zinnober-Werkstätten der Halle des Quecksilbers sowie ein Standort des Bundes des Roten Salamanders. Beide werden als mögliche Ausbildungsstätten für Zauberalchimisten genannt.
+
+RATING|Q053|search_semantic|P
+
+
+========Q054=======
+Was bewirkt die Kampfsonderfertigkeit Klingensturm?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der Klingensturm ermöglicht es, in einer Aktion zwei einzelne Attacken zu führen.
+
+*   **Regeln:** Der erste Angriff ist um –2 erschwert und verursacht –1 TP, der zweite um –4 erschwert und verursacht –2 TP (Minimum jeweils 1 TP). Bei einem Patzer in der ersten Attacke verfällt die zweite.
+*   **Kombinationen:** Wird ein Basismanöver genutzt, muss dieses für beide Attacken identisch sein. Der Bonus durch die SF *Einhändiger Kampf* ist anwendbar.
+*   **Einschränkungen:** Nicht kombinierbar mit Schild, Parierwaffe oder einer weiteren Einhandwaffe.
+*   **Voraussetzungen:** GE 15, Kampftechniken Dolche, Fächer, Fechtwaffen, Hiebwaffen oder Schwerter.
+*   **Kosten:** 30 AP.
+
+RATING|Q054|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der Klingensturm ermöglicht es, in einer Aktion zwei einzelne Attacken zu führen.
+
+*   **Regeln:** Der erste Angriff ist um –2 erschwert und verursacht –1 TP, der zweite um –4 erschwert und verursacht –2 TP (Minimum jeweils 1 TP). Bei einem Patzer in der ersten Attacke verfällt die zweite.
+*   **Kombinationen:** Wird ein Basismanöver genutzt, muss es für beide Attacken identisch sein. Der Bonus durch die SF *Einhändiger Kampf* ist anwendbar.
+*   **Einschränkungen:** Nicht kombinierbar mit Schild, Parierwaffe oder einer weiteren Einhandwaffe.
+*   **Voraussetzungen:** GE 15, Kampftechniken Dolche, Fächer, Fechtwaffen, Hiebwaffen oder Schwerter.
+*   **Kosten:** 30 AP.
+
+RATING|Q054|search_semantic|C
+
+
+========Q055=======
+Wie verhält sich Wundfieber?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Wundfieber ist eine Krankheit, die durch bestimmte Untote (z. B. Orkenzombies, Achazzombies, Mumien) oder Kadaver übertragen werden kann.
+
+*   **Infektionsmechanik:** Bei je 10 vollen Schadenspunkten (SP), die durch den Überträger verursacht wurden, muss mit 1W20 gewürfelt werden, um zu bestimmen, ob eine Infektion vorliegt (die Wahrscheinlichkeit variiert je nach Quelle).
+*   **Regelwerk:** Bei einer Infektion muss eine Krankheitsprobe abgelegt werden. Die spezifischen Regeln zur Krankheit Wundfieber finden sich im *Regelwerk* (S. 343/344) sowie im *Aventurischen Almanach* (S. 126 bzw. 130).
+
+RATING|Q055|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Wundfieber ist eine Krankheit, die durch bestimmte Untote (z. B. Orkenzombies, Achazzombies, Mumien) oder Kadaver übertragen werden kann.
+
+*   **Infektionsmechanik:** Bei je 10 vollen Schadenspunkten (SP), die durch den Überträger verursacht wurden, muss mit 1W20 gewürfelt werden, um zu bestimmen, ob eine Infektion vorliegt (die Wahrscheinlichkeit variiert je nach Quelle).
+*   **Regelwerk:** Bei einer Infektion muss eine Krankheitsprobe abgelegt werden. Die spezifischen Regeln zur Krankheit Wundfieber finden sich im *Regelwerk* (S. 343/344) sowie im *Aventurischen Almanach* (S. 126 bzw. 130).
+
+RATING|Q055|search_semantic|C
+
+
+========Q056=======
+Welcher Traditionsartefakt-Zauber der Hexen ermöglicht es ihnen, auf dem Besen zu fliegen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Hexen nutzen für ihr Fluggerät keinen Zauber, sondern eine sogenannte **Hexen- oder Flugsalbe**. Mit dieser Salbe bestrichene Gegenstände aus Holz können von der Hexe ein Jahr lang als Fluggerät verwendet werden.
+
+RATING|Q056|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der Kontext nennt keinen spezifischen Zauber, der das Fliegen auf dem Besen ermöglicht. Hexen verwenden hierfür eine **Hexen- oder Flugsalbe**, mit der sie hölzerne Gegenstände (wie Besen) bestreichen, um sie als Fluggerät nutzbar zu machen.
+
+RATING|Q056|search_semantic|C
+
+
+========Q057=======
+Welcher Erzdämon ist der Gegenspieler von Tsa?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Gegenspielerinnen von Tsa sind Asfaloth und Calijnaar.
+
+RATING|Q057|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Die Gegenspielerinnen von Tsa sind Asfaloth und Calijnaar.
+
+RATING|Q057|search_semantic|P
+
+
+========Q058=======
+Wie funktioniert ein Sturmangriff?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Regelbeschreibung für das Basismanöver „Sturmangriff“. Er beschreibt lediglich:
+
+*   **Machtvoller Sturmangriff:** Ein Spezialmanöver, das eine Anlaufstrecke von mindestens 2 Schritt und eine GS von mindestens 4 erfordert. Die Bewegung ist Teil der Angriffsaktion. Bei Erfolg steigen die TP (um 2 + halbe GS, max. +12 TP), bei Misserfolg sinkt die VW bis zum Ende der nächsten KR um 2. Die Erschwernis beträgt –4.
+*   **Sturmangriff zu Pferd:** Dieser erfordert den Befehl „Sturmangriff“ und muss im Galopp ausgeführt werden. Nach einer Probe auf *Reiten (Kampfmanöver)* erfolgt die Attacke als Teil des Befehls.
+
+RATING|Q058|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Regelbeschreibung für das Basismanöver „Sturmangriff“. Er beschreibt lediglich:
+
+*   **Machtvoller Sturmangriff:** Ein Spezialmanöver, das eine Anlaufstrecke von mindestens 2 Schritt und eine GS von mindestens 4 erfordert. Die Bewegung ist Teil der Angriffsaktion. Bei Erfolg steigen die TP (um 2 + halbe GS, max. +12 TP), bei Misserfolg sinkt die VW bis zum Ende der nächsten KR um 2. Die Erschwernis beträgt –4.
+*   **Sturmangriff zu Pferd:** Dieser erfordert den Befehl „Sturmangriff“ und muss im Galopp ausgeführt werden. Nach einer Probe auf *Reiten (Kampfmanöver)* erfolgt eine Attacke als Teil des Befehls.
+
+RATING|Q058|search_semantic|W
+
+
+========Q059=======
+Welche Kampfwerte hat ein Westwinddrache?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Kampfwerte für den Westwinddrachen.
+
+RATING|Q059|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Kampfwerte für einen Westwinddrachen.
+
+RATING|Q059|search_semantic|W
+
+
+========Q060=======
+Wie wirkt Belastung 2 auf die Regenerationsphasen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie sich Belastung auf die Regenerationsphasen auswirkt. Er beschreibt lediglich, dass Belastung durch schweres Gepäck oder Rüstungen entsteht und die Bewegungsfreiheit einschränkt.
+
+RATING|Q060|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie sich Belastung auf die Regenerationsphasen auswirkt. Er beschreibt lediglich, dass Belastung durch schweres Gepäck oder Rüstungen entsteht und die Bewegungsfreiheit einschränkt.
+
+RATING|Q060|search_semantic|P
+
+
+========Q061=======
+Was ist der Drachenorden im Mittelreich?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über einen „Drachenorden“ im Mittelreich. Es werden lediglich eine „Drachengarde“ (im Zusammenhang mit Kaiser Gerbald I.) sowie die „Al’Drakorhim“ erwähnt, wobei letztere jedoch nicht explizit als Drachenorden des Mittelreichs bezeichnet werden.
+
+RATING|Q061|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über einen „Drachenorden“ im Mittelreich. Es werden lediglich die „Al’Drakorhim“ erwähnt, die über Wissen zum Drachenkampf und Artefakte aus Drachenhorten verfügen, sowie eine „Drachengarde“ im Zusammenhang mit Kaiser Gerbald I.
+
+RATING|Q061|search_semantic|C
+
+
+========Q062=======
+Welche SF eigenen sich für eine tulamidische Dämonenjägerin?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Für eine tulamidische Dämonenjägerin (speziell im Kontext der Rashduler Elementaristen) wird im bereitgestellten Kontext explizit die Sonderfertigkeit **Entschwörung (Dämonen)** genannt. Als Voraussetzung hierfür ist ein MU-Wert von 13 erforderlich. Weitere spezifische Sonderfertigkeiten werden im Kontext nicht aufgeführt.
+
+RATING|Q062|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Für eine tulamidische Dämonenjägerin (speziell im Kontext der Rashduler Dämonenjägerin) wird als Sonderfertigkeit explizit **Entschwörung (Dämonen)** genannt. Voraussetzung hierfür ist ein Mut-Wert (MU) von mindestens 13.
+
+RATING|Q062|search_semantic|C
+
+
+========Q063=======
+Was passiert beim Einsatz von Ausfall?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Beim Einsatz der Fokusregel „Trefferzonen-Regeln“ führt der Ausfall einer Zone zu folgenden Konsequenzen:
+
+*   **Bein:** Der Held verliert die Hälfte seiner GS. Bei Ausfall beider Beine erleidet der Held den Status *Liegend*. Die Nutzung betroffener Talente ist erschwert (mindestens –3) oder unmöglich.
+*   **Torso:** Der Held wird *Handlungsunfähig*.
+*   **Kopf:** Der Held erleidet den Status *Bewusstlos*.
+
+Zudem müssen bei einem Ausfall einer Zone Proben auf *Selbstbeherrschung (Handlungsfähigkeit bewahren)* abgelegt werden. Eine Zone gilt erst dann nicht mehr als ausgefallen, wenn sie wieder mindestens 1 LeP besitzt. Wundschwellen und Effekte werden bei dieser Fokusregel ignoriert.
+
+RATING|Q063|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Beim Einsatz der Fokusregel „Trefferzonen-Regeln“ führt der Ausfall einer Zone zu folgenden Konsequenzen:
+
+*   **Bein:** Der Held verliert die Hälfte seiner GS. Bei Ausfall beider Beine erleidet der Held den Status *Liegend*. Die Nutzung betroffener Talente ist erschwert (mindestens –3) oder unmöglich.
+*   **Torso:** Der Held wird *Handlungsunfähig*.
+*   **Kopf:** Der Held erleidet den Status *Bewusstlos*.
+
+Zudem müssen bei einem Ausfall einer Zone Proben auf *Selbstbeherrschung (Handlungsfähigkeit bewahren)* abgelegt werden. Eine Zone gilt erst dann nicht mehr als ausgefallen, wenn sie wieder mindestens 1 LeP besitzt. Wundschwellen und Effekte werden bei dieser Fokusregel ignoriert.
+
+RATING|Q063|search_semantic|W
+
+
+========Q064=======
+Wer ist die Königin der Hexen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine „Königin der Hexen“.
+
+Er erwähnt lediglich, dass in einigen aranischen Hexenzirkeln diejenige Hexe zur Königin berufen wird, die dem Werben des Dämons Qasaar am längsten widerstehen kann.
+
+RATING|Q064|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine „Königin der Hexen“.
+
+Er erwähnt lediglich, dass in einigen aranischen Hexenzirkeln diejenige Hexe zur Königin berufen wird, die dem Werben des Dämons Qasaar am längsten widerstehen kann.
+
+RATING|Q064|search_semantic|W
+
+
+========Q065=======
+Welche Erschwernis erhält ein Magier auf das Zaubern in Kettenhemd?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über eine spezifische Erschwernis für Magier beim Zaubern in einem Kettenhemd. Er erwähnt lediglich, dass das Tragen eines Kettenhemds eine Belastung von 2 verursacht.
+
+RATING|Q065|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über eine spezifische Erschwernis für Magier beim Zaubern in einem Kettenhemd. Er erwähnt lediglich, dass das Tragen eines Kettenhemds zu einer Belastung von 2 führt.
+
+RATING|Q065|search_semantic|W
+
+
+========Q066=======
+Wie wird Karmaenergie von einem Geweihten regeneriert?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Karmaenergie regeneriert sich mit 1W6 Punkten pro Ruhephase. Zusätzliche Punkte können durch passende Vorteile (wie „Verbesserte Regeneration (Karmaenergie) I-III“) und Sonderfertigkeiten gewährt werden.
+
+RATING|Q066|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Karmaenergie regeneriert sich mit 1W6 Punkten pro Ruhephase. Zusätzliche Punkte können durch passende Vorteile (wie „Verbesserte Regeneration (Karmaenergie) I-III“) und Sonderfertigkeiten gewährt werden.
+
+RATING|Q066|search_semantic|C
+
+
+========Q067=======
+Welche Kampftechnik wird für ein 'Bastardschwert' verwendet?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Die Kampftechnik für das Bastardschwert ist **Zweihandschwerter**. Es kann zwar auch einhändig geführt werden, bleibt aber regeltechnisch der Kampftechnik Zweihandschwerter zugeordnet.
+
+RATING|Q067|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Die für das Bastardschwert verwendete Kampftechnik ist **Zweihandschwerter**. Dies gilt auch dann, wenn die Waffe einhändig geführt wird.
+
+RATING|Q067|search_semantic|C
+
+
+========Q068=======
+Kann eine Hexe eine weitere Person auf ihrem Besen mitnehmen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob eine Hexe eine weitere Person auf ihrem Besen mitnehmen kann.
+
+RATING|Q068|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob eine Hexe eine weitere Person auf ihrem Besen mitnehmen kann.
+
+RATING|Q068|search_semantic|W
+
+
+========Q069=======
+Was bewirkt der Vorteil Zäher Hund?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, was der Vorteil „Zäher Hund“ bewirkt. Er wird lediglich als empfohlener Vorteil in verschiedenen Charakterbeschreibungen aufgeführt.
+
+RATING|Q069|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welche regeltechnische Wirkung der Vorteil „Zäher Hund“ hat. Er wird lediglich als empfohlener Vorteil in verschiedenen Charakterbeschreibungen aufgeführt.
+
+RATING|Q069|search_semantic|W
+
+
+========Q070=======
+Welches Merkmal hat der Balsam?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Merkmal des Balsam Salabunde ist Heilung.
+
+RATING|Q070|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Merkmal des Balsam Salabunde ist Heilung.
+
+RATING|Q070|search_semantic|C
+
+
+========Q071=======
+Welche Ritter gibt es in den Streitenkönigreichen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: In den Streitenden Königreichen werden folgende Ritter bzw. Rittergruppen genannt:
+
+*   **Grüne Ritter:** Sie werden von der Sumenschaft entsandt, um für die Sache der Sumen einzutreten oder Schmähungen an Wald und Land zu rächen.
+*   **Ritter der Schwarzen Distel (Distelritter):** Die Hausmacht des Hauses Fenwasian, die den Farindelwald verteidigt.
+*   **Wacht der Ritter vom Crumold (Crumold-Wacht / Wacht im Wald):** Die Hausmacht des Hauses Crumold.
+
+RATING|Q071|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: In den Streitenden Königreichen werden folgende Ritter bzw. Rittergruppen genannt:
+
+*   **Grüne Ritter:** Werden von der Sumenschaft entsandt, um für Wald und Land einzutreten.
+*   **Ritter der Schwarzen Distel (Distelritter):** Hausmacht des Hauses Fenwasian, verteidigen den Farindelwald.
+*   **Wacht der Ritter vom Crumold (Crumold-Wacht / Wacht im Wald):** Hausmacht des Hauses Crumold, schützen den Wald.
+
+RATING|Q071|search_semantic|W
+
+
+========Q072=======
+Was benötigt man, um Meisterliche Parade einzusetzen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu einer Sonderfertigkeit namens „Meisterliche Parade“. Daher kann die Frage auf Basis der vorliegenden Dokumente nicht beantwortet werden.
+
+RATING|Q072|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zu einer Sonderfertigkeit namens „Meisterliche Parade“. Daher kann die Frage auf Basis der vorliegenden Dokumente nicht beantwortet werden.
+
+RATING|Q072|search_semantic|W
+
+
+========Q073=======
+Wer ist Phex' Gegenpart bei den Erzdämonen und was zeichnet ihn aus?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wer Phex' Gegenpart bei den Erzdämonen ist.
+
+RATING|Q073|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wer Phex' Gegenpart bei den Erzdämonen ist.
+
+RATING|Q073|search_semantic|W
+
+
+========Q074=======
+Was unterscheidet den Biss einer Gruftassel von normalen Tieren?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über die spezifischen Auswirkungen oder Besonderheiten des Bisses einer Gruftassel im Vergleich zu normalen Tieren. Es werden lediglich LeP-Verlust und Schmerz-Stufen bei Verletzungen der Gruftassel selbst aufgeführt.
+
+RATING|Q074|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über die spezifischen Auswirkungen oder Besonderheiten des Bisses einer Gruftassel im Vergleich zu normalen Tieren. Es werden lediglich LeP-Verlust und Schmerz-Stufen bei Verletzungen der Gruftassel selbst aufgeführt.
+
+RATING|Q074|search_semantic|W
+
+
+========Q075=======
+Wer ist Aikar Brazoragh?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Aikar Brazoragh ist der von den orkischen Göttern gesandte Einiger der Stämme und Herrscher des Orklandes. Er regiert von der Stadt Khezzara aus und wird von beinahe allen Orks als Anführer akzeptiert. Er verfügt über tiefes Wissen um die Geisterwelt und führt seine Krieger gegen die Menschen, um deren Stärke zu erproben. Zudem fordert er Tribut von Städten wie Lowangen.
+
+RATING|Q075|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Aikar Brazoragh ist der von den orkischen Göttern gesandte Einiger der Stämme und Herrscher des Orklandes. Er regiert von der Stadt Khezzara aus und wird von beinahe allen Orks als Anführer akzeptiert. Er verfügt über tiefes Wissen um die Geisterwelt und führt seine Krieger gegen die Menschen, um deren Stärke zu erproben. Zudem fordert er Tribut von Städten wie Lowangen.
+
+RATING|Q075|search_semantic|W
+
+
+========Q076=======
+Wie kann ich einen Ignisphaero modifizieren?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie ein Zauberer den Ignisphaero aktiv modifizieren kann (z. B. durch Zaubererweiterungen).
+
+Es wird lediglich erwähnt, dass:
+*   die AsP-Kosten des Ignisphaero nicht modifizierbar sind [3].
+*   ein Bonus auf den Ignisphaero durch die Nähe von Manifestationen elementaren Feuers möglich sein kann [2].
+*   der Ignisphaero als applizierte Version in einem Strohgolem genutzt werden kann [1].
+
+RATING|Q076|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, wie ein Zauberer den Ignisphaero aktiv modifizieren kann (z. B. durch Zaubererweiterungen).
+
+Es wird lediglich erwähnt, dass:
+*   die AsP-Kosten des Ignisphaero nicht modifizierbar sind [3].
+*   ein Bonus auf den Ignisphaero durch die Nähe von Manifestationen elementaren Feuers möglich sein kann [2].
+
+RATING|Q076|search_semantic|P
+
+
+========Q077=======
+Kann man zu Fall bringen mit Hammerschlag kombinieren?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob die Sonderfertigkeiten „Zu Fall bringen“ und „Hammerschlag“ miteinander kombiniert werden können.
+
+RATING|Q077|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, ob die Sonderfertigkeiten „Zu Fall bringen“ und „Hammerschlag“ miteinander kombiniert werden können.
+
+RATING|Q077|search_semantic|W
+
+
+========Q078=======
+Wie wirkt sich die Dunkelheit 3 auf Fernkampfangriffe aus?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine spezifischen Regeln zu den Auswirkungen von „Dunkelheit 3“ auf Fernkampfangriffe. Die Dokumente beschreiben lediglich, dass Dunkelheit die Sichtverhältnisse stufenweise verschlechtert, machen jedoch keine Angaben zu den daraus resultierenden Modifikatoren für Fernkampfproben.
+
+RATING|Q078|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine allgemeine Regel dazu, wie sich die Stufe „Dunkelheit 3“ spezifisch auf Fernkampfangriffe auswirkt. Die Dokumente beschreiben lediglich, dass die Liturgie „Dunkelheit“ (bzw. der Zauber „Dunkelheit“) die Sichtverhältnisse pro QS um 1 Stufe verschlechtert, wobei der Anwender selbst davon ausgenommen ist.
+
+RATING|Q078|search_semantic|W
+
+
+========Q079=======
+Welcher Liturgie-Modifikator greift, wenn ein Geweihter in einem entweihten oder namenlosen Tempel betet?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Für einen Tempel des Namenlosen gilt ein Modifikator von **–4** auf die Zeremonieprobe.
+
+Für einen entweihten Tempel enthält der Kontext keine spezifische Modifikator-Zahl; es wird lediglich festgehalten, dass ein entweihter Tempel nicht mehr als geweihter Boden zählt.
+
+RATING|Q079|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Für einen Tempel des Namenlosen gilt ein Modifikator von **–4** auf die Zeremonieprobe.
+
+Für einen entweihten Tempel enthält der Kontext keine spezifische Modifikator-Zahl; es wird lediglich festgehalten, dass ein entweihter Tempel nicht mehr als geweihter Boden zählt.
+
+RATING|Q079|search_semantic|W
+
+
+========Q080=======
+Wie viele KR dauert Elementarer Diener?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zur Dauer des Rituals „Elementarer Diener“ in Kampfrunden (KR). Er gibt lediglich eine Zauberdauer von 5 Minuten an.
+
+RATING|Q080|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen zur Dauer des Rituals „Elementarer Diener“ in Kampfrunden (KR). Er gibt lediglich eine Zauberdauer von 5 Minuten an.
+
+RATING|Q080|search_semantic|C
+
+
+========Q081=======
+Wie funktioniert das abrichten von Wildtieren?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Abrichten von Wildtieren funktioniert wie folgt:
+
+*   **Voraussetzung:** Um Wildtiere abrichten zu können, benötigt der Held die entsprechende Sonderfertigkeit (z. B. *Tierzüchter* oder die in *Geschuppte Tyrannen* genannte SF). Ohne diese SF kann ein Held mit dem Talent *Tierkunde* nur domestizierte Tiere abrichten.
+*   **Regelmechanik:** Die Sonderfertigkeit schaltet die Einsatzmöglichkeit *Abrichten* im Talent *Tierkunde* frei. Damit ist der Held in der Lage, Wesen abzurichten, die im Talent *Tierkunde* als Wildtiere definiert sind.
+*   **Komplexität:** Das Abrichten bestimmter exotischer Wildtiere gilt als komplex und erfordert zusätzlich ein entsprechendes Berufsgeheimnis.
+*   **Allgemeiner Hinweis:** Das Dressieren von Wildtieren ist laut den Fokusregeln (Stufe I/II) ein langwieriges, schwieriges und potenziell lebensgefährliches Unterfangen.
+
+RATING|Q081|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Um Wildtiere abrichten zu können, ist die Sonderfertigkeit „Tierzüchter“ (oder eine entsprechende SF wie bei Drachen) erforderlich. Diese schaltet die Einsatzmöglichkeit *Abrichten* im Talent *Tierkunde* frei. Ohne diese SF können mit *Tierkunde* nur domestizierte Tiere abgerichtet werden.
+
+Zusätzlich gilt:
+*   Das Abrichten von Wildtieren ist ein langwieriges und schwieriges Unterfangen, das teilweise lebensgefährlich sein kann.
+*   Für das Abrichten bestimmter exotischer Wildtiere ist zusätzlich ein entsprechendes Berufsgeheimnis erforderlich, da dies als komplex gilt.
+
+RATING|Q081|search_semantic|C
+
+
+========Q082=======
+Was zeichnet das 'Kampfseminar zu Andergast' aus?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Kampfseminar zu Andergast zeichnet sich durch folgende Punkte aus:
+
+*   **Ausbildung:** Es bietet eine harte Ausbildung, die neben der Zauberei (insbesondere Kampfmagie) auch hohe körperliche Anforderungen stellt.
+*   **Hintergrund:** Die Absolventen dienen oft in der Armee des Königreiches oder treten dem kämpferischen Magierorden der Grauen Stäbe (ODL) bei.
+*   **Ruf:** Die Magier gelten als konservativ, etwas hinterwäldlerisch und misstrauisch gegenüber Nostria und dessen Magiern.
+*   **Regeltechnische Leitlinie:** Die Leitlinie ist „aufgeschlossen“.
+*   **Zauber:** Es gibt ein spezifisches Wahlzauberpaket (u. a. *Ängste lindern, Corpofesso, Invocatio Maior/Minor*). Zudem gibt es Einschränkungen: Es darf zusätzlich nur ein Zauber des Merkmals Elementar gewählt werden, und Zauber, die TP oder SP bei Kulturschaffenden verursachen, sind nicht erlaubt.
+
+RATING|Q082|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Kampfseminar zu Andergast zeichnet sich durch folgende Punkte aus:
+
+*   **Ausbildung:** Es bietet eine harte Ausbildung, die neben der Zauberei (insbesondere Kampfmagie) auch hohe körperliche Anforderungen stellt.
+*   **Leitlinie:** Die Leitlinie ist „aufgeschlossen“.
+*   **Einsatz:** Die Absolventen dienen oft in der Armee des Königreiches oder treten dem Magierorden der Grauen Stäbe bei.
+*   **Ruf:** Sie gelten als konservativ, etwas hinterwäldlerisch und misstrauisch gegenüber Nostria.
+*   **Ausrüstung:** Neben Stab, Hirschfänger und Robe tragen sie meist einen Gambeson zum Schutz. Schwere Waffen sind ohne Dispens nicht gestattet.
+*   **Magische Einschränkungen:** Es gibt ein Wahlzauberpaket; zusätzlich ist nur ein Zauber des Merkmals Elementar erlaubt. Zauber, die TP oder SP bei Kulturschaffenden verursachen, sind nicht gestattet.
+
+RATING|Q082|search_semantic|C
+
+
+========Q083=======
+Wie funktioniert der 'Windmühlen'-Angriff (Windmühle SF)?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Windmühlen-Manöver funktioniert wie folgt:
+
+*   **Voraussetzung:** Der Kämpfer muss noch eine Aktion für die Kampfrunde (KR) zur Verfügung haben, die direkt nach der Parade für eine Attacke (AT) genutzt wird. Das Manöver kann nur gegen Angriffe mit Kampftechniken ausgeführt werden, die für das Manöver zugelassen sind (nicht mit Dolchen oder Fechtwaffen).
+*   **Ablauf:** Die Absicht muss vor der Reaktion angesagt werden. Die Parade (PA) ist um –2 erschwert.
+*   **Erfolg:** Gelingt die PA, führt der Kämpfer sofort eine AT gegen denselben Gegner mit einem Bonus von +4 TP aus.
+*   **Einschränkungen:** 
+    *   Alle weiteren Verteidigungen in dieser KR entfallen.
+    *   Die nachfolgende AT kann nicht mit einem Spezialmanöver, aber mit einem Basismanöver kombiniert werden.
+
+RATING|Q083|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Das Windmühlen-Manöver funktioniert wie folgt:
+
+*   **Voraussetzung:** Der Kämpfer muss noch eine freie Aktion in der aktuellen Kampfrunde (KR) zur Verfügung haben. Das Manöver kann nur gegen Angriffe mit Kampftechniken ausgeführt werden, die für das Manöver zugelassen sind (nicht mit Dolchen oder Fechtwaffen).
+*   **Ansage:** Die Absicht muss vor der Parade (PA) angesagt werden.
+*   **Erschwernis:** Die PA ist um –2 erschwert.
+*   **Erfolg:** Gelingt die PA, führt der Kämpfer sofort eine AT gegen denselben Gegner aus. Diese AT erhält einen Bonus von +4 TP.
+*   **Einschränkungen:**
+    *   Die nachfolgende AT kann nicht mit einem Spezialmanöver, aber mit einem Basismanöver kombiniert werden.
+    *   Nach Durchführung des Manövers entfallen für den Rest der KR alle weiteren Verteidigungen des Kämpfers.
+
+RATING|Q083|search_semantic|C
+
+
+========Q084=======
+Kann ein Held mit Paralyse noch Zauber sprechen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Ja, ein Held kann mit Paralyse grundsätzlich zaubern, sofern der Zauber keine Bewegung oder Sprache erfordert, die durch die jeweilige Paralysestufe erschwert oder unmöglich gemacht wird:
+
+*   **Stufen I–III:** Proben, die Bewegung oder Sprache erfordern, sind um 1 bis 3 Punkte erschwert.
+*   **Stufe IV:** Der Held ist bewegungsunfähig. Da Zauber in der Regel Handlungen erfordern, ist das Wirken von Zaubern auf dieser Stufe faktisch unmöglich.
+
+RATING|Q084|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Ja, ein Held kann mit Paralyse grundsätzlich zaubern, sofern der Zauber keine Bewegung oder Sprache erfordert, die durch die jeweilige Paralysestufe erschwert oder unmöglich gemacht wird:
+
+*   **Stufen I–III:** Proben, die Bewegung oder Sprache erfordern, sind um 1 bis 3 Punkte erschwert.
+*   **Stufe IV:** Der Held ist bewegungsunfähig. Da Zauber in der Regel Handlungen erfordern, ist das Wirken von Zaubern bei Stufe IV faktisch unmöglich.
+
+RATING|Q084|search_semantic|C
+
+
+========Q085=======
+Wer kann Auge des Basilisken verwenden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über eine Fähigkeit oder einen Gegenstand namens „Auge des Basilisken“. Er beschreibt lediglich den „Versteinernden Blick“ als eine Sonderregel, die ausschließlich vom Basilisken selbst eingesetzt wird.
+
+RATING|Q085|search_fuzzy|P
+
+--------search_semantic--------
+AI-Answer: Basierend auf dem bereitgestellten Kontext kann ausschließlich der **Basilisk** den „Versteinernden Blick“ (Auge des Basilisken) verwenden.
+
+RATING|Q085|search_semantic|P
+
+
+========Q086=======
+Kann der Wuchtschlag III mit Sturmangriff kombiniert werden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Regel, die die Kombination von Wuchtschlag III mit Sturmangriff verbietet. Es wird lediglich festgehalten, dass der Sturmangriff nicht mit dem Basismanöver Finte kombiniert werden kann.
+
+RATING|Q086|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine explizite Aussage darüber, ob der Wuchtschlag III mit dem Sturmangriff kombiniert werden kann. Er nennt lediglich den Wuchtschlag I als Voraussetzung für den Sturmangriff und stellt fest, dass der Sturmangriff nicht mit dem Basismanöver Finte kombiniert werden kann.
+
+RATING|Q086|search_semantic|W
+
+
+========Q087=======
+Wo liegt der alte Tanzplatz der nostrischen Hexen?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der wichtigste Tanzplatz der nostrischen Hexen liegt auf einem unzugänglichen Felsplateau oberhalb der Siedlung Norddrakenburg, an den Kalkklippen von Hallerû.
+
+RATING|Q087|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Der wichtigste Tanzplatz der nostrischen Hexen liegt auf einem unzugänglichen Felsplateau oberhalb der Siedlung Norddrakenburg, auf den Kalkklippen von Hallerû.
+
+RATING|Q087|search_semantic|C
+
+
+========Q088=======
+Ist ein Elenviner Vollblut schneller oder ein Orklandpony?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über das Orklandpony. Daher kann kein Vergleich zur Geschwindigkeit des Elenviner Vollbluts gezogen werden.
+
+RATING|Q088|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen über Orklandponys. Daher kann kein Vergleich zur Geschwindigkeit des Elenviner Vollbluts gezogen werden.
+
+RATING|Q088|search_semantic|W
+
+
+========Q089=======
+Welcher Status ist passend um Müdigkeit abzubilden?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welcher Status zur Abbildung von Müdigkeit zu verwenden ist.
+
+RATING|Q089|search_fuzzy|W
+
+--------search_semantic--------
+AI-Answer: Der bereitgestellte Kontext enthält keine Informationen darüber, welcher Status zur Abbildung von Müdigkeit zu verwenden ist.
+
+RATING|Q089|search_semantic|W
+
+
+========Q90=======
+Wie lange dauert das Aktivieren eines im Artefakt gespeicherten Spruchs?
+
+Expected: 
+
+--------search_fuzzy--------
+AI-Answer: Das Aktivieren eines im Artefakt gespeicherten Zauberspruchs erfordert eine freie Aktion. Die Wirkung tritt zu Beginn der nächsten Kampfrunde ein.
+
+RATING|Q90|search_fuzzy|C
+
+--------search_semantic--------
+AI-Answer: Zum Aktivieren eines im Artefakt gespeicherten Zauberspruchs ist eine freie Aktion notwendig (durch das Aussprechen eines Schlüsselwortes oder die Ausführung einer Schlüsselgeste). Die Wirkung des Zauberspruchs tritt zu Beginn der nächsten Kampfrunde ein.
+
+RATING|Q90|search_semantic|C
+

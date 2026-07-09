@@ -23,6 +23,7 @@ TOOLS = [
     "search_exact_keyword",
     "search_fuzzy",
     "search_phrase_proximity",
+    "search_semantic",
     "search_smart",
 ]
 
@@ -58,7 +59,7 @@ def _trim_question(text: str) -> str:
 
 def _build_user_args(question_text: str, tool: str) -> dict[str, Any]:
     q = question_text.strip()
-    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_semantic", "search_smart"}:
         return {"query": q, "size": 5}
     return {"phrase": q, "slop": 8, "size": 5}
 
@@ -69,16 +70,28 @@ def _build_realistic_fallback_args(question_text: str, tool: str) -> dict[str, A
         return {"query": q, "size": 5}
     if tool == "search_fuzzy":
         return {"query": q, "size": 5}
+    if tool == "search_semantic":
+        return {"query": q, "size": 5, "mode": "hybrid"}
     short_phrase = " ".join(q.split()[:8]).strip()
     return {"phrase": short_phrase or q, "slop": 6, "size": 5}
 
 
 def _build_smart_fallback_args(question_text: str, tool: str) -> dict[str, Any]:
     q = question_text.strip()
-    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_semantic", "search_smart"}:
         return {"query": q, "size": 5}
     short_phrase = " ".join(_trim_question(q).split()[:8]).strip()
     return {"phrase": short_phrase or q, "slop": 8, "size": 5}
+
+
+def _build_diagnostic_fallback_args(question_text: str, tool: str) -> dict[str, Any]:
+    q = _trim_question(question_text)
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
+        return {"query": q, "size": 5}
+    if tool == "search_semantic":
+        return {"query": q, "size": 5, "mode": "hybrid"}
+    short_phrase = " ".join(q.split()[:6]).strip()
+    return {"phrase": short_phrase or q, "slop": 5, "size": 5}
 
 
 def resolve_tool_args(question: dict[str, Any], tool: str, mode: str) -> dict[str, Any]:
@@ -105,7 +118,7 @@ def resolve_tool_args(question: dict[str, Any], tool: str, mode: str) -> dict[st
     legacy = question.get("tool_args", {})
     if isinstance(legacy, dict) and legacy.get(tool):
         return dict(legacy[tool])
-    return {}
+    return _build_diagnostic_fallback_args(question_text, tool)
 
 
 def _first_line(text: str) -> str:

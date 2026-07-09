@@ -1,0 +1,60 @@
+{
+  "run_id": "20260709-171718-realistic_args",
+  "eval_mode": "realistic_args",
+  "spec_path": "experiments/testbench-v2.json",
+  "run_json_path": "experiments/runs/7 - Fuzzy vs. Hybrid/20260709-171718-realistic_args/run-realistic_args.json",
+  "review_txt_path": "experiments/runs/7 - Fuzzy vs. Hybrid/20260709-171718-realistic_args/manual-review-realistic_args.txt",
+  "overall": {
+    "retrieval": {
+      "evaluated_rows": 0,
+      "macro_precision": null,
+      "macro_recall": null,
+      "hit_rate": null
+    },
+    "answer": {
+      "rated_rows": 180,
+      "count_C": 71,
+      "count_P": 25,
+      "count_W": 84,
+      "strict_precision": 0.39444444444444443,
+      "lenient_recall": 0.5333333333333333,
+      "weighted_score": 0.4638888888888889
+    }
+  },
+  "by_tool": {
+    "search_fuzzy": {
+      "retrieval": {
+        "evaluated_rows": 0,
+        "macro_precision": null,
+        "macro_recall": null,
+        "hit_rate": null
+      },
+      "answer": {
+        "rated_rows": 90,
+        "count_C": 35,
+        "count_P": 13,
+        "count_W": 42,
+        "strict_precision": 0.3888888888888889,
+        "lenient_recall": 0.5333333333333333,
+        "weighted_score": 0.46111111111111114
+      }
+    },
+    "search_semantic": {
+      "retrieval": {
+        "evaluated_rows": 0,
+        "macro_precision": null,
+        "macro_recall": null,
+        "hit_rate": null
+      },
+      "answer": {
+        "rated_rows": 90,
+        "count_C": 36,
+        "count_P": 12,
+        "count_W": 42,
+        "strict_precision": 0.4,
+        "lenient_recall": 0.5333333333333333,
+        "weighted_score": 0.4666666666666667
+      }
+    }
+  }
+}

@@ -1,6 +1,9 @@
 import argparse
+import json
 import os
 import re
+import urllib.error
+import urllib.request
 from pathlib import Path
 
 import pymupdf4llm
@@ -35,7 +38,80 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Loescht vor dem Re-Indexing nur Chunks desselben Dokuments (doc_id).",
     )
+    parser.add_argument(
+        "--enable-vectors",
+        action="store_true",
+        help="Berechnet Embeddings und speichert sie im Feld 'content_vector'.",
+    )
+    parser.add_argument(
+        "--embedding-model",
+        type=str,
+        default="nomic-embed-text",
+        help="Ollama Embedding-Modell (Default: nomic-embed-text).",
+    )
+    parser.add_argument(
+        "--embedding-api-url",
+        type=str,
+        default="http://127.0.0.1:11434/api/embeddings",
+        help="Ollama Embedding API Endpoint.",
+    )
+    parser.add_argument(
+        "--embedding-dims",
+        type=int,
+        default=0,
+        help="Dimensionen fuer dense_vector (0 = automatisch ueber Probe bestimmen).",
+    )
+    parser.add_argument(
+        "--embedding-timeout",
+        type=float,
+        default=30.0,
+        help="Timeout in Sekunden fuer Embedding-Anfragen.",
+    )
+    parser.add_argument(
+        "--embedding-fail-fast",
+        action="store_true",
+        help="Bricht bei Embedding-Fehlern sofort ab, statt ohne Vektor weiterzulaufen.",
+    )
     return parser
+
+
+class OllamaEmbedder:
+    def __init__(self, api_url: str, model: str, timeout_seconds: float, expected_dims: int = 0):
+        self.api_url = api_url
+        self.model = model
+        self.timeout_seconds = max(1.0, float(timeout_seconds))
+        self.expected_dims = int(expected_dims)
+
+    def _post(self, text: str) -> list[float]:
+        payload = json.dumps({"model": self.model, "prompt": text}).encode("utf-8")
+        request = urllib.request.Request(
+            self.api_url,
+            data=payload,
+            headers={"Content-Type": "application/json"},
+            method="POST",
+        )
+
+        with urllib.request.urlopen(request, timeout=self.timeout_seconds) as response:
+            raw = response.read().decode("utf-8")
+        parsed = json.loads(raw)
+        embedding_raw = parsed.get("embedding", [])
+
+        if not isinstance(embedding_raw, list) or not embedding_raw:
+            raise ValueError("Embedding-Antwort enthaelt kein gueltiges 'embedding' Array.")
+
+        vector = [float(value) for value in embedding_raw]
+        if self.expected_dims > 0 and len(vector) != self.expected_dims:
+            raise ValueError(
+                f"Embedding-Dimension passt nicht zum Mapping (erwartet {self.expected_dims}, erhalten {len(vector)})."
+            )
+        return vector
+
+    def probe_dimensions(self) -> int:
+        vector = self._post("dimension-probe")
+        return len(vector)
+
+    def encode(self, text: str) -> list[float]:
+        return self._post(text)
 
 
 def slugify(value: str) -> str:
@@ -52,7 +128,13 @@ def build_doc_id(pdf_path: Path, data_dir: Path) -> str:
     return "__".join(parts)
 
 
-def setup_elasticsearch(es_host: str, index_name: str, reset_index: bool) -> Elasticsearch:
+def setup_elasticsearch(
+    es_host: str,
+    index_name: str,
+    reset_index: bool,
+    enable_vectors: bool,
+    embedding_dims: int,
+) -> Elasticsearch:
     """Verbindet sich mit ES und stellt den Index inkl. Mapping sicher."""
     os.environ["no_proxy"] = "*"
 
@@ -64,25 +146,35 @@ def setup_elasticsearch(es_host: str, index_name: str, reset_index: bool) -> Ela
         print(f"Fehler bei der Verbindung zu Elasticsearch:\n{exc}")
         raise ConnectionError("Abbruch wegen Verbindungsfehler.") from exc
 
+    properties: dict = {
+        "doc_id": {"type": "keyword"},
+        "chunk_id": {"type": "keyword"},
+        "title": {
+            "type": "text",
+            "fields": {
+                "keyword": {"type": "keyword"},
+            },
+        },
+        "source": {"type": "keyword"},
+        "page": {"type": "integer"},
+        "file_path": {"type": "keyword"},
+        "content": {
+            "type": "text",
+            "analyzer": "german",
+        },
+    }
+
+    if enable_vectors:
+        properties["content_vector"] = {
+            "type": "dense_vector",
+            "dims": embedding_dims,
+            "index": True,
+            "similarity": "cosine",
+        }
+
     mapping = {
         "mappings": {
-            "properties": {
-                "doc_id": {"type": "keyword"},
-                "chunk_id": {"type": "keyword"},
-                "title": {
-                    "type": "text",
-                    "fields": {
-                        "keyword": {"type": "keyword"},
-                    },
-                },
-                "source": {"type": "keyword"},
-                "page": {"type": "integer"},
-                "file_path": {"type": "keyword"},
-                "content": {
-                    "type": "text",
-                    "analyzer": "german",
-                },
-            }
+            "properties": properties,
         }
     }
 
@@ -124,6 +216,8 @@ def extract_and_chunk_pdf(
     data_dir: Path,
     index_name: str,
     text_splitter: RecursiveCharacterTextSplitter,
+    embedder: OllamaEmbedder | None,
+    embed_fail_fast: bool,
 ) -> tuple[str, list[dict]]:
     print(f"Lese PDF: {pdf_path}")
 
@@ -159,6 +253,20 @@ def extract_and_chunk_pdf(
                 }
             )
 
+            if embedder is not None:
+                try:
+                    vector = embedder.encode(clean_chunk)
+                    documents[-1]["_source"]["content_vector"] = vector
+                except (urllib.error.URLError, TimeoutError, ValueError) as exc:
+                    if embed_fail_fast:
+                        raise RuntimeError(
+                            f"Embedding fehlgeschlagen fuer Chunk {chunk_id}: {exc}"
+                        ) from exc
+                    print(
+                        f"  -> Warnung: Embedding fuer {chunk_id} fehlgeschlagen ({exc}). "
+                        "Chunk wird ohne content_vector indexiert."
+                    )
+
     print(f"  -> {doc_id}: {len(documents)} Chunks")
     return doc_id, documents
 
@@ -184,10 +292,27 @@ def main() -> None:
     if args.chunk_overlap >= args.chunk_size:
         raise ValueError("chunk_overlap muss kleiner als chunk_size sein.")
 
+    embedder: OllamaEmbedder | None = None
+    embedding_dims = int(args.embedding_dims)
+    if args.enable_vectors:
+        embedder = OllamaEmbedder(
+            api_url=args.embedding_api_url,
+            model=args.embedding_model,
+            timeout_seconds=args.embedding_timeout,
+            expected_dims=embedding_dims,
+        )
+        if embedding_dims <= 0:
+            print("Bestimme Embedding-Dimensionen ueber Probe...")
+            embedding_dims = embedder.probe_dimensions()
+            embedder.expected_dims = embedding_dims
+            print(f"  -> Erkannte Embedding-Dimension: {embedding_dims}")
+
     es = setup_elasticsearch(
         es_host=args.es_host,
         index_name=args.index,
         reset_index=args.reset_index,
+        enable_vectors=args.enable_vectors,
+        embedding_dims=embedding_dims,
     )
 
     pdf_files = list_pdf_files(data_dir, args.glob)
@@ -213,6 +338,8 @@ def main() -> None:
                 data_dir=data_dir,
                 index_name=args.index,
                 text_splitter=text_splitter,
+                embedder=embedder,
+                embed_fail_fast=args.embedding_fail_fast,
             )
 
             if args.replace_doc:
@@ -237,6 +364,9 @@ def main() -> None:
     print(f"Geloeschte Alt-Chunks (replace-doc): {total_deleted}")
     print(f"Erfolgreich indexierte Chunks: {total_success}")
     print(f"Fehlgeschlagene Bulk-Operationen: {total_failed}")
+    if args.enable_vectors:
+        print(f"Vektor-Ingestion aktiv mit Modell: {args.embedding_model}")
+        print(f"Vektor-Dimensionen: {embedding_dims}")
 
 
 if __name__ == "__main__":

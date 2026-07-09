@@ -1,0 +1,40 @@
+Testbench Score Summary
+
+Run ID: 20260709-171718-realistic_args
+Eval Mode: realistic_args
+Spec: experiments/testbench-v2.json
+Run File: experiments/runs/7 - Fuzzy vs. Hybrid/20260709-171718-realistic_args/run-realistic_args.json
+Review File: experiments/runs/7 - Fuzzy vs. Hybrid/20260709-171718-realistic_args/manual-review-realistic_args.txt
+
+Overall Retrieval
+- Evaluated Rows: 0
+- Macro Precision: n/a
+- Macro Recall: n/a
+- Hit Rate: n/a
+
+Overall Answer
+- Rated Rows: 180
+- C/P/W: 71/25/84
+- Strict Precision (C only): 0.394
+- Lenient Recall (C+P): 0.533
+- Weighted Score (C=1,P=0.5,W=0): 0.464
+
+By Tool
+
+[search_fuzzy]
+- Retrieval Macro Precision: n/a
+- Retrieval Macro Recall: n/a
+- Retrieval Hit Rate: n/a
+- Answer C/P/W: 35/13/42
+- Answer Strict Precision: 0.389
+- Answer Lenient Recall: 0.533
+- Answer Weighted Score: 0.461
+
+[search_semantic]
+- Retrieval Macro Precision: n/a
+- Retrieval Macro Recall: n/a
+- Retrieval Hit Rate: n/a
+- Answer C/P/W: 36/12/42
+- Answer Strict Precision: 0.400
+- Answer Lenient Recall: 0.533
+- Answer Weighted Score: 0.467
