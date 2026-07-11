@@ -1,0 +1,55 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'fontFamily': 'Times New Roman' }}}%%
+%% UML Component Diagram (Mermaid, Schwarz-Weiss)
+classDiagram
+    direction LR
+
+    class Nutzer {
+      <<actor>>
+    }
+
+    class LLMClient {
+      <<component>>
+      +ask(question)
+      +render_answer()
+    }
+
+    class MCPServer {
+      <<component>>
+      +search_exact_keyword()
+      +search_phrase_proximity()
+      +search_fuzzy()
+      +search_semantic()
+      +search_smart()
+    }
+
+    class ElasticSearch {
+      <<component>>
+      +query(index, clause)
+      +return_hits()
+    }
+
+    class IngestionPipeline {
+      <<component>>
+      +extract_pdf_text()
+      +chunk_text()
+      +index_documents()
+    }
+
+    class PDFKorpus {
+      <<artifact>>
+      +pdf_files
+    }
+
+    class LLMProvider {
+      <<component>>
+      +generate_answer()
+      +tool_call_planning()
+    }
+
+    Nutzer --> LLMClient : stellt Frage
+    LLMClient --> MCPServer : list_tools()
+    LLMClient --> MCPServer : Tool-Aufruf
+    MCPServer --> ElasticSearch : Suchabfrage
+    IngestionPipeline --> ElasticSearch : schreibt Chunks
+    PDFKorpus --> IngestionPipeline : Quelldokumente
+    LLMClient --> LLMProvider : Gemini API oder Ollama lokal

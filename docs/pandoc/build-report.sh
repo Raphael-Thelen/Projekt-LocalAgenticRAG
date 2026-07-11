@@ -52,7 +52,7 @@ if [[ ! -f "$BIB_FILE" ]]; then
   exit 1
 fi
 
-# Optional: render Mermaid source files to SVG before PDF generation.
+# Optional: render Mermaid source files to PNG before PDF generation.
 if [[ -d "$MERMAID_DIR" ]]; then
   shopt -s nullglob
   mermaid_files=("$MERMAID_DIR"/*.mmd)
@@ -60,9 +60,9 @@ if [[ -d "$MERMAID_DIR" ]]; then
     if command -v mmdc >/dev/null 2>&1; then
       echo "Rendering Mermaid diagrams..."
       for mmd in "${mermaid_files[@]}"; do
-        svg="${mmd%.mmd}.svg"
-        mmdc -q -i "$mmd" -o "$svg"
-        echo "  -> $(basename "$svg")"
+        png="${mmd%.mmd}.png"
+        mmdc -q -i "$mmd" -o "$png"
+        echo "  -> $(basename "$png")"
       done
     else
       echo "Warning: Mermaid files found, but mmdc is not installed."

@@ -52,11 +52,13 @@ ElasticSearch ist als quelloffene, verteilte Such- und Analytics-Engine, die gez
 Die eigentliche Suchfunktionalität von ElasticSearch basiert dabei auf Lucene, einer in Java geschriebenen Programmbibliothek der Apache Software Foundation. Ziel der Bibliothek ist die Bereitstellung einer leistungsfähigen Volltextsuche, die es erlaubt, aus einem frei formulierten Text eine Trefferliste zu erzeugen. Dabei ist Lucene in der Lage, mit fehlerhaften Schreibweisen, Synonymen und Formulierungen sowie grammatikalischen Formen, wie Singular und Plural, umzugehen. Gesuchte Begriffe werden zuverlässig in Texten identifiziert [@elasticFullText2026]. Der Vorteil einer solchen Freitextsuche liegt in der Fähigkeit, dem Nutzer auch bei ungenauer oder fehlerhafter Eingabe ein passendes Suchergebnis bereitzustellen, was für die verwendete fuzzy Suche von zentraler Bedeutung ist [@elasticFullText2026].
 
 Die aus den Quelldaten erzeugte Vektordatenbank speichert mühelos große Mengen an halbstrukturierten Daten als schemalose JSON-Dokumente [@elasticVectorDatabase2026] und ermöglicht Sprachmodellen so den Zugriff auf lokale Informationen, ohne dass das Modell selbst die Quelle verarbeiten muss [@elasticVectorDatabase2026]. So gelingt das Retrieval in Echtzeit.
-Selbst bei umfangreichen Datenbeständen liefert die Suche innerhalb von Millisekunden deterministische Ergebnisse die dem Sprachmodell mit präzisen Kontextinformationen, wie beispielsweise die Quelldatei und die Zeilennummer, bereitgestellt werden [@elasticVectorDatabase2026]. Zum anderen erlaubt ElasticSearch eine hybride Suche, die die klassische Volltextsuche mit dichten und dünn besetzten Vektoreinbettungen (Dense und Sparse Vectors) kombiniert und so ein hohes semantisches Verständnis erreicht [@elasticHybridSearch2026]. Darüber hinaus besteht keine zwingende Framework-Abhängigkeit, da sich vollständige RAG-Pipelines direkt innerhalb des Elastic-Ökosystems umsetzen lassen, ohne dass zusätzliche externe Werkzeuge wie LangChain zwingend erforderlich wären [@elasticProduct2026].
+Selbst bei umfangreichen Datenbeständen liefert die Suche innerhalb von Millisekunden deterministische Ergebnisse die dem Sprachmodell mit präzisen Kontextinformationen, wie beispielsweise die Quelldatei und die Zeilennummer, bereitgestellt werden [@elasticVectorDatabase2026]. Zum anderen erlaubt ElasticSearch eine hybride Suche, die die klassische Volltextsuche mit dichten und dünn besetzten Vektoreinbettungen (Dense und Sparse Vectors) kombiniert und so ein hohes semantisches Verständnis erreicht [@elasticHybridSearch2026]. Während der ingestion wandelt dafür ein spezielles Embedding-Modell die Texte in hochdimensionale Zahlenvektoren um. Ein vector wird dabei *dense* genannt, wenn nahezu jede Dimension einen von null verschiedenen Wert enthält. Ist er dagegen dünn besetzt, das heißt die meisten Dimensionen sind null und nur wenige tragen Information, bezeichnet man ihn als *sparse*. Die *Cosine Similarity* beschreibt schließlich als Funktion die Ähnlichkeit zweier Vektoren über den Winkel zwischen ihnen und ist auf den Wertebereich von -1 bis 1 normiert. Je naeher der Wert an 1 liegt, desto ähnlicher sind die verglichenen Inhalte [@elasticHybridSearch2026].
+
+So kann die RAG-Pipeline direkt innerhalb des Elastic-Ökosystems umgesetzt werden, ohne dass zusätzliche externe Werkzeuge wie LangChain zwingend erforderlich wären [@elasticProduct2026].
 
 ## Model Context Protocol als Werkzeugschicht für LLM-Systeme
 
-Um im Rahmen einer RAG-Architektur auf die fehlertolerante Sucheoperation über die externen Datenquellen zugreifen zu können, die mit ElasticSearch in Form der Retrieval-Komponente bereitgestellt wird, ist eine übergeordnete Struktur nötig. Diese muss die Interaktion zwischen dem Sprachmodell und ElasticSearch sowohl koordinieren als auch standartisieren.
+Um im Rahmen einer RAG-Architektur auf die fehlertolerante Suchoperation über die externen Datenquellen zugreifen zu können, die mit ElasticSearch in Form der Retrieval-Komponente bereitgestellt wird, ist eine übergeordnete Struktur nötig. Diese muss die Interaktion zwischen dem Sprachmodell und ElasticSearch sowohl koordinieren als auch standartisieren.
 
 Herkömmliche Integrationsschnittstellen wie klassische REST- oder fixed-schema RPC-APIs stoßen hierbei an systemische Grenzen. Sie agieren prinzipiell zustandslos und unterstützen keine native Sitzungshistorie, weshalb ihre starren Verträge den dynamischen Anforderungen moderner KI-Systeme nicht gerecht  werden [@ray2025mcp]. Diese technologische Lücke schließt das von Anthropic entwickelte Model Context Protocol (MCP) als eine universelle Ebene, die als sitzungsorientiertes Framework die Integration von Werkzeugen, Prompts und Kontexten in LLMs vereinheitlicht [@sanikommu2025mcp; @ray2025mcp].
 
@@ -102,106 +104,297 @@ Da automatisierte textuelle Metriken die Nuancen natürlicher Sprache nicht ausr
 Abschließend ist die Erkenntnis zentral, dass hervorragende Retrieval-Metriken nicht automatisch eine hohe Antwortqualität garantieren [@es2025ragas; @lewis2020rag]. Wenn das LLM an der Interpretation der Suchergebnisse scheitert oder in Halluzination verfällt, führen selbst perfekte Retrieval-Werte zu einem fehlerhaften Ergebnis. Aus diesem Grund müssen zu einer ganzheitlichen Evaluation des Systems immer beide Metriken betrachtet werden.
 
 
-# Anforderungsanalyse und Zielarchitektur (ca. 1 Seiten, mit UML Diagramm, Komponenten Diagramm, Squence Diagramm)
+# Anforderungsanalyse und Zielarchitektur
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Nach Klärung der Grundbegriffe werden in diesem Kapitel die fachlichen und technischen Anforderungen an den zu entwickelnden Prototypen herausgearbeitet. 
 
-Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer
+Der erwartete Anwendungsfall ist die fachlich korrekte Beantwortung von Nutzerfragen über Nichenwissen aus einem lokalen Dokumentbestand möglicherweise sensibler oder geschützter Dateien. Daraus lassen sich zwei Leitprinzipien ableiten: Erstens muss das System ohne Cloud-Speicherung der Quelldaten betrieben werden können, zweitens muss jede Antwort explizit auf konkreten Textstellen basieren, damit die fachliche Korrektheit gewahrt bleibt.
 
-## Anforderungen an ein lokales und privatsphaerisches Assistenzsystem
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Interaktion soll einem werkzeuggestützten Agentic-RAG-Muster folgen: Das LLM entscheidet auf Basis der Frage, welches Retrieval-Tool geeignet ist, lässt Treffer abrufen und verdichtet diese zu einer Antwort.
 
 ## Funktionale Anforderungen
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+1. Das System muss PDF-Dokumente aus einem lokalen Verzeichnis ingestieren, in Chunks aufteilen und inklusive Metadaten indexieren.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+2. Das Retrieval muss zu Vergleichszwecken mehrere Strategien unterstützen und als Tool über MCP exponieren.
 
-## Nicht-funktionale Anforderungen
+3. Das LLM muss Retrieval-Tools bedarfsgerecht aufrufen, Treffer konsolidieren und eine fundierte Antwort erzeugen.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+4. Für reproduzierbare Experimente muss die Testbench verschiedene Modi und vergleichbare Runs unterstützen.
+
+5. Retrieval- und Antwortqualität müssen getrennt evaluierbar sein, um zwischen Tool und LLM als Fehlerquelle unterscheiden zu können.
+
+6. Die Inhalte der indexierten Dokumente verbleiben lokal, es darf zu Testzwecken eine optionale externe Modellanbindung existieren.
+
+7. Um auf Entwicklungen der Branche reagieren zu können müssen neue Retrieval-Tools ohne Änderung des Gesamtprotokolls integrierbar sein.
+
+8. Tippfehler und variiende Begriffswahl innerhalb der Suchanfrage müssen dennoch zu relevante Ergebnissen führen.
+
+9. Zu Zwecken der Wartbarkeit müssen die Komponenten der RAG-Pipeline klar getrennt sein.
 
 ## Zielarchitektur des Systems
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Zielarchitektur ist in vier Schichten aufgeteilt: Datenbasis (PDF-Dateien), Retrieval-Layer (ElasticSearch), Tool-Layer (MCP) und Client-Layer (LLM Chatbot in der Konsole). Die Ingestion-Pipeline extrahiert und segmentiert PDF-Inhalte einmalig und schreibt diese mit Metadaten in den ElasticSearch-Index. Der MCP-Server stellt darauf aufbauend Suchfunktionen als standardisierte Tools bereit. Der Client-Agent verbindet diese Tools mit dem Sprachmodell und orchestriert den Antwortprozess.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+![UML-Komponentendiagramm der Zielarchitektur](assets/mermaid/req-component.png)
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die operative Sequenz beginnt mit der Nutzerfrage im Client. Das LLM wählt anschließend ein oder mehrere Retrieval-Tools, der MCP-Server überführt den Tool-Aufruf in eine ElasticSearch-Abfrage und liefert Treffer mit Metadaten zurück. Auf dieser Grundlage erzeugt das LLM die finale, belegte Antwort. Damit werden sowohl fachliche Korrektheit als auch Transparenz des Antwortwegs abgesichert.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+![UML-Sequenzdiagramm für den Anfrage- und Antwortfluss im Agentic-RAG-Prototyp](assets/mermaid/req-sequence.png)
 
 
-# Systementwurf und Implementierung (ca. 1 Seiten, Klassendiagramm, Sourcecode snippets, Dokumentation im SC)
+# Systementwurf, Implementierung und Entwicklung der Retrieval-Strategien
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Auf die technischen Anforderung aus vorherigen Kapitel aufbauend, wird in diesem Kapitel die finale Version des Prototypen detailliert beschrieben. Es wird die Iterationshistorie erläutert sowie aufgetretene Probleme und deren Lösungen beleuchtet. 
 
 ## Gesamtpipeline vom PDF-Dokument bis zur Antwort
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+In der ersten Iteration des Prototypen unterstützte dieser nur ein eine einzelne PDF-Datei mit exakter Keyword Suche als einziger Retrieval Strategie. Im Verlauf der Entwicklung entwickelte sich die Architektur iterativ weiter. Auf rekursive Ingestion folgten neue Suchstrategien und deren Verbesserung, sodass das geforderte Format einer typischen RAG-Pipeline erreicht werden konnte. Diese sieht gegenwärtig wie folgt aus:
+
+![UML-Aktivitätsdiagramm der Gesamtpipeline vom PDF bis zur finalen Antwort](assets/mermaid/pipeline-overview.png)
+
+Neben den vier theoretischen Schichten ist die Pipeline sinnvoll in drei praktische Schritte zu unterteilen.
+Der erste Schritt besteht in der ingestion der Quelldaten, der Transformation der Quelldaten in die Datenbank der Retrieval-Schicht.
+
+Der relevante Code für diesen Schritt ist in erster Linie im Modul `ingestion` zu finden. Im Gegesatz zu den folgenden Beiden, muss die Ingestion nicht für jede Prompt des Nutzers neu ausgeführt werden. Es reicht den Prozess einmal vor eingabe der ersten Frage anzustoßen. Die errechneten Chunks, Metadaten und Vektoren sind peristent im Ordner `lara_documents` gespeichert. Lediglich eine Änderung an den Quelldaten macht ein erneutes durchführen dieses Schritts nötig.
+
+Sobald die Quelldaten verarbeitet sind kann der Nutzer über den Client, dessen Quellcode in `mcp-client` zu finden ist, den zweiten Schritt, Retrieval, anstoßen. Das vom Client angefragte LLM wählt darauf hin ein vom MCP Server, zu finden in `mcp-server`, als standartisierte Schnittstelle zur Verfügung gestelltes Retrieval-Tool und fragt damit den containerisierten ElasticSearch Server an, wo die Query bearbeitet wird.
+
+Das Resultat der ES-Query stößt schließlich den dritten Schritt an, indem dieses an den Client zurückgegeben wird, wo das LLM das Suchergebnis auswertet und zu einer Antwort formuliert. Der Client fungiert innerhalb der Schritte zwei und drei durchgehend als Orchestrator und bestimmt was zu welcher Zeit passiert.
 
 ## Dateningestion und Indexaufbau
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Ingestion ist so aufgebaut, dass sie nicht nur einzelne Dateien verarbeitet, sondern den gesammten lokalen PDF-Ordner rekursiv einliest. Damit eignet sich die Pipeline insbesondere auch für wachsende Datensammlungen. Ohne, dass das Skript neu angepasst werden muss, ist der Prozess über Parameter steuerbar. Derselbe Code kann sowohl für schnelle Erweiterung als auch für vollständige Re-Indexierungen genutzt werden.
 
-## ElasticSearch-Mapping und Dokumentstruktur
+Inhaltlich relevante Textfelder (`title`, `content`) werden mit dem Analyzer `german` indexiert, damit sprachspezifische Normalisierung bei der lexikalischen Suche berücksichtigt wird. Zentral für die spätere Retrieval-Qualität ist dabei das Chunking. Die Texte werden in kleinere Einheiten zerlegt, damit Elasticsearch später präzise Treffer zurückgeben kann und der Kontext für das LLM nicht zu grob wird. Die erzeugten Chunks werden zusammen mit stabilen Metadaten wie `doc_id`, `chunk_id`, `page` und `file_path` gespeichert. Diese Felder sind im weiteren Verlauf entscheidend für die Evaluation.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Parameter für Chunkgröße und Overlap haben sich im Entwicklungsverlauf mehrfach geändert. In den Iterationen hat sich diese, neben Wahl der Retrievalstrategie, als größter Hebel für Retrievalpräzision erwiesen. Kleine Chunks führten zwar zu hoher Granularität, aber häufiger zu Kontextverlust über Satz- und Abschnittsgrenzen hinweg, sodass zwar die erwarten Chunks gefunden wurden, dass LLM an mangels Kontext an der Interpretation scheiterte. Große Chunks verbesserten dagegen den lokalen Zusammenhang, reduzierten jedoch die Trennschärfe der Treffer und erhöhten die Menge irrelevanter Beitexte in der späteren Antwortgenerierung, sodass das LLM eine unpräzise Antwort lieferte. Ein analoger Trade-off zeigte sich ebenfalls beim Overlap: Ein zu geringer Überlappungsbereich begünstigt harte Informationsabbrüche an Chunkgrenzen, sodass dem LLM wieder der Kontext fehlt um ausführlich zu antworten. Wird der Overlap zu hoch gewählt, erzeugt diese unnötige Redundanz, größere Indexmengen und teilweise doppelte Evidenzen in den Top-Treffern, was seitens des LLM zu einer falschen Gewichtung der erhaltenen Informationen führte.
+
+Im finalen Stand wurde daher die Konfiguration `chunk-size=1100` und `chunk-overlap=180` gewählt. Die Einstellung erwies sich für den verwendeten Dokumenttyp als robuster Kompromiss zwischen semantischem Zusammenhang und ausreichender Grenzstabilität, sowie wirtschaftlicher Größe.
+
+
+```python
+#ingestion/ingest.py
+documents: list[dict] = []
+for page_data in md_pages:
+    page_num = get_page_number(page_data)
+    text = str(page_data.get("text", "")) if isinstance(page_data, dict) else ""
+    chunks = text_splitter.split_text(text)
+
+    for chunk_index, chunk in enumerate(chunks):
+        clean_chunk = chunk.strip()
+        if not clean_chunk:
+            continue
+
+        chunk_id = f"{doc_id}_p{page_num}_c{chunk_index:03d}"
+        documents.append(
+            {
+                "_index": index_name,
+                "_source": {
+                    "doc_id": doc_id,
+                    "chunk_id": chunk_id,
+                    "title": title,
+                    "source": doc_id,
+                    "page": page_num,
+                    "file_path": file_path,
+                    "content": clean_chunk,
+                },
+            }
+        )
+```
+
+Als optionale Funktion der Ingestion ist die Vektorerstellung implementiert. Sie wird durch den Flag `--enable-vectors` aktiviert. Dadurch bleibt die Pipeline für reine lexikale Experimente schlank, kann aber für semantische oder hybride Retrieval-Varianten erweitert werden, ohne den Datenfluss zu verändern.
+
+Technisch wird dafür ein eigener `OllamaEmbedder` verwendet, der pro Chunk einen HTTP-Request an die lokale Embedding-API stellt und das Ergebnis als numerischen Vektor zurückliefert. Von besonderer Relevanz ist dabei die Dimensionskontrolle. Wenn der Flag `--embedding-dims` größer als 0 gesetzt ist, wird jede Embedding-Antwort gegen diese feste Dimension validiert. Falls `--embedding-dims` auf 0 bleibt, ermittelt die Pipeline die Dimension zu Beginn über einen Probeaufruf und übernimmt diesen Wert anschließend konsistent für Mapping und Ingestion. Letzteres wurde im folgenden eingesetzt.
+
+Während der oben beschriebenen Verarbeitung wird der Vektor, sollte die Erstellung aktiviert sein, direkt als `dense_vector` an das jeweilige Chunk-Dokument angehangen (`content_vector`), die Ähnlichkeitsberechnung erfolgt über Cosine Similarity.
+
+```python
+#ingestion/ingest.py
+if args.enable_vectors:
+    embedder = OllamaEmbedder(
+        api_url=args.embedding_api_url,
+        model=args.embedding_model,
+        timeout_seconds=args.embedding_timeout,
+        expected_dims=embedding_dims,
+    )
+    if embedding_dims <= 0:
+        print("Bestimme Embedding-Dimensionen ueber Probe...")
+        embedding_dims = embedder.probe_dimensions()
+        embedder.expected_dims = embedding_dims
+        print(f"  -> Erkannte Embedding-Dimension: {embedding_dims}")
+```
+```python
+vector = embedder.encode(clean_chunk)
+documents[-1]["_source"]["content_vector"] = vector
+```
+
+ Ist die Vektorfunktion aktiv, ergänzt die Pipeline jedes Dokument um `content_vector` als `dense_vector`; die Ähnlichkeitsberechnung erfolgt über Cosine Similarity. Damit sind im selben Index sowohl klassische textbasierte als auch semantische beziehungsweise hybride Retrievalstrategien konsistent auf derselben Chunk-Basis möglich.
 
 ## MCP-Server und Such-Tools
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Der MCP-Server ist mit dem offiziellen MCP-SDK als eigenständiges Modul aufgesetzt und bindet in erster Linie Elasticsearch ein. Die Implementierung beistzt dabei zwei Endpunkte die angefragt werden können. `ListToolsRequestSchema` liefert dabei eine JSON formatierter Auflistung der verfügbaren Suchmodi. Die Ausführung einer Suche, der eigentliche Tool-Call, erfolgt über `CallToolRequestSchema`. Zum aktuellen Stand des Prototypen werden die Suchstrategien `search_exact_keyword`, `search_phrase_proximity`, `search_fuzzy`, `search_smart` und `search_semantic` bereitgestellt. Ein Tool-Aufruf wird serverseitig validiert, in eine konkrete Elasticsearch-Query transformiert und als normalisiertes JSON-Ergebnis inklusive Metadaten (`chunk_id`, `doc_id`, `page`, `excerpt`) zurückgegeben.
+
+Diese Struktur ist standart im MCP-Protokoll und liefert dem Client eine stabile, einheitliche Schnittstelle, während sich die Retrieval-Logik im Hintergrund ohne Kenntnis des Clients iterativ weiterentwickeln kann. Daraus resultierend übernimmt der Server nicht nur die reine Tool-Expose, sondern auch die Härtung der Retrieval-Pfade: Exact-Queries werden über Rewrite-Logik robuster gegen Formulierungsvarianten gemacht, der semantische Pfad besitzt bei Embedding-Problemen einen lexical fallback, und `search_smart` akzeptiert nur validierte Plaene oder fällt auf heuristische Planung zurück.
+
+### Exact Retrieval und Query-Rewrite
+
+Das Exact-Retrieval war die erste implementierte Suchstrategie und erwies sich im gegeben Anwendungsfall als brauchbar, für das nachschlagen spezieller Fachbegriffe, die in den Quelldaten sauber als solche definiert waren. Davon abgesehen stellte sich dieser Ansatz als fragil heraus. Insbesondere wurden Begriffe die an verschiedenen Stellen im Dokumentkorpus unter Synonymen verwendet wurden nicht gefunden.
+
+In Teilen lies sich der Ansatz verbessern. Um das volle Potential von ElasticSearch auszuschöpfen, wurde ein MCP-serverseitiger Query-Rewrite eingeführt. Hier zeigte sich zum ersten Mal die Stärke des modularen Ansatzes und des MCP-Protokolls: Die Suchlogik konnte deutlich robuster gestaltet werden, ohne den Tool-Vertrag anzupassen. Der Client musste dafür nicht modifiziert werden.
+
+Technisch bildet eine mehrstufige `should`-Query den Kern. Die Rohanfrage wird erst als `simple_query_string` mit niedrigem Boost ausgeführt. Rewrite-basierte Varianten, wie normalisierte Terme, OR-Varianten und phrase-nahe Abfragen werden anschließend ergänzt. Die wichtigsten Stellschrauben dieser Strategie sind `minimum_should_match`, die Wahl von `default_operator` (`and` oder `or`), sowie die Boost-Gewichte der einzelnen Query-Zweige.
+
+### Fuzzy Retrieval als robuster Baseline-Ansatz
+
+Nachdem gezeigt war, dass der Prototyp in seiner Grundfunktion läuft, wurde Fuzzy-Retrieval als zweite Strategie in den MCP-Server aufgenommen. Der Schritt ergab sich als direkte Reaktion auf die Grenzen der exakten Suche: Schon kleine Tippfehler, Schreibvarianten oder abweichende Formulierungen konnten relevante Treffer ausblenden. Fuzzy schließt genau diese Lücke und ist geeignet, als robuste Standardstrategie, insbesondere bei unsauberen Nutzeranfragen.
+
+Im Code basiert die Strategie auf einer kombinierten Bool-Query mit mehreren `should`-Klauseln, mit unterschiedlichen Fehlertoleranzgraden. Dabei bildet `multi_match` mit `fuzziness: "AUTO"` und `operator: "and"` den präziseren Kern. Ein zusätzlicher `match`-Zweig mit `operator: "or"` ist breiter aufgestellt und stabilisiert das Ergebnis bei unvollständigen oder unpräzisen Formulierungen. Zusätzlich erweitert `match_phrase_prefix` den Zugriff auf präfixbasierte Teiltreffer. Die Mindestbedingung `minimum_should_match: 1` stellt sicher, dass bereits ein belastbarer Pfad für einen Treffer ausreicht.
+
+Im Entwicklungsverlauf lagen die wichtigsten Hebel nicht in den Spezialregeln, sondern, wie bei der Exact-Version, in der Abstimmung der zentralen Parameter, diesmal `fuzziness`, `operator`, `prefix_length`, `max_expansions` und die jeweiligen `boost`-Gewichte der Zweige.  Je nach Abstimmung lässt sich zwischen Präzision und Robustheit verschieben. Ein zu aggressiver Fuzzy-Pfad erhöht die Trefferabdeckung auf kosten höheren Rauschens. Ein strenger Pfad reduziert dieses, mindert jedoch die Fehlertoleranz, welche die Stärke dieses HErangehenweise sein soll. Die finale Konfiguration geht in keines der Extreme. Eine mittlere Balance hat sich als am vielversprechensten etabliert.
+
+```typescript
+//mcp-server/index.ts
+if (toolName === "search_fuzzy") {
+    const query = String(args.query ?? "").trim();
+    const size = clampSize(args.size);
+
+    if (!query) {
+        throw new Error("'query' ist fuer search_fuzzy erforderlich.");
+    }
+
+    const { hits } = await esClient.search({
+        index: INDEX_NAME,
+        body: {
+            query: {
+                bool: {
+                    should: [
+                        {
+                            multi_match: {
+                                query,
+                                fields: ["content", "title^2"],
+                                fuzziness: "AUTO",
+                                operator: "and",
+                                prefix_length: 1,
+                            },
+                        },
+                        {
+                            match: {
+                                content: {
+                                    query,
+                                    fuzziness: "AUTO",
+                                    operator: "or",
+                                    boost: 0.7,
+                                },
+                            },
+                        },
+                        {
+                            match_phrase_prefix: {
+                                content: {
+                                    query,
+                                    max_expansions: 50,
+                                    boost: 0.6,
+                                },
+                            },
+                        },
+                    ],
+                    minimum_should_match: 1,
+                },
+            },
+            size,
+        },
+    });
+```
+
+### Phrase Proximity als mittelweg
+
+Als dritte Strategie wurde `search_phrase_proximity` hinzugefügt. Diese Strategie ist besonders für Fälle geeignet, in denen die Nähe zwischen Begriffen wichtiger ist als ein einzelnes Schlagwort. Der Ansatz sollte zum Beispiel stark sein, wenn ein Regelzusammenhang erst aus der Kombination zweier Terme entsteht oder eine feste Formulierung gesucht wird. 
+
+In der Theorie ist Phrase-Proximity vor allem dann sinnvoll, wenn die reine Fuzzy-Suche zu breit wird und Exact zu eng bleibt. Es kann also als eine Art Mittelweg zwischen den beiden bestehenden Strategien verstanden werden. Justierbar ist die Strategie über die Einstellung `slop`. Ein kleiner Wert erzwingt hohe Wortnähe und erhöht Präzision, ein größerer Wert fängt Umstellungen und Zwischenwörter ab, erhöht aber zugleich das Risiko für weniger trennscharfe Treffer. Der Standart-Wert von `slop = 5` hat sich jedoch als gut erwiesen. Eine Anpassung lieferte keine Messbare Verbesserung.
+
+### KI-gestütztes Smart Retrieval: Idee, Umsetzung und Grenzen
+
+Die Retrievalstrategie `search_smart` erweitert die Suche um einen vom LLM vorgeschlagenen, serverseitig validierten Suchplan mit Fallback-Mechanik. Dadurch werden Planungsflexibilität und operative Robustheit kombiniert: Der Client kann einen Plan vorschlagen, der Server behält jedoch die Kontrolle über Gültigkeit und Ausführung.
+
+Der Unterschied zu den anderen Strategien liegt dann darin, dass es nicht eine festgelegte Suchmethode ist, sondern ein adaptives Meta-System. Statt eine einzelne, vordefinierte Retrieval-Logik zu wählen und auszuführen, kann das Client-LLM einen detaillierten Plan mit Keywords, Expansionen und Confidence-Scores vorschlagen. Der Server validiert den Plan und übernimmt dann die intelligente Orchestration, statt das LLM die Strategie raten zu lassen.
+
+Dies ist konzeptionell ein Vorteil gegenüber Fällen, in denen das LLM extern bereits alle Strategien selbst wählt. `search_smart` reduziert die Verantwortung auf dem Client, da dieser nicht mehrfach experimentieren muss oder verschiedene Tools sequenziell aufrufen muss, sondern eine einzige, intelligente Anfrage stellen kann. Die Robustheit der Antwort hängt jedoch stark von der Qualität der Planer-Ausgabe und der serverseitigen Validierungslogik ab.
+
+### Semantic-Retrieval
+
+Der semantische Pfad kombiniert Embedding-basiertes `script_score`-Ranking mit lexikalen Signalen. Im Modus `hybrid` wird die Vektoraehnlichkeit gezielt um `should`-Klauseln erweitert, um sowohl semantische Naehe als auch robuste Begriffstreffer abzudecken. Zusaetzlich ist bei Problemen in der Embedding-Kette ein lexical fallback vorgesehen, damit das Retrieval auch bei partiellen Ausfaellen der Vektorkomponente funktionsfaehig bleibt.
+
+Das Semantic-Retrieval nutzt Embedding-basierte Ähnlichkeitssuche, um die inhaltliche Bedeutung von Queries und Dokumenten zu erfassen. Dadurch muss sich nicht auf exakte oder tolerante Wortübereinstimmungen verlassen werden. Der Ablauf unterteilt sich in drei Schritte und setzt voraus, dass bei der Ingestion Vektoren hinterlegt wurden.
+
+Ebenso wie zuvor die Quelldaten wird nach der Nutzeranfrage zuerst ein numerischen Vektor aus der Prompt erstellt. Dazu transformiert ein lokales Embedding-Modell den Eingabetext. An wen welches Modell die Anfrage gesendet wird ist konfigurierbar, standartmäßig ist das lokale `nomi-embed-text` via Ollama hinterlegt.
+
+Im Elasticsearch-Index wird anschließend eine `script_score`-Query ausgeführt. Über die Cosine-Similarity-Funktion wird die Ähnlichkeit zwischen dem Query-Vektor und dem `content_vector` jedes indexierten Chunks berechnet. Das Scoring verwendet die Formel
+```math
+cosineSimilarity(params.query_vector, 'content_vector') + 1.0
+```
+Es entstehen Werte im Bereich [0, 2], was sicherstellt, dass selbst Chunks mit geringer Ähnlichkeit noch positive Scores erhalten.
+
+Es werden zwei operative Modi unterstütz. Im Modus `semantic_only` wird ausschließlich die Vektorähnlichkeit mit hohem Boost (2.0) berücksichtigt, was die semantische Präzision maximiert, bei Begriffen, die das Modell schlecht erfasst, aber zu Fehltreffern führen kann. Der standartmäßig verwendete Modus `hybrid` kombiniert die Vektor-Query (Boost 1.4) gezielt mit lexikalen `should`-Klauseln aus Fuzzy-Retrieval (Boost `multi_match` 0.8, `match` 0.55). So wird ein ein robustes Retrieval ermöglicht, bei dem sowohl semantische Nähe als auch explizite Begriffstreffer belohnt sind.
 
 ## LLM-Client, Tool-Nutzung und Antwortgenerierung
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Der Client basiert maßgeblich auf künstlicher Intelligenz. Per Anforderungsdefinition muss das LLM lokal verfügbar sein, da eine Kommunikation mit der Cloud oder externen Anbietern die Grundprämisse des Datenschutzes verletzt. Die Wahl des LLM gestaltete sich als schwierig.
 
-## Reproduzierbarkeit, Logging und Artefaktstruktur
+Die erste Version des Prototypen sollte via Ollama ein lokales 7B Modell von *Mistral AI* verwenden. Dieser Plan scheiterte jedoch am MCP-Tool-Call. Mistral schien die bereitsgestellten Tools nicht zu finden, stattdessen wurden die Anfragen mit eigenem Wissen beantwortet. Das funktionierte weder gut, noch entspricht es den Anforderungen.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Mit *llama 3.1* in der 8B Variante konnten die Tools schlussendlich verwendet, und erste Ergebnisse verzeichnet werden. Auf der verwendete Hardware führte die Nutzung des Llama-Modells, welches im Vergleich zu Mistral ca. 14% größer ist, jedoch zu Performanceeinbußen. Der kombinierte Speicherplatzbedarf von Modell und ElasticSearch-Datenbanken überstiegen die Menge an hardwareseitig verfügbarem Arbeitsspeicher, was Swapping auslöste. Das Gerät wurde  unresponsiv, es dauerte mehrere Minuten, bis die Prompt vom RAG-System beanwortet wurde.
 
+Als Konsequnz fiel die Entscheidung auf einen Mittelweg. Um die Dauer von Testläufen auf der verfügbaren Hardware drastisch zu reduzieren wurde eine `.env`-Datei geschaffen, die es einfach erlaubt, das verwendete Modell von lokal auf remote API zu schalten. Aufgrund der Möglichkeit die API bestimmter Modelle kostenfrei zu nutzen fiel die Wahl auf `Gemini` von Google.
 
-# Entwicklung der Retrieval-Strategien (ca. 3 Seiten)
+```env
+#/.env.example
+# LLM provider switch: gemini or ollama
+LARA_LLM_PROVIDER=gemini
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+# Gemini (recommended during development on low-end hardware)
+GEMINI_API_KEY=replace_with_your_key
+GEMINI_MODEL_NAME=gemini-3.1-flash-lite
+GEMINI_BASE_URL=https://generativelanguage.googleapis.com/v1beta/openai/
 
-## Ausgangspunkt: einfacher Einzel-PDF-Prototyp
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-## Exact Retrieval und Query-Rewrite
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-## Phrase- und Proximity-Retrieval
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-## Fuzzy Retrieval als robuster Baseline-Ansatz (prüfen)
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
-
-## KI-gestuetztes Smart Retrieval: Idee, Umsetzung und Grenzen
-
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+# Ollama (ideal)
+OLLAMA_BASE_URL=http://localhost:11434/v1
+OLLAMA_MODEL_NAME=llama3.1
+```
 
 
 # Evaluationsdesign (ca. 3 Seiten)
+
+Mit der Verwendung eines externen Anbieters traten weitere Probleme auf, so ist die Menge an Anfragen pro Tag sowie pro Minute limitiert. Das tägliche Limit ist dabei hochgenug angesetzt um einen reibungslosen Betrieb zu ermöglichen. Das minütliche Limit machte für den regulären Betrieb ebenfalls keine Probleme, führte aber im automatisiert Testbetrieb immer wieder zu Abstürzen durch `rate-limit-exceeded`-Fehler.
+
+```python
+def _is_retryable_quota_error(exc: Exception) -> bool:
+    text = str(exc).lower()
+    markers = [
+        "quota",
+        "rate limit",
+        "rate_limit",
+        "too many requests",
+        "resource has been exhausted",
+        "429",
+    ]
+    return any(marker in text for marker in markers)
+```
+
+
+## Reproduzierbarkeit, Logging und Artefaktstruktur
+
+- Für jeden Lauf liegen strukturierte Artefakte vor:
+	- `run-<mode>.json`
+	- `manual-review-<mode>.txt`
+	- `score-<mode>.json`
+	- `score-summary-<mode>.txt`
+- Exakter Code-Snippet aus `experiments/score_testbench.py`:
+
+```python
+    strict_precision = c / total
+    lenient_recall = (c + p) / total
+    weighted_score = (1.0 * c + 0.5 * p + 0.0 * w) / total
+```
 
 ## Aufbau der Testbench
 
@@ -211,11 +404,11 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
 
-## Bewertungslogik fuer Retrieval
+## Bewertungslogik für Retrieval
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
 
-## Manuelle Bewertung der Antwortqualitaet
+## Manuelle Bewertung der Antwortqualität
 
 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
 
@@ -228,7 +421,7 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 # Experimentelle Ergebnisse (ca. 3 Seiten)
 
-## Ergebnisse der fruehen Runs und Iterationen
+## Ergebnisse der frühen Runs und Iterationen
 
 ## Verbesserungen durch Exact-Rewrite
 
@@ -245,13 +438,13 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 ## Einordnung der Retrieval-Ergebnisse
 
-## Warum Fuzzy aktuell der staerkste Ansatz ist
+## Warum Fuzzy aktuell der stärkste Ansatz ist
 
 ## Grenzen von Exact und Proximity
 
 ## Grenzen des aktuellen Smart-Retrieval-Ansatzes
 
-## Validitaet der Metriken und Grenzen der Goldtruth
+## Validität der Metriken und Grenzen der Goldtruth
 
 
 # Fazit und Ausblick (ca. 1 Seiten)
@@ -260,6 +453,6 @@ Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod 
 
 ## Wichtigste technische und methodische Erkenntnisse
 
-## Konkrete naechste Entwicklungsschritte
+## Konkrete nächste Entwicklungsschritte
 
-## Perspektiven fuer weiterfuehrende Forschung
+## Perspektiven für weiterführende Forschung

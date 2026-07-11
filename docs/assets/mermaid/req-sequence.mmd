@@ -1,0 +1,33 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'actorBkg': '#ffffff', 'actorBorder': '#000000', 'actorTextColor': '#000000', 'signalColor': '#000000', 'signalTextColor': '#000000', 'labelBoxBkgColor': '#ffffff', 'labelBoxBorderColor': '#000000', 'labelTextColor': '#000000', 'fontFamily': 'Times New Roman' }}}%%
+%% UML Sequence Diagram (Mermaid, Schwarz-Weiss)
+sequenceDiagram
+    autonumber
+    actor U as Nutzer
+    participant C as LLM-Client
+        participant M as LLM-Provider
+        participant S as MCP-Server
+        participant E as ElasticSearch
+
+    U->>C: Frage stellen
+        C->>S: initialize()
+        C->>S: list_tools()
+        S-->>C: Verfuegbare Tools
+        C->>M: Erste Chat-Anfrage mit Tool-Schemas
+        M-->>C: Antwort (optional mit tool_calls)
+
+        opt tool_calls vorhanden
+            loop fuer jeden Tool-Call
+                C->>S: call_tool(name, args)
+                S->>E: Query DSL auf lara_documents
+                E-->>S: Treffer + Scores + Metadaten
+                S-->>C: JSON Payload (results, count)
+            end
+            C->>M: Finale Chat-Anfrage mit Tool-Ergebnissen
+            M-->>C: Antwort mit Belegen
+        end
+
+        opt keine tool_calls
+            C-->>U: Direkte Modellantwort
+        end
+
+        C-->>U: Finale Antwort

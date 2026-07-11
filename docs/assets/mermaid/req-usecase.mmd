@@ -1,0 +1,20 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'fontFamily': 'Times New Roman' }}}%%
+%% UML Use-Case Diagram (Mermaid, Schwarz-Weiss)
+flowchart LR
+    actor_user["<<actor>>\nNutzer"]
+
+    subgraph system["Lokales Agentic-RAG-System"]
+      uc1((Frage stellen))
+      uc2((Antwort mit Belegen erhalten))
+      uc3((PDFs ingestieren und indexieren))
+      uc4((Retrieval-Tools aufrufen))
+      uc5((Runs und Qualität evaluieren))
+    end
+
+    actor_user --- uc1
+    actor_user --- uc2
+    actor_user --- uc5
+
+    uc1 --> uc4
+    uc4 --> uc2
+    uc3 -. unterstützt .-> uc2

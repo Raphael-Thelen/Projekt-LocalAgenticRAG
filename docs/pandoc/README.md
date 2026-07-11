@@ -8,7 +8,7 @@ Das Abstract auf der Titelseite wird automatisch aus `docs/Abstract.md` gelesen.
 
 - pandoc
 - tectonic (Standard PDF-Engine)
-- optional: mermaid-cli (`mmdc`) fuer `.mmd` -> `.svg`
+- optional: mermaid-cli (`mmdc`) fuer `.mmd` -> `.png`
 
 Installation auf macOS:
 
@@ -66,11 +66,11 @@ Bild:
 Mermaid:
 
 1. Datei anlegen: `docs/assets/mermaid/diagramm.mmd`
-2. Build starten (Script rendert automatisch nach `diagramm.svg`)
-3. SVG in Markdown einbinden:
+2. Build starten (Script rendert automatisch nach `diagramm.png`)
+3. PNG in Markdown einbinden:
 
 ```md
-![Komponentendiagramm](assets/mermaid/diagramm.svg)
+![Komponentendiagramm](assets/mermaid/diagramm.png)
 ```
 
 Tabelle (Markdown):

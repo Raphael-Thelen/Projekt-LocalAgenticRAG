@@ -1,0 +1,27 @@
+%%{init: {'theme': 'base', 'themeVariables': { 'background': '#ffffff', 'primaryColor': '#ffffff', 'primaryTextColor': '#000000', 'primaryBorderColor': '#000000', 'lineColor': '#000000', 'secondaryColor': '#ffffff', 'tertiaryColor': '#ffffff', 'fontFamily': 'Times New Roman' }}}%%
+%% UML Aktivitätsdiagramm (Mermaid, Schwarz-Weiß)
+flowchart TB
+    subgraph R1[Ingestion-Phase]
+        direction LR
+        A([Start]) --> B[Dateien laden]
+        B --> C[Extraktion und Chunking]
+        C --> D[Metadaten erzeugen]
+        D --> E[Chunks in ES Index]
+    end
+
+    subgraph R2[Retrieval-Phase]
+        direction LR
+        F[Nutzerfrage] --> G[LLM wählt Tools]
+        G --> H[MCP call_tool mit Query-Argumenten]
+        H --> I[Elasticsearch Query ausführen]
+        I --> J[Treffer + Metadaten zurückgeben]
+    end
+
+    subgraph R3[Antwort-Phase]
+        direction LR
+        K[Kontext im Client aufbereiten] --> L[Finale Antwort mit Belegen erzeugen]
+        L --> M([Ende])
+    end
+
+    E --> F
+    J --> K
