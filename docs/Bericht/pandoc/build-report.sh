@@ -2,7 +2,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
-DOCS_DIR="$ROOT_DIR/docs"
+DOCS_DIR="$ROOT_DIR/Bericht"
 PANDOC_DIR="$DOCS_DIR/pandoc"
 
 INPUT_MD="${1:-$DOCS_DIR/Report.md}"

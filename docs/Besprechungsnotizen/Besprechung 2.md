@@ -1,4 +1,3 @@
-20 seiten Text
 Was wurde gemacht, wie wurde es gemacht, was kam dabei raus. Intermediärer Zustand ist in Ordnung.
 
 Größers Modell versuchen, lange Wartezeiten. Kein Geld ausgeben :(
@@ -27,7 +26,7 @@ Mit KI drüber diskutieren.
 
 Gemini CLI
 
-Kein Template, keine Vorgaben 10-20 seiten Text (Ziel: 25)
+Kein Template, keine Vorgaben 10-20 seiten Text
 
 Markdown
 

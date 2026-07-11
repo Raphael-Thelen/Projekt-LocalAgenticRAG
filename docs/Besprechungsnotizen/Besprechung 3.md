@@ -1,11 +1,8 @@
-## Entwicklungsnotizen
+Titel und Abstrakt zum Vortrag ende Juni für Feedback einreichen.
 
-Versuch die KI das manuelle review übernehmen zu lassen sind kläglich gescheitert :(
+Erstes Kapitel optional für Feedback einreichen.
 
-
-## Deadlines
-
-Titel und Abstrakt zum Vortrag ende Juni für Feedback. und Termine mitte Juli.
+Termine Seminar Mitte Juli.
 
 
 ## Empfehlung fuer den roten Faden
