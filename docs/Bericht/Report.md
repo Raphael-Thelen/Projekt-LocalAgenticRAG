@@ -106,15 +106,15 @@ Abschließend ist die Erkenntnis zentral, dass hervorragende Retrieval-Metriken 
 
 # Anforderungsanalyse und Zielarchitektur
 
-Nach Klärung der Grundbegriffe werden in diesem Kapitel die fachlichen und technischen Anforderungen an den zu entwickelnden Prototypen herausgearbeitet. 
+Nach Klärung der Grundbegriffe, werden in diesem Kapitel die fachlichen und technischen Anforderungen an den zu entwickelnden Prototypen herausgearbeitet. 
 
-Der erwartete Anwendungsfall ist die fachlich korrekte Beantwortung von Nutzerfragen über Nichenwissen aus einem lokalen Dokumentbestand möglicherweise sensibler oder geschützter Dateien. Daraus lassen sich zwei Leitprinzipien ableiten: Erstens muss das System ohne Cloud-Speicherung der Quelldaten betrieben werden können, zweitens muss jede Antwort explizit auf konkreten Textstellen basieren, damit die fachliche Korrektheit gewahrt bleibt.
+Der erwartete Anwendungsfall ist die fachlich korrekte Beantwortung von Nutzerfragen über Nischenwissen aus einem lokalen Dokumentbestand (möglicherweise) sensibler oder geschützter Dateien. Daraus lassen sich zwei Leitprinzipien ableiten. Einerseits muss das System ohne Cloud-Speicherung der Quelldaten betrieben werden können, andererseits muss jede Antwort explizit auf konkreten Textstellen basieren, damit die fachliche Korrektheit gewahrt bleibt.
 
-Die Interaktion soll einem werkzeuggestützten Agentic-RAG-Muster folgen: Das LLM entscheidet auf Basis der Frage, welches Retrieval-Tool geeignet ist, lässt Treffer abrufen und verdichtet diese zu einer Antwort.
+Die Interaktion soll einem werkzeug-gestützten Agentic-RAG-Muster folgen. Das LLM entscheidet anhand der Frage, welches Retrieval-Tool geeignet ist, lässt Treffer abrufen und verdichtet diese zu einer Antwort.
 
 ## Funktionale Anforderungen
 
-1. Das System muss PDF-Dokumente aus einem lokalen Verzeichnis ingestieren, in Chunks aufteilen und inklusive Metadaten indexieren.
+1. Das System muss PDF-Dokumente aus einem lokalen Verzeichnis verarbeiten, in Chunks aufteilen und inklusive Metadaten indexieren.
 
 2. Das Retrieval muss zu Vergleichszwecken mehrere Strategien unterstützen und als Tool über MCP exponieren.
 
@@ -126,9 +126,9 @@ Die Interaktion soll einem werkzeuggestützten Agentic-RAG-Muster folgen: Das LL
 
 6. Die Inhalte der indexierten Dokumente verbleiben lokal, es darf zu Testzwecken eine optionale externe Modellanbindung existieren.
 
-7. Um auf Entwicklungen der Branche reagieren zu können müssen neue Retrieval-Tools ohne Änderung des Gesamtprotokolls integrierbar sein.
+7. Um auf Entwicklungen der Branche reagieren zu können, müssen neue Retrieval-Tools ohne Änderung des Gesamtprotokolls integrierbar sein.
 
-8. Tippfehler und variiende Begriffswahl innerhalb der Suchanfrage müssen dennoch zu relevante Ergebnissen führen.
+8. Tippfehler und variierende Begriffswahl innerhalb der Suchanfrage müssen dennoch zu relevante Ergebnissen führen.
 
 9. Zu Zwecken der Wartbarkeit müssen die Komponenten der RAG-Pipeline klar getrennt sein.
 
@@ -138,14 +138,14 @@ Die Zielarchitektur ist in vier Schichten aufgeteilt: Datenbasis (PDF-Dateien), 
 
 ![UML-Komponentendiagramm der Zielarchitektur](assets/mermaid/req-component.png)
 
-Die operative Sequenz beginnt mit der Nutzerfrage im Client. Das LLM wählt anschließend ein oder mehrere Retrieval-Tools, der MCP-Server überführt den Tool-Aufruf in eine ElasticSearch-Abfrage und liefert Treffer mit Metadaten zurück. Auf dieser Grundlage erzeugt das LLM die finale, belegte Antwort. Damit werden sowohl fachliche Korrektheit als auch Transparenz des Antwortwegs abgesichert.
+Die operative Sequenz beginnt mit der Nutzerfrage im Client. Das LLM wählt anschließend ein oder mehrere Retrieval-Tools. Der MCP-Server überführt den Tool-Aufruf in eine ElasticSearch-Abfrage und liefert im Anschluss Treffer mit Metadaten zurück. Auf dieser Grundlage erzeugt das LLM die finale, belegte Antwort. Damit werden sowohl fachliche Korrektheit als auch Transparenz des Antwortwegs abgesichert.
 
 ![UML-Sequenzdiagramm für den Anfrage- und Antwortfluss im Agentic-RAG-Prototyp](assets/mermaid/req-sequence.png)
 
 
 # Systementwurf, Implementierung und Entwicklung der Retrieval-Strategien
 
-Auf die technischen Anforderung aus vorherigen Kapitel aufbauend, wird in diesem Kapitel die finale Version des Prototypen detailliert beschrieben. Es wird die Iterationshistorie erläutert sowie aufgetretene Probleme und deren Lösungen beleuchtet. 
+Auf die technischen Anforderung aus vorherigen Kapitel aufbauend, wird in diesem Kapitel die finale Version des Prototypen detailliert beschrieben. Es wird die Iterationshistorie erläutert, zudem werden aufgetretene Probleme und deren Lösungen beleuchtet. 
 
 ## Gesamtpipeline vom PDF-Dokument bis zur Antwort
 
@@ -153,22 +153,21 @@ In der ersten Iteration des Prototypen unterstützte dieser nur ein eine einzeln
 
 ![UML-Aktivitätsdiagramm der Gesamtpipeline vom PDF bis zur finalen Antwort](assets/mermaid/pipeline-overview.png)
 
-Neben den vier theoretischen Schichten ist die Pipeline sinnvoll in drei praktische Schritte zu unterteilen.
-Der erste Schritt besteht in der ingestion der Quelldaten, der Transformation der Quelldaten in die Datenbank der Retrieval-Schicht.
+Neben den vier theoretischen Schichten ist die Pipeline sinnvoll in drei praktische Schritte zu unterteilen. Der erste Schritt besteht in der Ingestion der Quelldaten, der Transformation der Quelldaten in die Datenbank der Retrieval-Schicht.
 
-Der relevante Code für diesen Schritt ist in erster Linie im Modul `ingestion` zu finden. Im Gegesatz zu den folgenden Beiden, muss die Ingestion nicht für jede Prompt des Nutzers neu ausgeführt werden. Es reicht den Prozess einmal vor eingabe der ersten Frage anzustoßen. Die errechneten Chunks, Metadaten und Vektoren sind peristent im Ordner `lara_documents` gespeichert. Lediglich eine Änderung an den Quelldaten macht ein erneutes durchführen dieses Schritts nötig.
+Der relevante Code für diesen Schritt ist in erster Linie im Modul `ingestion` zu finden. Im Gegensatz zu den folgenden beiden Modulen, muss die Ingestion nicht für jeden Prompt des Nutzers neu ausgeführt werden. Es reicht, den Prozess einmal vor Eingabe der ersten Frage anzustoßen. Die errechneten Chunks, Metadaten und Vektoren sind persistent im Ordner `lara_documents` gespeichert. Lediglich eine Änderung an den Quelldaten macht ein erneutes Durchführen dieses Schritts nötig.
 
-Sobald die Quelldaten verarbeitet sind kann der Nutzer über den Client, dessen Quellcode in `mcp-client` zu finden ist, den zweiten Schritt, Retrieval, anstoßen. Das vom Client angefragte LLM wählt darauf hin ein vom MCP Server, zu finden in `mcp-server`, als standartisierte Schnittstelle zur Verfügung gestelltes Retrieval-Tool und fragt damit den containerisierten ElasticSearch Server an, wo die Query bearbeitet wird.
+Sobald die Quelldaten verarbeitet sind, kann der Nutzer über den Client, dessen Quellcode in `mcp-client` zu finden ist, den zweiten Schritt, Retrieval, anstoßen. Das vom Client angefragte LLM wählt ein Retrieval-Tool aus, das vom MCP-Server (zu finden in `mcp-server`) als standardisierte Schnittstelle bereitgestellt wird. Mit diesem Tool wird der containerisierte ElasticSearch-Server angefragt, auf dem die Query verarbeitet wird.
 
-Das Resultat der ES-Query stößt schließlich den dritten Schritt an, indem dieses an den Client zurückgegeben wird, wo das LLM das Suchergebnis auswertet und zu einer Antwort formuliert. Der Client fungiert innerhalb der Schritte zwei und drei durchgehend als Orchestrator und bestimmt was zu welcher Zeit passiert.
+Das Resultat der ES-Query stößt schließlich den dritten Schritt an, indem das Query an den Client zurückgegeben wird. Dort wertet das LLM das Suchergebnis aus und formuliert dieses zu einer Antwort. Der Client fungiert innerhalb der Schritte zwei und drei durchgehend als Orchestrator und bestimmt, was zu welcher Zeit passiert.
 
 ## Dateningestion und Indexaufbau
 
-Die Ingestion ist so aufgebaut, dass sie nicht nur einzelne Dateien verarbeitet, sondern den gesammten lokalen PDF-Ordner rekursiv einliest. Damit eignet sich die Pipeline insbesondere auch für wachsende Datensammlungen. Ohne, dass das Skript neu angepasst werden muss, ist der Prozess über Parameter steuerbar. Derselbe Code kann sowohl für schnelle Erweiterung als auch für vollständige Re-Indexierungen genutzt werden.
+Die Ingestion ist so aufgebaut, dass sie nicht nur einzelne Dateien verarbeitet, sondern den gesamten lokalen PDF-Ordner rekursiv einliest. Damit eignet sich die Pipeline insbesondere auch für wachsende Datensammlungen. Ohne, dass das Skript neu angepasst werden muss, ist der Prozess über Parameter steuerbar. Derselbe Code kann sowohl für schnelle Erweiterung als auch für vollständige Re-Indexierungen genutzt werden.
 
 Inhaltlich relevante Textfelder (`title`, `content`) werden mit dem Analyzer `german` indexiert, damit sprachspezifische Normalisierung bei der lexikalischen Suche berücksichtigt wird. Zentral für die spätere Retrieval-Qualität ist dabei das Chunking. Die Texte werden in kleinere Einheiten zerlegt, damit Elasticsearch später präzise Treffer zurückgeben kann und der Kontext für das LLM nicht zu grob wird. Die erzeugten Chunks werden zusammen mit stabilen Metadaten wie `doc_id`, `chunk_id`, `page` und `file_path` gespeichert. Diese Felder sind im weiteren Verlauf entscheidend für die Evaluation.
 
-Die Parameter für Chunkgröße und Overlap haben sich im Entwicklungsverlauf mehrfach geändert. In den Iterationen hat sich diese, neben Wahl der Retrievalstrategie, als größter Hebel für Retrievalpräzision erwiesen. Kleine Chunks führten zwar zu hoher Granularität, aber häufiger zu Kontextverlust über Satz- und Abschnittsgrenzen hinweg, sodass zwar die erwarten Chunks gefunden wurden, dass LLM an mangels Kontext an der Interpretation scheiterte. Große Chunks verbesserten dagegen den lokalen Zusammenhang, reduzierten jedoch die Trennschärfe der Treffer und erhöhten die Menge irrelevanter Beitexte in der späteren Antwortgenerierung, sodass das LLM eine unpräzise Antwort lieferte. Ein analoger Trade-off zeigte sich ebenfalls beim Overlap: Ein zu geringer Überlappungsbereich begünstigt harte Informationsabbrüche an Chunkgrenzen, sodass dem LLM wieder der Kontext fehlt um ausführlich zu antworten. Wird der Overlap zu hoch gewählt, erzeugt diese unnötige Redundanz, größere Indexmengen und teilweise doppelte Evidenzen in den Top-Treffern, was seitens des LLM zu einer falschen Gewichtung der erhaltenen Informationen führte.
+Die Parameter für Chunkgröße und Overlap haben sich im Entwicklungsverlauf mehrfach geändert. In den Iterationen hat sich diese, neben der Wahl der Retrieval-Strategie, als größter Hebel für Retrieval-Präzision erwiesen. Kleine Chunks führten zwar zu hoher Granularität, aber häufiger zu Kontextverlust über Satz- und Abschnittsgrenzen hinweg, sodass zwar die erwarten Chunks gefunden wurden, dass LLM an mangels Kontext an der Interpretation scheiterte. Große Chunks verbesserten dagegen den lokalen Zusammenhang, reduzierten jedoch die Trennschärfe der Treffer und erhöhten die Menge irrelevanter Beitexte in der späteren Antwortgenerierung, sodass das LLM eine unpräzise Antwort lieferte. Ein analoger Trade-off zeigte sich ebenfalls beim Overlap. Ein zu geringer Überlappungsbereich begünstigt harte Informationsabbrüche an Chunkgrenzen, sodass dem LLM wieder der Kontext fehlt, um ausführlich zu antworten. Wird der Overlap zu hoch gewählt, erzeugt dieser unnötige Redundanz, größere Indexmengen und teilweise doppelte Evidenzen in den Top-Treffern, was seitens des LLM zu einer falschen Gewichtung der erhaltenen Informationen führte.
 
 Im finalen Stand wurde daher die Konfiguration `chunk-size=1100` und `chunk-overlap=180` gewählt. Die Einstellung erwies sich für den verwendeten Dokumenttyp als robuster Kompromiss zwischen semantischem Zusammenhang und ausreichender Grenzstabilität, sowie wirtschaftlicher Größe.
 
@@ -205,9 +204,9 @@ for page_data in md_pages:
 
 Als optionale Funktion der Ingestion ist die Vektorerstellung implementiert. Sie wird durch den Flag `--enable-vectors` aktiviert. Dadurch bleibt die Pipeline für reine lexikale Experimente schlank, kann aber für semantische oder hybride Retrieval-Varianten erweitert werden, ohne den Datenfluss zu verändern.
 
-Technisch wird dafür ein eigener `OllamaEmbedder` verwendet, der pro Chunk einen HTTP-Request an die lokale Embedding-API stellt und das Ergebnis als numerischen Vektor zurückliefert. Von besonderer Relevanz ist dabei die Dimensionskontrolle. Wenn der Flag `--embedding-dims` größer als 0 gesetzt ist, wird jede Embedding-Antwort gegen diese feste Dimension validiert. Falls `--embedding-dims` auf 0 bleibt, ermittelt die Pipeline die Dimension zu Beginn über einen Probeaufruf und übernimmt diesen Wert anschließend konsistent für Mapping und Ingestion. Letzteres wurde im folgenden eingesetzt.
+Technisch wird dafür ein eigener `OllamaEmbedder` verwendet, der pro Chunk einen HTTP-Request an die lokale Embedding-API stellt und das Ergebnis als numerischen Vektor zurückliefert. Von besonderer Relevanz ist dabei die Dimensionskontrolle. Wenn der Flag `--embedding-dims` größer als 0 gesetzt ist, wird jede Embedding-Antwort gegen diese feste Dimension validiert. Falls `--embedding-dims` auf 0 bleibt, ermittelt die Pipeline die Dimension zu Beginn über einen Probeaufruf und übernimmt diesen Wert anschließend konsistent für Mapping und Ingestion. Letzteres wurde im Folgenden eingesetzt.
 
-Während der oben beschriebenen Verarbeitung wird der Vektor, sollte die Erstellung aktiviert sein, direkt als `dense_vector` an das jeweilige Chunk-Dokument angehangen (`content_vector`), die Ähnlichkeitsberechnung erfolgt über Cosine Similarity.
+Während der oben beschriebenen Verarbeitung wird der Vektor, sollte die Erstellung aktiviert sein, direkt als `dense_vector` an das jeweilige Chunk-Dokument angehangen (`content_vector`). Die Ähnlichkeitsberechnung erfolgt über Cosine Similarity.
 
 ```python
 #ingestion/ingest.py
@@ -229,29 +228,29 @@ vector = embedder.encode(clean_chunk)
 documents[-1]["_source"]["content_vector"] = vector
 ```
 
- Ist die Vektorfunktion aktiv, ergänzt die Pipeline jedes Dokument um `content_vector` als `dense_vector`; die Ähnlichkeitsberechnung erfolgt über Cosine Similarity. Damit sind im selben Index sowohl klassische textbasierte als auch semantische beziehungsweise hybride Retrievalstrategien konsistent auf derselben Chunk-Basis möglich.
+ Ist die Vektorfunktion aktiv, ergänzt die Pipeline jedes Dokument um `content_vector` als `dense_vector`; die Ähnlichkeitsberechnung erfolgt über Cosine Similarity. Damit sind im selben Index sowohl klassische textbasierte als auch semantische beziehungsweise hybride Retrieval-Strategien konsistent auf derselben Chunk-Basis möglich.
 
 ## MCP-Server und Such-Tools
 
-Der MCP-Server ist mit dem offiziellen MCP-SDK als eigenständiges Modul aufgesetzt und bindet in erster Linie Elasticsearch ein. Die Implementierung beistzt dabei zwei Endpunkte die angefragt werden können. `ListToolsRequestSchema` liefert dabei eine JSON formatierter Auflistung der verfügbaren Suchmodi. Die Ausführung einer Suche, der eigentliche Tool-Call, erfolgt über `CallToolRequestSchema`. Zum aktuellen Stand des Prototypen werden die Suchstrategien `search_exact_keyword`, `search_phrase_proximity`, `search_fuzzy`, `search_smart` und `search_semantic` bereitgestellt. Ein Tool-Aufruf wird serverseitig validiert, in eine konkrete Elasticsearch-Query transformiert und als normalisiertes JSON-Ergebnis inklusive Metadaten (`chunk_id`, `doc_id`, `page`, `excerpt`) zurückgegeben.
+Der MCP-Server ist mit dem offiziellen MCP-SDK als eigenständiges Modul aufgesetzt und bindet in erster Linie ElasticSearch ein. Die Implementierung besitzt dabei zwei Endpunkte, die angefragt werden können. `ListToolsRequestSchema` liefert dabei eine JSON-formatierte Auflistung der verfügbaren Suchmodi. Die Ausführung einer Suche, der eigentliche Tool-Call, erfolgt über `CallToolRequestSchema`. Zum aktuellen Stand des Prototypen werden die Suchstrategien `search_exact_keyword`, `search_phrase_proximity`, `search_fuzzy`, `search_smart` und `search_semantic` bereitgestellt. Ein Tool-Aufruf wird serverseitig validiert, in eine konkrete ElasticSearch-Query transformiert und als normalisiertes JSON-Ergebnis inklusive Metadaten (`chunk_id`, `doc_id`, `page`, `excerpt`) zurückgegeben.
 
-Diese Struktur ist standart im MCP-Protokoll und liefert dem Client eine stabile, einheitliche Schnittstelle, während sich die Retrieval-Logik im Hintergrund ohne Kenntnis des Clients iterativ weiterentwickeln kann. Daraus resultierend übernimmt der Server nicht nur die reine Tool-Expose, sondern auch die Härtung der Retrieval-Pfade: Exact-Queries werden über Rewrite-Logik robuster gegen Formulierungsvarianten gemacht, der semantische Pfad besitzt bei Embedding-Problemen einen lexical fallback, und `search_smart` akzeptiert nur validierte Plaene oder fällt auf heuristische Planung zurück.
+Diese Struktur ist standart im MCP-Protokoll und liefert dem Client eine stabile, einheitliche Schnittstelle, während sich die Retrieval-Logik im Hintergrund ohne Kenntnis des Clients iterativ weiterentwickeln kann. Daraus resultierend übernimmt der Server nicht nur die reine Tool-Expose, sondern auch die Härtung der Retrieval-Pfade. Exact-Queries werden über Rewrite-Logik robuster gegen Formulierungsvarianten gemacht, der semantische Pfad besitzt bei Embedding-Problemen einen lexical fallback, und `search_smart` akzeptiert nur validierte Plaene oder fällt auf heuristische Planung zurück.
 
 ### Exact Retrieval und Query-Rewrite
 
-Das Exact-Retrieval war die erste implementierte Suchstrategie und erwies sich im gegeben Anwendungsfall als brauchbar, für das nachschlagen spezieller Fachbegriffe, die in den Quelldaten sauber als solche definiert waren. Davon abgesehen stellte sich dieser Ansatz als fragil heraus. Insbesondere wurden Begriffe die an verschiedenen Stellen im Dokumentkorpus unter Synonymen verwendet wurden nicht gefunden.
+Das Exact-Retrieval war die erste implementierte Suchstrategie und erwies sich im gegeben Anwendungsfall als brauchbar für das Nachschlagen spezieller Fachbegriffe, die in den Quelldaten sauber als solche definiert waren. Davon abgesehen stellte sich dieser Ansatz als fragil heraus. Insbesondere wurden Begriffe, die an verschiedenen Stellen im Dokumentkorpus unter Synonymen verwendet wurden, nicht gefunden.
 
-In Teilen lies sich der Ansatz verbessern. Um das volle Potential von ElasticSearch auszuschöpfen, wurde ein MCP-serverseitiger Query-Rewrite eingeführt. Hier zeigte sich zum ersten Mal die Stärke des modularen Ansatzes und des MCP-Protokolls: Die Suchlogik konnte deutlich robuster gestaltet werden, ohne den Tool-Vertrag anzupassen. Der Client musste dafür nicht modifiziert werden.
+In Teilen lies sich der Ansatz verbessern. Um das volle Potential von ElasticSearch auszuschöpfen, wurde ein MCP-serverseitiger Query-Rewrite eingeführt. Hier zeigte sich zum ersten Mal die Stärke des modularen Ansatzes und des MCP-Protokolls. Die Suchlogik konnte deutlich robuster gestaltet werden, ohne den Tool-Vertrag anzupassen. Der Client musste dafür nicht modifiziert werden.
 
 Technisch bildet eine mehrstufige `should`-Query den Kern. Die Rohanfrage wird erst als `simple_query_string` mit niedrigem Boost ausgeführt. Rewrite-basierte Varianten, wie normalisierte Terme, OR-Varianten und phrase-nahe Abfragen werden anschließend ergänzt. Die wichtigsten Stellschrauben dieser Strategie sind `minimum_should_match`, die Wahl von `default_operator` (`and` oder `or`), sowie die Boost-Gewichte der einzelnen Query-Zweige.
 
 ### Fuzzy Retrieval als robuster Baseline-Ansatz
 
-Nachdem gezeigt war, dass der Prototyp in seiner Grundfunktion läuft, wurde Fuzzy-Retrieval als zweite Strategie in den MCP-Server aufgenommen. Der Schritt ergab sich als direkte Reaktion auf die Grenzen der exakten Suche: Schon kleine Tippfehler, Schreibvarianten oder abweichende Formulierungen konnten relevante Treffer ausblenden. Fuzzy schließt genau diese Lücke und ist geeignet, als robuste Standardstrategie, insbesondere bei unsauberen Nutzeranfragen.
+Nachdem gezeigt war, dass der Prototyp in seiner Grundfunktion läuft, wurde Fuzzy-Retrieval als zweite Strategie in den MCP-Server aufgenommen. Der Schritt ergab sich als direkte Reaktion auf die Grenzen der exakten Suche. Schon kleine Tippfehler, Schreibvarianten oder abweichende Formulierungen konnten bei dieser Suche relevante Treffer ausblenden. Fuzzy schließt genau diese Lücke und ist somit als als robuste Standardstrategie geeignet, insbesondere bei unsauberen Nutzeranfragen.
 
-Im Code basiert die Strategie auf einer kombinierten Bool-Query mit mehreren `should`-Klauseln, mit unterschiedlichen Fehlertoleranzgraden. Dabei bildet `multi_match` mit `fuzziness: "AUTO"` und `operator: "and"` den präziseren Kern. Ein zusätzlicher `match`-Zweig mit `operator: "or"` ist breiter aufgestellt und stabilisiert das Ergebnis bei unvollständigen oder unpräzisen Formulierungen. Zusätzlich erweitert `match_phrase_prefix` den Zugriff auf präfixbasierte Teiltreffer. Die Mindestbedingung `minimum_should_match: 1` stellt sicher, dass bereits ein belastbarer Pfad für einen Treffer ausreicht.
+Im Code basiert die Strategie auf einer kombinierten Bool-Query mit mehreren `should`-Klauseln, die unterschiedliche Fehlertoleranzgrade besitzen. Dabei bildet `multi_match` mit `fuzziness: "AUTO"` und `operator: "and"` den präziseren Kern. Ein zusätzlicher `match`-Zweig mit `operator: "or"` ist breiter aufgestellt und stabilisiert das Ergebnis bei unvollständigen oder unpräzisen Formulierungen. Zusätzlich erweitert `match_phrase_prefix` den Zugriff auf präfix-basierte Teiltreffer. Die Mindestbedingung `minimum_should_match: 1` stellt sicher, dass bereits ein belastbarer Pfad für einen Treffer ausreicht.
 
-Im Entwicklungsverlauf lagen die wichtigsten Hebel nicht in den Spezialregeln, sondern, wie bei der Exact-Version, in der Abstimmung der zentralen Parameter, diesmal `fuzziness`, `operator`, `prefix_length`, `max_expansions` und die jeweiligen `boost`-Gewichte der Zweige.  Je nach Abstimmung lässt sich zwischen Präzision und Robustheit verschieben. Ein zu aggressiver Fuzzy-Pfad erhöht die Trefferabdeckung auf kosten höheren Rauschens. Ein strenger Pfad reduziert dieses, mindert jedoch die Fehlertoleranz, welche die Stärke dieses HErangehenweise sein soll. Die finale Konfiguration geht in keines der Extreme. Eine mittlere Balance hat sich als am vielversprechensten etabliert.
+Im Entwicklungsverlauf lagen die wichtigsten Hebel nicht in den Spezialregeln, sondern, wie bei der Exact-Version, in der Abstimmung der zentralen Parameter. Diese waren in diesem Fall `fuzziness`, `operator`, `prefix_length`, `max_expansions` sowie die jeweiligen `boost`-Gewichte der Zweige.  Je nach Abstimmung lässt sich zwischen Präzision und Robustheit verschieben. Ein zu aggressiver Fuzzy-Pfad erhöht die Treffer-Abdeckung auf Kosten höheren Rauschens. Ein strenger Pfad reduziert dieses, mindert jedoch die Fehlertoleranz, welche die Stärke dieser Herangehensweise sein soll. Die finale Konfiguration geht in keines der Extreme. Eine mittlere Balance hat sich als am vielversprechendsten etabliert.
 
 ```typescript
 //mcp-server/index.ts
@@ -306,7 +305,7 @@ if (toolName === "search_fuzzy") {
     });
 ```
 
-### Phrase Proximity als mittelweg
+### Phrase-Proximity als Mittelweg
 
 Als dritte Strategie wurde `search_phrase_proximity` hinzugefügt. Diese Strategie ist besonders für Fälle geeignet, in denen die Nähe zwischen Begriffen wichtiger ist als ein einzelnes Schlagwort. Der Ansatz sollte zum Beispiel stark sein, wenn ein Regelzusammenhang erst aus der Kombination zweier Terme entsteht oder eine feste Formulierung gesucht wird. 
 
@@ -314,7 +313,7 @@ In der Theorie ist Phrase-Proximity vor allem dann sinnvoll, wenn die reine Fuzz
 
 ### KI-gestütztes Smart Retrieval: Idee, Umsetzung und Grenzen
 
-Die Retrievalstrategie `search_smart` erweitert die Suche um einen vom LLM vorgeschlagenen, serverseitig validierten Suchplan mit Fallback-Mechanik. Dadurch werden Planungsflexibilität und operative Robustheit kombiniert: Der Client kann einen Plan vorschlagen, der Server behält jedoch die Kontrolle über Gültigkeit und Ausführung.
+Die Retrieval-Strategie `search_smart` erweitert die Suche um einen vom LLM vorgeschlagenen, serverseitig validierten Suchplan mit Fallback-Mechanik. Dadurch werden Planungsflexibilität und operative Robustheit kombiniert: Der Client kann einen Plan vorschlagen, der Server behält jedoch die Kontrolle über Gültigkeit und Ausführung.
 
 Der Unterschied zu den anderen Strategien liegt dann darin, dass es nicht eine festgelegte Suchmethode ist, sondern ein adaptives Meta-System. Statt eine einzelne, vordefinierte Retrieval-Logik zu wählen und auszuführen, kann das Client-LLM einen detaillierten Plan mit Keywords, Expansionen und Confidence-Scores vorschlagen. Der Server validiert den Plan und übernimmt dann die intelligente Orchestration, statt das LLM die Strategie raten zu lassen.
 
@@ -364,9 +363,18 @@ OLLAMA_MODEL_NAME=llama3.1
 
 # Evaluationsdesign (ca. 3 Seiten)
 
-Mit der Verwendung eines externen Anbieters traten weitere Probleme auf, so ist die Menge an Anfragen pro Tag sowie pro Minute limitiert. Das tägliche Limit ist dabei hochgenug angesetzt um einen reibungslosen Betrieb zu ermöglichen. Das minütliche Limit machte für den regulären Betrieb ebenfalls keine Probleme, führte aber im automatisiert Testbetrieb immer wieder zu Abstürzen durch `rate-limit-exceeded`-Fehler.
+Die Evaluation des Prototypen erfolgt bewusst zweistufig, geteilt in Qualtität des Retrievals und Qualität der Antworten. Diese Unterscheidung ist für dieses Projekt zentral, da der Prototyp nicht nur Quelltextstellen finden soll, sondern aus diesen Belegstellen auch eine korekte Antwort formulieren muss. Ein einzelner Messwert würde die beiden möglichen Fehlerquellen, LLM und Retrieval, vermischen und damit die Bewertung der Retrieval-Strategien erschweren.
+
+Um die Tests reproduzier zuhalten, wird des weiteren auf ein standartisierten und automatisierten Testablauf gesetzt. Die Experimente werden also über eine strukturierte Testbench mit festen Fragen, definierten Modi und erwartete Retreivalstellen ausgeführt, und standartisiert protokolliert. Dadurch lassen sich einzelne Iterationen nachvollziehen und später auch in der Entwicklung vergleichen. Gerade in den frühen Phasen des Projekts war das wichtig, weil sich sowohl Ingestion, Chunking als auch die MCP-Tools mehrfach verändert haben und frühe Runs deshalb methodisch nur eingeschränkt mit späteren Läufen vergleichbar sind.
+
+## API-Quotas und Fehlertoleranz
+
+Bei den automatisierten Testläufen mit einem externen Modellanbieter trat ein technisches Randproblem auf: Die API war zwar für die manuelle Entwicklung gut nutzbar, im automatisierte Batch-Betrieb aber durch Tages- und vorallem Minutengrenzen begrenzt. Während das Tageslimit für die Arbeitssituation ausreichend hoch war, führten eng getaktete Testserien wiederholt zu `rate-limit-exceeded`-Fehlern, was in frühen Iterationen des Protoypen zum Komplettabsturz der Testpipeline führte.
+
+Um diese Fälle von echten inhaltlichen Fehlern zu trennen, verwendet der Runner eine einfache Prüffunktion, die typische Quota- und Rate-Limit-Fehlermeldungen erkennt. Statt einen Absturz zu erlauben, wird die fehlgeschlagene Anfrage nach steigender Verzögerung wiederholt.
 
 ```python
+#mcp-client/lara_runtime.py
 def _is_retryable_quota_error(exc: Exception) -> bool:
     text = str(exc).lower()
     markers = [
@@ -380,43 +388,76 @@ def _is_retryable_quota_error(exc: Exception) -> bool:
     return any(marker in text for marker in markers)
 ```
 
-
-## Reproduzierbarkeit, Logging und Artefaktstruktur
-
-- Für jeden Lauf liegen strukturierte Artefakte vor:
-	- `run-<mode>.json`
-	- `manual-review-<mode>.txt`
-	- `score-<mode>.json`
-	- `score-summary-<mode>.txt`
-- Exakter Code-Snippet aus `experiments/score_testbench.py`:
-
-```python
-    strict_precision = c / total
-    lenient_recall = (c + p) / total
-    weighted_score = (1.0 * c + 0.5 * p + 0.0 * w) / total
-```
-
 ## Aufbau der Testbench
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Orchestriert wird der Testablauf durch das Skript `experiments/run_testbench.py`, das eine definierte Fragenmenge gegen ausgewählte Retrieval-Tools ausführt. Für jedes Frage-Tool-Paar wird zunächst ein Tool-Aufruf erzeugt, dann die LLM-Antwort gesammelt und schließlich der Run als JSON abgelegt. Da ein menschlicher Nutzer die generierten Fragen manuell bewerten muss, erfolgt die Auswertung im Anschluss über ein zweites Skript in `experiments/score_testbench.py`. Dort werden gesammelten Daten mit der manuellen Bewertung zusammengeführt und zu einer kompakten Score-Datei zusammengefasst.
+
+Für jeden Lauf werden vier Artefakte erzeugt:
+
+- `run-<mode>.json` mit den vollständigen Antworten, Tool-Ergebnissen und Metadaten.
+- `manual-review-<mode>.txt` mit den Tatsächlichen und erwarteten Antworten als Vorlage für die manuelle Bewertung.
+- `score-<mode>.json` mit den berechneten Metriken.
+- `score-summary-<mode>.txt` als lesbare Kurzfassung.
+
+Diese Trennung ist nicht nur organisatorisch sinnvoll, sondern methodisch wichtig, da das Laufprotokoll unverändert archiviert bleibt, während die Bewertung im Fall eines menschlichen Fehlers separat wiederholt werden kann.
+
+## Verwendete Testdaten
+
+Zum Testen wurde die Pipeline mit PDFs gefüttert. Die verwendeten PDFs sollten dabei inhaltich spezifisch genug sein, dass die später abgefragten Inhalte nicht bereits im antrainierten Wissen des LLM vorhanden sind. Gleichzeitig war es wichtig ein Thema zu wählen, das inhaltlich wenig komplex ist und es dadurch erlaubt die LLM-generierten Antworten leicht zu verifizieren. Zusätzlich ist für die Bewertung der RAG-Pipeline sinnvoll einen PDF-Bestand zu wählen, der zum einen groß genug ist und zum zweiten verteiltes Wissen über den selben Themenkomplex enthält, sodass zur Beantwortung der Fragen Informationen aus verschiedenen Chunks kombiniert werden muss.
+
+In Frage kam dazu unteranderem eine, mittels Webscraping erlangte, Sammlung an Wikipedia-Artikeln zu wissenschaftlichen Themen. Dabei müsste sichergestellt werden, das es sich um Artikel mit ausreichender Spezifizität handelt, sodass die Inhalte nicht bereits Teil des Wissensschatzes des LLM sind. Das wiederum macht aber eine ausführliche Einarbeitung des Testen nötig, damit die LLM-Antworten zuverlässig auf korrektheit bewertet werden können.
+
+Insbesonder deshalb wurde letzendlich ine Sammlung an Büchern des Pen-And-Paper Fantasy-Rollenspiels `Das schwarze Auge` (DSA) gewählt. Dabei handelt es sich um ein 1984 von Ulrich Kiesow entworfenes Gesellschaftsspiel [@muehlenhoffSimon1995dsa], welches in der fikitven Welt Aventurien spielt [@spohr2015dsaRegelwerk]. Seit der Veröffentlichung, sind über 500 Publikation zu DSA erschienen, den Datenbestand für die Evaluierung bilden jedoch lediglich 70 aktuelle Werke der 5. Regeledition von DSA, mit einer Größe von 4,67 GB beziehungsweise 12.136 Seiten DIN A4. Die Auswahl ist bewusst so getroffen, dass sowohl klar formulierte Regelpassagen enthalten sind, als auch erzählerichere Beschreibungen der Spielwelt, die ein gründlicheres Zusammentragen und Interpretieren durch die RAG-Pipeline beziehungsweise das LLM verlangen. So ergibt sich eine ausgewogene Mischung für die Tests.
 
 ## Fragenset, Modi und Goldtruth-Konzept
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Benchmark basiert auf einem Fragenset mit zehn heterogenen Fragen. Die Fragen des Sets wurden so gewählt, dass sowohl klar lokalisierbare Fakten als auch schwieriger Formulierungen mit Synonymen und Schreibfehlern. Zudem stammen die Fragen aus unterschiedlichen Kategorien der zugrundeliegenden Materie. Ziel war nicht ein möglichst großer Datensatz, sondern ein kontrollierbares Set, an dem sich Unterschiede zwischen Retrieval-Strategien zuverlässig zeigen lassen.
+
+Die Testbench wird in drei Modi gefahren: `user`, `realistic_args` und `diagnostic_args`. Der Modus `user` simuliert die direkte, unkuratierte Anfrage des Nutzers und nutzt möglichst nahe am Originaltext liegende Suchargumente. `realistic_args` bildet den typischen Produktivfall ab, in dem für jedes Tool bereits sinnvoll vorparametrisierte Argumente vorliegen oder heuristisch ergänzt werden. `diagnostic_args` ist breiter und defensiver angelegt; dieser Modus wurde vor allem genutzt, um Unterschiede zwischen den Strategien unter günstigeren Suchbedingungen sichtbar zu machen.
+
+Die wichtigsten Vergleichsläufe wurden über alle drei Modi hinweg mit identischem Fragenkatalog ausgeführt. Dadurch ist sichtbar, wie stark ein Tool von der Eingabeform abhängt. Genau diese Sensitivität ist für das Projekt relevant, weil die Nutzeranfrage im Alltag nicht kontrolliert formuliert ist. Im späteren Verlauf wurde die Testbench um weitere Tool- und Modusvarianten erweitert, darunter `search_semantic` und `smart_args`; der methodische Kern bleibt jedoch derselbe: dieselbe Frage wird unter kontrollierten Bedingungen mit verschiedenen Retrieval-Pfaden verglichen.
+
+Die Goldtruth wird nicht auf Dokumentebene, sondern auf Chunk-Ebene geführt. Für jede Frage ist hinterlegt, welche Chunk-IDs als relevant gelten. Der Runner liest diese Zuordnung aus dem Abschnitt `chunk_goldtruth` und bewertet nur jene Tool-Ergebnisse, für die ein Goldtruth-Eintrag vorhanden ist. Das ist wichtig, weil die Arbeit nicht bloß überprüfen will, ob „irgendetwas Passendes“ gefunden wurde, sondern ob genau die vorberechneten Belegstellen im Ergebnis auftauchen. Die spätere manuelle Antwortbewertung wird dadurch nicht ersetzt, sondern ergänzt.
 
 ## Bewertungslogik für Retrieval
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die Retrieval-Bewertung basiert auf den üblichen Informationsretrieval-Metriken Precision@k, Recall@k und Hit-Rate. Für jede Frage wird die Schnittmenge aus den zurückgegebenen Chunk-IDs und den erwarteten Chunk-IDs bestimmt. Daraus ergeben sich folgende Kennzahlen:
+
+$$
+\operatorname{Precision@k} = \frac{|R_k \cap G|}{|R_k|}, \quad
+\operatorname{Recall@k} = \frac{|R_k \cap G|}{|G|}, \quad
+\operatorname{Hit@k} = \mathbb{1}(|R_k \cap G| > 0)
+$$
+
+Dabei ist $R_k$ die Menge der zurückgegebenen Treffer und $G$ die Goldtruth der jeweiligen Frage. Die Metriken werden nicht nur pro Frage, sondern als Mittelwert über alle auswertbaren Fragen berichtet. Diese Macro-Aggregation verhindert, dass einzelne Fragen mit vielen oder wenigen Treffern die Gesamtbewertung dominieren.
+
+Besonders relevant ist die getrennte Behandlung von Zero-Hit-Fällen. Ein Lauf, der gar keinen relevanten Chunk findet, ist methodisch anders zu bewerten als ein Lauf mit vorhandenem, aber nur schwach sortiertem Trefferbild. Deshalb wird die Hit-Rate separat ausgewiesen. In der historischen Entwicklung des Projekts war genau dieser Unterschied wichtig: Exact Retrieval scheiterte anfangs oft komplett, während Fuzzy zwar deutlich öfter traf, aber nicht immer die präziseste Rangfolge lieferte.
 
 ## Manuelle Bewertung der Antwortqualität
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Die reine Retrieval-Qualität genügt für die Zielsetzung der Arbeit nicht, weil das LLM aus den Treffern erst eine belastbare Antwort formulieren muss. Deshalb wird jede Antwort zusätzlich manuell mit einem einfachen, aber aussagekräftigen Schema bewertet. Verwendet werden die Kategorien `C` für korrekt, `P` für teilweise korrekt und `W` für falsch oder unzureichend.
+
+Aus diesen Ratings werden drei Kennzahlen gebildet:
+
+$$
+\operatorname{Strict Precision} = \frac{C}{N}, \quad
+\operatorname{Lenient Recall} = \frac{C + P}{N}, \quad
+\operatorname{Weighted Score} = \frac{1\cdot C + 0.5\cdot P + 0\cdot W}{N}
+$$
+
+Hier steht $N$ für alle tatsächlich bewerteten Antworten. Der gewichtete Score ist dabei die zentrale Verdichtungsmetrik, weil er zwischen vollständig korrekten und nur teilweise korrekten Antworten unterscheidet, ohne harte Fälle vollständig zu nivellieren. Die manuelle Bewertung wird im Projekt bewusst einfach gehalten, damit sie reproduzierbar bleibt und nicht von einer zu feingranularen, subjektiven Skala abhängt.
+
+Die Trennung zwischen Retrieval- und Antwortbewertung ist auch deshalb notwendig, weil gute Suchergebnisse nicht automatisch zu einer guten Antwort führen. Ein Modell kann relevante Chunks erhalten und sie dennoch falsch zusammenfassen, überinterpretieren oder halluzinieren. Umgekehrt kann eine schwächere Trefferliste unter Umständen noch zu einer brauchbaren Antwort führen, wenn die relevanten Passagen trotzdem enthalten sind. Das Evaluationsdesign macht diese Unterschiede sichtbar.
 
 ## Versuchsaufbau und Vergleichbarkeit der Runs
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Im Projektverlauf wurden mehrere Experimentserien nacheinander ausgeführt. Die frühen Runs dienten vor allem dazu, Ingestion, Chunking und Toolverhalten zu stabilisieren. Spätere Läufe verbesserten dann vor allem Exact Retrieval durch serverseitiges Query-Rewrite und ergänzten den Vergleich um Fuzzy-, Proximity- und später hybride bzw. semantische Varianten. Dadurch entstand kein statischer Einzelbenchmark, sondern eine kontrollierte Iterationsfolge.
 
-Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.  
+Für die Vergleichbarkeit ist wichtig, dass nicht alle Runs gleich stark gewichtet werden können. Frühere Läufe stammen teils aus der Goldtruth-Aufbauphase oder aus Phasen, in denen noch nicht alle Artefakte vollständig waren. Belastbare Aussagen werden deshalb vor allem über Runs getroffen, die mit identischer Testbench, identischem Bewertungsformat und vollständigen Artefakten erzeugt wurden. Die aktuelle Struktur mit getrennten Run-, Review- und Score-Dateien erleichtert genau diese Form der Nachvollziehbarkeit.
+
+Inhaltlich zeigt das Evaluationsdesign damit zwei Dinge: Erstens lässt sich das Retrieval des Systems über standardisierte Goldtruth-Fragen objektiv vergleichen. Zweitens kann die Qualität der finalen Antwort unabhängig davon manuell überprüft werden. Gerade diese Kombination ist für ein Agentic-RAG-System sinnvoll, weil das System nicht nur Daten finden, sondern auch korrekt in eine Antwort überführen muss.
+
+Die detaillierten Ergebnisse der einzelnen Runs und der Vergleich der Strategien folgen im nächsten Kapitel. Dort wird auf Basis dieser Metriken gezeigt, wie sich Exact, Proximity, Fuzzy und die später ergänzten Varianten unter realistischen Bedingungen tatsächlich verhalten.
 
 
 # Experimentelle Ergebnisse (ca. 3 Seiten)
