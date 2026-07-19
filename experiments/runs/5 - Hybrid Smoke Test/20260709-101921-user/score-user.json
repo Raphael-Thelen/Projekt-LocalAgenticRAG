@@ -1,0 +1,43 @@
+{
+  "run_id": "20260709-101921-user",
+  "eval_mode": "user",
+  "spec_path": "experiments/testbench-smoke-q1.json",
+  "run_json_path": "experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/run-user.json",
+  "review_txt_path": "experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/manual-review-user.txt",
+  "overall": {
+    "retrieval": {
+      "evaluated_rows": 1,
+      "macro_precision": 0.2,
+      "macro_recall": 1.0,
+      "hit_rate": 1.0
+    },
+    "answer": {
+      "rated_rows": 1,
+      "count_C": 1,
+      "count_P": 0,
+      "count_W": 0,
+      "strict_precision": 1.0,
+      "lenient_recall": 1.0,
+      "weighted_score": 1.0
+    }
+  },
+  "by_tool": {
+    "search_semantic": {
+      "retrieval": {
+        "evaluated_rows": 1,
+        "macro_precision": 0.2,
+        "macro_recall": 1.0,
+        "hit_rate": 1.0
+      },
+      "answer": {
+        "rated_rows": 1,
+        "count_C": 1,
+        "count_P": 0,
+        "count_W": 0,
+        "strict_precision": 1.0,
+        "lenient_recall": 1.0,
+        "weighted_score": 1.0
+      }
+    }
+  }
+}

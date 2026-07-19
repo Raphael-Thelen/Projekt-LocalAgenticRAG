@@ -26,4 +26,4 @@ node_modules/
 
 # ignore build artifacts
 *.pdf
-/docs/assets/mermaid/*.png
+/docs/Bericht/assets/mermaid/*.png

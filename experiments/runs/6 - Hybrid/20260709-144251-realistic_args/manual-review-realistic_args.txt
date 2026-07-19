@@ -37,9 +37,9 @@ AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt ist 
 RATING|Q1|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt des Mittelreichs ist Gareth.
 
-RATING|Q1|search_smart|W
+RATING|Q1|search_smart|C
 
 
 ========Q2=======
@@ -81,9 +81,13 @@ AI-Answer: Als größte Widersacher der Zwölfgötter gelten:
 RATING|Q2|search_semantic|P
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Die größten Widersacher der Zwölfgötter sind:
 
-RATING|Q2|search_smart|W
+*   **Die Erzdämonen:** Sie stammen aus der Siebten Sphäre (dem Chaos/dem Draußen) und streben danach, das Wirken der Götter zu vernichten oder zu pervertieren. Es gibt zwölf Erzdämonen, die den Zwölfgöttern als Gegenspieler gegenüberstehen, sowie weitere machtvolle, unabhängige Erzdämonen.
+*   **Der Namenlose:** Er gilt als ein zentraler Gegenspieler, der die Macht der anderen Götter heimlich unterwandert.
+*   **Schrecken aus der Siebten Sphäre:** Generell werden alle Wesenheiten aus dem Chaos als Widersacher aller Götter bezeichnet.
+
+RATING|Q2|search_smart|C
 
 
 ========Q3=======
@@ -136,9 +140,17 @@ Der FW dient als Puffer, um Differenzen zwischen dem Würfelergebnis und dem Eig
 RATING|Q3|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Eine Fertigkeitsprobe besteht aus drei Teilproben auf die jeweils zugehörigen Eigenschaften.
 
-RATING|Q3|search_smart|W
+**Ablauf:**
+1. Es wird nacheinander auf die drei beteiligten Eigenschaften gewürfelt.
+2. Übersteigt ein Würfelergebnis den jeweiligen Eigenschaftswert, müssen die Differenzpunkte vom Fertigkeitswert (FW) abgezogen werden, um den Wurf auszugleichen.
+3. Sind alle Punkte des FW verbraucht und kann ein weiterer Wurf nicht mehr ausgeglichen werden, gilt die Probe als misslungen.
+
+**Funktion des Fertigkeitswerts (FW):**
+Der FW dient als Puffer, um Ergebnisse auszugleichen, die über den Eigenschaftswerten liegen. Die eingesetzten Punkte stehen für die verbleibenden Teilproben nicht mehr zur Verfügung. Bei einer neuen Fertigkeitsprobe steht der FW wieder in voller Höhe zur Verfügung.
+
+RATING|Q3|search_smart|P
 
 
 ========Q4=======
@@ -167,9 +179,9 @@ AI-Answer: Wenn der Bestätigungswurf bei einer Nahkampf-Attacke misslingt, erle
 RATING|Q4|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Wenn der Bestätigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann eine optionale Nahkampf-Patzertabelle verwendet werden.
 
-RATING|Q4|search_smart|W
+RATING|Q4|search_smart|C
 
 
 ========Q5=======
@@ -218,9 +230,13 @@ Zusätzlich darf die Gesamtanzahl der Eigenschaftspunkte 100 nicht übersteigen.
 RATING|Q5|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Für den Erfahrungsgrad **Erfahren** gelten bei der Heldenerschaffung folgende maximale Obergrenzen:
 
-RATING|Q5|search_smart|W
+*   **Eigenschaften:** 14
+*   **Fertigkeiten:** 10
+*   **Kampftechniken:** 12
+
+RATING|Q5|search_smart|P
 
 
 ========Q6=======
@@ -255,9 +271,11 @@ Die Stufe verschwindet wieder, sobald die Lebenspunkte über diese Begrenzung (d
 RATING|Q6|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Die erste Stufe Schmerz erhält ein Held, sobald seine Lebenspunkte auf drei Viertel der Gesamt-Lebensenergie gesunken sind.
 
-RATING|Q6|search_smart|W
+Die Stufe verschwindet, sobald die Lebenspunkte wieder über diese Begrenzung steigen. Alternativ verliert der Held, sofern nichts anderes genannt ist, nach jeweils 4 Stunden eine Stufe des Zustands.
+
+RATING|Q6|search_smart|C
 
 
 ========Q7=======
@@ -298,9 +316,19 @@ AI-Answer: Die drei Gilden sind:
 RATING|Q7|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Die drei großen Gilden sind:
 
-RATING|Q7|search_smart|W
+1.  **Weiße Gilde** (Bund des Weißen Pentagramms)
+2.  **Graue Gilde** (Große Graue Gilde des Geistes)
+3.  **Schwarze Gilde** (Bruderschaft der Wissenden)
+
+**Haltung zur Magie:**
+Der bereitgestellte Kontext enthält keine explizite philosophische Definition der Haltung zur Magie für jede Gilde, beschreibt jedoch deren gegenseitige Wahrnehmung:
+*   Die **Weiße Gilde** steht der Schwarzen Gilde kritisch gegenüber und unterstellt ihr Dämonenpaktiererei und Nekromantie. Sie überwacht die Schwarze Gilde und beobachtet auch die Graue Gilde aufgrund deren Vielseitigkeit genau.
+*   Die **Graue Gilde** zeichnet sich durch eine extreme Vielseitigkeit aus.
+*   Die **Schwarze Gilde** wird von der Weißen Gilde als potenziell gefährlich eingestuft.
+
+RATING|Q7|search_smart|P
 
 
 ========Q8=======
@@ -341,9 +369,14 @@ AI-Answer: Ein Spieler kann Schicksalspunkte für folgende vier Optionen einsetz
 RATING|Q8|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Ein Spieler kann Schicksalspunkte für folgende Optionen einsetzen:
 
-RATING|Q8|search_smart|W
+1. **Neuer Wurf:** Wiederholung von Würfeln bei Eigenschafts-, Fertigkeits-, Attacke-, Verteidigungs- oder Fernkampfproben (außer bei Patzern).
+2. **Erster:** Um schneller als alle anderen zu handeln.
+3. **Zustand ignorieren:** Um einen Zustand zu ignorieren.
+4. **Qualität verbessern oder Schadenswurf wiederholen:** Als weitere Anwendungsmöglichkeiten bei Proben.
+
+RATING|Q8|search_smart|C
 
 
 ========Q9=======
@@ -384,9 +417,14 @@ AI-Answer: Ein Spielercharakter der Spezies Zwerg erhält folgende Grundwerte:
 RATING|Q9|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Ein Spielercharakter der Spezies Zwerg erhält laut Regelwerk folgende Grundwerte:
 
-RATING|Q9|search_smart|W
+*   **LE:** 8
+*   **SK:** –4
+*   **ZK:** –4
+*   **GS:** 6
+
+RATING|Q9|search_smart|C
 
 
 ========Q10=======
@@ -415,7 +453,7 @@ AI-Answer: Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein 
 RATING|Q10|search_semantic|C
 
 --------search_smart--------
-AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.
+AI-Answer: Um einen Spruchzauber in einen profanen Gegenstand zu binden und ein Zauberspeicher-Artefakt zu erschaffen, wird das Ritual **ARCANOVI** benötigt.
 
-RATING|Q10|search_smart|W
+RATING|Q10|search_smart|C
 

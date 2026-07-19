@@ -85,7 +85,7 @@ AI-Answer: Eine Fertigkeitsprobe besteht aus drei Teilproben auf die dem Talent 
 **Funktion des Fertigkeitswerts (FW):**
 Der FW dient als Puffer, um Wurfergebnisse, die den Eigenschaftswert übersteigen, auszugleichen. Er steht bei jeder neuen Fertigkeitsprobe wieder in voller Höhe zur Verfügung. Zudem bestimmt die Höhe des FW bei Routineproben, ob eine Probe ohne Würfeln gelingt.
 
-RATING|Q3|search_fuzzy|?
+RATING|Q3|search_fuzzy|P
 
 --------search_phrase_proximity--------
 AI-Answer: Eine Fertigkeitsprobe besteht aus drei Teilproben auf die jeweils zugehörigen Eigenschaftswerte.
@@ -96,7 +96,7 @@ Der **Fertigkeitswert (FW)** dient dazu, misslungene Teilproben auszugleichen:
 *   Sind alle Punkte des FW verbraucht und kann ein Wurf nicht mehr ausgeglichen werden, gilt die Probe als misslungen.
 *   Nach Abschluss der Probe steht der FW für die nächste Anwendung wieder voll zur Verfügung.
 
-RATING|Q3|search_phrase_proximity|?
+RATING|Q3|search_phrase_proximity|P
 
 
 ========Q4=======
@@ -107,12 +107,12 @@ Expected: Wenn bei Attacke 20 und Bestaetigungswurf misslungen, ist der Patzer b
 --------search_exact_keyword--------
 AI-Answer: Wenn der Bestätigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann der Spielleiter die optionale Nahkampf-Patzertabelle verwenden.
 
-RATING|Q4|search_exact_keyword|?
+RATING|Q4|search_exact_keyword|C
 
 --------search_fuzzy--------
 AI-Answer: Wenn der Bestätigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann bei Verwendung der optionalen Regel die Nahkampf-Patzertabelle genutzt werden.
 
-RATING|Q4|search_fuzzy|?
+RATING|Q4|search_fuzzy|C
 
 --------search_phrase_proximity--------
 AI-Answer: Keine Treffer im Retrieval. Es wurde kein LLM-Aufruf gemacht, um Quota zu schonen.

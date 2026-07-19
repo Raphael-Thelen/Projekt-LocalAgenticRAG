@@ -1,0 +1,9 @@
+{
+  "name": "lara-report",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build the L.A.R.A. report from Markdown with Pandoc.",
+  "scripts": {
+    "build": "./pandoc/build-report.sh"
+  }
+}

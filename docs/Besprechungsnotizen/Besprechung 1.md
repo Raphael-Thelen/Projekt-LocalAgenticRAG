@@ -24,5 +24,3 @@ Kibana
 MCP Protokoll von Anthropic für KI (JavaScript)
 
 → Qualitative Bewertung
-
-Bis Ende Januar

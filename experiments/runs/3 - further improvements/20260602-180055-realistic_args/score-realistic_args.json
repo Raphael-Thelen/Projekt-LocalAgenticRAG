@@ -2,8 +2,8 @@
   "run_id": "20260602-180055-realistic_args",
   "eval_mode": "realistic_args",
   "spec_path": "/Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/testbench-v1.json",
-  "run_json_path": "experiments/runs/20260602-180055-realistic_args/run-realistic_args.json",
-  "review_txt_path": "experiments/runs/20260602-180055-realistic_args/manual-review-realistic_args.txt",
+  "run_json_path": "experiments/runs/3 - further improvements/20260602-180055-realistic_args/run-realistic_args.json",
+  "review_txt_path": "experiments/runs/3 - further improvements/20260602-180055-realistic_args/manual-review-realistic_args.txt",
   "overall": {
     "retrieval": {
       "evaluated_rows": 30,
@@ -12,13 +12,13 @@
       "hit_rate": 0.5
     },
     "answer": {
-      "rated_rows": 26,
-      "count_C": 14,
-      "count_P": 2,
+      "rated_rows": 30,
+      "count_C": 16,
+      "count_P": 4,
       "count_W": 10,
-      "strict_precision": 0.5384615384615384,
-      "lenient_recall": 0.6153846153846154,
-      "weighted_score": 0.5769230769230769
+      "strict_precision": 0.5333333333333333,
+      "lenient_recall": 0.6666666666666666,
+      "weighted_score": 0.6
     }
   },
   "by_tool": {
@@ -30,13 +30,13 @@
         "hit_rate": 0.5
       },
       "answer": {
-        "rated_rows": 9,
-        "count_C": 4,
+        "rated_rows": 10,
+        "count_C": 5,
         "count_P": 2,
         "count_W": 3,
-        "strict_precision": 0.4444444444444444,
-        "lenient_recall": 0.6666666666666666,
-        "weighted_score": 0.5555555555555556
+        "strict_precision": 0.5,
+        "lenient_recall": 0.7,
+        "weighted_score": 0.6
       }
     },
     "search_fuzzy": {
@@ -47,13 +47,13 @@
         "hit_rate": 0.8
       },
       "answer": {
-        "rated_rows": 8,
-        "count_C": 8,
-        "count_P": 0,
+        "rated_rows": 10,
+        "count_C": 9,
+        "count_P": 1,
         "count_W": 0,
-        "strict_precision": 1.0,
+        "strict_precision": 0.9,
         "lenient_recall": 1.0,
-        "weighted_score": 1.0
+        "weighted_score": 0.95
       }
     },
     "search_phrase_proximity": {
@@ -64,13 +64,13 @@
         "hit_rate": 0.2
       },
       "answer": {
-        "rated_rows": 9,
+        "rated_rows": 10,
         "count_C": 2,
-        "count_P": 0,
+        "count_P": 1,
         "count_W": 7,
-        "strict_precision": 0.2222222222222222,
-        "lenient_recall": 0.2222222222222222,
-        "weighted_score": 0.2222222222222222
+        "strict_precision": 0.2,
+        "lenient_recall": 0.3,
+        "weighted_score": 0.25
       }
     }
   }

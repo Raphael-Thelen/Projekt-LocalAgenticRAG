@@ -1,8 +1,8 @@
 # Pandoc PDF Build
 
-Dieses Setup erzeugt aus `docs/Report.md` ein PDF mit Header/Footer, eingebetteten Grafiken, Tabellen und optionalen Mermaid-Diagrammen.
+Dieses Setup erzeugt aus `docs/Bericht/Report.md` ein PDF mit Header/Footer, eingebetteten Grafiken, Tabellen und optionalen Mermaid-Diagrammen.
 
-Das Abstract auf der Titelseite wird automatisch aus `docs/Abstract.md` gelesen.
+Das Abstract auf der Titelseite wird automatisch aus `docs/Bericht/Abstract.md` gelesen.
 
 ## Voraussetzungen
 
@@ -17,42 +17,60 @@ brew install pandoc tectonic
 npm install -g @mermaid-js/mermaid-cli
 ```
 
-## Build ausfuehren
+## Build ausführen
 
-Vom Projekt-Root:
+Im Berichtsverzeichnis kann der Standard-Build über das dortige `package.json` gestartet werden:
 
 ```bash
-./docs/pandoc/build-report.sh
+cd docs/Bericht
+npm run build
+```
+
+Alternativ direkt vom Projekt-Root:
+
+```bash
+./docs/Bericht/pandoc/build-report.sh
 ```
 
 Standard:
 
-- Input: `docs/Report.md`
-- Output: `docs/Report.pdf`
-- Abstract: `docs/Abstract.md`
+- Input: `docs/Bericht/Report.md`
+- Output: `docs/Bericht/Report.pdf`
+- Abstract: `docs/Bericht/Abstract.md`
+- Bibliographie: `docs/Bericht/references.bib`
+- PDF-Engine: `tectonic`
 
 Eigenes Input/Output:
 
 ```bash
-./docs/pandoc/build-report.sh docs/Report.md docs/Report-v2.pdf
+./docs/Bericht/pandoc/build-report.sh \
+  docs/Bericht/Report.md \
+  docs/Bericht/Report-v2.pdf
 ```
 
 Mit expliziter Abstract- und Bibliographie-Datei:
 
 ```bash
-./docs/pandoc/build-report.sh docs/Report.md docs/Report-v2.pdf docs/Abstract.md docs/references.bib
+./docs/Bericht/pandoc/build-report.sh \
+  docs/Bericht/Report.md \
+  docs/Bericht/Report-v2.pdf \
+  docs/Bericht/Abstract.md \
+  docs/Bericht/references.bib
 ```
 
 Eigenes Abstract (optional drittes Argument):
 
 ```bash
-./docs/pandoc/build-report.sh docs/Report.md docs/Report-v2.pdf docs/Abstract.md
+./docs/Bericht/pandoc/build-report.sh \
+  docs/Bericht/Report.md \
+  docs/Bericht/Report-v2.pdf \
+  docs/Bericht/Abstract.md
 ```
 
 Andere PDF-Engine:
 
 ```bash
-PDF_ENGINE=xelatex ./docs/pandoc/build-report.sh
+PDF_ENGINE=xelatex ./docs/Bericht/pandoc/build-report.sh
 ```
 
 ## Einbettung im Markdown
@@ -65,7 +83,7 @@ Bild:
 
 Mermaid:
 
-1. Datei anlegen: `docs/assets/mermaid/diagramm.mmd`
+1. Datei anlegen: `docs/Bericht/assets/mermaid/diagramm.mmd`
 2. Build starten (Script rendert automatisch nach `diagramm.png`)
 3. PNG in Markdown einbinden:
 
@@ -86,7 +104,7 @@ Tabelle (Markdown):
 
 BibTeX-Datei:
 
-- `docs/references.bib`
+- `docs/Bericht/references.bib`
 
 Zitieren im Text (Pandoc-Syntax):
 
@@ -99,10 +117,10 @@ Siehe Elastic-Dokumentation fuer Mapping-Details [@elasticsearch].
 ```
 
 Beim Build wird das Quellenverzeichnis automatisch als Abschnitt `Literaturverzeichnis` am Ende erzeugt.
-Optional kann ein CSL-Stil unter `docs/pandoc/citation-style.csl` abgelegt werden.
+Optional kann ein CSL-Stil unter `docs/Bericht/pandoc/citation-style.csl` abgelegt werden.
 
 ## Troubleshooting
 
-- Bilder fehlen: Pfade relativ zu `docs/Report.md` verwenden.
-- Header/Footer fehlt: Datei `docs/pandoc/header-footer.tex` pruefen.
+- Bilder fehlen: Pfade relativ zu `docs/Bericht/Report.md` verwenden.
+- Header/Footer fehlt: Datei `docs/Bericht/pandoc/header-footer.tex` prüfen.
 - Mermaid wird nicht gerendert: `mmdc` installieren.

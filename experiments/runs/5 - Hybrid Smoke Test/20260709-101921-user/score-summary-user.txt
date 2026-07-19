@@ -1,0 +1,31 @@
+Testbench Score Summary
+
+Run ID: 20260709-101921-user
+Eval Mode: user
+Spec: experiments/testbench-smoke-q1.json
+Run File: experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/run-user.json
+Review File: experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/manual-review-user.txt
+
+Overall Retrieval
+- Evaluated Rows: 1
+- Macro Precision: 0.200
+- Macro Recall: 1.000
+- Hit Rate: 1.000
+
+Overall Answer
+- Rated Rows: 1
+- C/P/W: 1/0/0
+- Strict Precision (C only): 1.000
+- Lenient Recall (C+P): 1.000
+- Weighted Score (C=1,P=0.5,W=0): 1.000
+
+By Tool
+
+[search_semantic]
+- Retrieval Macro Precision: 0.200
+- Retrieval Macro Recall: 1.000
+- Retrieval Hit Rate: 1.000
+- Answer C/P/W: 1/0/0
+- Answer Strict Precision: 1.000
+- Answer Lenient Recall: 1.000
+- Answer Weighted Score: 1.000

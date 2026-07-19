@@ -69,13 +69,13 @@ Ausgefuehrt wurde faktisch der folgende Ablauf (automatisiert ueber alle Paare `
 
 Ergebnis: Score-Dateien fuer 10 bewertete Runs frisch erzeugt/aktualisiert.
 
-## 5) Gesamtergebnis ueber alle vorhandenen Runs
+## 5) Gesamtergebnis der Runs vom 2. Juni 2026 und der Goldtruth-Aufbauphase
 
-Hinweis: Es gibt 11 Score-Dateien im Repo. Zwei davon sind Sonderfaelle aus der Goldtruth-Aufbauphase (ein Lauf ohne Retrieval-Eval, ein Lauf ohne manuelle Ratings).
+Die neun Vergleichslaeufe vom 2. Juni 2026 sind mit jeweils 30 von 30 Antworten vollstaendig bewertet. Die beiden zusaetzlich aufgefuehrten Laeufe aus der Goldtruth-Aufbauphase wurden spaeter aus dem Repository entfernt; ihre Tabellenwerte geben den damaligen Stand wieder.
 
 | Kohorte | Run ID | Mode | Overall Hit | Overall P | Overall R | Answer Weighted | Rated | Exact Hit | Prox Hit | Fuzzy Hit |
 |---|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Latest (post rewrite hardening) | 20260602-180055-realistic_args | realistic_args | 0.500 | 0.142 | 0.283 | 0.577 | 26 | 0.500 | 0.200 | 0.800 |
+| Latest (post rewrite hardening) | 20260602-180055-realistic_args | realistic_args | 0.500 | 0.142 | 0.283 | 0.600 | 30 | 0.500 | 0.200 | 0.800 |
 | Latest (post rewrite hardening) | 20260602-180514-user | user | 0.433 | 0.120 | 0.250 | 0.550 | 30 | 0.500 | 0.000 | 0.800 |
 | Latest (post rewrite hardening) | 20260602-181105-diagnostic_args | diagnostic_args | 0.667 | 0.280 | 0.489 | 0.650 | 30 | 0.700 | 0.400 | 0.900 |
 | Session 2 | 20260602-173138-realistic_args | realistic_args | 0.333 | 0.095 | 0.183 | 0.433 | 30 | 0.000 | 0.200 | 0.800 |
@@ -91,7 +91,7 @@ Hinweis: Es gibt 11 Score-Dateien im Repo. Zwei davon sind Sonderfaelle aus der 
 
 ### 6.1 Realistic Args
 - Overall Hit: 0.300 -> 0.333 -> 0.500
-- Overall Weighted Answer: 0.400 -> 0.433 -> 0.577
+- Overall Weighted Answer: 0.400 -> 0.433 -> 0.600
 - Exact Hit: 0.000 -> 0.000 -> 0.500
 - Prox Hit: 0.100 -> 0.200 -> 0.200
 - Fuzzy Hit: 0.800 -> 0.800 -> 0.800
@@ -120,8 +120,7 @@ Hinweis: Es gibt 11 Score-Dateien im Repo. Zwei davon sind Sonderfaelle aus der 
 
 ### 7.2 Wo aktuell Grenzen liegen
 - Proximity zeigt trotz Rewrite noch keine sichtbare Verbesserung in den aktuellen Metriken.
-- Einzelne Altruns sind methodisch nicht direkt vergleichbar (Goldtruth-Aufbauphase, fehlende Ratings oder fehlende Retrieval-Eval).
-- Ein Lauf hat nur 26 statt 30 Ratings (realistic latest), dadurch leichte Antwort-Metrik-Vorsicht bei Vergleichen.
+- Die historischen Laeufe aus der Goldtruth-Aufbauphase sind methodisch nicht direkt mit den neun vollstaendig bewerteten Vergleichslaeufen vergleichbar.
 
 ### 7.3 Methodische Konsequenz
 - Fuer harte Vorher/Nachher-Aussagen die drei Modus-Runs immer als Triplet vergleichen (gleiches Zeitfenster, gleiche Spezifikation, gleiche Rating-Abdeckung).
@@ -137,7 +136,7 @@ Hinweis: Es gibt 11 Score-Dateien im Repo. Zwei davon sind Sonderfaelle aus der 
 
 - Proximity gezielt nachschaerfen (z.B. term extraction, slop-Strategie, ggf. alternative query clauses).
 - Optional: Aggregations-Skript fuer automatische Langzeit-Reporting-Datei (z.B. `experiments/aggregate_runs.py`).
-- Konsistente Vollbewertung aller aktuellen Runs (30/30), um Antwortmetriken exakt vergleichbar zu halten.
+- Bei kuenftigen Runs weiterhin alle Antworten bewerten, um Antwortmetriken vergleichbar zu halten.
 
 ## 10) Relevante Artefakte (Auswahl)
 

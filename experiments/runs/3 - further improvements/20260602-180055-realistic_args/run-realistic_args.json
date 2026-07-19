@@ -617,7 +617,7 @@
           },
           "answer": "Eine Fertigkeitsprobe besteht aus drei Teilproben auf die dem Talent zugeordneten Eigenschaften.\n\n**Ablauf:**\n1. F\u00fcr jede der drei Eigenschaften wird ein W20 gew\u00fcrfelt.\n2. Liegt das Wurfergebnis \u00fcber dem Eigenschaftswert, muss die Differenz durch Punkte aus dem Fertigkeitswert (FW) ausgeglichen werden.\n3. Die eingesetzten Punkte werden vom FW abgezogen und stehen f\u00fcr die weiteren Teilproben nicht mehr zur Verf\u00fcgung.\n4. Ist der FW aufgebraucht und kann ein Wurf nicht mehr korrigiert werden, ist die Probe misslungen.\n\n**Funktion des Fertigkeitswerts (FW):**\nDer FW dient als Puffer, um Wurfergebnisse, die den Eigenschaftswert \u00fcbersteigen, auszugleichen. Er steht bei jeder neuen Fertigkeitsprobe wieder in voller H\u00f6he zur Verf\u00fcgung. Zudem bestimmt die H\u00f6he des FW bei Routineproben, ob eine Probe ohne W\u00fcrfeln gelingt.",
           "llm_skipped": false,
-          "manual_rating": "?"
+          "manual_rating": "P"
         },
         "search_phrase_proximity": {
           "tool_args": {
@@ -680,7 +680,7 @@
           },
           "answer": "Eine Fertigkeitsprobe besteht aus drei Teilproben auf die jeweils zugeh\u00f6rigen Eigenschaftswerte.\n\nDer **Fertigkeitswert (FW)** dient dazu, misslungene Teilproben auszugleichen:\n*   \u00dcbersteigt ein W\u00fcrfelwurf den Eigenschaftswert, m\u00fcssen Punkte des FW eingesetzt werden, um die Differenz auszugleichen.\n*   Eingesetzte Punkte stehen f\u00fcr die verbleibenden Teilproben nicht mehr zur Verf\u00fcgung.\n*   Sind alle Punkte des FW verbraucht und kann ein Wurf nicht mehr ausgeglichen werden, gilt die Probe als misslungen.\n*   Nach Abschluss der Probe steht der FW f\u00fcr die n\u00e4chste Anwendung wieder voll zur Verf\u00fcgung.",
           "llm_skipped": false,
-          "manual_rating": "?"
+          "manual_rating": "P"
         }
       }
     },
@@ -770,7 +770,7 @@
           },
           "answer": "Wenn der Best\u00e4tigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann der Spielleiter die optionale Nahkampf-Patzertabelle verwenden.",
           "llm_skipped": false,
-          "manual_rating": "?"
+          "manual_rating": "C"
         },
         "search_fuzzy": {
           "tool_args": {
@@ -847,7 +847,7 @@
           },
           "answer": "Wenn der Best\u00e4tigungswurf bei einer Nahkampf-Attacke misslingt, erleidet der Held 1W6+2 SP. Alternativ kann bei Verwendung der optionalen Regel die Nahkampf-Patzertabelle genutzt werden.",
           "llm_skipped": false,
-          "manual_rating": "?"
+          "manual_rating": "C"
         },
         "search_phrase_proximity": {
           "tool_args": {

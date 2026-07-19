@@ -321,11 +321,11 @@ Dies ist konzeptionell ein Vorteil gegenüber Fällen, in denen das LLM extern b
 
 ### Semantic-Retrieval
 
-Der semantische Pfad kombiniert Embedding-basiertes `script_score`-Ranking mit lexikalen Signalen. Im Modus `hybrid` wird die Vektoraehnlichkeit gezielt um `should`-Klauseln erweitert, um sowohl semantische Naehe als auch robuste Begriffstreffer abzudecken. Zusaetzlich ist bei Problemen in der Embedding-Kette ein lexical fallback vorgesehen, damit das Retrieval auch bei partiellen Ausfaellen der Vektorkomponente funktionsfaehig bleibt.
+Das Tool `search_semantic` stellt die semantische Suche und deren Kombination mit lexikaler Suche bereit. Im Modus `hybrid` wird das Embedding-basierte `script_score`-Ranking um lexikale `should`-Klauseln erweitert, um sowohl semantische Nähe als auch Begriffstreffer abzudecken. Zusätzlich ist bei Problemen in der Embedding-Kette ein lexikaler Fallback vorgesehen, damit das Retrieval auch bei Ausfällen der Vektorkomponente funktionsfähig bleibt.
 
 Das Semantic-Retrieval nutzt Embedding-basierte Ähnlichkeitssuche, um die inhaltliche Bedeutung von Queries und Dokumenten zu erfassen. Dadurch muss sich nicht auf exakte oder tolerante Wortübereinstimmungen verlassen werden. Der Ablauf unterteilt sich in drei Schritte und setzt voraus, dass bei der Ingestion Vektoren hinterlegt wurden.
 
-Ebenso wie zuvor die Quelldaten wird nach der Nutzeranfrage zuerst ein numerischen Vektor aus der Prompt erstellt. Dazu transformiert ein lokales Embedding-Modell den Eingabetext. An wen welches Modell die Anfrage gesendet wird ist konfigurierbar, standartmäßig ist das lokale `nomi-embed-text` via Ollama hinterlegt.
+Ebenso wie zuvor die Quelldaten wird nach der Nutzeranfrage zuerst ein numerischen Vektor aus der Prompt erstellt. Dazu transformiert ein lokales Embedding-Modell den Eingabetext. An wen welches Modell die Anfrage gesendet wird ist konfigurierbar, standartmäßig ist das lokale `nomic-embed-text` via Ollama hinterlegt.
 
 Im Elasticsearch-Index wird anschließend eine `script_score`-Query ausgeführt. Über die Cosine-Similarity-Funktion wird die Ähnlichkeit zwischen dem Query-Vektor und dem `content_vector` jedes indexierten Chunks berechnet. Das Scoring verwendet die Formel
 ```math
@@ -343,7 +343,7 @@ Die erste Version des Prototypen sollte via Ollama ein lokales 7B Modell von *Mi
 
 Mit *llama 3.1* in der 8B Variante konnten die Tools schlussendlich verwendet, und erste Ergebnisse verzeichnet werden. Auf der verwendete Hardware führte die Nutzung des Llama-Modells, welches im Vergleich zu Mistral ca. 14% größer ist, jedoch zu Performanceeinbußen. Der kombinierte Speicherplatzbedarf von Modell und ElasticSearch-Datenbanken überstiegen die Menge an hardwareseitig verfügbarem Arbeitsspeicher, was Swapping auslöste. Das Gerät wurde  unresponsiv, es dauerte mehrere Minuten, bis die Prompt vom RAG-System beanwortet wurde.
 
-Als Konsequnz fiel die Entscheidung auf einen Mittelweg. Um die Dauer von Testläufen auf der verfügbaren Hardware drastisch zu reduzieren wurde eine `.env`-Datei geschaffen, die es einfach erlaubt, das verwendete Modell von lokal auf remote API zu schalten. Aufgrund der Möglichkeit die API bestimmter Modelle kostenfrei zu nutzen fiel die Wahl auf `Gemini` von Google.
+Als Konsequnz fiel die Entscheidung auf einen Mittelweg. Um die Dauer von Testläufen auf der verfügbaren Hardware drastisch zu reduzieren wurde eine `.env`-Datei geschaffen, die es einfach erlaubt, das verwendete Modell von lokal auf remote API zu schalten. Aufgrund der Möglichkeit die API bestimmter Modelle kostenfrei zu nutzen fiel die Wahl auf `Gemini` von Google. Diese externe Anbindung ist ausdrücklich als Entwicklungs- und Evaluationsmodus zu verstehen und ersetzt nicht den in der Zielsetzung geforderten lokalen Produktivbetrieb, sondern verkürzt ausschließlich die Iterations- und Testdauer auf der verfügbaren Hardware. Im lokalen Zielbetrieb werden sowohl Retrieval als auch Antwortgenerierung mit Elasticsearch und Ollama auf dem eigenen System ausgeführt um die Datenschutzvorraussetzungen einzuhalten. Im Gemini-Modus verbleiben zwar PDF-Dateien und Elasticsearch-Index lokal, die für eine Antwort ausgewählten Textausschnitte werden jedoch als Kontext an das externe Modell übertragen, was nicht für sensible oder lizenzrechtlich entsprechend eingeschränkte Dokumentbestände vorgesehen ist.
 
 ```env
 #/.env.example
@@ -361,7 +361,7 @@ OLLAMA_MODEL_NAME=llama3.1
 ```
 
 
-# Evaluationsdesign (ca. 3 Seiten)
+# Evaluationsdesign
 
 Die Evaluation des Prototypen erfolgt bewusst zweistufig, geteilt in Qualtität des Retrievals und Qualität der Antworten. Diese Unterscheidung ist für dieses Projekt zentral, da der Prototyp nicht nur Quelltextstellen finden soll, sondern aus diesen Belegstellen auch eine korekte Antwort formulieren muss. Ein einzelner Messwert würde die beiden möglichen Fehlerquellen, LLM und Retrieval, vermischen und damit die Bewertung der Retrieval-Strategien erschweren.
 
@@ -390,16 +390,16 @@ def _is_retryable_quota_error(exc: Exception) -> bool:
 
 ## Aufbau der Testbench
 
-Orchestriert wird der Testablauf durch das Skript `experiments/run_testbench.py`, das eine definierte Fragenmenge gegen ausgewählte Retrieval-Tools ausführt. Für jedes Frage-Tool-Paar wird zunächst ein Tool-Aufruf erzeugt, dann die LLM-Antwort gesammelt und schließlich der Run als JSON abgelegt. Da ein menschlicher Nutzer die generierten Fragen manuell bewerten muss, erfolgt die Auswertung im Anschluss über ein zweites Skript in `experiments/score_testbench.py`. Dort werden gesammelten Daten mit der manuellen Bewertung zusammengeführt und zu einer kompakten Score-Datei zusammengefasst.
+Orchestriert wird der Testablauf durch das Skript `experiments/run_testbench.py`, das eine definierte Fragenmenge gegen ausgewählte Retrieval-Tools ausführt. Für jedes Frage-Tool-Paar wird zunächst ein Tool-Aufruf erzeugt, dann die LLM-Antwort gesammelt und schließlich der Run als JSON abgelegt. Da die generierten Antworten anschließend manuell bewertet werden, erfolgt die Auswertung über das zweite Skript `experiments/score_testbench.py`. Dieses liest die C/P/W-Bewertungen ein, ergänzt sie im vorhandenen Run-Protokoll und berechnet daraus die Retrieval- und Antwortmetriken.
 
-Für jeden Lauf werden vier Artefakte erzeugt:
+Im Verlauf eines vollständig bewerteten Laufs entstehen bis zu vier Artefakte:
 
-- `run-<mode>.json` mit den vollständigen Antworten, Tool-Ergebnissen und Metadaten.
-- `manual-review-<mode>.txt` mit den Tatsächlichen und erwarteten Antworten als Vorlage für die manuelle Bewertung.
+- `run-<mode>.json` mit den vollständigen Antworten, Tool-Ergebnissen und Metadaten; beim Scoring werden darin zusätzlich die manuellen Ratings eingetragen.
+- `manual-review-<mode>.txt` mit den tatsächlichen und erwarteten Antworten als temporäre Vorlage für die manuelle Bewertung.
 - `score-<mode>.json` mit den berechneten Metriken.
 - `score-summary-<mode>.txt` als lesbare Kurzfassung.
 
-Diese Trennung ist nicht nur organisatorisch sinnvoll, sondern methodisch wichtig, da das Laufprotokoll unverändert archiviert bleibt, während die Bewertung im Fall eines menschlichen Fehlers separat wiederholt werden kann.
+Wird der kombinierte Ablauf mit `--score-after-review` verwendet, löscht der Runner die manuelle Bewertungsdatei nach erfolgreichem Scoring. Dauerhaft erhalten bleiben dann das um die Ratings ergänzte Run-Protokoll sowie die beiden Score-Dateien. Bei separat ausgeführter Bewertung kann die Review-Datei dagegen zusätzlich archiviert werden. Die zugehörige Testspezifikation wird im Run über ihren Pfad referenziert, jedoch nicht als unveränderlicher Snapshot kopiert. Die Nachvollziehbarkeit beruht damit auf den gespeicherten Run-Daten, den Score-Artefakten und der im Repository vorhandenen Testbench-Version. Eine vollständig bitgenaue Reproduktion historischer Läufe ist nur eingeschränkt möglich, wenn sich die referenzierte Testspezifikation oder die Implementierung zwischenzeitlich verändert hat.
 
 ## Verwendete Testdaten
 
@@ -445,7 +445,7 @@ $$
 \operatorname{Weighted Score} = \frac{1\cdot C + 0.5\cdot P + 0\cdot W}{N}
 $$
 
-Hier steht $N$ für alle tatsächlich bewerteten Antworten. Der gewichtete Score ist dabei die zentrale Verdichtungsmetrik, weil er zwischen vollständig korrekten und nur teilweise korrekten Antworten unterscheidet, ohne harte Fälle vollständig zu nivellieren. Die manuelle Bewertung wird im Projekt bewusst einfach gehalten, damit sie reproduzierbar bleibt und nicht von einer zu feingranularen, subjektiven Skala abhängt.
+Hier steht $N$ für alle tatsächlich bewerteten Antworten. Der gewichtete Score ist dabei die zentrale Verdichtungsmetrik, weil er zwischen vollständig korrekten und nur teilweise korrekten Antworten unterscheidet, ohne harte Fälle vollständig zu nivellieren. Die manuelle Bewertung wird im Projekt bewusst einfach gehalten, damit die Entscheidungen anhand weniger klar abgegrenzter Kategorien nachvollziehbar bleiben. Eine subjektive Komponente kann dadurch reduziert, aber nicht vollständig ausgeschlossen werden.
 
 Die Trennung zwischen Retrieval- und Antwortbewertung ist auch deshalb notwendig, weil gute Suchergebnisse nicht automatisch zu einer guten Antwort führen. Ein Modell kann relevante Chunks erhalten und sie dennoch falsch zusammenfassen, überinterpretieren oder halluzinieren. Umgekehrt kann eine schwächere Trefferliste unter Umständen noch zu einer brauchbaren Antwort führen, wenn die relevanten Passagen trotzdem enthalten sind. Das Evaluationsdesign macht diese Unterschiede sichtbar.
 
@@ -453,47 +453,169 @@ Die Trennung zwischen Retrieval- und Antwortbewertung ist auch deshalb notwendig
 
 Im Projektverlauf wurden mehrere Experimentserien nacheinander ausgeführt. Die frühen Runs dienten vor allem dazu, Ingestion, Chunking und Toolverhalten zu stabilisieren. Spätere Läufe verbesserten dann vor allem Exact Retrieval durch serverseitiges Query-Rewrite und ergänzten den Vergleich um Fuzzy-, Proximity- und später hybride bzw. semantische Varianten. Dadurch entstand kein statischer Einzelbenchmark, sondern eine kontrollierte Iterationsfolge.
 
-Für die Vergleichbarkeit ist wichtig, dass nicht alle Runs gleich stark gewichtet werden können. Frühere Läufe stammen teils aus der Goldtruth-Aufbauphase oder aus Phasen, in denen noch nicht alle Artefakte vollständig waren. Belastbare Aussagen werden deshalb vor allem über Runs getroffen, die mit identischer Testbench, identischem Bewertungsformat und vollständigen Artefakten erzeugt wurden. Die aktuelle Struktur mit getrennten Run-, Review- und Score-Dateien erleichtert genau diese Form der Nachvollziehbarkeit.
+Für die Vergleichbarkeit ist wichtig, dass nicht alle Runs gleich stark gewichtet werden können. Frühere Läufe stammen teils aus der Goldtruth-Aufbauphase oder aus Phasen, in denen noch nicht alle Artefakte vollständig waren. Zudem enthalten historische Run-Dateien teilweise absolute, inzwischen veraltete Pfade zur jeweiligen Testspezifikation. Belastbare Aussagen werden deshalb vor allem über Runs getroffen, die mit derselben Testbench, demselben Bewertungsformat und einem vergleichbaren Implementationsstand erzeugt wurden. Zur Einordnung werden die gespeicherte Run-ID, der Ausführungszeitpunkt, der Evaluationsmodus, der verwendete LLM-Provider und das Modell sowie die ausgewählten Tools herangezogen. Da kein eigener Snapshot der Testspezifikation und kein Git-Commit im Run-Ordner gespeichert wird, ist die Reproduzierbarkeit älterer Läufe dennoch begrenzt und darf nicht mit einer vollständig versionierten Versuchsdokumentation gleichgesetzt werden.
+
+Eine weitere Einschränkung entsteht durch die manuelle Antwortbewertung. Das bewusst einfach gehaltene C/P/W-Schema sorgt zwar für eine konsistente Grundstruktur, die Zuordnung bleibt jedoch eine menschliche Ermessensentscheidung. Die vorhandenen Runs wurden nicht unabhängig durch mehrere Personen bewertet, weshalb keine Inter-Rater-Reliabilität angegeben werden kann. Die Antwortmetriken sind daher als nachvollziehbare manuelle Einschätzung innerhalb dieses Projekts zu interpretieren, nicht als vollständig objektive Messung.
 
 Inhaltlich zeigt das Evaluationsdesign damit zwei Dinge: Erstens lässt sich das Retrieval des Systems über standardisierte Goldtruth-Fragen objektiv vergleichen. Zweitens kann die Qualität der finalen Antwort unabhängig davon manuell überprüft werden. Gerade diese Kombination ist für ein Agentic-RAG-System sinnvoll, weil das System nicht nur Daten finden, sondern auch korrekt in eine Antwort überführen muss.
 
 Die detaillierten Ergebnisse der einzelnen Runs und der Vergleich der Strategien folgen im nächsten Kapitel. Dort wird auf Basis dieser Metriken gezeigt, wie sich Exact, Proximity, Fuzzy und die später ergänzten Varianten unter realistischen Bedingungen tatsächlich verhalten.
 
 
-# Experimentelle Ergebnisse (ca. 3 Seiten)
+# Experimentelle Ergebnisse
 
 ## Ergebnisse der frühen Runs und Iterationen
 
+Ausgangspunkt der experimentellen Untersuchung bildet die erste vollständige Versuchserie mit zehn Fragen, die jeweils mit den drei zu diesem Zeitpunkt verfügbaren Strategien Exact, Fuzzy und Phrase-Proximity bearbeitet wurden. Jeder der Fragen lag jeweils mit angepassten Argumenten in den Modi `user`, `realistic_args` und `diagnostic_args` vor.
+
+Im `user`-Modus erreichte Fuzzy Retrieval eine Hit-Rate von 0,800, eine Macro-Precision von 0,220 und einen Macro-Recall von 0,450. Alle zehn vom LLM gelieferten Antworten konnten in der manuellen Bewertung als korrekt eingestuft werden. Exact und Phrase-Proximity fanden dagegen in diesem ersten Lauf keinen der als relevant markierten Goldtruth-Chunks, entsprechend lieferte das LLM auch zu keiner der mit diesen beiden Strategien beantworteten Fragen korrekte Antworten. Im Modus `realistic_args` blieb Fuzzy bei denselben Retrievalwerten und erwies sich als stabil gegenüber der veränderten Parameter. Phrase-Proximity verbesserte sich leicht mit einer Hit-Rate von 0,100 waraus zwei korrekten Antworten abgeleitet wurden. Exact blieb weiterhin ohne relevanten Treffer.
+
+Der Modus `diagnostic_args` stellte den Strategien gezielt vorbereitete, günstige Suchargumente zur Verfügung. Unter diesen Idealbedingungen schnitten alle drei Verfahren besser ab. Fuzzy erzielte nun eine Hit-Rate von 0,900 mit einen Macro-Recall von 0,800. Exact und Phrase-Proximity erreichten jeweils eine Hit-Rate von 0,400. Bei der Antwortqualität unterschieden sie sich jedoch deutlich: Exact kam auf einen gewichteten Score von 0,400, Phrase-Proximity lediglich auf 0,250. 
+
+Das Ergebnis zeigt zugleich, weshalb Retrieval- und Antwortqualität getrennt ausgewiesen werden müssen. Das Auffinden mindestens eines relevanten Chunks garantiert nicht, dass der bereitgestellte Kontext vollständig ist oder vom LLM korrekt interpretiert wird.
+
+Dieser erste Test zeigt hervorragend die Schwächen der drei Modi auf und verdeutlicht, wo besonderer Verbesserungsbedarf besteht. Es ist außerdem zu beobachten, das die Suchargumente einen ebenso entscheidendne Einfluss auf das Ergebnis haben, wie die verwendete Strategie. Zugleich ist zu beobachten, warum Retrieval und Antwortqualität dringend getrennt voneinander aufgezeichnet werden müssen. Das Auffinden eines relevanten Chunkgs garantiert nämlich werder die Vollständigkeit de benötigten Kontext, noch die korrekte Interpretation durch das LLM. Es zeichnet sich jedoch schon jetzt eine klare Tendenz ab, was den Vergleich der Strategiene betrifft. Exact und Phrase-Proximity reagieren empfindlicher auf die Form der übergebenen Argumente, während Fuzzy über die Modi hinweg stabil bleibt.
+
 ## Verbesserungen durch Exact-Rewrite
+
+Nach der Einführung des serverseitigen Query-Rewrites für Exact Retrieval zeigen sich maßgebliche Fortschritte. Im User-Lauf stieg die Hit-Rate der Exact-Strategie erheblich von ursprünglichen 0,000 auf 0,500. Ebenso konnte eine Macro-Precision von 0,140 und ein Macro-Recall von 0,300 verzeichnet werden. Diese Verbesserungen schlagen sich auch auf Qualität der LLM-generierten Antworten aus. Brachte der User-Lauf im Ersten Test noch keine korrekte Antwort hervor, wurden nach dem Rewrite sechs von zehn Antworten als richtig und eine weitere als teilweise korrekt bewertet. Der gewichtete Antwortscore erhöhte sich ebenfalls drastisch von 0,000 auf 0,650.
+
+Unter den günstigeren Bedingungen des `diagnostic_args`-Laufs konnte Exact die Hit-Rate nochmal auf 0,700 verbessern Der Macro-Recall betrug 0,467 mit einem gewichteten Antwortscore von 0,850. Mit diese guten Ergebnisse übertraf Exact in diesem spezifischen Lauf sogar die robuste Fuzzy-Strategie, die einen leicht niedrigeren gewichteten Score von 0,800 aufwies. Ein Ergebnis, dass sich gut durch den ergänzten Rewrite-Zweig erklären lässt. Normalisierte Terme, AND- und OR-Varianten sowie eine phrase-nahe Abfrage erweiterten die Menge der potenziell passenden Formulierungen, und erzeugten so mehr Treffer, zu denen auch Goldtruth-Chunks zählten. Dieses Ergebniss darf jedoch nicht als generelle Überlegenheit von Exact missverstanden werden. Die Strategie profitierte erheblich von den gezielt vorbereiteten Suchargumenten. Im weniger idealen User-Modus blieb Fuzzy mit einem unveränderten gewichteten Score von 1,000 besser.
+
+Abzuleiten ist jedoch die Beobachtung, dass die Qualität der Antwort nicht allein von der grundsätzlichen Retrieval-Strategie bestimmt abhängig ist, insbesonder die serverseitige Aufbereitung des Suchstrings spielt eine entscheidende Rolle und kann die Leistungsfähigkeit eines bestehenden Tools maßgeblich beeinflussen.
 
 ## Vergleich von Exact, Proximity und Fuzzy
 
+Für einen belastbaren Vergleich von Exact, Phrase-Proximity und Fuzzy wurden in einem dritten Testlauf erneut alle drei Strategien mit jeweils allen drei Modi unter vergleichbaren Bedingungen ausgeführt. Die Ergebnisse sind in Tabelle 1 zusammengefasst.
+
+| Modus | Strategie | Hit-Rate | Macro-Recall | gewichteter Antwortscore |
+|:--|:--|--:|--:|--:|
+| `user` | Exact | 0,500 | 0,300 | 0,650 |
+| `user` | Fuzzy | 0,800 | 0,450 | 1,000 |
+| `user` | Proximity | 0,000 | 0,000 | 0,000 |
+| `realistic_args` | Exact | 0,500 | 0,300 | 0,600 |
+| `realistic_args` | Fuzzy | 0,800 | 0,450 | 0,950 |
+| `realistic_args` | Proximity | 0,200 | 0,100 | 0,250 |
+| `diagnostic_args` | Exact | 0,700 | 0,467 | 0,850 |
+| `diagnostic_args` | Fuzzy | 0,900 | 0,800 | 0,800 |
+| `diagnostic_args` | Proximity | 0,400 | 0,200 | 0,300 |
+
+Tabelle: Vergleich von Exact, Fuzzy und Phrase-Proximity in der dritten Iteration.
+
+Wie im erten Testlauf erzielte Fuzzy im `user`-Modus mit 0,800 sowohl die höchste Hit-Rate als auch den höchsten gewichteten Antwortscore von perfekten 1,000. Exact folgte mit 0,500 beziehungsweise 0,650, Phrase-Proximity bildete wie gehabt das Schlusslicht, weder einen Goldtruth-Treffer noch eine korrekte Antwort konnte verzeichnet werden. Im Modus `realistic_args` fiel das Ergebnis ähnlich aus. Fuzzy erreichte wieder eine Hit-Rate von 0,800, der gewichteten Score fiel mit 0,950 etwas schwächer aus. Exact kam auf Werte von 0,500 bei der Hit-Rate und 0,600 LLM-Antwortgenauigkeit. Auch Phrase-Proximity lieferte Ergebnisse, die mit lediglich 0,200 und 0,250 jedoch niedriger ausfielen.
+
+Im diagnostischen Modus verbesserten sich Exact und Phrase-Proximity wie erwartet wieder sichtbar. Exact kam auf eine Hit-Rate von 0,700 und einen gewichteten Antwortscore von 0,850, Phrase-Proximity auf 0,400 und 0,300. Fuzzy blieb mit einer Hit-Rate von 0,900 und einem Macro-Recall von 0,800 retrievalseitig am stärksten, lag mit seinem Antwortscore von 0,800 jedoch knapp hinter Exact. Über alle drei Modi hinweg wies Fuzzy damit immernoch die geringste Sensitivität gegenüber der Eingabeform auf. Für ein interaktives System, in dem Nutzerfragen nicht kontrolliert formuliert werden können, ist diese Stabilität von besonderer Bedeutung.
+
+Exact bleibt ungeachtet dessen für präzise Fachbegriffe sowie konkrete Zahlen- und Regelfragen geeignet. Seine Leistung hängt allerdings stärk davon ab, ob die Query bereits relevante Begriffe enthält und das Rewrite zweckmäßige Varianten erzeugt. Phrase-Proximity erwies sich im untersuchten Fragenset als schwächste der drei Strategien. Das liegt wohl daran, dass viele Fragen weder eine charakteristische kurze Phrase noch ein geeignetes Termpaar enthileten, dessen räumliche Nähe im Dokument den gesuchten Sachverhalt zuverlässig identifiziert hätte.
+
 ## Vergleich Fuzzy vs. Smart im User-Mode
+
+Nach einführung der Smart-Retrieval-Strategie untersuchte ein gezielter Vergleich die Performance von Fuzzy und Smart anhand der bekannten zehn Fragen. Im `user`-Modus erreichten beide eine Hit-Rate von 0,800. Fuzzy lag mit einer Macro-Precision von 0,220 gegenüber 0,200 und einem Macro-Recall von 0,450 gegenüber 0,400 leicht vor Smart. Bei der manuellen Antwortbewertung wurden für Fuzzy neun Antworten als korrekt und eine als teilweise korrekt eingestuft. Für Smart ergaben sich acht korrekte und zwei teilweise korrekte Antworten. Daraus resultierten gewichtete Antwortscores von 0,950 für Fuzzy und 0,900 für Smart.
+
+Smart konnte die weniger komplexe Fuzzy-Baseline in diesem Lauf somit nicht übertreffen. Dieses Ergebnis widerlegt nicht grundsätzlich den Nutzen eines geplanten Retrievals, zeigt jedoch, dass eine zusätzliche LLM-basierte Planungsstufe keinen automatischen Qualitätsgewinn erzeugt. Der Planner kann relevante Begriffe auslassen, ungeeignete Expansionen ergänzen oder einen nicht optimalen Retrieval-Modus wählen. Die dadurch entstehende Query kann trotz formal korrekter Struktur schlechter ausfallen als eine direkte Fuzzy-Suche, insbesondere dann, wenn das Ergebnis maßgeblich von der Verwendung spezifischer Fachbegriffe abhängt, die nicht notwendigerweise Teil des LLM sind. Für die Bewertung des Ansatzes ist folglich festzuhalten, das Smart ein experimenteller Ansatz bietet, dessen zusätzlicher Aufwand bislang nicht durch eine messbare Verbesserung gerechtfertigt werden kann, weshalb dieser Ansatz nicht weiter verfolgt wurde.
+
+## Vergleich von Fuzzy und Semantic Retrieval
+
+Mit `search_semantic` wurde der Vergleich um die im Abschnitt "Semantic-Retrieval" erläuterte Vektorsuche erweitert. Der im Semantic-Tool verwendete Modus `hybrid` verbindet dabei die Ähnlichkeit zwischen Query- und Chunk-Embeddings mit lexikalen Suchsignalen. 
+
+Um zu untersuchen, ob die zusätzliche Vektorkomponente gegenüber der Fuzzy-Baseline einen Vorteil bietet wurden zwei Vergleiche im Modus `realistic_args` durchgeführt. Da verglichen werden soll, welches Tool sich final am besten für den gegebenen Anwendungsfall eignet, wird bewusst ein Vergleich auf realitätsnahen Daten gemacht. Auf aufbereitete Idelbedingungen wie sie zuvor im Testmodus `diagnostic_args` gemacht wurde wird bewusst verzichtet. Der Vergleich geschieht in zwei Läufen. Erst mit dem bekannten 10-Fragen-Benchmark und anschließend mit einem größeren Praxistest mit 90 kuratierten Fragen zunehmender Schwierigkeit und verschiedener Kategorien. In beiden Läufen erzeugte Gemini die Antworten aus bis zu fünf zurückgegebenen Chunks.
+
+### 10-Fragen-Benchmark mit Chunk-Goldtruth
+
+Der vollständige Vergleichslauf ergänzte Exact, Fuzzy, Phrase-Proximity und Smart um Semantic Retrieval. Für sämtliche Semantic-Aufrufe ist die Vektorkomponente als aktiv protokolliert (`semantic_status: active`, mit Embedding-Modell `nomic-embed-text` über Ollama). Die hier ausgewiesenen Semantic-Ergebnisse stammen also aus dem hybriden Suchmodus mit aktiven Embeddings. Die zehn Fragen und ihre vorbereiteten Chunk-IDs erlauben die Bewertung der Retrievalqualität als auch die Bewertung der daraus erzeugten Antworten:
+
+| Strategie | Macro-Precision | Macro-Recall | Hit-Rate | Gewichteter Antwortscore |
+|:--|--:|--:|--:|--:|
+| Exact | 0,140 | 0,300 | 0,500 | 0,650 |
+| Fuzzy | 0,220 | 0,450 | 0,800 | 1,000 |
+| Proximity | 0,065 | 0,100 | 0,200 | 0,250 |
+| Smart | 0,220 | 0,433 | 0,800 | 0,850 |
+| Semantic | 0,220 | 0,450 | 0,800 | 0,950 |
+
+Tabelle: Ergebnisse des Vergleichslaufs mit zehn Fragen im Modus `realistic_args`. Semantic bezeichnet `search_semantic` im Modus `hybrid`.
+
+Es fällt auf, dass Fuzzy und Semantic identische Macro-Werte für Precision und Recall erreichen sowie eine identische Hit-Rate von 0,800. Beide fanden damit bei acht von zehn Fragen mindestens einen Goldtruth-Chunk. Bei der Antwortqualität lag Fuzzy leicht vorn und erzielte bei allen zehn Antworten eine Einstufung als korrekt. Semantic lieferte neun korrekte und eine teilweise korrekte Antwort. Daraus ergeben sich gewichtete Antwortscores von 1,000 beziehungsweise 0,950. Exact erreichte 0,650 und Phrase-Proximity 0,250. Smart erreichte eine Macro-Precision von 0,220, einen Macro-Recall von 0,433 und eine Hit-Rate von 0,800.
+
+Die zusätzliche Vektorkomponente führte in diesem kleinen Benchmark somit zu keiner Verbesserung der gemessenen Retrieval- oder Antwortqualität.
+
+### 90-Fragen-Praxistest zur Antwortqualität
+
+Der zweite Vergleich untersuchte nun nur noch die klar stärksten Strategien Fuzzy und Semantic anhand von 90 Fragen. Dieser Praxistest verzichtete bewusst auf eine Chunk-Goldtruth, da die praktische Brauchbarkeit der finalen Antworten im Mittelpunkt stand. Pro Tool wurden alle 90 Antworten mit dem C/P/W-Schema bewertet. Retrieval-Precision, Retrieval-Recall und Hit-Rate können für diesen Lauf daher nicht bestimmt werden.
+
+| Strategie | Korrekt (C) | Teilweise korrekt (P) | Falsch / unzureichend (W) | Gewichteter Antwortscore | Tolerante Antwortquote |
+|:--|--:|--:|--:|--:|--:|
+| Fuzzy | 35 | 13 | 42 | 0,461 | 0,533 |
+| Semantic | 36 | 12 | 42 | 0,467 | 0,533 |
+
+Tabelle: Antwortqualität im Praxistest mit jeweils 90 bewerteten Antworten. Die tolerante Antwortquote umfasst korrekte und teilweise korrekte Antworten.
+
+Semantic erzielte einen gewichteten Antwortscore von 0,467, Fuzzy einen Wert von 0,461. Bei beiden Strategien waren 48 von 90 Antworten mindestens teilweise korrekt; die tolerante Antwortquote lag entsprechend jeweils bei 0,533. Die nahezu identischen Werte zeigen keinen klaren praktischen Vorsprung einer der beiden Strategien. Zugleich relativiert der größere Test die sehr guten Resultate des kleinen Benchmarks: Jeweils 42 von 90 Antworten, also 46,7 Prozent, wurden als falsch oder unzureichend bewertet.
+
+Die beiden Testreihen müssen aufgrund ihrer unterschiedlichen Bewertungsgrundlage getrennt interpretiert werden. Der 10-Fragen-Benchmark misst anhand vorbereiteter Chunk-IDs sowohl Retrieval- als auch Antwortqualität, während der 90-Fragen-Praxistest ausschließlich die resultierenden Antworten bewertet. Eine gemeinsame Retrievalkennzahl lässt sich daher nicht bilden. In den vorliegenden Vergleichen ist nach wie vor kein klarer Qualitätsgewinn durch den zusätzlichen Embedding-Aufwand gegenüber Fuzzy zu erkennen.
 
 ## Vergleich Gemini API vs. Lokale Modelle
 
+Um die Brauchbarkeit des Systems für den intialen Zweck, die lokale Suche in sensiblen Daten, zu prüfen ist ein Vergleich der Entwicklungsumgebung mit der Gemini-API und einem lokalen Modell nötig. Dies gestaltete sich zunächst schwierig. Das zunächst eingesetzte 7B Mistral-Modell nutzte die bereitgestellten Tools nicht zuverlässig und beantwortete Fragen stattdessen auf Basis seines Modellwissens. Ein Testlauf mit dem etwas größeren 8-B Llama 3.1 zeigte, dass dieses die MCP-Tools zwar zuverlässig aufrufen konnte, allerdings in Verbindung mit Elasticsearch auf dem verwendeten System starkes Swapping verursachte. Die Antwortzeit stieg dadurch massiv an.
+
+Ein tatsächlicher Vergleich zwischen der Gemini API und lokalen Modellen wurde aufgrund der Leistungsintesiven Natur der LLMs erst zuletzt auf separater Hardware durchgeführt. Es zeigte sich, dass unter Verwendung eines lokal ausgeführten Gemini-Modells, die exakt selben Resultate verzeichnet werden konnten wie unter Verwendung der API. Lediglich die Wartezeit stieg drastisch an. Auch die Verwendung eines anderen LLM, wie Llama und Qwen führte nur zu geringfügig anderen Formulierungen, lieferte aber zu allen Fragen die gleichen Antworten wie die zuvor eingesetzte Cloud-Lösung.
+
 ## Zusammenfassung der zentralen quantitativen Befunde
 
+Über die vergleichbaren Läufe des 10-Fragen-Benchmarks hinweg erwies sich Fuzzy als stabilste Retrieval-Strategie. Die Hit-Rate lag wiederholt bei 0,800 und erreichte im diagnostischen Modus sogar 0,900. Die deutlichste Verbesserung zwischen zwei Implementationsständen betraf Exact. Durch das serverseitige Query-Rewrite erhöhte sich dessen Hit-Rate im User-Modus von 0,000 auf 0,500, der gewichteten Antwortscore wurde von 0,000 auf 0,650 verbessert. Phrase-Proximity blieb dagegen mit Hit-Raten zwischen 0,000 und 0,400 sowie gewichteten Antwortscores zwischen 0,000 und 0,300 stark von vorbereiteten Argumenten abhängig und deutlich unterlegen. Im direkten User-Vergleich zwischen Fuzzy und der LLM-unterstützt planenden Smart-Strategie lag Fuzzy mit einem gewichteten Antwortscore von 0,950 knapp vorne, gegenüber Smart mit 0,900. Beide erreichten eine Hit-Rate von 0,800.
 
-# Diskussion (ca. 3 Seiten)
+Im ergänzenden Vergleich mit zehn Fragen erreichten Fuzzy und Semantic identische Retrievalmetriken. Bei der Antwortqualität lag Fuzzy mit 1,000 leicht vor Semantic mit 0,950. Smart erreichte ebenfalls eine Hit-Rate von 0,800, blieb mit einem gewichteten Antwortscore von 0,850 jedoch zurück. Im 90-Fragen-Praxistest waren die gewichteten Antwortscores von Fuzzy und Semantic mit 0,461 beziehungsweise 0,467 nahezu gleich.  Ein klarer Qualitätsvorteil der zusätzlichen Vektorkomponente war in keinem der beiden Vergleiche erkennbar. Die bei beiden Strategien auf 0,533 begrenzte tolerante Antwortquote zeigt jedoch, dass die sehr guten Ergebnisse des kleinen Benchmarks nicht auf das größere Fragenset übertragbar sind.
+
+
+# Diskussion
 
 ## Einordnung der Retrieval-Ergebnisse
 
-## Warum Fuzzy aktuell der stärkste Ansatz ist
+Die Experimente bestätigen die technische Funktionsfähigkeit der entworfenen Architektur, Elasticsearch kann über MCP zuverlässig als lokale Retrieval-Schicht angesprochen werden und die fünf implementierten Suchpfade sind über eine gemeinsame Schnittstelle erreichbar und liefern normalisierte Treffer einschließlich der für eine Quellenzuordnung benötigten Metadaten. Damit erfüllt der Prototyp die grundlegende Anforderung, lokale Dokumentbestände über standardisierte Werkzeuge für ein LLM zugänglich zu machen.
 
-## Grenzen von Exact und Proximity
+Zwischen Retrieval- und Antwortqualität besteht in den Versuchen ein erkennbarer Zusammenhang. Das Auffinden eines Goldtruth-Chunks erhöht die Wahrscheinlichkeit einer korrekten Antwort deutlich obwohl es sie jedoch nicht garantiert. Ein Treffer kann zu wenig Kontext enthalten, mit irrelevanten Passagen konkurrieren oder vom LLM falsch gewichtet werden, was jedoch seltener der Fall ist. Umgekehrt kann eine brauchbare Antwort entstehen, obwohl nicht alle hinterlegten Goldtruth-Chunks in der Treffermenge vorkommen. Dies kann sowohl darauf zurückzuführen sein, dass bereits ein Teil der Suchergebnisse ausreicht, oder darauf, dass benötigtes Wissen dem LLM bereits von sich aus bekannt ist. Die getrennte Messung beider Stufen erweist sich somit als methodisch notwendig. Eine ebenso auf die Methodik bezogener Schluss ist die Relativierung der sehr guten Antwortwerte der kleinen Testbench durch den 90-Fragen-Praxistest. Bei größerer thematischer und sprachlicher Streuung lagen die gewichteten Scores von Fuzzy und Semantic jeweils unter 0,5. Mit 46,7 Prozent wurden beinahe die Hälfte aller Antworten als komplett Falsch oder ungeügend bewertet. Der Prototyp kann also grundsätzlich brauchbare Antworten aus dem Dokumentbestand erzeugen, erreicht über ein breiteres Fragenspektrum hinweg aber noch keine zufriedenstellend durchgehende, verlässliche Qualität.
+
+Innerhalb des 10-Fragen-Goldtruth-Benchmarks stellt Fuzzy über alle Tests hinweg den stärksten allgemeinen Ansatz dar. Die Strategie erzielte über mehrere Implementationsstände und Modi hinweg konstant hohe Hit-Raten und brach im Gegensatz zu Exact und Phrase-Proximity bei unvorbereiteten Nutzerfragen nicht vollständig ein. Die außergewöhnliche Robustheit lässt sich mit der kombinierten Elasticsearch-Query erklären. `fuzziness: AUTO` toleriert Abweichungen in der Schreibweise, der AND-Zweig belohnt das gemeinsame Auftreten der Suchbegriffe, der breitere OR-Zweig fängt aber auch unvollständige Formulierungen auf und `match_phrase_prefix` berücksichtigt Wortanfänge, eine Kombination die sich insbesondere für den deutschsprachigen DSA-Bestand eignet, der zahlreiche Eigennamen und spezifische Regelbegriffe enthält. Gegenüber den aufwändigeren Strategien Smart und Semantic besitzt Fuzzy zudem einen strukturellen Einfachheitsvorteil. Es wird weder eine zusätzliche Modellinferenz zur Planung noch die Erzeugung eines Query-Embeddings zur Laufzeit benötigt. Dadurch entfallen zusätzliche Fehlerquellen und Abhängigkeiten, die Antwortgeschwindigkeit wird insbesondere bei lokaler Ausführung verbessert. Eine allgemeine Überlegenheit lässt sich aus den Ergebnissen dennoch auch hier nicht ableiten. Im 90-Fragen-Praxistest lag Semantic bei der Antwortqualität mit 0,467 geringfügig vor Fuzzy mit 0,461. Ein Unterschied, der zu klein ist um einen Vorteil in jedewede Richtung auszusprechen. Auch die vergleichsweise niedrige Macro-Precision begrenzt die Bewertung von Fuzzy, relevante Chunks werden häufig von mehreren irrelevanten Passagen begleitet, was für die anschließende Antwortgenerierung hochproblematisch sein kann, weil nur eine begrenzte Zahl von Treffern als Kontext übergeben wird und irrelevante Passagen die Gewichtung durch das LLM negaitv beeinflussen können.
+
+Die Strategie Exact Retrieval setzt voraus, dass die Nutzeranfrage und der Dokumenttext hinreichend ähnliche Terme enthalten. Synonyme, Umschreibungen und das Fehlen eines zentralen Fachbegriffs in der Anfrage bleiben deshalb auch nach der Einführung des serverseitigen Rewrites problematisch, denn die Erweiterung um normalisierte Begriffe und mehrere Query-Varianten verbessert die Robustheit zwar nachweislich, bleibt jedoch noch immer an fest implementierte Regeln gebunden. Sprachliche Beziehungen, die in diesen Regeln nicht vorgesehen sind können nicht zuverlässig aufgelöst werden, während die breiteren OR-Zweige zeitlgleich zusätzliches Rauschen erzeugen, was die Strategie von ihrere ursprünglichen idee abweichen lässt und in Richtung einer Fuzzy-Suche verwässert. Noch stärker von der Qualität der Eingabeparameter ist Phrase-Proximity abhängig. Die Strategie benötigt entweder eine charakteristische Phrase oder zwei aussagekräftige Terme, deren Nähe im Dokument den gesuchten Zusammenhang signalisiert. Eine natürlichsprachliche Frage erfüllt diese Voraussetzung in der Regel nicht. Fragewörter und weitere Funktionswörter sind im Dokumenttext entweder nicht vorhanden oder bilden dort keine zusammenhängende Passage. Auch der Parameter `slop` löst dieses Grundproblem nicht vollständig. Ein kleiner Wert schließt umformulierte Textstellen aus, während ein großer Wert die Suche weniger trennscharf macht und sie einer allgemeinen Begriffssuche annähert. Beide Verfahren behalten dennoch einen Wert als spezialisierte Werkzeuge. Exact eignet sich für eindeutige Regelbegriffe, Eigennamen und Zahlenangaben, insbesondere wenn die zentrale Terminologie bereits bekannt ist. Phrase-Proximity kann bei bekannten Formulierungen oder bewusst gewählten Termpaaren präzise Ergebnisse liefern. Die vorliegenden Messungen sprechen jedoch dagegen, eines der beiden Verfahren als alleinige Standardstrategie für frei formulierte Nutzerfragen einzusetzen.
 
 ## Grenzen des aktuellen Smart-Retrieval-Ansatzes
 
+Smart Retrieval erweitert den Ablauf um eine Planungsstufe vor der eigentlichen Elasticsearch-Abfrage. Diese Stufe ermöglicht zwar eine flexible Normalisierung und Expansion der Nutzeranfrage, erzeugt jedoch zusätzliche Fehlerquellen. Der Planer kann relevante Begriffe auslassen, ungeeignete Erweiterungen aufnehmen oder einen unpassenden Retrieval-Modus wählen. Die serverseitige Validierung stellt sicher, dass Struktur, Datentypen und Wertebereiche des Plans zulässig sind, kann dessen fachliche Angemessenheit aber nicht garantieren. Werden Planung und Antwortgenerierung durch dasselbe LLM ausgeführt, können sich modelltypische Fehlannahmen und Kontextspezifisches Halbwissen des LLM zudem auf beide Stufen auswirken. Im direkten User-Vergleich ergab sich zudem kein Vorteil gegenüber Fuzzy, da beide Strategien dieselbe Hit-Rate erreichten, Fuzzy aber sowohl bei Macro-Precision und Macro-Recall als auch bei der Antwortbewertung leicht vorne lag. Im ergänzenden Vergleich unter `realistic_args` erreichte Smart mit 0,800 erneut dieselbe Hit-Rate wie Fuzzy, blieb mit einem gewichteten Antwortscore von 0,850 gegenüber 1,000 aber noch deutlicher zurück. Ein relevanter Treffer genügte somit nicht in jedem Fall für eine vollständige Antwort. Zugleich benötigt die Planungsstufe eine zusätzliche Modellinferenz. Bei Verwendung eines externen Providers steigt damit auch die Zahl der API-Aufrufe und die Belastung der verfügbaren Quota, was sich bereits in der Dauer dieses Tests im Vergleich zu den vorherigen niederschlug.
+
 ## Validität der Metriken und Grenzen der Goldtruth
 
+Die Chunk-Goldtruth des kleinen Benchmarks ermöglicht eine nachvollziehbare quantitative Retrievalmessung, bildet Relevanz jedoch nur in dem Umfang ab, in dem die erwarteten Belegstellen zuvor manuell erfasst wurden. Ein inhaltlich geeigneter Chunk, der nicht als Goldtruth markiert ist, wird bei der Berechnung als irrelevant behandelt. Dieser Effekt wird durch den Overlap des Chunkings verstärkt. Mehrere Chunks können nahezu dieselbe Passage enthalten, wenn davon nur einer hinterlegt ist, unterschätzen Precision und Recall unter Umständen die tatsächlich bereitgestellte Evidenz. Darüber hinaus ist die Goldtruth unmittelbar an konkrete Chunk-IDs gebunden. Änderungen an Chunk-Größe, Overlap, PDF-Extraktion oder Dokumentidentifikatoren können dazu führen, dass ältere Zuordnungen nicht mehr auf den aktuellen Index anwendbar sind.
 
-# Fazit und Ausblick (ca. 1 Seiten)
+Auch der Umfang des Benchmarks begrenzt die Aussagekraft, mit zehn Fragen verändert ein einziger zusätzlicher Treffer die Hit-Rate eines Tools bereits maßgeblich, die Werte eignen sich damit zur gezielten Entwicklungsdiagnose und zum Vergleich klar definierter Varianten, keinesfalls jedoch für weitreichende statistische Verallgemeinerungen.
+
+Die manuelle C/P/W-Einstufung führt eine weitere subjektive Komponente ein. Das einfache Schema reduziert zwar den Interpretationsspielraum gegenüber einer feingranularen Skala, ersetzt jedoch keine unabhängige Mehrfachbewertung. Da die Antworten nur durch ein Personen beurteilt wurden, ist die Werung nicht vollstädig objektiv, besonder dann wenn Fragen als partiell richtig gewertet werden. Des weiteren sind die im Scorer verwendeten Begriffe `Strict Precision` und `Lenient Recall` nicht technisch mit den gleichnamigen klassischen Retrievalmetriken identisch, ss handelt sich mehr um den Anteil vollständig korrekter beziehungsweise mindestens teilweise korrekter Antworten als komplexe Metriken und sind hier als solche zu verstehen.
+
+Zum 90-Fragen-Praxistest ist zu erwähnen, dass dieser bewusst keine Chunk-Goldtruth besitzt, da sein Ziel nicht darin bestand, die isolierte Retrievalleistung zu messen, sondern zu prüfen, ob aus Sicht eines Nutzers brauchbare finale Antworten entstehen. Precision, Recall und Hit-Rate bleiben für diesen Lauf folglich unbestimmt. Er erwiterter die Messung dafür um ein größeres und vielfältigeres Fragenset. Die Versuchsformen ergänzen sich folglich, müssen aufgrund ihrer unterschiedlichen Bewertungsgrundlage jedoch getrennt voneinander interpretiert werden.
+
+# Fazit und Ausblick
 
 ## Beantwortung der Forschungsfrage
 
-## Wichtigste technische und methodische Erkenntnisse
+Die Forschungsfrage, ob Elasticsearch über das Model Context Protocol als Grundlage für einen KI-gestützten lokalen Dokumentzugriff dienen kann, lässt sich auf Basis des entwickelten Prototypen grundsätzlich positiv beantworten. Die implementierte Architektur verarbeitet lokale PDF-Dokumente, zerlegt sie in Chunks, indexiert Text und Metadaten und stellt mehrere Retrieval-Strategien über standardisierte MCP-Tools bereit. Ein angeschlossenes Sprachmodell kann die zurückgegebenen Passagen anschließend zu einer Antwort verdichten und diese durch Quellenangaben nachvollziehbar machen. Zudem kann die Architektur vollständig lokal betrieben werden, sofern leistungsstarke Hardware vorliegt, die Elasticsearch, MCP-Server, Embedding-Modell und Antwort-LLM gleichzeitig ausgeführen kann. Die Ollama-Anbindung und die erfolgreiche Tool-Nutzung mit Llama 3.1 demonstrieren diesen Betriebsweg.
 
-## Konkrete nächste Entwicklungsschritte
+Hinsichtlich der inhaltlichen Zuverlässigkeit ist die positive Antwort jedoch einzuschränken. Fuzzy Retrieval erreichte im kleinen Goldtruth-Benchmark zwar sehr gute und über die Eingabemodi hinweg stabile Ergebnisse, im breiteren 90-Fragen-Praxistest wurden jedoch nur 53,3 Prozent der Antworten von Fuzzy und Semantic als wenigstens teilweise korrekt bewertet.
+
+Elasticsearch und MCP bilden demnach eine geeignete technische Grundlage für lokalen Dokumentzugriff, die praktische Antwortqualität hängt jedoch wesentlich von der Suchstrategie, der Dokumentaufbereitung, der Leistungsfähigkeit des verwendeten Sprachmodells und den verfügbaren Hardwareressourcen ab.
+
+## Technische und methodische Erkenntnisse
+
+Eine wesentliche technische Erkenntnis des Projekts liegt in der funktionierenden, klaren Trennung von Ingestion, Retrieval-Server und LLM-Client. Die Modularisierung erleichtert den Austausch einzelner Komponenten und ermöglichte es beispielsweise, zusätzliche Suchstrategien einzuführen, ohne die Gesamtarchitektur oder den MCP-Vertrag grundlegend zu verändern. Deutlich wurde dieser Vorteil beim serverseitigen Exact-Rewrite, sowie beim Einführen der beiden neuen Strategien Smart und Hybrid.
+
+Zudem wurde die Mächtigkeit der Fuzzy-Suchstrategie für Anfragen auf Basis natürlicher Sprache deutlich. Da bot Fuzzy Retrieval im untersuchten Goldtruth-Benchmark die mit Abstand höchste Robustheit mit ebenso hoher Antwortqualität. Das embedding-basierte Semantic Retrieval ließ sich ebenfalls erfolgreich integrieren und erreichte im großen Praxistest eine nahezu identische Antwortqualität. Obwohl ein deutlicher praktischer Vorteil der zusätzlichen Vektorkomponente zunächst nicht erkennbar wurde, ist davon auszugehen, dass in dieser Strategie weiteres Potenzial verborgen liegt. Ähnlich führte die LLM-gestützte Planung des Smart Retrievals nicht automatisch zu besseren Ergebnissen. Anders als beim Vektorembedding, kann hier aber davon ausgegangen werden, dass die Herangehensweise auch mit weitere Entwicklung keine nennenswerten Vorteile gegenüber Fuzzy bieten kann, da die Exact-Suche durch die Planung lediglich in Richtung Fuzzy umgebaut wird. Die zusätzliche Agentik kann ihren höheren Aufwand und ihre zusätzlichen Fehlerquellen nicht durch messbare Qualitätsgewinne rechtfertigen.
+
+Methodisch erwies sich die getrennte Betrachtung von Retrieval- und Antwortqualität als ebenso wichtig. Nur so kann vernünfitg unterschieden werden, ob eine fehlerhafte Antwort auf fehlende Evidenz oder auf deren unzureichende Verarbeitung durch das LLM zurückzuführen ist. Der kleine 10-Fragen-Benchmark eignete sich dabei für schnelle, kontrollierte Iterationen an der Suchlogik. Der größere Praxistest zeigte dagegen, dass sehr gute Ergebnisse auf wenigen vorbereiteten Fragen nicht zwangsläufig auf ein breiteres Anwendungsspektrum übertragben werden können.
 
 ## Perspektiven für weiterführende Forschung
+
+Über die unmittelbare Weiterentwicklung des Prototypen hinaus stellt sich die Frage nach der Übertragbarkeit der Ergebnisse und der anhaltenden Relevanz eines solchen Projekts.
+
+Der verwendete DSA-Korpus verbindet klar strukturierte Regeltexte mit erzählerischen Passagen, bildet jedoch nur einen einzelnen fachlichen und sprachlichen Kontext ab. Untersuchungen mit größeren sowie thematisch unterschiedlichen Dokumentbeständen könnten zeigen, ob die beobachtete Stärke des Fuzzy Retrievals auch bei wissenschaftlichen, technischen oder juristischen Texten bestehen bleibt.
+
+Ein weiterer Forschungspunkt liegt in der lokalen Modellinferenz. Modelle unterschiedlicher Größe und Quantisierung sollten auf sehr leistungsfähiger Hardware insbesondere hinsichtlich Antwortqualität, aber auch Schnelligkeit, verglichen werden. Für agentische Verfahren ist zudem zu bestimmen, ab welcher Fragekomplexität ein mehrstufiger Planungs- und Suchprozess einen messbaren Vorteil gegenüber einer einzelnen robusten Query erzielen kann.
+
+Zuletzt bietet sich nun mehr denn je die Frage nach Alternativen. Anders als zu Beginn des Forschungsprojekts verfügen die wichtigsten Chatbots mittlerweile über die Fähigkeit direkt auf lokal gespeicherte Dokumente zuzugreifen. Sobald lokal gehostete LLMs diese Fähigkeit ebenfalls erhalten, ist ein ES-gestütztes Suchsystem obsolet, muss schließlich davon ausgegangen werden, dass die integrierten Tools bereits in der Lage sein werden PDF Dokumente auszulesen und zu durchsuchen, ohne vorherige Aufbereitung.

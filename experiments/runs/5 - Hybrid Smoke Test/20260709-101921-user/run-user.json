@@ -104,7 +104,8 @@
             ]
           },
           "answer": "Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt des Mittelreichs ist Gareth.",
-          "llm_skipped": false
+          "llm_skipped": false,
+          "manual_rating": "C"
         }
       }
     }

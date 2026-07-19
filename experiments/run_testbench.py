@@ -66,9 +66,7 @@ def _build_user_args(question_text: str, tool: str) -> dict[str, Any]:
 
 def _build_realistic_fallback_args(question_text: str, tool: str) -> dict[str, Any]:
     q = _trim_question(question_text)
-    if tool == "search_exact_keyword":
-        return {"query": q, "size": 5}
-    if tool == "search_fuzzy":
+    if tool in {"search_exact_keyword", "search_fuzzy", "search_smart"}:
         return {"query": q, "size": 5}
     if tool == "search_semantic":
         return {"query": q, "size": 5, "mode": "hybrid"}

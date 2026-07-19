@@ -3,8 +3,8 @@ Testbench Score Summary
 Run ID: 20260602-180055-realistic_args
 Eval Mode: realistic_args
 Spec: /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/experiments/testbench-v1.json
-Run File: experiments/runs/20260602-180055-realistic_args/run-realistic_args.json
-Review File: experiments/runs/20260602-180055-realistic_args/manual-review-realistic_args.txt
+Run File: experiments/runs/3 - further improvements/20260602-180055-realistic_args/run-realistic_args.json
+Review File: experiments/runs/3 - further improvements/20260602-180055-realistic_args/manual-review-realistic_args.txt
 
 Overall Retrieval
 - Evaluated Rows: 30
@@ -13,11 +13,11 @@ Overall Retrieval
 - Hit Rate: 0.500
 
 Overall Answer
-- Rated Rows: 26
-- C/P/W: 14/2/10
-- Strict Precision (C only): 0.538
-- Lenient Recall (C+P): 0.615
-- Weighted Score (C=1,P=0.5,W=0): 0.577
+- Rated Rows: 30
+- C/P/W: 16/4/10
+- Strict Precision (C only): 0.533
+- Lenient Recall (C+P): 0.667
+- Weighted Score (C=1,P=0.5,W=0): 0.600
 
 By Tool
 
@@ -25,25 +25,25 @@ By Tool
 - Retrieval Macro Precision: 0.140
 - Retrieval Macro Recall: 0.300
 - Retrieval Hit Rate: 0.500
-- Answer C/P/W: 4/2/3
-- Answer Strict Precision: 0.444
-- Answer Lenient Recall: 0.667
-- Answer Weighted Score: 0.556
+- Answer C/P/W: 5/2/3
+- Answer Strict Precision: 0.500
+- Answer Lenient Recall: 0.700
+- Answer Weighted Score: 0.600
 
 [search_fuzzy]
 - Retrieval Macro Precision: 0.220
 - Retrieval Macro Recall: 0.450
 - Retrieval Hit Rate: 0.800
-- Answer C/P/W: 8/0/0
-- Answer Strict Precision: 1.000
+- Answer C/P/W: 9/1/0
+- Answer Strict Precision: 0.900
 - Answer Lenient Recall: 1.000
-- Answer Weighted Score: 1.000
+- Answer Weighted Score: 0.950
 
 [search_phrase_proximity]
 - Retrieval Macro Precision: 0.065
 - Retrieval Macro Recall: 0.100
 - Retrieval Hit Rate: 0.200
-- Answer C/P/W: 2/0/7
-- Answer Strict Precision: 0.222
-- Answer Lenient Recall: 0.222
-- Answer Weighted Score: 0.222
+- Answer C/P/W: 2/1/7
+- Answer Strict Precision: 0.200
+- Answer Lenient Recall: 0.300
+- Answer Weighted Score: 0.250

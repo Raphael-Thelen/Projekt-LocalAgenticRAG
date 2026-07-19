@@ -69,11 +69,15 @@ Dieses Dokument protokolliert alle Arbeitsschritte zur Implementierung von `sear
   - Kommando:
     - `OLLAMA_BASE_URL=http://127.0.0.1:11434/v1 LARA_EMBED_MODEL=nomic-embed-text /Users/raphaelthelen/Arbeitsplatz/Uni/Projekt-LocalAgenticRAG/.venv/bin/python experiments/run_testbench.py --spec experiments/testbench-smoke-q1.json --tools search_semantic --modes user --provider gemini --run-group session-5-hybrid-semantic`
   - Artefakte:
-    - `experiments/runs/session-5-hybrid-semantic/20260709-101921-user/run-user.json`
-    - `experiments/runs/session-5-hybrid-semantic/20260709-101921-user/manual-review-user.txt`
+    - `experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/run-user.json`
+    - `experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/manual-review-user.txt`
+    - `experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/score-user.json`
+    - `experiments/runs/5 - Hybrid Smoke Test/20260709-101921-user/score-summary-user.txt`
   - Laufzusammenfassung:
     - Retrieval: 5 Treffer
     - Antwort (erste Zeile): "Das Mittelreich wird von Kaiserin Rohaja regiert. Die Hauptstadt des Mittelreichs ist Gareth."
+    - Antwortbewertung: 1/1 korrekt (C); Strict Precision, Lenient Recall und gewichteter Antwortscore jeweils 1.000.
+    - Retrieval-Metriken: Macro-Precision 0.200, Macro-Recall 1.000, Hit-Rate 1.000. Der gespeicherte Lauf nutzte den lexikalen Fallback (`semantic_status: fallback_lexical`).
 
 - [dokumentiert] Troubleshooting-Hinweis waehrend der Implementierung:
   - Ein erster Testlauf mit `--provider ollama` schlug in der LLM-Schicht mit `404 page not found` fehl.
